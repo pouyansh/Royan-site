@@ -1,0 +1,30 @@
+image: python:3.6.5
+
+services:
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: asdproject
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: asdpassword
+
+test:
+  script:
+  - whoami
+#   - export DATABASE_URL=postgresql://postgres:asdpassword@postgres:5432/asdproject
+  - export PGPASSWORD=$POSTGRES_PASSWORD
+  - apt-get update -qy
+  - apt-get install -y python-dev python-pip
+  - pip install -r requirements.txt
+  - python manage.py test --settings=backend_settings.gitlab_runner_settings
+
+
+production:
+ type: deploy
+ script:
+ - apt-get update -qy
+ - apt-get install -y ruby-dev
+ - gem install dpl
+ - dpl --provider=heroku --app=asd-g7 --api-key=$HEROKU_PRODUCTION_API_KEY
+ only:
+ - master
