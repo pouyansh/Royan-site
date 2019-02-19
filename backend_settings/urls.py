@@ -24,9 +24,9 @@ import django.views.static
 admin.site.site_header = "رویان توکاژن"
 urlpatterns = [
 
-	url(r'^media/(?P<path>.*)$', django.views.static.serve,
-		{'document_root': settings.MEDIA_ROOT, 'show_indexes': settings.DEBUG}),
-	path('admin/', admin.site.urls),
-	path('', include(('apps.dashboard.urls', 'dashboard'), 'dashboard')),
+    url(r'^media/(?P<path>.*)$', django.views.static.serve,
+        {'document_root': settings.MEDIA_ROOT, 'show_indexes': settings.DEBUG}),
+    path('admin/', admin.site.urls),
+    path('', include(('apps.temporary.urls', 'temporary'), 'temporary')),
 
 ]

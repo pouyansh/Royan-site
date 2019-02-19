@@ -1,0 +1,142 @@
+{% load static staticfiles %}
+<!--================Header Menu Area =================-->
+<header class="header_area">
+    <div class="main_menu" id="mainNav">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent" style="margin-right: 100px;">
+                    <ul class="nav navbar-nav menu_nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Services</a>
+                            <ul class="dropdown-menu"
+                                style="display: flex; position: fixed; width: 80%; margin-left: 10%;">
+                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
+                                    <h4 class="nav-item submenu" style="padding: 10px; width: 100%; color: rgb(119,71,251);
+																				">Next Generation Sequencing</h4>
+                                    <ol class="ordered-list-alpha" style="position: relative; padding: 0;">
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">RNA Sequencing</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">nRNA Sequencing</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">Whole Exome Sequencing
+                                            (WES)</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">Whole Genome Sequencing
+                                            (WGS)</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">MetaGenome Sequencing</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
+                                    <h4 class="nav-item submenu"
+                                        style="padding: 10px; width: 100%; color: rgb(119,71,251);">Sanger
+                                        Sequencing</h4>
+                                    <ol class="ordered-list-alpha" style="position: relative; padding: 0">
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">Purified Templates</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">PCR purification</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">Direct Colony
+                                            Sequencing</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">Standard Sanger
+                                            Sequencing</a></li>
+                                    </ol>
+                                </li>
+                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
+                                    <h4 class="nav-item submenu"
+                                        style="padding: 10px; width: 100%; color: rgb(119,71,251);">Genetic
+                                        Services</h4>
+                                    <ol class="ordered-list-alpha" style="position: relative; padding: 0">
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">Oligo DNA Synthesis</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
+                                    <h4 class="nav-item submenu"
+                                        style="padding: 10px; width: 100%; color: rgb(119,71,251);">Gene Synthesis</h4>
+                                    <ol class="ordered-list-alpha"
+                                        style="position: relative; padding: 0; width: auto;">
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">Standard Gene
+                                            Synthesis</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">ssDNA Synthesis</a>
+                                        </li>
+
+                                    </ol>
+                                </li>
+                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
+                                    <h4 class="nav-item submenu"
+                                        style="padding: 10px; width: 100%; color: rgb(119,71,251);">Bioinformatics</h4>
+                                    <ol class="ordered-list-alpha"
+                                        style="position: relative; padding: 0; width: auto;">
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">WES Analysis</a>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                                style="text-transform: none;">WGS Analysis</a>
+                                        </li>
+
+                                    </ol>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Products</a>
+                            <ul class="dropdown-menu" style="width: 250px;">
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">PCR Set</a></li>
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">PCR Master Mix</a></li>
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">Cyber Green Master Mix</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item submenu dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Research areas</a>
+                            <ul class="dropdown-menu" style="width: 250px;">
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">Cancer Research</a></li>
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">Genome Editing and Engineering</a>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">Metagenomics</a></li>
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">Infectious Diseases</a></li>
+                                <li class="nav-item"><a class="nav-link" href="elements.html"
+                                                        style="text-transform: none;">Synthetic Biology</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">About Us</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="genric-btn default circle" style="margin-right: -100px;">Login</a>
+            </div>
+        </nav>
+    </div>
+</header>
+<!--================Header Menu Area =================-->

@@ -1,3 +1,4 @@
+{% load static staticfiles %}
 <!doctype html>
 <html lang="en">
 <head>
@@ -21,7 +22,7 @@
 </head>
 <body data-spy="scroll" data-target="#mainNav" data-offset="70">
 
-{% include 'navbar.html %}
+{% include "temporary/navbar.html" %}
 
 <!--================Home Banner Area =================-->
 <section class="banner_area">
@@ -139,7 +140,7 @@
     </div>
 </div>
 
-{% include 'footer.html' %}
+{% include "temporary/footer.html" %}
 
 
 <!-- Optional JavaScript -->
