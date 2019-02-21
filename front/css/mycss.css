@@ -57,3 +57,18 @@ color: #fff;
 padding: 0px;
 display: inline-block;
 }
+
+.purplebtn {
+    background-color: rgb(188,91,254);
+    color: #eeeeee;
+    border: 1px solid rgb(188,91,254);
+    min-width: 100px;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+}
+
+.purplebtn:hover {
+    color: rgb(188,91,254);
+    background-color: #eeeeee;
+}

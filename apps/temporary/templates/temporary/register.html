@@ -33,43 +33,91 @@
 <!--================End Home Banner Area =================-->
 
 <!--================Start Form =================-->
-<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont">
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container">
         <div class="section-top-border">
             <div class="row">
                 <div class="col-lg-8 col-md-8" style="margin: auto">
                     <!--<h3 class="mb-30 title_color">فرم ثبت نام</h3>-->
 
-                    <form action="#" style="">
-                        <div class="single-element-widget">
-                            <label class="mb-30 title_color">نوع حساب کاربری</label>
-                            <div class="default-select" id="default-select">
-                                <select>
+                    <form action="#">
+                        <div style="width: 50%; margin: 20px auto; display: flex;">
+                            <div class="single-element-widget" style="margin: auto;">
+                                <label class="mb-30 title_color" style="line-height: 42px; margin: auto 20px;">نوع حساب
+                                    کاربری</label>
+                                <select id="type_select" onchange="(function () {
+                                        var val = document.getElementById('type_select').value;
+                                        console.log(val);
+                                        if (val == 2) {
+                                            document.getElementById('organization_name').style.display = 'flex';
+                                            document.getElementById('submit_ID').style.display = 'flex';
+                                            document.getElementById('economic_ID').style.display = 'flex';
+                                            document.getElementById('post').style.display = 'flex';
+                                            document.getElementById('education').style.display = 'none';
+                                            document.getElementById('national_ID').style.display = 'none';
+                                            document.getElementById('organization').style.display = 'none';
+                                        }
+                                        if (val == 1) {
+                                            document.getElementById('organization_name').style.display = 'none';
+                                            document.getElementById('submit_ID').style.display = 'none';
+                                            document.getElementById('economic_ID').style.display = 'none';
+                                            document.getElementById('post').style.display = 'none';
+                                            document.getElementById('education').style.display = 'flex';
+                                            document.getElementById('national_ID').style.display = 'flex';
+                                            document.getElementById('organization').style.display = 'flex';
+                                        }
+                                        })(); return false;">
                                     <option value="1">حقیقی</option>
                                     <option value="2">حقوقی</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="mt-10" style="display: flex;">
+                        <div id="first_name" class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 نام:</label>
                             <input type="text" name="first_name" class="single-input">
                         </div>
-                        <div class="mt-10" style="display: flex;">
+                        <div id="last_name" class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 نام خانوادگی:</label>
                             <input type="text" name="last_name" class="single-input">
                         </div>
-                        <div class="mt-10" style="display: flex;">
+                        <div id="organization_name" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                نام شرکت:</label>
+                            <input type="text" name="last_name" class="single-input">
+                        </div>
+                        <div id="post" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                سمت:</label>
+                            <input type="text" name="last_name" class="single-input">
+                        </div>
+                        <div id="national_ID" class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 کد ملی:</label>
                             <input type="text" name="first_name" class="single-input-primary"
                                    style="display: inline-block;">
                         </div>
-                        <div class="mt-10" style="display: flex;">
+                        <div id="submit_ID" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                شماره ثبت:</label>
+                            <input type="text" name="first_name" class="single-input-primary"
+                                   style="display: inline-block;">
+                        </div>
+                        <div id="economic_ID" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                شماره اقتصادی:</label>
+                            <input type="text" name="first_name" class="single-input-primary"
+                                   style="display: inline-block;">
+                        </div>
+                        <div id="education" class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 مقطع تحصیلی:</label>
@@ -84,7 +132,7 @@
                         </div>
 
 
-                        <div class="mt-10" style="display: flex;">
+                        <div id="organization" class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 موسسه/سازمان/آموزشگاه:</label>
@@ -107,7 +155,7 @@
                                 آدرس:</label>
                             <textarea class="single-textarea"></textarea>
                         </div>
-
+                        <button type="submit" class="genric-btn purplebtn circle">ثبت</button>
                     </form>
                 </div>
             </div>
