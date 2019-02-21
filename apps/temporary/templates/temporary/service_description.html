@@ -1,0 +1,89 @@
+{% load static staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Royan Tokagene</title>
+    <!-- Bootstrap CSS -->
+    {% include 'temporary/cssfiles.html' %}
+</head>
+<body data-spy="scroll" data-target="#mainNav" data-offset="70">
+
+{% include "temporary/navbar.html" %}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
+             data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Primers Description</h2>
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="elements.html">Services</a>
+                    <a href="elements.html">Primer</a>
+                </div>
+            </div>
+        </div>
+        <img src="{% static 'img/DNA.png' %}" style="width:100%; float: right;">
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border text-right" style="font-family: FarsiFont">
+            <h3 class="mb-30 title_color" style="font-family: FarsiFont">پرایمر</h3>
+            <div class="row">
+                <div class="col-md-9">
+                    <p class="text-right">پرایمر رشتهٔ کوتاهی از آر ان ای یا دی ان ای است که معمولاً از ۱۸ تا ۲۲ باز
+                        تشکیل
+                        شده‌است. این رشته کوتاه به عنوان نقطه ای برای آغاز سنتز دی ان ای عمل می‌کند.
+
+                        پرایمر جزئی ضروری در فرایند رونویسی دی ان ای محسوب می‌شود چرا که آنزیم‌های کاتالیز کننده این
+                        فرایند
+                        (DNA polymeraseها) تنها قادر هستند نوکلئوتیدها را به یک رشته موجود از جنس دی ان ای اضافه کنند.
+                        پلیمراز رونویسی را از انتهای '۳ پرایمر آغاز کرده و شروع به کپی کردن رشته مقابل می‌کند.
+
+                        در رونویسی دی ان ای در شرایط طبیعی، از رشته‌هایی از جنس آر ان ای که به آن‌ها پرایمر آر ان ای
+                        گفته
+                        می‌شود، به منظور سنتز دی ان ای در هر دو رشته پیشرو و پسرو استفاده می‌گردد.
+
+                        از طرف دیگر بسیاری از تکنیک‌های آزمایشگاهی که نیازمند دی ان ای پلیمراز هستند، از پرایمرهای دی ان
+                        ای
+                        استفاده می‌کنند چرا که پرایمرهای دی ان ای مقاومت دمایی بیشتری دارند. از جمله این تکنیک‌ها
+                        می‌توان به
+                        توالی یابی دی ان ای (DNA sequencing) و واکنش زنجیره ای پلیمراز (polymerase chain reaction) اشاره
+                        کرد.
+
+                        در آزمایشات، استفاده از پرایمری که دمای ذوبش (Tm اش) به دمای اتصال آن به رشته نزدیک باشد، اهمیت
+                        دارد. یک پرایمر که دمای ذوبش به‌طور معنی دار بالاتر از دمای واکنش اتصال (annealing) است، ممکن
+                        است به
+                        محل نادرست متصل شده و توالی اشتباه را رونویسی کند. در حالی که اگر دمای ذوب پرایمر به‌طور معنی
+                        دار
+                        کمتر از دمای اتصال رشته باشد، ممکن است نتواند به مکان مورد نظر بچسبد و قطعه تکثیر نشود. این
+                        پرایمرها
+                        معمولاً الیگونوکلئوتیدهایی کوتاه هستند که به روش شیمیایی سنتز شده‌اند و طولی در حدود ۲۰
+                        بازدارند.
+                        آن‌ها به DNAی هدف متصل می‌شوند. پس از آن فرایند نسخه برداری توسط پلیمراز انجام می‌شود. </p>
+
+                </div>
+                <div class="col-md-3">
+                    <img src="{% static 'img/primer.png' %}" alt="" class="img-fluid">
+                </div>
+                <button type="submit" class="genric-btn purplebtn circle">ثبت سفارش</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "temporary/footer.html" %}
+
+
+{% include "temporary/jsfiles.html" %}
+</body>
+</html>
