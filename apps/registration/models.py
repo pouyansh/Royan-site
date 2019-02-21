@@ -8,7 +8,6 @@ class Customer(User):
     fax = models.IntegerField(null=True, verbose_name="فکس")
     address = models.CharField(max_length=500, verbose_name='آدرس')
     email_verified = models.BooleanField(default=False, verbose_name="ایمیل تایید شده است")
-    referee = models.CharField(max_length=20, verbose_name='معرف', null=True)
 
     @property
     def full_name(self):
@@ -30,4 +29,4 @@ class Person(Customer):
     national_id = models.IntegerField(verbose_name="کد ملی")
     education = models.CharField(max_length=100, verbose_name="تحصیلات")
     org = models.CharField(max_length=100, verbose_name="موسسه/آموزشگاه/سازمان")
-
+    cellphone_number = models.IntegerField(verbose_name="شماره تلفن همراه")

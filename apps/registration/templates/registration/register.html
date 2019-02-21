@@ -1,0 +1,187 @@
+{% load static staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Royan Tokagene</title>
+    <!-- Bootstrap CSS -->
+    {% include 'temporary/cssfiles.html' %}
+</head>
+<body data-spy="scroll" data-target="#mainNav" data-offset="70">
+
+{% include 'temporary/navbar.html' %}
+{% include 'temporary/chat_sidebar.html' %}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
+             data-background=""></div>
+
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Register</h2>
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="elements.html">Register</a>
+                </div>
+            </div>
+        </div>
+        <img src="{% static 'img/DNA.png' %}" style="width:100%; float: right;">
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<!--================Start Form =================-->
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+                    <!--<h3 class="mb-30 title_color">فرم ثبت نام</h3>-->
+
+                    <form action="#">
+                        <div style="width: 50%; margin: 20px auto; display: flex;">
+                            <div class="single-element-widget" style="margin: auto;">
+                                <label class="mb-30 title_color" style="line-height: 42px; margin: auto 20px;">نوع حساب
+                                    کاربری</label>
+                                <select id="type_select" onchange="(function () {
+                                        var val = document.getElementById('type_select').value;
+                                        console.log(val);
+                                        if (val == 2) {
+                                            document.getElementById('organization_name').style.display = 'flex';
+                                            document.getElementById('submit_ID').style.display = 'flex';
+                                            document.getElementById('economic_ID').style.display = 'flex';
+                                            document.getElementById('post').style.display = 'flex';
+                                            document.getElementById('education').style.display = 'none';
+                                            document.getElementById('national_ID').style.display = 'none';
+                                            document.getElementById('organization').style.display = 'none';
+                                        }
+                                        if (val == 1) {
+                                            document.getElementById('organization_name').style.display = 'none';
+                                            document.getElementById('submit_ID').style.display = 'none';
+                                            document.getElementById('economic_ID').style.display = 'none';
+                                            document.getElementById('post').style.display = 'none';
+                                            document.getElementById('education').style.display = 'flex';
+                                            document.getElementById('national_ID').style.display = 'flex';
+                                            document.getElementById('organization').style.display = 'flex';
+                                        }
+                                        })(); return false;">
+                                    <option value="1">حقیقی</option>
+                                    <option value="2">حقوقی</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="first_name" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                نام:</label>
+                            <input type="text" name="first_name" class="single-input">
+                        </div>
+                        <div id="last_name" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                نام خانوادگی:</label>
+                            <input type="text" name="last_name" class="single-input">
+                        </div>
+                        <div id="organization_name" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                نام شرکت:</label>
+                            <input type="text" name="last_name" class="single-input">
+                        </div>
+                        <div id="post" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                سمت:</label>
+                            <input type="text" name="last_name" class="single-input">
+                        </div>
+                        <div id="national_ID" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                کد ملی:</label>
+                            <input type="text" name="first_name" class="single-input-primary"
+                                   style="display: inline-block;">
+                        </div>
+                        <div id="submit_ID" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                شماره ثبت:</label>
+                            <input type="text" name="first_name" class="single-input-primary"
+                                   style="display: inline-block;">
+                        </div>
+                        <div id="economic_ID" class="mt-10" style="display: none;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                شماره اقتصادی:</label>
+                            <input type="text" name="first_name" class="single-input-primary"
+                                   style="display: inline-block;">
+                        </div>
+                        <div id="education" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                مقطع تحصیلی:</label>
+                            <input type="text" name="first_name" class="single-input-primary"
+                                   style="display: inline-block;">
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                ایمیل:</label>
+                            <input type="email" name="EMAIL" class="single-input">
+                        </div>
+
+
+                        <div id="organization" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                موسسه/سازمان/آموزشگاه:</label>
+                            <input type="text" name="address" class="single-input">
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                تلفن:</label>
+                            <input type="text" name="address" class="single-input">
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                فکس:</label>
+                            <input type="text" name="address" class="single-input">
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                <div style="color: red; display: inline;">*</div>
+                                آدرس:</label>
+                            <textarea class="single-textarea"></textarea>
+                        </div>
+                        <button type="submit" class="genric-btn purplebtn circle">ثبت</button>
+                    </form>
+
+                    <!--<form>-->
+                        <!--{% for field in form %}-->
+                            <!--<div id="{{field}}" class="mt-10" style="display: flex;">-->
+                            <!--<label style="float: right; display: inline-block; width: 100px;">-->
+                                <!--<div style="color: red; display: inline;">*</div>-->
+                                <!--{{field.label}}</label>-->
+                            <!--<input type="text" name="address" class="single-input">-->
+
+                        <!--</div>-->
+                        <!--{% endfor %}-->
+                    <!--</form>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================End form =================-->
+
+{% include 'temporary/footer.html' %}
+
+
+{% include 'temporary/jsfiles.html' %}
+</body>
+</html>

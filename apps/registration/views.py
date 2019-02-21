@@ -32,7 +32,7 @@ class Login(LoginView):
 
 class Register(CreateView):
 	form_class = SignUpForm
-	template_name = 'registeration/register.html'
+	template_name = 'registration/register.html'
 
 	def success_response(self, request, message, **kwargs):
 		context = self.get_context_data(**kwargs)
