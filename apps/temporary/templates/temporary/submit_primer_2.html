@@ -40,20 +40,46 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8" style="margin: auto">
 
-                    <p>شما میتوانید فایل زیر را دانلود کرده، آن را پر کنید و سابمیت کنید و یا با استفاده از فرم درج شده رد سایت، اطلاعات را وارد نمایید.</p>
+                    <p>شما میتوانید فایل زیر را دانلود کرده، آن را پر کنید و سابمیت کنید و یا با استفاده از فرم درج شده
+                        رد سایت، اطلاعات را وارد نمایید.</p>
                     <a href="{% static 'primer.xls' %}" download>فایل</a>
                     <form>
                         <input type="file">
                         <div id="results">
 
                         </div>
-                        <div class="mt-10" style="display: flex; margin-top: 30px;">
-                            <label style="float: right; display: inline-block; width: 150px;">
-                                <div style="color: red; display: inline;">*</div>
-                                نام فاکتور شونده:</label>
-                            <input type="text" required name="address" class="single-input">
-                        </div>
-                        <button type="submit" class="genric-btn purplebtn circle">ادامه</button>
+                        <button class="genric-btn purplebtn circle" id="btn">اضافه</button>
+                        <table dir="ltr" id="table"
+                               style="float: left; width: 100%; border: 1px solid #111111; text-align: center; margin: 20px 0;">
+                            <thead>
+                                <tr>
+                                    <th>num</th>
+                                    <th>Oligo name</th>
+                                    <th>Oligo Sequence</th>
+                                    <th>Amount</th>
+                                    <th>Purification</th>
+                                    <th>Modification</th>
+                                </tr>
+                            </thead>
+                            <!--<tr>-->
+                                <!--<td>1</td>-->
+                                <!--<td><input type="text" style="width: 90%;"></td>-->
+                                <!--<td><input type="text" style="width: 90%;"></td>-->
+                                <!--<td><select style="width: 100%;">-->
+                                    <!--<option>a1</option>-->
+                                    <!--<option>a2</option>-->
+                                <!--</select></td>-->
+                                <!--<td><select style="width: 100%;">-->
+                                    <!--<option>a1</option>-->
+                                    <!--<option>a2</option>-->
+                                <!--</select></td>-->
+                                <!--<td><select style="width: 100%;">-->
+                                    <!--<option>a1</option>-->
+                                    <!--<option>a2</option>-->
+                                <!--</select></td>-->
+                            <!--</tr>-->
+                        </table>
+                        <button type="submit" class="genric-btn purplebtn circle">ثبت</button>
                     </form>
                 </div>
             </div>
@@ -66,5 +92,39 @@
 
 
 {% include "temporary/jsfiles.html" %}
+<script>
+    $(document).ready(function(){
+
+      $("#table").append(addNewRow(1));
+    });
+    var count=2;
+    $("#btn").click(function(){
+
+      $("#table").append(addNewRow(count));
+      count++;
+      return false;
+    });
+
+    function addNewRow(count){
+      var newrow='<tr>'+
+                                '<td>'+count+'</td>'+
+                                '<td><input type="text" style="width: 90%;"></td>'+
+                                '<td><input type="text" style="width: 90%;"></td>'+
+                                '<td><select style="width: 100%;">'+
+                                    '<option>a1</option>'+
+                                    '<option>a2</option>'+
+                                '</select></td>'+
+                                '<td><select style="width: 100%;">'+
+                                    '<option>a1</option>'+
+                                    '<option>a2</option>'+
+                                '</select></td>'+
+                                '<td><select style="width: 100%;">'+
+                                    '<option>a1</option>'+
+                                    '<option>a2</option>'+
+                                '</select></td>'+
+                            '</tr>';
+      return newrow;
+    }
+</script>
 </body>
 </html>
