@@ -6,19 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="img/favicon.png" type="image/png">
-    <title>BulkApp</title>
+    <title>Royan Tokagene</title>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="vendors/linericon/style.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-    <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-    <link rel="stylesheet" href="vendors/animate-css/animate.css">
-    <link rel="stylesheet" href="vendors/popup/magnific-popup.css">
-    <!-- main css -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    {% include 'temporary/cssfiles.html' %}
 </head>
 <body data-spy="scroll" data-target="#mainNav" data-offset="70">
 
@@ -42,123 +32,93 @@
 </section>
 <!--================End Home Banner Area =================-->
 
-<div class="whole-wrap" dir="rtl" style="text-align: right;">
+<!--================Start Form =================-->
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont">
     <div class="container">
         <div class="section-top-border">
             <div class="row">
-                <div class="col-lg-8 col-md-8">
-                    <h3 class="mb-30 title_color">فرم ثبت نام</h3>
-                    <form action="#" dir="rtl">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+                    <!--<h3 class="mb-30 title_color">فرم ثبت نام</h3>-->
+
+                    <form action="#" style="">
+                        <div class="single-element-widget">
+                            <label class="mb-30 title_color">نوع حساب کاربری</label>
+                            <div class="default-select" id="default-select">
+                                <select>
+                                    <option value="1">حقیقی</option>
+                                    <option value="2">حقوقی</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 نام:</label>
-                            <input type="text" name="first_name"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'First Name'" required class="single-input">
+                            <input type="text" name="first_name" class="single-input">
                         </div>
                         <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 نام خانوادگی:</label>
-                            <input type="text" name="last_name" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Last Name'" required class="single-input">
+                            <input type="text" name="last_name" class="single-input">
                         </div>
                         <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
-                                کدملی:</label>
-                    <input type="text" name="first_name"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Primary color'" required class="single-input-primary"
+                                کد ملی:</label>
+                            <input type="text" name="first_name" class="single-input-primary"
                                    style="display: inline-block;">
                         </div>
                         <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
                                 مقطع تحصیلی:</label>
-                            <input type="text" name="first_name"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Primary color'" required class="single-input-primary"
+                            <input type="text" name="first_name" class="single-input-primary"
                                    style="display: inline-block;">
                         </div>
                         <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
-                                نام خانوادگی:</label>
-                            <input type="email" name="EMAIL" placeholder="*ایمیل" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Email address'" required class="single-input">
+                                ایمیل:</label>
+                            <input type="email" name="EMAIL" class="single-input">
                         </div>
 
 
-                        <div class="input-group-icon mt-10">
+                        <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
-                                نام خانوادگی:</label>
-                            <!--<div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>-->
-                            <input type="text" name="address" placeholder="*موسسه/سازمان/دانشگاه"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Address'" required class="single-input">
+                                موسسه/سازمان/آموزشگاه:</label>
+                            <input type="text" name="address" class="single-input">
                         </div>
-                        <div class="input-group-icon mt-10">
+                        <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
-                                نام خانوادگی:</label>
-                            <!--<div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>-->
-                            <input type="text" name="address" placeholder="*تلفن" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Address'" required class="single-input">
+                                تلفن:</label>
+                            <input type="text" name="address" class="single-input">
                         </div>
-                        <div class="input-group-icon mt-10">
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                فکس:</label>
+                            <input type="text" name="address" class="single-input">
+                        </div>
+                        <div class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 100px;">
                                 <div style="color: red; display: inline;">*</div>
-                                نام خانوادگی:</label>
-                            <!--<div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>-->
-                            <input type="text" name="address" placeholder="فکس" onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Address'" required class="single-input">
-                        </div>
-                        <div class="mt-10">
-                    <textarea class="single-textarea" placeholder="*آدرس" onfocus="this.placeholder = ''"
-                              onblur="this.placeholder = 'Message'" required></textarea>
+                                آدرس:</label>
+                            <textarea class="single-textarea"></textarea>
                         </div>
 
-
-                        <div class="mt-10">
-                            <input type="text" name="first_name" placeholder="Accent color"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Accent color'" required class="single-input-accent">
-                        </div>
-                        <div class="mt-10">
-                            <input type="text" name="first_name" placeholder="Secondary color"
-                                   onfocus="this.placeholder = ''"
-                                   onblur="this.placeholder = 'Secondary color'" required
-                                   class="single-input-secondary">
-                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!--================End form =================-->
 
 {% include "temporary/footer.html" %}
 
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/stellar.js"></script>
-<script src="vendors/lightbox/simpleLightbox.min.js"></script>
-<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-<script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-<script src="vendors/isotope/isotope-min.js"></script>
-<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-<script src="vendors/counter-up/jquery.counterup.js"></script>
-<script src="js/mail-script.js"></script>
-<script src="vendors/popup/jquery.magnific-popup.min.js"></script>
-<script src="js/theme.js"></script>
+{% include "temporary/jsfiles.html" %}
 </body>
 </html>

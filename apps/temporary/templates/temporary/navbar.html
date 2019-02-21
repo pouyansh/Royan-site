@@ -5,7 +5,9 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+                <h3 class="navbar-brand" style="color: #eeeeee;"> Royan Tokagene</h3>
+
+                <!--<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -13,17 +15,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse offset" id="navbarSupportedContent" style="margin-right: 100px;">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
+                <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav menu_nav ml-auto nav-mega">
                         <li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Services</a>
-                            <ul class="dropdown-menu"
-                                style="display: flex; position: fixed; width: 80%; margin-left: 10%;">
-                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
-                                    <h4 class="nav-item submenu" style="padding: 10px; width: 100%; color: rgb(119,71,251);
+                            <ul class="dropdown-menu  mega-menu">
+                                <li class="submenu" style="position: relative; width: 34%; text-align: center;">
+                                    <h4 class="dropdown-item" style="padding: 10px; width: 100%; color: rgb(119,71,251);
 																				">Next Generation Sequencing</h4>
                                     <ol class="ordered-list-alpha" style="position: relative; padding: 0;">
                                         <li class="nav-item"><a class="nav-link" href="elements.html"
@@ -41,8 +43,8 @@
                                         </li>
                                     </ol>
                                 </li>
-                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
-                                    <h4 class="nav-item submenu"
+                                <li class="submenu" style="position: relative; width: 33%; text-align: center;">
+                                    <h4 class="dropdown-item"
                                         style="padding: 10px; width: 100%; color: rgb(119,71,251);">Sanger
                                         Sequencing</h4>
                                     <ol class="ordered-list-alpha" style="position: relative; padding: 0">
@@ -58,10 +60,10 @@
                                                                 style="text-transform: none;">Standard Sanger
                                             Sequencing</a></li>
                                     </ol>
-                                </li>
-                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
-                                    <h4 class="nav-item submenu"
-                                        style="padding: 10px; width: 100%; color: rgb(119,71,251);">Genetic
+
+                                    <h4 class="dropdown-item"
+                                        style="padding: 10px; width: 100%; color: rgb(119,71,251); margin-top: 20px;">
+                                        Genetic
                                         Services</h4>
                                     <ol class="ordered-list-alpha" style="position: relative; padding: 0">
                                         <li class="nav-item"><a class="nav-link" href="elements.html"
@@ -69,8 +71,8 @@
                                         </li>
                                     </ol>
                                 </li>
-                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
-                                    <h4 class="nav-item submenu"
+                                <li class="submenu" style="position: relative; width: 33%; text-align: center;">
+                                    <h4 class="dropdown-item"
                                         style="padding: 10px; width: 100%; color: rgb(119,71,251);">Gene Synthesis</h4>
                                     <ol class="ordered-list-alpha"
                                         style="position: relative; padding: 0; width: auto;">
@@ -83,10 +85,9 @@
                                         </li>
 
                                     </ol>
-                                </li>
-                                <li class="submenu" style="position: relative; width: 20%; text-align: center;">
-                                    <h4 class="nav-item submenu"
-                                        style="padding: 10px; width: 100%; color: rgb(119,71,251);">Bioinformatics</h4>
+                                    <h4 class="dropdown-item"
+                                        style="padding: 10px; width: 100%; color: rgb(119,71,251); margin-top: 20px;">
+                                        Bioinformatics</h4>
                                     <ol class="ordered-list-alpha"
                                         style="position: relative; padding: 0; width: auto;">
                                         <li class="nav-item"><a class="nav-link" href="elements.html"
@@ -103,7 +104,7 @@
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Products</a>
-                            <ul class="dropdown-menu" style="width: 250px;">
+                            <ul class="dropdown-menu" style="min-width: 250px;">
                                 <li class="nav-item"><a class="nav-link" href="elements.html"
                                                         style="text-transform: none;">PCR Set</a></li>
                                 <li class="nav-item"><a class="nav-link" href="elements.html"
@@ -115,7 +116,7 @@
                         <li class="nav-item submenu dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Research areas</a>
-                            <ul class="dropdown-menu" style="width: 250px;">
+                            <ul class="dropdown-menu" style="min-width: 250px;">
                                 <li class="nav-item"><a class="nav-link" href="elements.html"
                                                         style="text-transform: none;">Cancer Research</a></li>
                                 <li class="nav-item"><a class="nav-link" href="elements.html"
@@ -129,12 +130,13 @@
                                                         style="text-transform: none;">Synthetic Biology</a></li>
                             </ul>
                         </li>
-
+                        
                         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                         <li class="nav-item"><a class="nav-link" href="contact.html">About Us</a></li>
                     </ul>
+                    <a href="#" class="genric-btn default circle" style="margin-left: auto;">Login</a>
                 </div>
-                <a href="#" class="genric-btn default circle" style="margin-right: -100px;">Login</a>
+
             </div>
         </nav>
     </div>
