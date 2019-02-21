@@ -1,0 +1,118 @@
+{% load static staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Royan Tokagene</title>
+    <!-- Bootstrap CSS -->
+    {% include 'temporary/cssfiles.html' %}
+</head>
+<body data-spy="scroll" data-target="#mainNav" data-offset="70">
+
+{% include "temporary/navbar.html" %}
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
+             data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Primer</h2>
+                <div class="page_link">
+                    <a href="index.html">Home</a>
+                    <a href="elements.html">Services</a>
+                    <a href="elements.html">Primer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<!--================Start Form =================-->
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+                    <!--<h3 class="mb-30 title_color">فرم ثبت نام</h3>-->
+
+                    <form action="{% url 'submit_primer_2' %}">
+                        <div id="type" class="mt-10" style="display: flex;">
+                            <label class="mb-30 title_color" style="float: right; display: inline-block; width: 100px;">نوع حساب
+                                کاربری</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">حقیقی</h4>
+                        </div>
+                        <div id="first_name" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                نام:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">پویان</h4>
+                        </div>
+                        <div id="last_name" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                نام خانوادگی:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">شیرزادیان</h4>
+                        </div>
+                        <div id="national_ID" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                کد ملی:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">0440700140</h4>
+                        </div>
+                        <div id="education" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                مقطع تحصیلی:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">دیپلم</h4>
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                ایمیل:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">pshirzadian26@gmail.com</h4>
+                        </div>
+
+
+                        <div id="organization" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                موسسه/سازمان/آموزشگاه:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">دانشگاه صنعتی شریف</h4>
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                تلفن:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">09126804295</h4>
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                فکس:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">----</h4>
+                        </div>
+                        <div class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 100px;">
+                                آدرس:</label>
+                            <h4 style="display: inline-block; font-family: FarsiFont;">تهران-پژوهشکده رویان</h4>
+                        </div>
+
+                        <div class="mt-10" style="display: flex; margin-top: 30px;">
+                            <label style="float: right; display: inline-block; width: 150px;">
+                                <div style="color: red; display: inline;">*</div>
+                                نام فاکتور شونده:</label>
+                            <input type="text" required name="address" class="single-input">
+                        </div>
+                        <button type="submit" class="genric-btn purplebtn circle">ادامه</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================End form =================-->
+
+{% include "temporary/footer.html" %}
+
+
+{% include "temporary/jsfiles.html" %}
+</body>
+</html>
