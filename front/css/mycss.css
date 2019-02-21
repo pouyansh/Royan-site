@@ -72,3 +72,10 @@ display: inline-block;
     color: rgb(188,91,254);
     background-color: #eeeeee;
 }
+
+.fa-comment {
+  color: #666666;
+}
+.fa-comment:hover {
+  color: #bbbbbb;
+}
