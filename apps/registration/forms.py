@@ -27,7 +27,7 @@ class SignUpForm(UserCreationForm):
     education = forms.CharField(max_length=100)
     org = forms.CharField(max_length=100)
     cellphone_number = forms.IntegerField()
-    type = forms.ChoiceField(choices={(1, "حقیقی"), (2, "حقوقی")})
+    fax = forms.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
         if 'url' in kwargs:
@@ -37,9 +37,12 @@ class SignUpForm(UserCreationForm):
 
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['email'].label = "ایمیل"
+        self.fields['email'].required = True
         self.fields['username'].label = "نام کاربری"
         self.fields['first_name'].label = "نام"
+        self.fields['first_name'].required = True
         self.fields['last_name'].label = "نام خانوادگی"
+        self.fields['last_name'].required = True
         self.fields['password1'].label = "رمز عبور"
         self.fields['password2'].label = "تکرار رمز عبور"
         self.fields['national_id'].label = "کد ملی"
@@ -53,14 +56,13 @@ class SignUpForm(UserCreationForm):
         self.fields['fax'].label = "فکس"
         self.fields['address'].label = "آدرس"
         self.fields['cellphone_number'].label = "تلفن همراه"
-        self.fields['type'].label = "نوع حساب کاربری"
 
     class Meta:
         model = Customer
         fields = (
-            'type', 'username', 'first_name', 'last_name', 'organization_name', 'national_id', 'submit_id',
-            'economic_id', 'post', 'education', 'email', 'phone_number', 'cellphone_number', 'fax', 'address',
-            'password1', 'password2',)
+            'first_name', 'last_name', 'organization_name', 'national_id', 'submit_id',
+            'economic_id', 'post', 'education', 'org', 'email', 'phone_number', 'cellphone_number', 'fax', 'address',
+            'username', 'password1', 'password2',)
 
 
 class EditProfileForm(ModelForm):

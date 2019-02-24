@@ -79,3 +79,9 @@ display: inline-block;
 .fa-comment:hover {
   color: #bbbbbb;
 }
+
+input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance:textfield;
+    appearance: none;
+}
