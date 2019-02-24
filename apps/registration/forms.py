@@ -30,11 +30,6 @@ class SignUpForm(UserCreationForm):
     fax = forms.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
-        if 'url' in kwargs:
-            self.url = kwargs.pop('url')
-        else:
-            self.url = '127.0.0.0.1:8000/'
-
         super(UserCreationForm, self).__init__(*args, **kwargs)
         self.fields['email'].label = "ایمیل"
         self.fields['email'].required = True
@@ -62,7 +57,7 @@ class SignUpForm(UserCreationForm):
         fields = (
             'first_name', 'last_name', 'organization_name', 'national_id', 'submit_id',
             'economic_id', 'post', 'education', 'org', 'email', 'phone_number', 'cellphone_number', 'fax', 'address',
-            'username', 'password1', 'password2',)
+            'username', 'password1', 'password2')
 
 
 class EditProfileForm(ModelForm):
