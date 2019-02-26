@@ -58,6 +58,11 @@ padding: 0px;
 display: inline-block;
 }
 
+a:not([href]):not([tabindex]) {
+    color: #eeeeee;
+    max-width: 30%;
+}
+
 .purplebtn {
     background-color: rgb(188,91,254);
     color: #eeeeee;
@@ -77,6 +82,10 @@ display: inline-block;
     display: block;
     margin: 20px auto;
 }
+.greenbtn:hover {
+    color: rgb(56,208,30);
+    background-color: #eeeeee;
+}
 
 .graybtn {
     background-color: #bbbbbb;
@@ -86,6 +95,7 @@ display: inline-block;
     font-size: 16px;
     display: block;
     margin: 20px auto;
+    cursor: not-allowed;
 }
 
 .purplebtn:hover {

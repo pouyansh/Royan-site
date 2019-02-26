@@ -34,17 +34,19 @@
 </section>
 <!--================End Home Banner Area =================-->
 
-<!--================Start Form =================-->
-<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
-    <div class="container">
-        <div class="section-top-border">
-            <div class="row">
-                <div class="col-lg-8 col-md-8" style="margin: auto">
-                    <!--<h3 class="mb-30 title_color">فرم ثبت نام</h3>-->
+<!--================Start Form=====================-->
+<form>
+    <!--================Start Section1 =================-->
+    <div id="sec1" class="whole-wrap" dir="rtl"
+         style="display: block; text-align: right; font-family: FarsiFont; font-size: 16px;">
+        <div class="container">
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8" style="margin: auto">
 
-                    <form>
                         <div id="type" class="mt-10" style="display: flex;">
-                            <label class="mb-30 title_color" style="float: right; display: inline-block; width: 100px;">نوع حساب
+                            <label class="mb-30 title_color" style="float: right; display: inline-block; width: 100px;">نوع
+                                حساب
                                 کاربری</label>
                             <h4 style="display: inline-block; font-family: FarsiFont;">حقیقی</h4>
                         </div>
@@ -102,18 +104,246 @@
                                 نام فاکتور شونده:</label>
                             <input type="text" required name="address" class="single-input">
                         </div>
-                        <button type="submit" class="genric-btn purplebtn circle">ادامه</button>
-                    </form>
+                        <a class="genric-btn purplebtn circle" onclick="goto(2)" onsubmit="return false;">ادامه</a>
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!--================End form =================-->
+    <!--================End Section1 =================-->
 
+    <!--================Start Section2 =================-->
+    <div id="sec2" class="whole-wrap" dir="rtl"
+         style="display: none; text-align: right; font-family: FarsiFont; font-size: 16px;">
+        <div class="container">
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8" style="margin: auto">
+
+                        <p>شما میتوانید فایل زیر را دانلود کرده، آن را پر کنید و سابمیت کنید و یا با استفاده از فرم درج
+                            شده
+                            رد سایت، اطلاعات را وارد نمایید.</p>
+                        <div style="margin: auto; ">
+                            <a href="{% static 'primer.xls' %}" download style="margin-left: 10%; width: 30%; display: inline-block; border: 1px solid #555555; float: left;
+                                                                        background: rgb(143,109,252); text-align: center; color: #eeeeee; font-size: 20px;">Download
+                                template file</a>
+                            <a href="{% static 'primer.xls' %}" download style="margin-right: 10%; width: 30%; display: inline-block; border: 1px solid #555555; float: right;
+                                                                        background: rgb(143,109,252); text-align: center; color: #eeeeee; font-size: 20px;">Upload
+                                your file</a>
+                        </div>
+                        <!--<input type="file" style="display: inline-block; ">-->
+                        <div id="results">
+
+                        </div>
+
+                        <table dir="ltr" id="table"
+                               style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
+                            <thead>
+                            <tr style="font-size: 12px;">
+                                <th>num</th>
+                                <th>Oligo name</th>
+                                <th>Oligo Sequence</th>
+                                <th style="width: 15%;">Concentration</th>
+                                <th style="width: 15%;">Purification</th>
+                                <th style="width: 15%;">Modification</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <a class="genric-btn purplebtn circle" id="addbtn"
+                                style="float: left; display: inline-block;">اضافه
+                        </a>
+                        <a class="genric-btn purplebtn circle" onclick="goto(3)"
+                                style="float: right; display: inline-block">ادامه
+                        </a>
+                        <a class="genric-btn purplebtn circle" onclick="goto(1)"
+                                style="float: right; display: inline-block">بازگشت
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Section2 =================-->
+
+    <!--================Start Section3 =================-->
+    <div id="sec3" class="whole-wrap" dir="rtl"
+         style="display: none; text-align: right; font-family: FarsiFont; font-size: 16px;">
+        <div class="container">
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8" style="margin: auto">
+
+                        <table dir="ltr" id="table2"
+                               style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
+                            <thead>
+                            <tr style="font-size: 12px;">
+                                <th>num</th>
+                                <th>Oligo name</th>
+                                <th>Oligo Sequence</th>
+                                <th style="width: 15%;">Concentration</th>
+                                <th style="width: 15%;">Purification</th>
+                                <th style="width: 15%;">Modification</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+
+                        </table>
+                        <input type="checkbox" id="checkbox" onchange="changed()"> صحت موارد ثبت شده را تایید می
+                        نمایم.
+                        <br>
+                        <a onclick="goto(2)" class="genric-btn purplebtn circle" style="display: inline-block">
+                            بازگشت
+                        </a>
+                        <button type="submit" id="btn" class="genric-btn greenbtn circle"
+                                style="display: none; float: left">ثبت نهایی
+                        </button>
+                        <div id="btn1" class="genric-btn graybtn circle" style="display: inline-block; float: left">
+                            ثبت نهایی
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Section3 =================-->
+
+    <!--================Start Section4 =================-->
+    <div id="sec4" class="whole-wrap" dir="rtl"
+         style="display: none; text-align: right; font-family: FarsiFont; font-size: 16px;">
+        <div class="container">
+            <div class="section-top-border">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8" style="margin: auto">
+                        <div style="font-family: FarsiFont; text-align: center; background: rgb(156,239,141); width: 100%; height: 100px; display: block; color: #222222">
+                            <h4 style="font-family: FarsiFont; padding-top: 20px;">سفارش شما با موفقیت انجام شد. پیش
+                                فاکتور جهت تایید نهایی سفارش، به زودی به ایمیل شما ارسال خواهد گردید. </h4>
+                            <h3 style="font-family: FarsiFont;">کد رهگیری: PR-971210-1</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Section4 =================-->
+
+</form>
+<!--================End Form=======================-->
 {% include "temporary/footer.html" %}
 
 
 {% include "temporary/jsfiles.html" %}
+<script>
+    $(document).ready(function(){
+
+      $("#table").append(addNewRow(1));
+    });
+    var count=2;
+    $("#addbtn").click(function(){
+
+      $("#table").append(addNewRow(count));
+      count++;
+      return false;
+    });
+
+    function addNewRow(count){
+      var newrow='<tr>'+
+                                '<td>'+count+'</td>'+
+                                '<td><input type="text" style="width: 90%; border-color: #bbbbbb;"></td>'+
+                                '<td style="display: flex; margin: auto">5-<input type="text" style="width: 70%; border-color: #bbbbbb;">-3</td>'+
+                                '<td><select style="width: 100%; border-color: #bbbbbb;">'+
+                                    '<option>select</option>'+
+                                    '<option>0.02</option>'+
+                                    '<option>0.04</option>'+
+                                    '<option>0.1</option>'+
+                                    '<option>1</option>'+
+                                '</select></td>'+
+                                '<td><select style="width: 100%; border-color: #bbbbbb;">'+
+                                    '<option>select</option>'+
+                                    '<option>Yes</option>'+
+                                    '<option>No</option>'+
+                                '</select></td>'+
+                                '<td><select style="width: 100%; border-color: #bbbbbb;">'+
+                                    '<option>select</option>'+
+                                    '<option>a1</option>'+
+                                    '<option>a2</option>'+
+                                '</select></td>'+
+                            '</tr>';
+      return newrow;
+    }
+
+    function changed () {
+        var value = $('#checkbox').prop("checked");
+        console.log(value);
+        if (value == true) {
+            console.log("1");
+            $('#btn').css('display', 'inline-block');
+            $('#btn1').css('display', 'none');
+        }
+        if (value == false) {
+            $('#btn1').css('display', 'inline-block');
+            $('#btn').css('display', 'none');
+        }
+    }
+
+    function goto (i) {
+        var id = "sec"+i;
+        $("#sec1").css('display', 'none');
+        $("#sec2").css('display', 'none');
+        $("#sec3").css('display', 'none');
+        $("#sec4").css('display', 'none');
+        $("#"+id).css('display', 'block');
+        return false;
+    }
+
+</script>
 </body>
 </html>
