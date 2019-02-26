@@ -8,7 +8,6 @@ from django.contrib.auth.forms import PasswordChangeForm as DjangoPasswordChange
 from django.shortcuts import get_object_or_404
 
 from apps.registration.models import *
-from backend_settings import settings
 
 
 class SignUpForm(UserCreationForm):
@@ -16,7 +15,7 @@ class SignUpForm(UserCreationForm):
     post = forms.CharField(max_length=100)
     submit_id = forms.IntegerField()
     economic_id = forms.IntegerField()
-    national_id = forms.IntegerField()
+    national_id = forms.CharField()
     education = forms.CharField(max_length=100)
     org = forms.CharField(max_length=100)
     cellphone_number = forms.IntegerField()
@@ -73,21 +72,87 @@ class SignUpForm(UserCreationForm):
 
     def clean_national_id(self):
         nid = self.cleaned_data['national_id']
+        print(nid)
         customer_type = self.cleaned_data['type']
-        if customer_type == 1:
+        print("customer_type: ", customer_type)
+        if str(customer_type) == "1":
             user_exists = get_object_or_404(Person, national_id=nid)
             if user_exists:
                 raise forms.ValidationError("کد ملی تکراری است.")
-        if len(str(nid)) != 10:
-            raise forms.ValidationError("کد ملی باید 10 رقمی باشد.")
-        return nid
+            if len(str(nid)) != 10:
+                raise forms.ValidationError("کد ملی باید 10 رقمی باشد.")
+            print(nid)
+            return nid
+        else:
+            return 1
 
     def clean_organization_name(self):
-        org_name = self.cleaned_data['orgaization_name']
+        org_name = self.cleaned_data['organization_name']
+        customer_type = self.cleaned_data['type']
+        if customer_type == 1:
+            return ''
         user_exists = Organization.objects.filter(organization_name=org_name)
         if len(user_exists) > 0:
             raise forms.ValidationError("نام شرکت تکراری است.")
         return org_name
+
+    def clean_economic_id(self):
+        eid = self.cleaned_data['economic_id']
+        customer_type = self.cleaned_data['type']
+        if customer_type == 2:
+            user_exists = get_object_or_404(Organization, economic_id=eid)
+            if user_exists:
+                raise forms.ValidationError("شماره اقتصادی تکراری است.")
+            return eid
+        else:
+            return 0
+
+    def clean_submit_id(self):
+        sid = self.cleaned_data['submit_id']
+        customer_type = self.cleaned_data['type']
+        if customer_type == 2:
+            user_exists = get_object_or_404(Organization, submit_id=sid)
+            if user_exists:
+                raise forms.ValidationError("شماره ثبت تکراری است.")
+            return sid
+        else:
+            return 0
+
+    def clean_post(self):
+        post = self.cleaned_data['post']
+        customer_type = self.cleaned_data['type']
+        if customer_type == 2:
+            user_exists = get_object_or_404(Organization, post=post)
+            if user_exists:
+                raise forms.ValidationError("شماره ثبت تکراری است.")
+            return post
+        else:
+            return ''
+
+    def clean(self):
+        print("hi")
+        cleaned_data = super(SignUpForm, self).clean()
+        customer_type = cleaned_data['type']
+        if customer_type == 1:
+            self.instance.organization_name = ""
+            self.instance.submit_id = 0
+            self.instance.economic_id = 0
+            self.instance.post = ""
+        else:
+            self.instance.national_id = ""
+            self.instance.cellphone_number = 0
+            self.instance.education = ""
+            self.instance.org = ""
+        print(self.instance)
+        print(cleaned_data)
+
+    def save(self, commit=True):
+        user = super(UserCreationForm, self).save(commit=False)
+        user.set_password(self.cleaned_data["password1"])
+        if commit:
+            user.save()
+        print("user: ", user)
+        return user
 
 
 class Hash:

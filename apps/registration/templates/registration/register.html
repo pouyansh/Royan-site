@@ -91,6 +91,8 @@
     $(document).ready(function () {
         $("input").addClass('single-input');
         $("input").prop('required',false);
+        $("#id_national_id").prop('type','text');
+        $("#id_national_id").prop('pattern', "[0-9]*");
         $("#type").css('width', '50%');
         $("#type").css('margin', '20px auto');
         $('#type').on('change', function() {
