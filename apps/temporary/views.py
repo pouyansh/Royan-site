@@ -13,5 +13,13 @@ def submit_primer_2(request):
     return render(request, "temporary/submit_primer_2.html")
 
 
+def submit_primer_3(request):
+    return render(request, "temporary/submit_primer_3.html")
+
+
+def submit_primer_4(request):
+    return render(request, "temporary/submit_primer_4.html")
+
+
 def service_description(request):
     return render(request, "temporary/service_description.html")

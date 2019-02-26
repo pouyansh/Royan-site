@@ -40,15 +40,6 @@
         <div class="section-top-border">
             <div class="row">
                 <div class="col-lg-8 col-md-8" style="margin: auto">
-
-                    <p>شما میتوانید فایل زیر را دانلود کرده، آن را پر کنید و سابمیت کنید و یا با استفاده از فرم درج شده
-                        رد سایت، اطلاعات را وارد نمایید.</p>
-                    <div style="margin: auto; ">
-                    <a href="{% static 'primer.xls' %}" download style="margin-left: 10%; width: 30%; display: inline-block; border: 1px solid #555555; float: left;
-                                                                        background: rgb(143,109,252); text-align: center; color: #eeeeee; font-size: 20px;">Download template file</a>
-                    <a href="{% static 'primer.xls' %}" download style="margin-right: 10%; width: 30%; display: inline-block; border: 1px solid #555555; float: right;
-                                                                        background: rgb(143,109,252); text-align: center; color: #eeeeee; font-size: 20px;">Upload your file</a>
-                    </div>
                     <form>
                         <!--<input type="file" style="display: inline-block; ">-->
                         <div id="results">
@@ -67,26 +58,60 @@
                                     <th style="width: 15%;">Modification</th>
                                 </tr>
                             </thead>
-                            <!--<tr>-->
-                                <!--<td>1</td>-->
-                                <!--<td><input type="text" style="width: 90%;"></td>-->
-                                <!--<td><input type="text" style="width: 90%;"></td>-->
-                                <!--<td><select style="width: 100%;">-->
-                                    <!--<option>a1</option>-->
-                                    <!--<option>a2</option>-->
-                                <!--</select></td>-->
-                                <!--<td><select style="width: 100%;">-->
-                                    <!--<option>a1</option>-->
-                                    <!--<option>a2</option>-->
-                                <!--</select></td>-->
-                                <!--<td><select style="width: 100%;">-->
-                                    <!--<option>a1</option>-->
-                                    <!--<option>a2</option>-->
-                                <!--</select></td>-->
-                            <!--</tr>-->
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr><tr>
+                                <td>1</td>
+                                <td>O1</td>
+                                <td>5'-ACTGTGGGGTAAA-3'</td>
+                                <td>0.1</td>
+                                <td>Yes</td>
+                                <td>a1</td>
+                            </tr>
+
                         </table>
-                        <button class="genric-btn purplebtn circle" id="btn" style="float: left; display: inline-block;">اضافه</button>
-                        <button type="submit" class="genric-btn purplebtn circle" style="float: right; display: inline-block">ثبت</button>
+                        <input type="checkbox" id="checkbox" onchange="changed()"> صحت موارد ثبت شده را تایید می نمایم.
+                        <br>
+                        <button type="submit" class="genric-btn purplebtn circle" style="display: inline-block">بازگشت</button>
+                        <button type="submit" id="btn" class="genric-btn greenbtn circle" style="display: none; float: left">ثبت نهایی</button>
+                        <div id="btn1" class="genric-btn graybtn circle" style="display: inline-block; float: left">ثبت نهایی</div>
                     </form>
                 </div>
             </div>
@@ -102,7 +127,6 @@
 <script>
     $(document).ready(function(){
 
-      $("#table").append(addNewRow(1));
     });
     var count=2;
     $("#btn").click(function(){
@@ -111,6 +135,18 @@
       count++;
       return false;
     });
+
+    function changed () {
+        var value = $('#checkbox').prop("checked");
+        if (value == true) {
+            $('btn').css('display', 'inline-block');
+            $('btn1').css('display', 'none');
+        }
+        if (value == false) {
+            $('btn1').css('display', 'inline-block');
+            $('btn').css('display', 'none');
+        }
+    }
 
     function addNewRow(count){
       var newrow='<tr>'+
