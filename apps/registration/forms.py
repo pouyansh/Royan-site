@@ -5,17 +5,10 @@ from django.core.mail import send_mail
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.forms import PasswordChangeForm as DjangoPasswordChangeForm
+from django.shortcuts import get_object_or_404
 
-from apps.registration.models import Customer
+from apps.registration.models import *
 from backend_settings import settings
-
-
-class ChangePasswordForm(DjangoPasswordChangeForm):
-    def __init__(self, user, *args, **kwargs):
-        super().__init__(user, *args, **kwargs)
-        self.fields['old_password'].label = "رمز عبور"
-        self.fields['new_password1'].label = "رمز عبور جدید"
-        self.fields['new_password2'].label = "تکرار رمز عبور جدید"
 
 
 class SignUpForm(UserCreationForm):
@@ -28,6 +21,7 @@ class SignUpForm(UserCreationForm):
     org = forms.CharField(max_length=100)
     cellphone_number = forms.IntegerField()
     fax = forms.IntegerField(required=False)
+    type = forms.ChoiceField(choices={(1, "حقیقی"), (2, "حقوقی")})
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -51,50 +45,49 @@ class SignUpForm(UserCreationForm):
         self.fields['fax'].label = "فکس"
         self.fields['address'].label = "آدرس"
         self.fields['cellphone_number'].label = "تلفن همراه"
+        self.fields['type'].label = "نوع حساب کاربری"
 
     class Meta:
         model = Customer
         fields = (
-            'first_name', 'last_name', 'organization_name', 'national_id', 'submit_id',
+            'type', 'first_name', 'last_name', 'organization_name', 'national_id', 'submit_id',
             'economic_id', 'post', 'education', 'org', 'email', 'phone_number', 'cellphone_number', 'fax', 'address',
             'username', 'password1', 'password2')
 
-
-class EditProfileForm(ModelForm):
-    state = forms.CharField(label='استان')
-    city = forms.CharField(label='شهر')
-    district = forms.CharField(label="محله")
-
-    class Meta:
-        model = Customer
-        fields = ('first_name', 'last_name')
-
-
-class ForgetPassForm(forms.Form):
-    username = forms.CharField(max_length=20, required=True, label="نام کاربری")
-
-    class Meta:
-        model = Customer
-        fields = 'username'
-
-    def send_email(self):
+    def clean_username(self):
         username = self.cleaned_data['username']
-        user = Customer.objects.get(username=username)
-        send_mail(
-            'بازیابی رمز عبور',
-            'لطفا برروی لینک زیر کلیک نمایید:\n'
-            '127.0.0.1:8000/reset_password/' + Hash.dohash(user.email + '`' + user.username),
-            settings.EMAIL_HOST_USER,
-            [user.email],
-            fail_silently=False,
-        )
+        try:
+            user_exists = Customer.objects.get(username=username)
+        except Customer.DoesNotExist:
+            user_exists = None
+        if user_exists:
+            raise forms.ValidationError("نام کاربری تکراری است.")
+        return username
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user_exists = Customer.objects.filter(email=email)
+        if len(user_exists) > 0:
+            raise forms.ValidationError("ایمیل وارد شده تکراری است.")
+        return email
 
-class ResetPasswordForm(SetPasswordForm):
-    def __init__(self, user, *args, **kwargs):
-        super().__init__(user, *args, **kwargs)
-        self.fields['new_password1'].label = "رمز عبور جدید"
-        self.fields['new_password2'].label = "تکرار رمز عبور جدید"
+    def clean_national_id(self):
+        nid = self.cleaned_data['national_id']
+        customer_type = self.cleaned_data['type']
+        if customer_type == 1:
+            user_exists = get_object_or_404(Person, national_id=nid)
+            if user_exists:
+                raise forms.ValidationError("کد ملی تکراری است.")
+        if len(str(nid)) != 10:
+            raise forms.ValidationError("کد ملی باید 10 رقمی باشد.")
+        return nid
+
+    def clean_organization_name(self):
+        org_name = self.cleaned_data['orgaization_name']
+        user_exists = Organization.objects.filter(organization_name=org_name)
+        if len(user_exists) > 0:
+            raise forms.ValidationError("نام شرکت تکراری است.")
+        return org_name
 
 
 class Hash:

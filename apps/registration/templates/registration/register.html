@@ -45,25 +45,33 @@
                     <h3 class="mb-30 title_color" style=" font-family: FarsiFont;">فرم ثبت نام</h3>
                     <form method="post">
                         {% csrf_token %}
-                        <div style="width: 50%; margin: 20px auto; display: flex;">
-                            <div class="single-element-widget" style="margin: auto;">
-                                <label class="mb-30 title_color" style="line-height: 42px; margin: auto 20px;">نوع حساب
-                                    کاربری</label>
-                                <select id="type_select" onchange="customer_type()">
-                                    <option value="1">حقیقی</option>
-                                    <option value="2">حقوقی</option>
-                                </select>
-                            </div>
-                        </div>
+                        <!--<div style="width: 50%; margin: 20px auto; display: flex;">-->
+                            <!--<div class="single-element-widget" style="margin: auto;">-->
+                                <!--<label class="mb-30 title_color" style="line-height: 42px; margin: auto 20px;">نوع حساب-->
+                                    <!--کاربری</label>-->
+                                <!--<select id="id_type" name="type" onchange="customer_type()">-->
+                                    <!--<option value="1">حقیقی</option>-->
+                                    <!--<option value="2">حقوقی</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         {% for field in form %}
                         <div id="{{field.name}}" class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 150px;">
                                 {% if field.field.required %}
-                                    <div style="color: red; display: inline;">*</div>
+                                <div style="color: red; display: inline;">*</div>
                                 {% endif %}
                                 {{field.label}}</label>
-                            {{field}}
-                            {{field.error}}
+                            <div style="width: 100%;">
+                                {{field}}
+                                {% if field.errors %}
+                                <ul>
+                                    {% for error in field.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
                         </div>
                         {% endfor %}
                         <button type="submit" class="genric-btn purplebtn circle">ثبت</button>
@@ -81,12 +89,15 @@
 {% include 'temporary/jsfiles.html' %}
 <script>
     $(document).ready(function () {
-
+        $("input").addClass('single-input');
+        $("input").prop('required',false);
+        $("#type").css('width', '50%');
+        $("#type").css('margin', '20px auto');
         customer_type();
     });
 
     function customer_type() {
-        var val = $('#type_select').val();
+        var val = $('#id_type').val();
         console.log(val);
         if (val == 2) {
             $('#organization_name').css('display','flex');
@@ -109,6 +120,10 @@
             $('#cellphone_number').css('display', 'flex');
         }
     };
+
+
+
+
 
 </script>
 </body>
