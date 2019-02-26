@@ -21,7 +21,7 @@ class SignUpForm(UserCreationForm):
     org = forms.CharField(max_length=100)
     cellphone_number = forms.IntegerField()
     fax = forms.IntegerField(required=False)
-    type = forms.ChoiceField(choices={(1, "حقیقی"), (2, "حقوقی")})
+    type = forms.ChoiceField(choices={(2, "حقوقی"), (1, "حقیقی")})
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
