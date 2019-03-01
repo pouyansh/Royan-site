@@ -164,3 +164,24 @@ input[type=number] {
     font-size: 15px;
 }
 
+a .footer_helpnote {
+    border-radius: 10px;
+    background: #eeeeee;
+    position: absolute;
+    top: -20px;
+    display: inline-block;
+    color: #444444;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s;
+}
+
+a:hover .footer_helpnote {
+    visibility: visible;
+    opacity: 1;
+    transition: 1s;
+}
