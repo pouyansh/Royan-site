@@ -18,16 +18,6 @@
                     <h3 class="mb-30 title_color" style=" font-family: FarsiFont;">فرم ثبت نام</h3>
                     <form method="post">
                         {% csrf_token %}
-                        <!--<div style="width: 50%; margin: 20px auto; display: flex;">-->
-                            <!--<div class="single-element-widget" style="margin: auto;">-->
-                                <!--<label class="mb-30 title_color" style="line-height: 42px; margin: auto 20px;">نوع حساب-->
-                                    <!--کاربری</label>-->
-                                <!--<select id="id_type" name="type" onchange="customer_type()">-->
-                                    <!--<option value="1">حقیقی</option>-->
-                                    <!--<option value="2">حقوقی</option>-->
-                                <!--</select>-->
-                            <!--</div>-->
-                        <!--</div>-->
                         {% for field in form %}
                         <div id="{{field.name}}" class="mt-10" style="display: flex;">
                             <label style="float: right; display: inline-block; width: 150px;">
@@ -47,6 +37,9 @@
                             </div>
                         </div>
                         {% endfor %}
+                        <br>
+                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                        <div class="g-recaptcha" data-sitekey="6LdRSRYUAAAAAFCqQ1aZnYfRGJIlAUMX3qkUWlcF"></div>
                         <button type="submit" class="genric-btn purplebtn circle">ثبت</button>
                     </form>
                 </div>
@@ -116,6 +109,7 @@
             $('#cellphone_number').css('display', 'flex');
         }
     };
+
 
 
 
