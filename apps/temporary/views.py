@@ -9,14 +9,6 @@ def submit_primer_1(request):
     return render(request, "temporary/submit_primer_1.html")
 
 
-def submit_primer_2(request):
-    return render(request, "temporary/submit_primer_2.html")
-
-
-def submit_primer_3(request):
-    return render(request, "temporary/submit_primer_3.html")
-
-
 def submit_primer_4(request):
     return render(request, "temporary/submit_primer_4.html")
 

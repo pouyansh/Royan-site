@@ -1,41 +1,15 @@
+{% extends "temporary/mother_panel.html" %}
 {% load static staticfiles %}
-<!doctype html>
-<html lang="en">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="img/favicon.png" type="image/png">
-    <title>Royan TuCAgene</title>
-    <!-- Bootstrap CSS -->
-    {% include 'temporary/cssfiles.html' %}
-</head>
-<body data-spy="scroll" data-target="#mainNav" data-offset="70">
 
-{% include "temporary/navbar.html" %}
-{% include "temporary/chat_sidebar.html" %}
+{% block banner_content %}
+<h2>Register</h2>
+<div class="page_link">
+    <a href="index.html">Home</a>
+    <a href="elements.html">Register</a>
+</div>
+{% endblock banner_content %}
 
-<!--================Home Banner Area =================-->
-<section class="banner_area">
-    <div class="banner_inner d-flex align-items-center">
-        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
-             data-background=""></div>
-
-        <div class="container">
-            <div class="banner_content text-center">
-                <h2>Register</h2>
-                <div class="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="elements.html">Register</a>
-                </div>
-            </div>
-        </div>
-        <img src="{% static 'img/DNA.png' %}" style="width:100%; float: right;">
-    </div>
-</section>
-<!--================End Home Banner Area =================-->
-
-<!--================Start Form =================-->
+{% block main_content %}
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container">
         <div class="section-top-border">
@@ -165,11 +139,4 @@
         </div>
     </div>
 </div>
-<!--================End form =================-->
-
-{% include "temporary/footer.html" %}
-
-
-{% include "temporary/jsfiles.html" %}
-</body>
-</html>
+{% endblock main_content %}
