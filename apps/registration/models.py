@@ -27,6 +27,6 @@ class Organization(Customer):
 
 class Person(Customer):
     national_id = models.CharField(max_length=10, verbose_name="کد ملی")
-    education = models.CharField(max_length=100, verbose_name="تحصیلات")
+    education = models.CharField(max_length=100, verbose_name="تحصیلات", null=True)
     org = models.CharField(max_length=100, verbose_name="موسسه/آموزشگاه/سازمان")
     cellphone_number = models.IntegerField(verbose_name="شماره تلفن همراه")
