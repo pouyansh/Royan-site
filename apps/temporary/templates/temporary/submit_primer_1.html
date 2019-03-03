@@ -99,43 +99,59 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-8" style="margin: auto">
 
-                        <p>شما میتوانید فایل زیر را دانلود کرده، آن را پر کنید و سابمیت کنید و یا با استفاده از فرم درج
-                            شده
-                            رد سایت، اطلاعات را وارد نمایید.</p>
-                        <div style="margin: auto; ">
-                            <a href="{% static 'primer.xls' %}" download style="margin-left: 10%; width: 30%; display: inline-block; border: 1px solid #555555; float: left;
-                                                                        background: rgb(143,109,252); text-align: center; color: #eeeeee; font-size: 20px;">Download
-                                template file</a>
-                            <a href="{% static 'primer.xls' %}" download style="margin-right: 10%; width: 30%; display: inline-block; border: 1px solid #555555; float: right;
-                                                                        background: rgb(143,109,252); text-align: center; color: #eeeeee; font-size: 20px;">Upload
-                                your file</a>
+                        <p>
+                            برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
+                        </p>
+                        ‌
+                        <div class="submit_service_register_parts">
+                            <input type="radio" name="type_1" id="type_1" style="display: inline-block;"
+                                   onclick="radiochanged(1)">
+                            <h5 style="display: inline-block">روش اول:</h5>
+                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید ابتدا فایل اکسل
+                                داده شده را دانلود کنید و
+                                آن را پر کنید. سپس از طریق درگاه قرار داده شده، آن را آپلود کنید.
+                            </div>
+                            <div style="margin: auto; display: flex; height: 100%;">
+                                <a href="{% static 'primer.xls' %}" download class="submit_service_excel">دانلود فایل
+                                    نمونه</a>
+                                <a href="{% static 'primer.xls' %}" download class="submit_service_excel">درگاه
+                                    آپلود</a>
+                            </div>
                         </div>
-                        <!--<input type="file" style="display: inline-block; ">-->
-                        <div id="results">
 
+                        <div class="submit_service_register_parts">
+                            <input type="radio" name="type_2" id="type_2" style="display: inline-block;"
+                                   onclick="radiochanged(2)">
+                            <h5 style="display: inline-block">روش دوم:</h5>
+                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید توالی‌های خود را از
+                                طریق جدول زیر، وارد کنید.
+                            </div>
+                            <div style="height: 0px; transition: 2s;" id="div_type_1">
+                                <table dir="ltr" id="table"
+                                       style="width: 100%; padding: 20px; text-align: center;
+                                   margin: 20px 0; transition: 1s; visibility: hidden; opacity: 0;">
+                                    <thead>
+                                    <tr style="font-size: 12px;">
+                                        <th>num</th>
+                                        <th>Oligo name</th>
+                                        <th>Oligo Sequence</th>
+                                        <th style="width: 15%;">Concentration</th>
+                                        <th style="width: 15%;">Purification</th>
+                                        <th style="width: 15%;">Modification</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                                <a class="genric-btn purplebtn circle" id="addbtn"
+                                   style="display: inline-block; transition: 1s;
+                                   visibility: hidden; opacity: 0;">اضافه
+                                </a>
+                            </div>
                         </div>
-
-                        <table dir="ltr" id="table"
-                               style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
-                            <thead>
-                            <tr style="font-size: 12px;">
-                                <th>num</th>
-                                <th>Oligo name</th>
-                                <th>Oligo Sequence</th>
-                                <th style="width: 15%;">Concentration</th>
-                                <th style="width: 15%;">Purification</th>
-                                <th style="width: 15%;">Modification</th>
-                            </tr>
-                            </thead>
-                        </table>
-                        <a class="genric-btn purplebtn circle" id="addbtn"
-                                style="float: left; display: inline-block;">اضافه
-                        </a>
                         <a class="genric-btn purplebtn circle" onclick="goto(3)"
-                                style="float: right; display: inline-block">ادامه
+                           style="float: right; display: inline-block">ادامه
                         </a>
                         <a class="genric-btn purplebtn circle" onclick="goto(1)"
-                                style="float: right; display: inline-block">بازگشت
+                           style="float: right; display: inline-block">بازگشت
                         </a>
                     </div>
                 </div>
@@ -276,7 +292,7 @@
       var newrow='<tr>'+
                                 '<td>'+count+'</td>'+
                                 '<td><input type="text" style="width: 90%; border-color: #bbbbbb;"></td>'+
-                                '<td style="display: flex; margin: auto">5-<input type="text" style="width: 70%; border-color: #bbbbbb;">-3</td>'+
+                                '<td style="display: flex; margin: auto">5\'-<input type="text" style="width: 70%; border-color: #bbbbbb;">-3\'</td>'+
                                 '<td><select style="width: 100%; border-color: #bbbbbb;">'+
                                     '<option>select</option>'+
                                     '<option>0.02</option>'+
@@ -312,6 +328,26 @@
         }
     }
 
+    function radiochanged (id) {
+        if ($('#type_'+id).prop("checked") == true){
+            $('#type_'+(3-id)).prop("checked", false)
+            if (id == 2) {
+                $('#div_type_1').css("height", "100%");
+                $('#table').css("opacity", 1);
+                $('#table').css("visibility", "visible");
+                $('#addbtn').css("opacity", 1);
+                $('#addbtn').css("visibility", "visible");
+            }
+            if (id == 1) {
+                $('#div_type_1').css("height", "0px");
+                $('#table').css("opacity", 0);
+                $('#table').css("visibility", "hidden");
+                $('#addbtn').css("opacity", 0);
+                $('#addbtn').css("visibility", "hidden");
+            }
+        }
+    }
+
     function goto (i) {
         var id = "sec"+i;
         $("#sec1").css('display', 'none');
@@ -321,6 +357,12 @@
         $("#"+id).css('display', 'block');
         return false;
     }
+
+
+
+
+
+
 
 </script>
 {% endblock script %}
