@@ -6,6 +6,7 @@ def register(request):
 
 
 def submit_primer_1(request):
+    request.session['django_language'] = 'en'
     return render(request, "temporary/submit_primer_1.html")
 
 

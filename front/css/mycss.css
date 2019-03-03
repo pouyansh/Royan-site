@@ -200,6 +200,11 @@ a:hover .footer_helpnote {
     font-size: 20px;
 }
 
+.submit_service_excel:hover {
+    color: rgb(143,109,252);
+    background: #eeeeee;
+}
+
 .submit_service_register_parts {
     display: block;
     border-radius: 5px;
@@ -207,4 +212,13 @@ a:hover .footer_helpnote {
     padding: 20px;
     margin: 30px;
     transition: 2s;
+}
+
+#table {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+    transition: 1s;
+    font-family: "Roboto", sans-serif;
 }

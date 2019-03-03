@@ -82,8 +82,9 @@
                                 نام فاکتور شونده:</label>
                             <input type="text" required name="address" class="single-input">
                         </div>
-                        <a class="genric-btn purplebtn circle" onclick="goto(2)" onsubmit="return false;">ادامه</a>
-
+                        <a class="genric-btn purplebtn circle" onclick="goto(2)"
+                           style="float: left; margin: 10px; display: inline-block">ادامه
+                        </a>
                     </div>
                 </div>
             </div>
@@ -99,9 +100,9 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-8" style="margin: auto">
 
-                        <p>
+                        <h5>
                             برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
-                        </p>
+                        </h5>
                         ‌
                         <div class="submit_service_register_parts">
                             <input type="radio" name="type_1" id="type_1" style="display: inline-block;"
@@ -111,10 +112,12 @@
                                 داده شده را دانلود کنید و
                                 آن را پر کنید. سپس از طریق درگاه قرار داده شده، آن را آپلود کنید.
                             </div>
-                            <div style="margin: auto; display: flex; height: 100%;">
-                                <a href="{% static 'primer.xls' %}" download class="submit_service_excel">دانلود فایل
+                            <div id="div_type_1" style="margin: auto; display: flex; height: 100%; transition-delay: 1s;">
+                                <a style="transition: 1s;" id="div_type_1_btn_1"
+                                   href="{% static 'primer.xls' %}" download class="submit_service_excel">دانلود فایل
                                     نمونه</a>
-                                <a href="{% static 'primer.xls' %}" download class="submit_service_excel">درگاه
+                                <a style="transition: 1s;" id="div_type_1_btn_2"
+                                   href="{% static 'primer.xls' %}" download class="submit_service_excel">درگاه
                                     آپلود</a>
                             </div>
                         </div>
@@ -126,10 +129,8 @@
                             <div style="font-size: 20px; display: inline-block">در این روش، شما باید توالی‌های خود را از
                                 طریق جدول زیر، وارد کنید.
                             </div>
-                            <div style="height: 0px; transition: 2s;" id="div_type_1">
-                                <table dir="ltr" id="table"
-                                       style="width: 100%; padding: 20px; text-align: center;
-                                   margin: 20px 0; transition: 1s; visibility: hidden; opacity: 0;">
+                            <div style="height: 100%; transition: 1s;" id="div_type_2">
+                                <table dir="ltr" id="table" lang="en">
                                     <thead>
                                     <tr style="font-size: 12px;">
                                         <th>num</th>
@@ -142,16 +143,15 @@
                                     </thead>
                                 </table>
                                 <a class="genric-btn purplebtn circle" id="addbtn"
-                                   style="display: inline-block; transition: 1s;
-                                   visibility: hidden; opacity: 0;">اضافه
+                                   style="display: inline-block; transition: 1s;">اضافه
                                 </a>
                             </div>
                         </div>
                         <a class="genric-btn purplebtn circle" onclick="goto(3)"
-                           style="float: right; display: inline-block">ادامه
+                           style="float: left; margin: 10px; display: inline-block">ادامه
                         </a>
                         <a class="genric-btn purplebtn circle" onclick="goto(1)"
-                           style="float: right; display: inline-block">بازگشت
+                           style="float: right; margin: 10px; display: inline-block">بازگشت
                         </a>
                     </div>
                 </div>
@@ -311,6 +311,7 @@
                                     '<option>a2</option>'+
                                 '</select></td>'+
                             '</tr>';
+
       return newrow;
     }
 
@@ -332,14 +333,24 @@
         if ($('#type_'+id).prop("checked") == true){
             $('#type_'+(3-id)).prop("checked", false)
             if (id == 2) {
-                $('#div_type_1').css("height", "100%");
+                $('#div_type_1').css("height", "0px");
+                $('#div_type_1_btn_1').css("opacity", 0);
+                $('#div_type_1_btn_1').css("visibility", "hidden");
+                $('#div_type_1_btn_2').css("opacity", 0);
+                $('#div_type_1_btn_2').css("visibility", "hidden");
+                $('#div_type_2').css("height", "100%");
                 $('#table').css("opacity", 1);
                 $('#table').css("visibility", "visible");
                 $('#addbtn').css("opacity", 1);
                 $('#addbtn').css("visibility", "visible");
             }
             if (id == 1) {
-                $('#div_type_1').css("height", "0px");
+                $('#div_type_1').css("height", "100%");
+                $('#div_type_1_btn_1').css("opacity", 1);
+                $('#div_type_1_btn_1').css("visibility", "visible");
+                $('#div_type_1_btn_2').css("opacity", 1);
+                $('#div_type_1_btn_2').css("visibility", "visible");
+                $('#div_type_2').css("height", "0px");
                 $('#table').css("opacity", 0);
                 $('#table').css("visibility", "hidden");
                 $('#addbtn').css("opacity", 0);
@@ -349,6 +360,8 @@
     }
 
     function goto (i) {
+        var body = $("html, body");
+        body.stop().animate({scrollTop:200}, 500, 'swing');
         var id = "sec"+i;
         $("#sec1").css('display', 'none');
         $("#sec2").css('display', 'none');
@@ -357,12 +370,5 @@
         $("#"+id).css('display', 'block');
         return false;
     }
-
-
-
-
-
-
-
 </script>
 {% endblock script %}
