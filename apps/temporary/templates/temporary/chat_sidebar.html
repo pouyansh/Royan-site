@@ -6,8 +6,9 @@
 <script src='{% static "js/jquery-3.2.1.min.js" %}'></script>
 <script>
     jQuery(document).scroll(function() {
-        var scroll = $(window).scrollTop();
+        var scroll = $(document).scrollTop();
+        console.log($(document).height());
 
-        $("#chat").css("margin-top", - scroll / $(window).height() * 200 + 450);
+        $("#chat").css("margin-top", - scroll / $(document).height() * 400 + 450);
     });
 </script>

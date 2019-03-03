@@ -51,39 +51,37 @@
 
 {% block script %}
 <script>
-    $(document).ready(function () {
-        $("input").addClass('single-input');
-        $("input").prop('required',false);
-        $("#id_national_id").prop('type','text');
-        $("#id_national_id").prop('pattern', "[0-9]*");
-        $("#type").css('width', '50%');
-        $("#type").css('margin', '20px auto');
-        $('#type').on('change', function() {
-            var val = $('.current').first().text();
-            console.log($('.current').first().text());
-            if (val == 'حقوقی') {
-                $('#organization_name').css('display','flex');
-                $('#submit_id').css('display','flex');
-                $('#economic_id').css('display','flex');
-                $('#post').css('display','flex');
-                $('#education').css('display','none');
-                $('#national_id').css('display','none');
-                $('#org').css('display','none');
-                $('#cellphone_number').css('display', 'none');
-            }
-            if (val == 'حقیقی') {
-                $('#organization_name').css('display', 'none');
-                $('#submit_id').css('display', 'none');
-                $('#economic_id').css('display', 'none');
-                $('#post').css('display', 'none');
-                $('#education').css('display', 'flex');
-                $('#national_id').css('display', 'flex');
-                $('#org').css('display', 'flex');
-                $('#cellphone_number').css('display', 'flex');
-            }
-        });
-        customer_type();
+    $("input").addClass('single-input');
+    $("input").prop('required',false);
+    $("#id_national_id").prop('type','text');
+    $("#id_national_id").prop('pattern', "[0-9]*");
+    $("#type").css('width', '50%');
+    $("#type").css('margin', '20px auto');
+    $('#type').on('change', function() {
+        var val = $('.current').first().text();
+        console.log($('.current').first().text());
+        if (val == 'حقوقی') {
+            $('#organization_name').css('display','flex');
+            $('#submit_id').css('display','flex');
+            $('#economic_id').css('display','flex');
+            $('#post').css('display','flex');
+            $('#education').css('display','none');
+            $('#national_id').css('display','none');
+            $('#org').css('display','none');
+            $('#cellphone_number').css('display', 'none');
+        }
+        if (val == 'حقیقی') {
+            $('#organization_name').css('display', 'none');
+            $('#submit_id').css('display', 'none');
+            $('#economic_id').css('display', 'none');
+            $('#post').css('display', 'none');
+            $('#education').css('display', 'flex');
+            $('#national_id').css('display', 'flex');
+            $('#org').css('display', 'flex');
+            $('#cellphone_number').css('display', 'flex');
+        }
     });
+    customer_type();
 
     function customer_type() {
         var val = $('.current').first().text();
