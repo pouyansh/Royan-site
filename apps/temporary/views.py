@@ -16,3 +16,7 @@ def submit_primer_4(request):
 
 def service_description(request):
     return render(request, "temporary/service_description.html")
+
+
+def index(request):
+    return render(request, "temporary/index.html")
