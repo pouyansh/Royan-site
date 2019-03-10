@@ -334,5 +334,20 @@ a:hover .footer_helpnote {
 }
 
 .li-header {
-    background: #cccccc;
+    display: inline-block;
+    float: right;
+    width: 50%;
+    text-align: center;
+}
+
+.li-body {
+    font-weight: bold;
+    display: inline-block;
+    float: right;
+    width: 50%;
+    text-align: center;
+}
+
+.feature_item {
+    display: flow-root;
 }
