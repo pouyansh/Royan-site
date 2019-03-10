@@ -7,7 +7,6 @@
 <script>
     jQuery(document).scroll(function() {
         var scroll = $(document).scrollTop();
-        console.log($(document).height());
 
         $("#chat").css("margin-top", - scroll / $(document).height() * 400 + 450);
     });

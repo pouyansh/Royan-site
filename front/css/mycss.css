@@ -10,6 +10,7 @@
     padding: 0;
 }
 
+.header_area.navbar_fixed .main_menu .navbar .nav .nav-item,
 .header_area .navbar .nav .nav-item {
 
     color: #222222;
@@ -21,6 +22,7 @@
     margin: 0px;
 }
 
+.header_area.navbar_fixed .main_menu .navbar .nav .nav-item .nav-link,
 .header_area .navbar .nav .nav-item .nav-link {
     font: 600 12px/100px "Open Sans", sans-serif;
     line-height: 100px;
@@ -29,11 +31,14 @@
     display: inline-block;
 }
 
-.header_area .navbar .nav .nav-item .nav-padding {
+.header_area.navbar_fixed .main_menu .navbar .nav .nav-item .nav-padding,
+.header_area .navbar .nav .nav-item .nav-padding{
     padding: 10px 20px;
+    line-height: 50px;
 }
 
-.header_area .navbar .nav .nav-item.submenu ul .nav-item .nav-no-padding {
+.header_area .navbar .nav .nav-item.submenu ul .nav-item .nav-no-padding,
+.header_area .navbar .nav .nav-item .nav-no-padding{
     padding: 0 5px;
     text-align: center;
 }
@@ -256,6 +261,8 @@ a:hover .footer_helpnote {
   color: rgb(119,71,251);
   font-size: 18px;
   font-weight: bold;
+  margin: 0;
+  text-align: center;
 }
 
 .mega-dropdown-menu form {
@@ -266,12 +273,66 @@ a:hover .footer_helpnote {
   margin-bottom: 3px;
 }
 
-.nav-link:hover, .nav-link:focus {
+.header_area .navbar .nav .nav-item .nav-link:hover, .header_area .navbar .nav .nav-item .nav-link:focus {
     background: none;
+    color: pink;
     outline = none;
 
 }
 
 .mega-dropdown .nav-link {
     display: inline-block;
+}
+
+.nav-pills {
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.nav-pills-item {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+    padding: 0;
+
+}
+
+.nav-pills > li + li {
+    margin: 0;
+}
+
+.nav-pills-item a {
+    color: #eeeeee;
+    margin: 0;
+}
+
+.nav-pills-item a:hover {
+    color: #222222;
+    margin: 0;
+}
+
+.nav-side {
+    background: #999999;
+    height: 100%;
+    float: right;
+    padding: 30px 0;
+}
+
+.nav-pills .active, .nav-pills > li.active > a, .nav-pills > li.active > a:focus {
+    background: pink;
+    margin: 0;
+    color: #777777;
+}
+
+.fade {
+    display: none;
+}
+
+.fade.active {
+    display: inherit;
+}
+
+.li-header {
+    background: #cccccc;
 }

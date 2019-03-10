@@ -5,7 +5,9 @@
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <h3 class="navbar-brand"><img src="{% static 'img/logo.png' %}"></h3>
+                <div class="navbar-header">
+                    <a class="navbar-brand" style="font-size: 20px; padding-top: 15px;">Royan TuCAGene</a>
+                </div>
 
                 <!--<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -18,13 +20,14 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav menu_nav ml-auto">
+                    <ul class="nav navbar-nav menu_nav ml-auto navbar-left">
                         <li class="nav-item active"><a class="nav-link nav-padding" href="#home">Home</a></li>
                         <li class="nav-item submenu dropdown mega-dropdown">
-                            <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown" role="button"
+                            <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                               role="button"
                                aria-haspopup="true" aria-expanded="false">Services</a>
                             <ul class="mega-dropdown-menu dropdown-menu">
-                                <li class="col-xs-3">
+                                <li class="col-lg-3 col-sm-12">
                                     <ol class="ordered-list-alpha">
                                         <li class="dropdown-header">
                                             Next Generation Sequencing
@@ -45,7 +48,7 @@
                                         </li>
                                     </ol>
                                 </li>
-                                <li class="col-sm-3">
+                                <li class="col-lg-3 col-sm-12">
                                     <ol class="ordered-list-alpha">
                                         <li class="dropdown-header">Sanger
                                             Sequencing
@@ -64,7 +67,7 @@
                                     </ol>
                                 </li>
 
-                                <li class="col-sm-2">
+                                <li class="col-lg-2 col-sm-12">
 
                                     <ol class="ordered-list-alpha">
                                         <li class="dropdown-header">
@@ -76,7 +79,7 @@
                                         </li>
                                     </ol>
                                 </li>
-                                <li class="col-sm-2">
+                                <li class="col-lg-2 col-sm-12">
 
                                     <ol class="ordered-list-alpha">
                                         <li class="dropdown-header">Gene Synthesis
@@ -91,7 +94,7 @@
 
                                     </ol>
                                 </li>
-                                <li class="col-sm-2">
+                                <li class="col-lg-2 col-sm-12">
 
                                     <ol class="ordered-list-alpha">
                                         <li class="dropdown-header">
@@ -109,7 +112,8 @@
                             </ul>
                         </li>
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown" role="button"
+                            <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                               role="button"
                                aria-haspopup="true" aria-expanded="false">Products</a>
                             <ul class="dropdown-menu" style="min-width: 250px;">
                                 <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
@@ -121,7 +125,8 @@
                             </ul>
                         </li>
                         <li class="nav-item submenu dropdown">
-                            <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown" role="button"
+                            <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                               role="button"
                                aria-haspopup="true" aria-expanded="false">Research areas</a>
                             <ul class="dropdown-menu" style="min-width: 250px;">
                                 <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
@@ -141,9 +146,11 @@
                         <li class="nav-item"><a class="nav-link nav-padding" href="contact.html">Contact</a></li>
                         <li class="nav-item"><a class="nav-link nav-padding" href="contact.html">About Us</a></li>
                     </ul>
-                    <a href="#" class="genric-btn default circle" style="margin-left: auto;">Login</a>
-                </div>
 
+                </div>
+                <div class="nav navbar-nav navbar-right">
+                    <a href="#" class="genric-btn default circle">Login</a>
+                </div>
             </div>
         </nav>
     </div>
