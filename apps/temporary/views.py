@@ -20,3 +20,7 @@ def service_description(request):
 
 def index(request):
     return render(request, "temporary/index.html")
+
+
+def user_profile(request):
+    return render(request, "temporary/user_profile.html")
