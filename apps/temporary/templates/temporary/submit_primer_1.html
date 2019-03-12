@@ -12,6 +12,27 @@
 {% endblock banner_content %}
 
 {% block main_content %}
+<div class="multi-step container">
+    <div class="col-lg-2">
+        <div id="progress_btn_1" class="circle btn-primary">1</div>
+        <label class="progress-bar-label">ثبت مشخصات فاکتور شونده</label>
+    </div>
+    <div class="col-lg-1 connecting-line"></div>
+    <div class="col-lg-2">
+        <div id="progress_btn_2" class="btn circle">2</div>
+        <label class="progress-bar-label">ثبت اطلاعات توالی‌ها</label>
+    </div>
+    <div class="col-lg-1 connecting-line"></div>
+    <div class="col-lg-2">
+        <div id="progress_btn_3" class="circle">3</div>
+        <label class="progress-bar-label">تایید اطلاعات توالی‌ها</label>
+    </div>
+    <div class="col-lg-1 connecting-line"></div>
+    <div class="col-lg-2">
+        <div id="progress_btn_4" class="circle">4</div>
+        <label class="progress-bar-label">دریافت کد رهگیری</label>
+    </div>
+</div>
 <!--================Start Form=====================-->
 <form>
     <!--================Start Section1 =================-->
@@ -82,7 +103,7 @@
                                 نام فاکتور شونده:</label>
                             <input type="text" required name="address" class="single-input">
                         </div>
-                        <a class="genric-btn purplebtn circle" onclick="goto(2)"
+                        <a class="genric-btn purplebtn circle" onclick="goto(2, 1)"
                            style="float: left; margin: 10px; display: inline-block">ادامه
                         </a>
                     </div>
@@ -112,7 +133,8 @@
                                 داده شده را دانلود کنید و
                                 آن را پر کنید. سپس از طریق درگاه قرار داده شده، آن را آپلود کنید.
                             </div>
-                            <div id="div_type_1" style="margin: auto; display: flex; height: 100%; transition-delay: 1s;">
+                            <div id="div_type_1"
+                                 style="margin: auto; display: flex; height: 100%; transition-delay: 1s;">
                                 <a style="transition: 1s;" id="div_type_1_btn_1"
                                    href="{% static 'primer.xls' %}" download class="submit_service_excel">دانلود فایل
                                     نمونه</a>
@@ -147,12 +169,14 @@
                                 </a>
                             </div>
                         </div>
-                        <a class="genric-btn purplebtn circle" onclick="goto(3)"
-                           style="float: left; margin: 10px; display: inline-block">ادامه
-                        </a>
-                        <a class="genric-btn purplebtn circle" onclick="goto(1)"
-                           style="float: right; margin: 10px; display: inline-block">بازگشت
-                        </a>
+                        <div class="pager">
+                            <a class="genric-btn purplebtn circle" onclick="goto(3, 2)"
+                               style="float: left; margin: 10px; display: inline-block">ادامه
+                            </a>
+                            <a class="genric-btn purplebtn circle" onclick="goto(1, 2)"
+                               style="float: right; margin: 10px; display: inline-block">بازگشت
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -233,7 +257,7 @@
                         <input type="checkbox" id="checkbox" onchange="changed()"> صحت موارد ثبت شده را تایید می
                         نمایم.
                         <br>
-                        <a onclick="goto(2)" class="genric-btn purplebtn circle" style="display: inline-block">
+                        <a onclick="goto(2, 3)" class="genric-btn purplebtn circle" style="display: inline-block">
                             بازگشت
                         </a>
                         <button type="submit" id="btn" class="genric-btn greenbtn circle"
@@ -277,8 +301,7 @@
 {% block script %}
 <script>
     $(document).ready(function(){
-
-      $("#table").append(addNewRow(1));
+        $("#table").append(addNewRow(1));
     });
     var count=2;
     $("#addbtn").click(function(){
@@ -359,7 +382,7 @@
         }
     }
 
-    function goto (i) {
+    function goto (i, j) {
         var body = $("html, body");
         body.stop().animate({scrollTop:200}, 500, 'swing');
         var id = "sec"+i;
@@ -368,7 +391,22 @@
         $("#sec3").css('display', 'none');
         $("#sec4").css('display', 'none');
         $("#"+id).css('display', 'block');
+        $("#progress_btn_"+i).addClass("btn-primary");
+        $("#progress_btn_"+i).removeClass("btn-muted");
+        $("#progress_btn_"+i).removeClass("btn-success");
+        if (j > i) {
+            $("#progress_btn_"+j).removeClass("btn-primary");
+            $("#progress_btn_"+j).addClass("btn-muted");
+            $("#progress_btn_"+j).removeClass("btn-success");
+        }
+        else {
+            $("#progress_btn_"+j).removeClass("btn-primary");
+            $("#progress_btn_"+j).removeClass("btn-muted");
+            $("#progress_btn_"+j).addClass("btn-success");
+        }
         return false;
     }
+
+
 </script>
 {% endblock script %}
