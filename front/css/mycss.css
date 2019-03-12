@@ -59,46 +59,6 @@ a:not([href]):not([tabindex]) {
     max-width: 30%;
 }
 
-.purplebtn {
-    background-color: rgb(188,91,254);
-    color: #eeeeee;
-    border: 1px solid rgb(188,91,254);
-    min-width: 100px;
-    font-size: 16px;
-    display: block;
-    margin: 20px auto;
-}
-
-.greenbtn {
-    background-color: rgb(56,208,30);
-    color: #eeeeee;
-    border: 1px solid rgb(56,208,30);
-    min-width: 100px;
-    font-size: 16px;
-    display: block;
-    margin: 20px auto;
-}
-.greenbtn:hover {
-    color: rgb(56,208,30);
-    background-color: #eeeeee;
-}
-
-.graybtn {
-    background-color: #bbbbbb;
-    color: #eeeeee;
-    border: 1px solid #bbbbbb;
-    min-width: 100px;
-    font-size: 16px;
-    display: block;
-    margin: 20px auto;
-    cursor: not-allowed;
-}
-
-.purplebtn:hover {
-    color: rgb(188,91,254);
-    background-color: #eeeeee;
-}
-
 .fa-comment {
     color: #666666;
 }
