@@ -198,3 +198,33 @@ a:hover .footer_helpnote {
     display: flow-root;
 }
 
+.banner_index{
+    height: 100vh;
+    padding: 0;
+    background: url('../img/DNA6.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+}
+
+@media (max-width: 991px) {
+    .my_chat {
+        visibility: hidden:
+        display: none;
+    }
+
+    .banner_index {
+        background: url('../img/banner2.jpg');
+        width: 100vw;
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-position:center;
+        -webkit-background-size:contain;
+        -moz-background-size:cover;
+        -o-background-size:cover;
+    }
+}

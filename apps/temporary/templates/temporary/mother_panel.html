@@ -10,11 +10,12 @@
     <!-- Bootstrap CSS -->
     {% include 'temporary/cssfiles.html' %}
 </head>
-<body data-spy="scroll" data-target="#mainNav" data-offset="70">
+<body data-spy="scroll" data-target="#mainNav" data-offset="70" style="overflow-x: hidden;">
 
 {% include "temporary/navbar.html" %}
 {% include "temporary/chat_sidebar.html" %}
 
+{% block banner %}
 <!--================Home Banner Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center">
@@ -32,6 +33,7 @@
     </div>
 </section>
 <!--================End Home Banner Area =================-->
+{% endblock banner %}
 
 
 
