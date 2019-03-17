@@ -4,17 +4,11 @@
 {% block banner %}
 <!--================Home Banner Area =================-->
 <section class="home_banner_area" id="home" style="min-height: unset; max-height: 100vh;">
-    <div class="banner_inner" style="padding: 0;">
-        <div class="container-fluid banner_index" style="padding: 0;">
-                <!--<img class="img-fluid " src="{% static 'img/DNA6.png' %}" alt=""-->
-                     <!--style="">-->
-                <!--<div class="col-lg-3" style="width: 100%; height: 100%; display: inline-block;">-->
-                    <!--<div class="banner_map_img">-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            </div>
+    <div class="banner_inner" style="padding: 0; min-height: 50vh;">
+        <div class="container-fluid" style="padding: 0; max-height: 100vh;">
+            <img src="{% static 'img/DNA6.png' %}" class="banner_index">
         </div>
+    </div>
 </section>
 <!--================End Home Banner Area =================-->
 {% endblock banner %}

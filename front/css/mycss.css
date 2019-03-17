@@ -163,18 +163,11 @@ a:hover .footer_helpnote {
 }
 
 .banner_index{
-    height: 50vh;
-    width: 100vw;
+    width: 100%;
+    height: auto;
     display: block;
     padding: 0;
-    background: url('../img/banner.jpg');
-    background-repeat: no-repeat;
-
-    background-size:contain;
-    background-position:center;
-    -webkit-background-size:contain;
-    -moz-background-size:contain;
-    -o-background-size:contain;
+    transform: scaleX(-1);
 }
 
 @media (max-width: 991px) {

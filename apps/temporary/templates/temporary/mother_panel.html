@@ -20,24 +20,15 @@
 
 {% block banner %}
 <!--================Home Banner Area =================-->
-<section class="banner_area">
-    <div class="banner_inner d-flex align-items-center">
-        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0"
-             data-background=""></div>
-        <img src="{% static 'img/DNA.png' %}" style="height: 400px; float: left; transform: scaleX(-1);">
-        <div class="container">
-            <div class="banner_content text-center">
-                {% block banner_content %}
-                    <h2>Royan TuCAGene</h2>
-                {% endblock banner_content %}
-            </div>
+<section class="home_banner_area" id="home" style="min-height: unset; max-height: 100vh;">
+    <div class="banner_inner" style="padding: 0; min-height: 50vh;">
+        <div class="container-fluid" style="padding: 0; max-height: 60vh;">
+            <img src="{% static 'img/DNA6.png' %}" class="banner_index">
         </div>
-
     </div>
 </section>
 <!--================End Home Banner Area =================-->
 {% endblock banner %}
-
 
 
 {% block main_content %}
