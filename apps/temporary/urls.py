@@ -9,4 +9,5 @@ urlpatterns = [
     path('service_description/', service_description, name='service_description'),
     path('index/', index, name='index'),
     path('user_profile/', user_profile, name='user_profile'),
+    path('admin_profile/', admin_profile, name='admin_profile'),
 ]

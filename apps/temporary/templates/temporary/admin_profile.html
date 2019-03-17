@@ -1,0 +1,281 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container-fluid" style="padding-right: 0; padding-left: 0; min-height: 500px;">
+        <div class="col-lg-2 col-sm-12 nav-side" style="height: 100%;">
+            <div class="container-fluid" style="text-align: center">
+                <h3 class="nav-side-name">مهدی توتونچی</h3>
+            </div>
+            <ul class="nav nav-pills">
+                <li class="nav-pills-item active"><a class="nav-a-tab active" data-toggle="pill" href="#services">سرویس‌های سفارش داده شده</a>
+                </li>
+                <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu1">همه سفارش‌ها</a>
+                </li>
+                <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu3">پیام‌های من</a></li>
+                <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu3">تغییر رمز عبور</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-9 col-sm-12" style="float: right; padding-top: 30px;">
+            <div id="home" class="tab-pane fade in active show">
+                <div class="feature_item">
+                    <h4 style="font-family: FarsiFont; padding: 20px; border-bottom: 1px solid #dddddd;">سرویس‌های سفارش داده شده</h4>
+                    <h5 style="font-family: FarsiFont; padding: 20px;">سرویس‌های در انتظار پیش فاکتور</h5>
+                    <div class="table-responsive">
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام کاربر</th>
+                                <th>کد رهگیری سفارش</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت سفارش</th>
+                                <th>جزئیات</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971201-1</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-warning">در انتظار پیش فاکتور</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971211-4</td>
+                                <td>۹۷/۱۲/۰۴</td>
+                                <td class="text-warning">در انتظار پیش فاکتور</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971215-12</td>
+                                <td>۹۷/۱۲/۱۵</td>
+                                <td class="text-warning">در انتظار پیش فاکتور</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h5 style="font-family: FarsiFont; padding: 20px;">سرویس‌های تحویل داده نشده</h5>
+                    <div class="table-responsive">
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام کاربر</th>
+                                <th>کد رهگیری سفارش</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت سفارش</th>
+                                <th>مبلغ کل</th>
+                                <th>وضعیت تحویل سفارش</th>
+                                <th>جزئیات</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971201-1</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-success">تایید شده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971211-4</td>
+                                <td>۹۷/۱۲/۰۴</td>
+                                <td class="text-success">تایید شده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971215-12</td>
+                                <td>۹۷/۱۲/۱۵</td>
+                                <td class="text-success">تایید شده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h5 style="font-family: FarsiFont; padding: 20px;">سرویس‌های در انتظار پرداخت هزینه</h5>
+                    <div class="table-responsive">
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام کاربر</th>
+                                <th>کد رهگیری سفارش</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت سفارش</th>
+                                <th>مبلغ کل</th>
+                                <th>وضعیت تحویل سفارش</th>
+                                <th>وضعیت پرداخت</th>
+                                <th>جزئیات</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971201-1</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-success">تایید شده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td class="text-danger">پرداخت نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971211-4</td>
+                                <td>۹۷/۱۲/۰۴</td>
+                                <td class="text-success">تایید شده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td class="text-danger">پرداخت نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>Primer-971215-12</td>
+                                <td>۹۷/۱۲/۱۵</td>
+                                <td class="text-success">تایید شده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td class="text-danger">پرداخت نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <div class="feature_item">
+                    <h4>همه سفارش‌ها</h4>
+                    <div class="table-responsive">
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>کد رهگیری سفارش</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت سفارش</th>
+                                <th>مبلغ کل</th>
+                                <th>وضعیت تحویل سفارش</th>
+                                <th>وضعیت پرداخت</th>
+                                <th>جزئیات</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>1</td>
+                                <td>Primer-971201-1</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-success">تایید شده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-success">تایید شده</td>
+                                <td class="text-success">پرداخت شده</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-double-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Primer-971211-4</td>
+                                <td>۹۷/۱۲/۰۴</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-success">تایید شده</td>
+                                <td class="text-success">پرداخت شده</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Primer-971215-12</td>
+                                <td>۹۷/۱۲/۱۵</td>
+                                <td class="text-warning">در انتظار پیش فاکتور</td>
+                                <td>۱۲۰۰۰۰۰</td>
+                                <td class="text-danger">تایید نشده</td>
+                                <td class="text-danger">پرداخت نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-caret-left'></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <div class="feature_item">
+                    <h4>پیام‌های من</h4>
+                    <div class="table-responsive">
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>ارسال کننده</th>
+                                <th>گیرنده</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت</th>
+                                <th>مشاهده</th>
+                            </tr>
+                            </thead>
+                            <tr>
+                                <td>۱</td>
+                                <td>مدیر سایت</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-danger">مشاهده نشده</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>۲</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>مدیر سایت</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-secondary">-</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>۳</td>
+                                <td>مدیر سایت</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-success">مشاهده شده</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>۴</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>مدیر سایت</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-success">-</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block script %}
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+{% endblock script %}

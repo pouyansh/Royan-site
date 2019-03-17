@@ -24,3 +24,7 @@ def index(request):
 
 def user_profile(request):
     return render(request, "temporary/user_profile.html")
+
+
+def admin_profile(request):
+    return render(request, "temporary/admin_profile.html")
