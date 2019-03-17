@@ -164,6 +164,7 @@ a:hover .footer_helpnote {
 
 .feature_item {
     display: flow-root;
+    margin-bottom: 30px;
 }
 
 .banner_index{
