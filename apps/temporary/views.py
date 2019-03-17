@@ -28,3 +28,7 @@ def user_profile(request):
 
 def admin_profile(request):
     return render(request, "temporary/admin_profile.html")
+
+
+def order_details(request):
+    return render(request, "temporary/order-details.html")

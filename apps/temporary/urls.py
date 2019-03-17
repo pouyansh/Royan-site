@@ -10,4 +10,5 @@ urlpatterns = [
     path('index/', index, name='index'),
     path('user_profile/', user_profile, name='user_profile'),
     path('admin_profile/', admin_profile, name='admin_profile'),
+    path('order_details/', order_details, name='order_details'),
 ]

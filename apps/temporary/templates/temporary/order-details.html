@@ -1,0 +1,105 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block banner_content %}
+<h2>Primer</h2>
+<div class="page_link">
+    <a href="index.html">Home</a>
+    <a href="elements.html">Services</a>
+    <a href="elements.html">Primer</a>
+</div>
+{% endblock banner_content %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div style="font-family: FontFarsi; padding: 30px;">سفارش دهنده: پویان شیرزادیان</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+
+                    <table dir="ltr" id="table2"
+                           style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
+                        <thead>
+                        <tr style="font-size: 12px;">
+                            <th>num</th>
+                            <th>Oligo name</th>
+                            <th>Oligo Sequence</th>
+                            <th style="width: 15%;">Concentration</th>
+                            <th style="width: 15%;">Purification</th>
+                            <th style="width: 15%;">Modification</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td>1</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+
+                    </table>
+                    <input type="checkbox" id="checkbox">
+                    <div style="font-family: FarsiFont; display: inline;">پیش فاکتور ارسال شد
+                    </div>
+                    <br>
+                    <a href="#" class="btn btn-info circle"
+                            style="float: right; font-size: 18px; font-family: FarsiFont; min-width: 60px; margin: 30px 10px;">ویرایش اطلاعات
+                    </a>
+                    <button type="submit" id="btn" class="btn btn-success circle"
+                            style="float: left; font-size: 18px; font-family: FarsiFont; min-width: 60px; margin: 30px 10px;">ثبت
+                    </button>
+                    <button class="btn btn-secondary circle"
+                            style="float: left; font-family: FarsiFont;font-size: 18px; min-width: 60px; margin-top: 30px;">
+                        بازگشت
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

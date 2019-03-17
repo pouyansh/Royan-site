@@ -43,6 +43,7 @@
         background-color: #eeeeee;
     }
 
+
 </style>
 {% endblock internal_css %}
 
@@ -179,7 +180,7 @@
                                 سپس تکمیل شده‌ی آن را آپلود کنید.
                             </div>
                             <div id="div_type_1"
-                                 style="margin: auto; display: flex; height: 100%; transition-delay: 1s;">
+                                 style="margin: auto; display: flex; height: 100%; transition: 1s;">
                                 <a style="transition: 1s;" id="div_type_1_btn_1"
                                    href="{% static 'primer.xls' %}" download class="submit_service_excel">دانلود فایل
                                     نمونه</a>
@@ -193,7 +194,8 @@
                             <input type="radio" name="type_2" id="type_2" style="display: inline-block;"
                                    onclick="radiochanged(2)">
                             <h5 style="display: inline-block">روش دوم:</h5>
-                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید جزئیات توالی‌های خود را از
+                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید جزئیات توالی‌های
+                                خود را از
                                 طریق جدول زیر، وارد کنید.
                             </div>
                             <div style="height: 100%; transition: 1s;" id="div_type_2">
@@ -231,7 +233,7 @@
 
     <!--================Start Section3 =================-->
     <div id="sec3" class="whole-wrap" dir="rtl"
-         style="display: none; text-align: right; font-family: FarsiFont; font-size: 16px;">
+         style="display: none; text-align: right; font-size: 16px;">
         <div class="container">
             <div class="section-top-border">
                 <div class="row">
@@ -299,16 +301,20 @@
                             </tr>
 
                         </table>
-                        <input type="checkbox" id="checkbox" onchange="changed()"> صحت موارد ثبت شده را تایید می
-                        نمایم.
+                        <input type="checkbox" id="checkbox" onchange="changed()">
+                        <div style="font-family: FarsiFont; display: inline;">
+                            صحت موارد ثبت شده را تایید می نمایم.
+                        </div>
                         <br>
-                        <a onclick="goto(2, 3)" class="genric-btn purplebtn circle" style="display: inline-block">
+                        <a onclick="goto(2, 3)" class="genric-btn purplebtn circle"
+                           style="display: inline-block; font-family: FarsiFont;">
                             بازگشت
                         </a>
                         <button type="submit" id="btn" class="genric-btn greenbtn circle"
-                                style="display: none; float: left">ثبت نهایی
+                                style="display: none; float: left; font-family: FarsiFont;">ثبت نهایی
                         </button>
-                        <div id="btn1" class="genric-btn graybtn circle" style="display: inline-block; float: left">
+                        <div id="btn1" class="genric-btn graybtn circle"
+                             style="display: inline-block; float: left; font-family: FarsiFont;">
                             ثبت نهایی
                         </div>
                     </div>
@@ -451,6 +457,7 @@
         }
         return false;
     }
+
 
 
 
