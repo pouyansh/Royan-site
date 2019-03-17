@@ -141,7 +141,7 @@
 }
 
 .nav-pills-item a {
-    color: #eeeeee;
+    color: #222222;
     margin: 0;
 }
 
@@ -151,14 +151,16 @@
 }
 
 .nav-side {
-    background: #999999;
     height: 100%;
     float: right;
     padding: 30px 0;
+    color: #222222;
+    border: 1px solid #222222;
 }
 
 .nav-pills .active, .nav-pills > li.active > a, .nav-pills > li.active > a:focus {
     background: pink;
     margin: 0;
-    color: #777777;
+    color: #222222;
+    border-radius: 5px;
 }

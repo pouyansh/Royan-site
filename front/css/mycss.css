@@ -17,23 +17,25 @@
     -o-transform: rotate(-15deg);
     transform: rotate(-15deg);
     font-size: 20px;
-    color: #eeeeee;
-    line-height: 50px;
+    line-height: 60px;
     font-family: FarsiFont;
     transition: 2s;
+    color: #eeeeee;
 }
 
 .my_chat {
     position: fixed;
     margin: 450px auto;
     left: 10px;
-    width: 150px;
-    height: 70px;
-    background: rgb(188,91,254);
+    width: 50px;
+    height: 50px;
+    background: #B37DC0;
     padding: 10px;
     font-weight: bold;
     border-radius: 5px;
     transition: transform 2s;
+    color: #eeeeee;
+    border-radius: 50%;
 }
 
 .my_chat:hover {
@@ -43,6 +45,7 @@
     -o-transform: rotate(-15deg);
     transform: rotate(-15deg);
     transition: transform 1s;
+    color: #eeeeee;
 }
 
 .my_chat:hover .rotate{
@@ -52,6 +55,7 @@
     -o-transform: rotate(0deg);
     transform: rotate(0deg);
     transition: 1s;
+    color: #eeeeee;
 }
 
 a:not([href]):not([tabindex]) {
@@ -159,15 +163,18 @@ a:hover .footer_helpnote {
 }
 
 .banner_index{
-    height: 100vh;
+    height: 50vh;
+    width: 100vw;
+    display: block;
     padding: 0;
-    background: url('../img/DNA6.png');
+    background: url('../img/banner.jpg');
     background-repeat: no-repeat;
-    background-size:cover;
+
+    background-size:contain;
     background-position:center;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
+    -webkit-background-size:contain;
+    -moz-background-size:contain;
+    -o-background-size:contain;
 }
 
 @media (max-width: 991px) {
