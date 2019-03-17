@@ -4,19 +4,23 @@
 {% block main_content %}
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container-fluid" style="padding-right: 0; padding-left: 0; min-height: 500px;">
-        <div class="col-lg-2 col-sm-12 nav-side">
+        <div class="col-lg-2 col-sm-12 nav-side" style="height: 100%;">
+            <div class="container-fluid" style="text-align: center">
+                <h3 class="nav-side-name">پویان شیرزادیان</h3>
+            </div>
             <ul class="nav nav-pills">
                 <li class="nav-pills-item active"><a class="nav-a-tab active" data-toggle="pill" href="#home">اطلاعات شخصی</a>
                 </li>
                 <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu1">همه سفارش‌ها</a>
                 </li>
                 <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu3">پیام‌های من</a></li>
+                <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu3">تغییر رمز عبور</a></li>
             </ul>
         </div>
         <div class="col-lg-9 col-sm-12" style="float: right; padding-top: 30px;">
             <div id="home" class="tab-pane fade in active show">
                 <div class="feature_item">
-                    <h4>اطلاعات شخصی</h4>
+                    <h4 style="font-family: FarsiFont;">اطلاعات شخصی</h4>
                     <div class="table table-bordered">
                         <div class="col-lg-4 col-sm-12"
                              style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
@@ -48,9 +52,8 @@
                             <div class="li-header">تلفن</div>
                             <div class="li-body">۰۹۱۲۶۸۰۴۲۹۵</div>
                         </div>
-
-
                     </div>
+                    <button class="btn btn-secondary circle" style="float: left; margin: 20px; font-size: 18px;">ویرایش اطلاعات شخصی</button>
                 </div>
             </div>
             <div id="menu1" class="tab-pane fade">
@@ -104,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div id="menu3" class="tab-pane fade" style="font: 600 12px/100px 'Open Sans', sans-serif;">
+            <div id="menu3" class="tab-pane fade">
                 <div class="feature_item">
                     <h4>پیام‌های من</h4>
                     <div class="table-responsive">
