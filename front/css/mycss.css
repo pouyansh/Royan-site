@@ -205,3 +205,12 @@ a.details-link {
 a.details-link:hover {
     color: rgb(143,109,252);
 }
+
+.footer-link {
+    color: #aaaaaa;
+    display: block;
+}
+
+.footer-link:hover {
+    color: rgb(143,109,252);
+}
