@@ -1,24 +1,6 @@
 {% extends "temporary/mother_panel.html" %}
 {% load static staticfiles %}
 
-{% block banner %}
-<!--================Home Banner Area =================-->
-<section class="home_banner_area" style="min-height: unset; max-height: 100vh;">
-    <div class="banner_inner" style="padding: 0;">
-        <div class="container-fluid" style="padding: 0;">
-                <img class="img-fluid " src="{% static 'img/banner.jpg' %}" alt=""
-                     style="">
-                <!--<div class="col-lg-3" style="width: 100%; height: 100%; display: inline-block;">-->
-                    <!--<div class="banner_map_img">-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            </div>
-        </div>
-</section>
-<!--================End Home Banner Area =================-->
-{% endblock banner %}
-
 {% block main_content %}
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container-fluid" style="padding-right: 0; padding-left: 0; min-height: 500px;">
@@ -28,12 +10,10 @@
                 </li>
                 <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu1">همه سفارش‌ها</a>
                 </li>
-                <!--<li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu2">Bought Products</a>-->
-                <!--</li>-->
                 <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu3">پیام‌های من</a></li>
             </ul>
         </div>
-        <div class="col-lg-8 col-sm-12" style="float: right; padding-top: 30px;">
+        <div class="col-lg-9 col-sm-12" style="float: right; padding-top: 30px;">
             <div id="home" class="tab-pane fade in active show">
                 <div class="feature_item">
                     <h4>اطلاعات شخصی</h4>
@@ -93,120 +73,83 @@
                             <tr>
                                 <td>1</td>
                                 <td>Primer-971201-1</td>
-                                <td>97/12/01</td>
+                                <td>۹۷/۱۲/۰۱</td>
                                 <td class="text-success">تایید شده</td>
                                 <td>۱۲۰۰۰۰۰</td>
                                 <td class="text-success">تایید شده</td>
                                 <td class="text-success">پرداخت شده</td>
-                                <td><a>جزئیات</a></td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-double-left'></i></a></td>
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Primer-971211-4</td>
-                                <td>97/12/11</td>
+                                <td>۹۷/۱۲/۰۴</td>
                                 <td class="text-danger">تایید نشده</td>
                                 <td>۱۲۰۰۰۰۰</td>
                                 <td class="text-success">تایید شده</td>
                                 <td class="text-success">پرداخت شده</td>
-                                <td><a>جزئیات</a></td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Primer-971215-12</td>
-                                <td>97/12/15</td>
+                                <td>۹۷/۱۲/۱۵</td>
                                 <td class="text-warning">در انتظار پیش فاکتور</td>
                                 <td>۱۲۰۰۰۰۰</td>
                                 <td class="text-danger">تایید نشده</td>
                                 <td class="text-danger">پرداخت نشده</td>
-                                <td><a>جزئیات</a></td>
+                                <td><a class="details-link" href="#"><i class='fa fa-caret-left'></i></a></td>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
-            <!--<div id="menu2" class="tab-pane fade" style="font: 600 12px/100px 'Open Sans', sans-serif;">-->
-                <!--<div class="feature_item">-->
-                    <!--<h4>Bought Products</h4>-->
-                    <!--<div class="table-responsive">-->
-                        <!--<table class="table" style="text-align: center;">-->
-                            <!--<thead>-->
-                            <!--<tr>-->
-                                <!--<th>#</th>-->
-                                <!--<th>Product_id</th>-->
-                                <!--<th>Date</th>-->
-                                <!--<th>received</th>-->
-                            <!--</tr>-->
-                            <!--</thead>-->
-                            <!--<tr>-->
-                                <!--<td>1</td>-->
-                                <!--<td>product_1</td>-->
-                                <!--<td>97/12/02</td>-->
-                                <!--<td>yes</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>2</td>-->
-                                <!--<td>product_3</td>-->
-                                <!--<td>97/12/12</td>-->
-                                <!--<td>yes</td>-->
-                            <!--</tr>-->
-                            <!--<tr>-->
-                                <!--<td>3</td>-->
-                                <!--<td>product_2</td>-->
-                                <!--<td>97/12/13</td>-->
-                                <!--<td>yes</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
             <div id="menu3" class="tab-pane fade" style="font: 600 12px/100px 'Open Sans', sans-serif;">
                 <div class="feature_item">
-                    <h4>Transactions</h4>
+                    <h4>پیام‌های من</h4>
                     <div class="table-responsive">
                         <table class="table" style="text-align: center;">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>for</th>
-                                <th>id</th>
-                                <th>Date</th>
+                                <th>ارسال کننده</th>
+                                <th>گیرنده</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت</th>
+                                <th>مشاهده</th>
                             </tr>
                             </thead>
                             <tr>
-                                <td>1</td>
-                                <td>order service</td>
-                                <td>Primer-971201</td>
-                                <td>97/12/01</td>
+                                <td>۱</td>
+                                <td>مدیر سایت</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-danger">مشاهده نشده</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>buy product</td>
-                                <td>product_1</td>
-                                <td>97/12/02</td>
+                                <td>۲</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>مدیر سایت</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-secondary">-</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             <tr>
-                                <td>3</td>
-                                <td>order service</td>
-                                <td>Primer-971211</td>
-                                <td>97/12/11</td>
+                                <td>۳</td>
+                                <td>مدیر سایت</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-success">مشاهده شده</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             <tr>
-                                <td>4</td>
-                                <td>buy product</td>
-                                <td>product_3</td>
-                                <td>97/12/12</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>buy product</td>
-                                <td>product_2</td>
-                                <td>97/12/13</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>order service</td>
-                                <td>Primer_971215</td>
-                                <td>97/12/15</td>
+                                <td>۴</td>
+                                <td>پویان شیرزادیان</td>
+                                <td>مدیر سایت</td>
+                                <td>۹۷/۱۲/۰۱</td>
+                                <td class="text-success">-</td>
+                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
                         </table>
                     </div>
@@ -227,14 +170,5 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
-
-
-
-
-
-
-
-
-
 </script>
 {% endblock script %}
