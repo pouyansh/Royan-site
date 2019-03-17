@@ -1,0 +1,111 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block banner %}
+<!--================Home Banner Area =================-->
+<section class="home_banner_area" id="home" style="min-height: unset; max-height: 100vh;">
+    <div class="banner_inner" style="padding: 0; min-height: 50vh;">
+        <div class="container-fluid" style="padding: 0; max-height: 100vh;">
+            <img src="{% static 'img/DNA6.png' %}" class="banner_index">
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+{% endblock banner %}
+
+{% block main_content %}
+<!--================Feature Area =================-->
+<section class="feature_area p_120" id="feature">
+    <div class="container">
+        <div class="main_title">
+            <h2 style="font-family: FontFarsi">شرکت رویان توکاژن</h2>
+            <p>یک عبارت</p>
+        </div>
+    </div>
+</section>
+<!--================End Feature Area =================-->
+
+<!--================Interior Area =================-->
+<section class="interior_area">
+    <div class="container">
+        <div class="main_title">
+            <h3>خبرها</h3>
+        </div>
+        <div class="feature_inner row" dir="rtl" style="text-align: right; font-family: FontFarsi;">
+            <div class="col-lg-3 col-md-6">
+                <div class="feature_item">
+                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
+                    <h4>خبر</h4>
+                    <p>متن خبر</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature_item">
+                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
+                    <h4>خبر</h4>
+                    <p>متن خبر</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature_item">
+                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
+                    <h4>خبر</h4>
+                    <p>متن خبر</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="feature_item">
+                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
+                    <h4>خبر</h4>
+                    <p>متن خبر</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Interior Area =================-->
+
+<!--================Interior Area =================-->
+<section class="interior_area interior_two" style="text-align: right;">
+    <div class="container">
+        <div class="interior_inner row">
+            <div class="col-lg-5 offset-lg-1">
+                <div class="interior_text">
+                    <h4>محصول جدید ۱</h4>
+                    <p>عبارتی در مورد محصول جدید ۱</p>
+                    <a class="main_btn" href="#">جزئیات محصول</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid" src="{% static 'img/DNA4.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Interior Area =================-->
+
+<!--================Interior Area =================-->
+<section class="interior_area interior_one" style="text-align: right;">
+    <div class="container">
+        <div class="interior_inner row">
+            <div class="col-lg-6">
+                <img class="img-fluid" src="{% static 'img/DNA5.png' %}" alt="">
+            </div>
+            <div class="col-lg-5 offset-lg-1">
+                <div class="interior_text">
+                    <h4>محصول جدید ۲</h4>
+                    <p>عبارتی در مورد محصول جدید ۲</p>
+                    <a class="main_btn" href="#">جزئیات محصول</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Interior Area =================-->
+
+{% endblock main_content %}
+
+{% include "temporary/footer.html" %}
+
+
+{% include "temporary/jsfiles.html" %}

@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django_jalali',
-    'apps.registration'
+    'apps.registration',
+    'apps.landing',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +78,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'apps', 'temporary', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'registration', 'templates'),
+            os.path.join(BASE_DIR, 'apps', 'landing', 'templates'),
             os.path.join(BASE_DIR, 'templates'),
         ],
         'APP_DIRS': True,
