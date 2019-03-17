@@ -164,3 +164,18 @@
     color: #222222;
     border-radius: 5px;
 }
+
+.header_area.navbar_fixed .main_menu .navbar .container-fluid .navbar-header .navbar-brand {
+    display: inline-block;
+}
+
+.header_area.navbar_fixed .main_menu .navbar .container-fluid .navbar-header .navbar-logo {
+    display: none;
+}
+.header_area .main_menu .navbar .container-fluid .navbar-header .navbar-logo {
+    display: inline-block;
+}
+
+.header_area .main_menu .navbar .container-fluid .navbar-header .navbar-brand {
+    display: none;
+}
