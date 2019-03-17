@@ -31,7 +31,7 @@
 
 .header_area.navbar_fixed .main_menu .navbar .nav .nav-item .nav-padding,
 .header_area .navbar .nav .nav-item .nav-padding{
-    padding: 10px 20px;
+    padding: 0px 20px;
     line-height: 50px;
 }
 
@@ -172,13 +172,17 @@
 
 .header_area.navbar_fixed .main_menu .navbar .container-fluid .navbar-header .navbar-brand {
     display: inline-block;
+    float: left;
+    margin-top: 30px;
 }
 
-.header_area.navbar_fixed .main_menu .navbar .container-fluid .navbar-header .navbar-logo {
-    display: none;
-}
 .header_area .main_menu .navbar .container-fluid .navbar-header .navbar-logo {
     display: inline-block;
+    height: 100px;
+    width: auto;
+    float: left;
+    margin-left: 20px;
+    margin-top: 10px;
 }
 
 .header_area .main_menu .navbar .container-fluid .navbar-header .navbar-brand {
@@ -187,4 +191,17 @@
 
 .nav-a-tab, .feature_item h4 {
     font-family: FarsiFont;
+}
+
+.upper-nav-link {
+    background: none;
+    color: #eeeeee;
+    outline = none;
+}
+
+.header_area.navbar_fixed .main_menu .navbar .nav .nav-item .upper-nav-link:hover,
+.header_area .navbar .nav .nav-item .upper-nav-link:hover, .upper-nav-link:focus {
+    background: none;
+    color: pink;
+    outline = none;
 }
