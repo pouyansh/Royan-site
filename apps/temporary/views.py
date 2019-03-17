@@ -32,3 +32,7 @@ def admin_profile(request):
 
 def order_details(request):
     return render(request, "temporary/order-details.html")
+
+
+def change_order(request):
+    return render(request, "temporary/change_order.html")
