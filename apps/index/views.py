@@ -1,13 +1,8 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, TemplateView
+from django.views.generic import CreateView, TemplateView
 
 from apps.index.forms import *
 from apps.index.models import *
-
-
-def index(request):
-    return render(request, 'index/index.html')
 
 
 class Index(TemplateView):
@@ -15,8 +10,8 @@ class Index(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['news'] = News.objects.all()[:4]
-        print(News.objects.all()[0].image)
+        news = News.objects.all()
+        context['news'] = reversed(news[len(news)-4:len(news)])
         return context
 
 

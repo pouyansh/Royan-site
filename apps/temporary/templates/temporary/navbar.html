@@ -28,9 +28,20 @@
                         <div class="row" style="width: 100%;">
                             <ul class="nav" style="margin: 0 50px 0 auto;">
                                 <li class="nav-item"><a class="upper-nav-link" href="#">Contact</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li class="nav-item">
+                                    <div class="upper-nav-link" style="display: inline-block;">Welcome,</div>
+                                    <a href="#" style="display: inline-block; margin-left: 0; padding-left: 0;"
+                                       class="upper-nav-link" >{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                                </li>
+                                <li class="nav-item"><a href="#"
+                                                                  class="upper-nav-link">Logout</a>
+                                </li>
+                                {% else %}
                                 <li class="nav-item"><a href="#"
                                                                   class="upper-nav-link">Login/Register</a>
                                 </li>
+                                {% endif %}
                             </ul>
                         </div>
                         <ul class="nav navbar-nav menu_nav ml-auto nav-right">
