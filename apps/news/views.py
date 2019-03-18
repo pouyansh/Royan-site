@@ -31,3 +31,8 @@ class ShowNewsDetail(DetailView):
 class ShowNewsList(ListView):
     model = News
     template_name = 'news/show_news_list.html'
+
+
+class ShowNewsListAdmin(ListView):
+    model = News
+    template_name = 'news/show_news_list_admin.html'

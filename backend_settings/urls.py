@@ -29,7 +29,7 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('', include(('apps.temporary.urls', 'temporary'), 'temporary')),
                   path('', include(('apps.registration.urls', 'registration'), 'registration')),
-                  path('', include(('apps.index.urls', 'index'), 'index')),
                   path('', include(('apps.news.urls', 'news'), 'news')),
+                  path('', include(('apps.index.urls', 'index'), 'index')),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
