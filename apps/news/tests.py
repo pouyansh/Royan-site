@@ -1,3 +1,3 @@
 from django.test import TestCase
 
-# class NewsTests(TestCase):
+# Create your tests here.

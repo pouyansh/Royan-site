@@ -10,3 +10,12 @@ class AddNewsForm(forms.ModelForm):
         fields = ['title', 'summary', 'description',
                   'english_title', 'english_summary', 'english_description',
                   'image']
+
+
+class UpdateNewsForm(forms.ModelForm):
+
+    class Meta:
+        model = News
+        fields = ['title', 'summary', 'description',
+                  'english_title', 'english_summary', 'english_description',
+                  'image']

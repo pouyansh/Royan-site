@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from apps.news.forms import AddNewsForm
 from apps.news.models import News
@@ -14,6 +14,13 @@ class AddNews(CreateView):
 
     def get_queryset(self):
         return super(AddNews, self).get_queryset()
+
+
+class UpdateNews(UpdateView):
+    model = News
+    template_name = 'news/update_news.html'
+    form_class = AddNewsForm
+    success_url = reverse_lazy('index:index')
 
 
 class ShowNewsDetail(DetailView):
