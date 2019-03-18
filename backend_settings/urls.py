@@ -30,5 +30,6 @@ urlpatterns = [
                   path('', include(('apps.temporary.urls', 'temporary'), 'temporary')),
                   path('', include(('apps.registration.urls', 'registration'), 'registration')),
                   path('', include(('apps.index.urls', 'index'), 'index')),
+                  path('', include(('apps.news.urls', 'news'), 'news')),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
