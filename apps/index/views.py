@@ -11,7 +11,6 @@ class Index(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         news = News.objects.all()
-        context['news'] = reversed(news[len(news)-4:len(news)])
+        context['news'] = reversed(news[max(0, len(news) - 4):len(news)])
         context['products'] = []
         return context
-

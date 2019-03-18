@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from apps.news.forms import AddNewsForm
 from apps.news.models import News
@@ -14,3 +14,8 @@ class AddNews(CreateView):
 
     def get_queryset(self):
         return super(AddNews, self).get_queryset()
+
+
+class ShowNewsDetail(DetailView):
+    model = News
+    template_name = 'news/show_news.html'
