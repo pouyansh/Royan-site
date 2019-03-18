@@ -16,9 +16,9 @@
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <h3 class="mb-30 title_color" style="font-family: FarsiFont">اخبار</h3>
             {% for news in news_list %}
-            <div class="row">
-                <div class="col-md-3">
-                    <img src="{{ news.image.url }}" alt="" class="img-fluid">
+            <div class="row" style="padding: 20px;border-bottom: 1px solid #aaaaaa;">
+                <div class="col-md-3" style="text-align: center;">
+                    <img src="{{ news.image.url }}" alt="" class="img-fluid" style="margin: auto;">
                 </div>
                 <div class="col-md-9">
                     <a href="{% url 'news:show_news' news.id%}" class="text-info"

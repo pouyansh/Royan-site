@@ -19,7 +19,7 @@
     <div class="container">
         <div class="main_title">
             <h2 style="font-family: FarsiFont">شرکت رویان توکاژن</h2>
-            <p>یک عبارت</p>
+            <p style="font-family: FarsiFont">یک عبارت</p>
         </div>
     </div>
 </section>
@@ -29,16 +29,19 @@
 <section class="interior_area">
     <div class="container">
         <div class="main_title">
-            <a href="{% url 'news:show_news_list' %}" class="text-dark" style="font-family: FarsiFont; font-size: 30px;">خبرها</a>
+            <a href="{% url 'news:show_news_list' %}" class="text-dark"
+               style="font-family: FarsiFont; font-size: 30px;">اخبار</a>
         </div>
         <div class="feature_inner row" dir="rtl" style="text-align: right; font-family: FarsiFont;">
             {% for new in news %}
             <div class="col-lg-3 col-md-6">
-                <div class="feature_item">
-                    <img class="img-news" src="{{ new.image.url }}" alt="">
+                <div class="feature_item" style="height: 400px;">
+                    <div style="width: 100%; height: 150px; margin-bottom: 20px;; text-align: center;">
+                        <img class="img-news" src="{{ new.image.url }}" alt="" style="width: auto; height: 100%; max-width: 100%;">
+                    </div>
                     <a href="{% url 'news:show_news' new.id %}" class="text-info"
                        style="font-size: 20px; font-family: FarsiFont;">{{ new.title }}</a>
-                    <p style="font-family: FarsiFont;">{{ new.summary }}</p>
+                    <p>{{ new.summary }}</p>
                 </div>
             </div>
             {% endfor %}
