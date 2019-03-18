@@ -18,7 +18,7 @@
 <section class="feature_area p_120" id="feature">
     <div class="container">
         <div class="main_title">
-            <h2 style="font-family: FontFarsi">شرکت رویان توکاژن</h2>
+            <h2 style="font-family: FarsiFont">شرکت رویان توکاژن</h2>
             <p>یک عبارت</p>
         </div>
     </div>
@@ -29,15 +29,16 @@
 <section class="interior_area">
     <div class="container">
         <div class="main_title">
-            <h3>خبرها</h3>
+            <a href="{% url 'news:show_news_list' %}" class="text-dark" style="font-family: FarsiFont; font-size: 30px;">خبرها</a>
         </div>
-        <div class="feature_inner row" dir="rtl" style="text-align: right; font-family: FontFarsi;">
+        <div class="feature_inner row" dir="rtl" style="text-align: right; font-family: FarsiFont;">
             {% for new in news %}
             <div class="col-lg-3 col-md-6">
                 <div class="feature_item">
                     <img class="img-news" src="{{ new.image.url }}" alt="">
-                    <h4>{{ new.title }}</h4>
-                    <p>{{ new.summary }}</p>
+                    <a href="{% url 'news:show_news' new.id %}" class="text-info"
+                       style="font-size: 20px; font-family: FarsiFont;">{{ new.title }}</a>
+                    <p style="font-family: FarsiFont;">{{ new.summary }}</p>
                 </div>
             </div>
             {% endfor %}
@@ -51,6 +52,9 @@
 <section class="interior_area interior_two" style="text-align: right;">
     <div class="container">
         <div class="interior_inner row">
+            <div class="col-lg-6">
+                <img class="img-fluid" src="{{ product1.image.url }}" alt="">
+            </div>
             <div class="col-lg-5 offset-lg-1">
                 <div class="interior_text">
                     <h4>{{ product1.name }}</h4>
@@ -58,9 +62,7 @@
                     <a class="main_btn" href="#">جزئیات محصول</a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <img class="img-fluid" src="{{ product1.image.url }}" alt="">
-            </div>
+
         </div>
     </div>
 </section>

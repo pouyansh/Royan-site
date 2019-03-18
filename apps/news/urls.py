@@ -6,5 +6,6 @@ from apps.news.views import *
 
 urlpatterns = [
     path('add_news/', staff_member_required(AddNews.as_view()), name='add_news'),
-    url('news/(?P<pk>\d+)/$', ShowNewsDetail.as_view(), name='show_news')
+    url('news/(?P<pk>\d+)/$', ShowNewsDetail.as_view(), name='show_news'),
+    path('news_list/', ShowNewsList.as_view(), name='show_news_list')
 ]

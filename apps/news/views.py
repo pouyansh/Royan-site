@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView
 
 from apps.news.forms import AddNewsForm
 from apps.news.models import News
@@ -19,3 +19,8 @@ class AddNews(CreateView):
 class ShowNewsDetail(DetailView):
     model = News
     template_name = 'news/show_news.html'
+
+
+class ShowNewsList(ListView):
+    model = News
+    template_name = 'news/show_news_list.html'
