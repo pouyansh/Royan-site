@@ -32,34 +32,15 @@
             <h3>خبرها</h3>
         </div>
         <div class="feature_inner row" dir="rtl" style="text-align: right; font-family: FontFarsi;">
+            {% for new in news %}
             <div class="col-lg-3 col-md-6">
                 <div class="feature_item">
-                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
-                    <h4>خبر</h4>
-                    <p>متن خبر</p>
+                    <img class="img-news" src="{{ new.image.url }}" alt="">
+                    <h4>{{ new.title }}</h4>
+                    <p>{{ new.summary }}</p>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="feature_item">
-                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
-                    <h4>خبر</h4>
-                    <p>متن خبر</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="feature_item">
-                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
-                    <h4>خبر</h4>
-                    <p>متن خبر</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="feature_item">
-                    <img class="img-news" src="{% static 'img/DNA3.png' %}" alt="">
-                    <h4>خبر</h4>
-                    <p>متن خبر</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
