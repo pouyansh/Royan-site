@@ -8,8 +8,15 @@
                 <div class="navbar-header" style="line-height: 100%;">
 
                     <img class="navbar-logo" src="{% static 'img/logo.png' %}">
-                    <div class="navbar-brand" style="font-size: 20px; padding-top: 15px; margin-left: 20px; color: #eeeeee;">
-                        Royan <div class="text-danger" style="display: inline;">T</div>u<div class="text-primary" style="display: inline;">C</div><div class="text-success" style="display: inline;">A</div><div class="text-dark" style="display: inline;">G</div>ene
+                    <div class="navbar-brand"
+                         style="font-size: 20px; padding-top: 15px; margin-left: 20px; color: #eeeeee;">
+                        Royan
+                        <div class="text-danger" style="display: inline;">T</div>
+                        u
+                        <div class="text-primary" style="display: inline;">C</div>
+                        <div class="text-success" style="display: inline;">A</div>
+                        <div class="text-dark" style="display: inline;">G</div>
+                        ene
                     </div>
                 </div>
 
@@ -31,21 +38,24 @@
                                 {% if request.user.is_authenticated %}
                                 <li class="nav-item">
                                     <div class="upper-nav-link" style="display: inline-block;">Welcome,</div>
-                                    <a href="#" style="display: inline-block; margin-left: 0; padding-left: 0; font-size: 20px;"
-                                       class="upper-nav-link" >{{ request.user.first_name }} {{ request.user.last_name }}</a>
+                                    <a href="#"
+                                       style="display: inline-block; margin-left: 0; padding-left: 0; font-size: 20px;"
+                                       class="upper-nav-link">{{ request.user.first_name }}
+                                        {{ request.user.last_name }}</a>
                                 </li>
-                                <li class="nav-item"><a href="#"
-                                                                  class="upper-nav-link">Logout</a>
+                                <li class="nav-item"><a href="{% url 'registration:logout' %}"
+                                                        class="upper-nav-link">Logout</a>
                                 </li>
                                 {% else %}
-                                <li class="nav-item"><a href="#"
-                                                                  class="upper-nav-link">Login/Register</a>
+                                <li class="nav-item"><a href="{% url 'registration:login' %}"
+                                                        class="upper-nav-link">Login/Register</a>
                                 </li>
                                 {% endif %}
                             </ul>
                         </div>
                         <ul class="nav navbar-nav menu_nav ml-auto nav-right">
-                            <li class="nav-item active"><a class="nav-link nav-padding" href="{% url 'index:index' %}">Home</a></li>
+                            <li class="nav-item active"><a class="nav-link nav-padding" href="{% url 'index:index' %}">Home</a>
+                            </li>
                             <li class="nav-item submenu dropdown mega-dropdown">
                                 <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
                                    role="button"

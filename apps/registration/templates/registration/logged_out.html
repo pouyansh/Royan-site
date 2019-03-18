@@ -1,0 +1,22 @@
+{% load static staticfiles %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Royan Tokagene</title>
+    <!-- Bootstrap CSS -->
+    {% include 'temporary/cssfiles.html' %}
+</head>
+<body>
+<div class="login_body"></div>
+<div class="bg-text" style="width: 60%;" dir="rtl">
+    <h2>شما با موفقیت از سایت خارج شدید!</h2>
+    <a class="btn circle btn-dark" href="{% url 'index:index' %}"
+            style="font-family: FarsiFont; font-size: 18px; min-width: 80px; margin: 10px;">خانه</a>
+    <a class="btn circle btn-dark" href="{% url 'registration:login' %}"
+            style="font-family: FarsiFont; font-size: 18px; min-width: 80px; margin: 10px;">ورود</a>
+</div>
+</body>
+</html>

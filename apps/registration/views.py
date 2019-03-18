@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
@@ -13,3 +13,6 @@ class Login(LoginView):
 class LoginSuccess(TemplateView):
     template_name = 'registration/login_success.html'
 
+
+class Logout(LogoutView):
+    model = User
