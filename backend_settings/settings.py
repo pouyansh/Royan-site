@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_jalali',
     'apps.registration',
-    'apps.landing',
+    'apps.index'
 ]
 
 MIDDLEWARE = [
@@ -78,7 +78,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'apps', 'temporary', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'registration', 'templates'),
-            os.path.join(BASE_DIR, 'apps', 'landing', 'templates'),
+            os.path.join(BASE_DIR, 'apps', 'index', 'templates'),
             os.path.join(BASE_DIR, 'templates'),
         ],
         'APP_DIRS': True,
@@ -150,8 +150,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_USE_TLS = True
 # EMAIL_PORT = 587
 #
-# EMAIL_HOST_USER = 'sakhoufcompani@gmail.com'
-# EMAIL_HOST_PASSWORD = 'sakhoufsucks'
+# EMAIL_HOST_USER = ''
+# EMAIL_HOST_PASSWORD = ''
 LOGIN_URL = '/login/'
 
 if DEBUG:
