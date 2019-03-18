@@ -46,42 +46,46 @@
 </section>
 <!--================End Interior Area =================-->
 
+{% if product1 %}
 <!--================Interior Area =================-->
 <section class="interior_area interior_two" style="text-align: right;">
     <div class="container">
         <div class="interior_inner row">
             <div class="col-lg-5 offset-lg-1">
                 <div class="interior_text">
-                    <h4>محصول جدید ۱</h4>
-                    <p>عبارتی در مورد محصول جدید ۱</p>
+                    <h4>{{ product1.name }}</h4>
+                    <p>{{ product1.description }}</p>
                     <a class="main_btn" href="#">جزئیات محصول</a>
                 </div>
             </div>
             <div class="col-lg-6">
-                <img class="img-fluid" src="{% static 'img/DNA4.png' %}" alt="">
+                <img class="img-fluid" src="{{ product1.image.url }}" alt="">
             </div>
         </div>
     </div>
 </section>
 <!--================End Interior Area =================-->
+{% endif %}
 
+{% if product2 %}
 <!--================Interior Area =================-->
-<section class="interior_area interior_one" style="text-align: right;">
+<section class="interior_area interior_two" style="text-align: right;">
     <div class="container">
         <div class="interior_inner row">
-            <div class="col-lg-6">
-                <img class="img-fluid" src="{% static 'img/DNA5.png' %}" alt="">
-            </div>
             <div class="col-lg-5 offset-lg-1">
                 <div class="interior_text">
-                    <h4>محصول جدید ۲</h4>
-                    <p>عبارتی در مورد محصول جدید ۲</p>
+                    <h4>{{ product2.name }}</h4>
+                    <p>{{ product2.description }}</p>
                     <a class="main_btn" href="#">جزئیات محصول</a>
                 </div>
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid" src="{{ product2.image.url }}" alt="">
             </div>
         </div>
     </div>
 </section>
 <!--================End Interior Area =================-->
+{% endif %}
 
 {% endblock main_content %}
