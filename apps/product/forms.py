@@ -9,3 +9,6 @@ class CreateCategoryForm(forms.ModelForm):
         model = Category
         fields = ['name', 'description']
 
+
+class CategoryListAdminForm(forms.Form):
+    category_id = forms.CharField(max_length=10)

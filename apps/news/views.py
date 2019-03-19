@@ -3,6 +3,7 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView, F
 
 from apps.news.forms import *
 from apps.news.models import News
+from apps.product.models import Category
 
 
 class AddNews(CreateView):
@@ -15,6 +16,11 @@ class AddNews(CreateView):
     def get_queryset(self):
         return super(AddNews, self).get_queryset()
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        return context
+
 
 class UpdateNews(UpdateView):
     model = News
@@ -22,15 +28,30 @@ class UpdateNews(UpdateView):
     form_class = UpdateNewsForm
     success_url = reverse_lazy('index:index')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        return context
+
 
 class ShowNewsDetail(DetailView):
     model = News
     template_name = 'news/show_news.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        return context
+
 
 class ShowNewsList(ListView):
     model = News
     template_name = 'news/show_news_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        return context
 
 
 class ShowNewsListAdmin(ListView, FormView):
@@ -41,7 +62,10 @@ class ShowNewsListAdmin(ListView, FormView):
     form_class = NewsListAdminForm
 
     def form_valid(self, form):
-        print(form.cleaned_data['news_id'])
         News.objects.filter(id=form.cleaned_data['news_id']).delete()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        return context

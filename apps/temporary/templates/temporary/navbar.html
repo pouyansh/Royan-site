@@ -151,13 +151,11 @@
                                    role="button"
                                    aria-haspopup="true" aria-expanded="false">Products</a>
                                 <ul class="dropdown-menu" style="min-width: 250px;">
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">PCR Set</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">PCR Master Mix</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Cyber Green Master Mix</a>
-                                    </li>
+                                    {% for category in product_categories %}
+                                    <li class="nav-item">
+                                        <a class="nav-link nav-no-padding" href="elements.html"
+                                           style="text-transform: none;">{{ category.name }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">

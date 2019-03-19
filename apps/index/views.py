@@ -3,6 +3,7 @@ from django.views.generic import CreateView, TemplateView
 
 from apps.news.forms import *
 from apps.news.models import *
+from apps.product.models import Category
 
 
 class Index(TemplateView):
@@ -13,4 +14,5 @@ class Index(TemplateView):
         news = News.objects.all()
         context['news'] = reversed(news[max(0, len(news) - 4):len(news)])
         context['products'] = []
+        context['product_categories'] = Category.objects.all()
         return context
