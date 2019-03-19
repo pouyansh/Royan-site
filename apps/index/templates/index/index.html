@@ -29,8 +29,13 @@
 <section class="interior_area">
     <div class="container">
         <div class="main_title">
+            {% if request.user.is_authenticated and request.user.is_staff %}
+            <a href="{% url 'news:show_news_list_admin' %}" class="text-dark"
+               style="font-family: FarsiFont; font-size: 30px;">اخبار</a>
+            {% else %}
             <a href="{% url 'news:show_news_list' %}" class="text-dark"
                style="font-family: FarsiFont; font-size: 30px;">اخبار</a>
+            {% endif %}
         </div>
         <div class="feature_inner row" dir="rtl" style="text-align: right; font-family: FarsiFont;">
             {% for new in news %}
