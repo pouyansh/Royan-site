@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, FormView
 
@@ -38,8 +38,19 @@ class ShowCategoryListAdmin(ListView, FormView):
 class CreateProduct(CreateView):
     model = Product
     success_url = reverse_lazy('index:index')
+    form_class = CreateProductForm
+    template_name = 'product/create_product.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        category = get_object_or_404(Category, pk=self.kwargs['pk'])
+        context['category'] = category
+        kwargs['category'] = category
+        print(category.name)
         context['product_categories'] = Category.objects.all()
         return context
+
+    def form_valid(self, form):
+        category = get_object_or_404(Category, pk=self.kwargs['pk'])
+        form.instance.category = category
+        return super().form_valid(form)

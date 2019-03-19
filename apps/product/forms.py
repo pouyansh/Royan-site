@@ -12,3 +12,10 @@ class CreateCategoryForm(forms.ModelForm):
 
 class CategoryListAdminForm(forms.Form):
     category_id = forms.CharField(max_length=10)
+
+
+class CreateProductForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'count', 'image']
