@@ -1,9 +1,7 @@
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import TemplateView
 
-from apps.news.forms import *
 from apps.news.models import *
-from apps.product.models import Category
+from apps.product.models import Category, Product
 
 
 class Index(TemplateView):
@@ -13,6 +11,15 @@ class Index(TemplateView):
         context = super().get_context_data(**kwargs)
         news = News.objects.all()
         context['news'] = reversed(news[max(0, len(news) - 4):len(news)])
-        context['products'] = []
+        products = Product.objects.filter(is_available=True)
+        if len(products) >= 2:
+            context['product1'] = products[len(products) - 1]
+            context['product2'] = products[len(products) - 2]
+        if len(products) == 1:
+            context['product1'] = products[len(products) - 1]
+            context['product2'] = None
+        if len(products) == 0:
+            context['product1'] = None
+            context['product2'] = None
         context['product_categories'] = Category.objects.all()
         return context
