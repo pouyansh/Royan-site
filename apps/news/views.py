@@ -37,7 +37,7 @@ class ShowNewsListAdmin(ListView, FormView):
     model = News
     template_name = 'news/show_news_list_admin.html'
 
-    success_url = reverse_lazy('news:show_news_list')
+    success_url = reverse_lazy('news:show_news_list_admin')
     form_class = NewsListAdminForm
 
     def form_valid(self, form):
