@@ -19,3 +19,7 @@ class UpdateNewsForm(forms.ModelForm):
         fields = ['title', 'summary', 'description',
                   'english_title', 'english_summary', 'english_description',
                   'image']
+
+
+class NewsListAdminForm(forms.Form):
+    news_id = forms.CharField(max_length=10)

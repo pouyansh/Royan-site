@@ -1,39 +1,88 @@
 {% extends "temporary/mother_panel.html" %}
 {% load static staticfiles %}
 
-{% block banner_content %}
-<h2>Primer</h2>
-<div class="page_link">
-    <a href="index.html">Home</a>
-    <a href="elements.html">Services</a>
-    <a href="elements.html">Primer</a>
-</div>
-{% endblock banner_content %}
+{% block internal_css %}
+<style>
+.popup {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.popup .popuptext {
+  visibility: hidden;
+  display: none;
+}
+
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
+</style>
+{% endblock %}
 
 {% block main_content %}
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <h3 class="mb-30 title_color" style="font-family: FarsiFont">اخبار</h3>
-            {% for news in news_list %}
-            <div class="row" style="padding: 20px;border-bottom: 1px solid #aaaaaa;">
-                <div class="col-lg-3" style="text-align: center;">
-                    <img src="{{ news.image.url }}" alt="" class="img-fluid" style="margin: auto;">
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="news_id" id="id_news_id" style="display: none;">
+                {% for news in news_list reversed %}
+                <div class="row" style="padding: 20px; margin: 20px;border-bottom: 1px solid #aaaaaa;">
+                    <div class="col-lg-3" style="text-align: center;">
+                        <img src="{{ news.image.url }}" alt="" class="img-fluid" style="margin: auto;">
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="{% url 'news:show_news' news.id%}" class="text-info"
+                           style="font-size: 20px; font-family: FarsiFont">{{ news.title }}</a>
+                        <div style="font-family: FarsiFont;">{{ news.summary }}</div>
+                    </div>
+                    <div class="col-lg-2">
+                        <a href="{% url 'news:update_news' news.id %}" class="btn btn-info circle"
+                           style="font-size: 18px; min-width: 80px; display: block;">ویرایش</a>
+                        <div onclick="myFunction({{ news.id }})" class="popup btn btn-danger circle"
+                             style="font-size: 18px; min-width: 80px; display: block; margin: 20px 0;">حذف
+                            <div class="popuptext" id="myPopup{{ news.id }}">
+                                مطمئن هستید؟
+                                <button type="submit" onclick="myDelete({{ news.id }})" class="btn btn-danger circle" style="font-size: 18px;">بله
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-lg-7">
-                    <a href="{% url 'news:show_news' news.id%}" class="text-info"
-                       style="font-size: 20px; font-family: FarsiFont">{{ news.title }}</a>
-                    <div style="font-family: FarsiFont;">{{ news.summary }}</div>
-                </div>
-                <div class="col-lg-2">
-                    <a href="{% url 'news:update_news' news.id %}" class="btn btn-info circle"
-                        style="font-size: 18px; min-width: 40px;">ویرایش</a>
-                    <button class="btn btn-danger circle"
-                        style="font-size: 18px; min-width: 40px;">حذف</button>
-                </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            </form>
         </div>
     </div>
 </div>
 {% endblock main_content %}
+
+{% block script %}
+<script>
+function myFunction(id) {
+    var popup = document.getElementById("myPopup"+id);
+    popup.classList.toggle("show");
+}
+function myDelete(i) {
+    $("#id_news_id").val(i);
+    console.log($("#id_news_id").val());
+}
+
+</script>
+{% endblock %}

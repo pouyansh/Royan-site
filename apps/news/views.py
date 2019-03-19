@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, FormView
 
-from apps.news.forms import AddNewsForm
+from apps.news.forms import *
 from apps.news.models import News
 
 
@@ -19,7 +19,7 @@ class AddNews(CreateView):
 class UpdateNews(UpdateView):
     model = News
     template_name = 'news/update_news.html'
-    form_class = AddNewsForm
+    form_class = UpdateNewsForm
     success_url = reverse_lazy('index:index')
 
 
@@ -33,6 +33,15 @@ class ShowNewsList(ListView):
     template_name = 'news/show_news_list.html'
 
 
-class ShowNewsListAdmin(ListView):
+class ShowNewsListAdmin(ListView, FormView):
     model = News
     template_name = 'news/show_news_list_admin.html'
+
+    success_url = reverse_lazy('news:show_news_list')
+    form_class = NewsListAdminForm
+
+    def form_valid(self, form):
+        print(form.cleaned_data['news_id'])
+        News.objects.filter(id=form.cleaned_data['news_id']).delete()
+        return super().form_valid(form)
+

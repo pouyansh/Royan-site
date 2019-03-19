@@ -15,7 +15,7 @@
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <h3 class="mb-30 title_color" style="font-family: FarsiFont">اخبار</h3>
-            {% for news in news_list %}
+            {% for news in news_list reversed %}
             <div class="row" style="padding: 20px;border-bottom: 1px solid #aaaaaa;">
                 <div class="col-md-3" style="text-align: center;">
                     <img src="{{ news.image.url }}" alt="" class="img-fluid" style="margin: auto;">
