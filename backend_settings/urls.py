@@ -21,7 +21,7 @@ from django.urls import path, include
 from django.conf.urls import url
 import django.views.static
 
-admin.site.site_header = "رویان توکاژن"
+admin.site.site_header = "Royan TuCAGene"
 urlpatterns = [
 
                   url(r'^media/(?P<path>.*)$', django.views.static.serve,
@@ -30,6 +30,7 @@ urlpatterns = [
                   path('', include(('apps.temporary.urls', 'temporary'), 'temporary')),
                   path('', include(('apps.registration.urls', 'registration'), 'registration')),
                   path('', include(('apps.news.urls', 'news'), 'news')),
+                  path('', include(('apps.product.urls', 'product'), 'product')),
                   path('', include(('apps.index.urls', 'index'), 'index')),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

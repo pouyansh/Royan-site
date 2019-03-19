@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'django_jalali',
     'apps.registration',
     'apps.index',
-    'apps.news'
+    'apps.news',
+    'apps.product'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'apps', 'temporary', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'registration', 'templates'),
+            os.path.join(BASE_DIR, 'apps', 'product', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'index', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'news', 'templates'),
             os.path.join(BASE_DIR, 'templates'),
