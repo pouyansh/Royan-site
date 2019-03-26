@@ -51,7 +51,7 @@
                         <div style="font-family: FarsiFont;">{{ category.description }}</div>
                     </div>
                     <div class="col-lg-3">
-                        <a href="" class="btn btn-info circle"
+                        <a href="{% url 'product:update_category' category.id %}" class="btn btn-info circle"
                            style="font-size: 18px; min-width: 80px; display: block;">ویرایش</a>
                         <div onclick="myFunction({{ category.id }})" class="popup btn btn-danger circle"
                              style="font-size: 18px; min-width: 80px; display: block; margin: 20px 0;">حذف

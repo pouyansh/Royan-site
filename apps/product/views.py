@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, FormView, DetailView
+from django.views.generic import CreateView, ListView, FormView, DetailView, UpdateView
 
 from apps.product.forms import *
 from apps.product.models import *
@@ -28,6 +28,18 @@ class ShowCategoryListAdmin(ListView, FormView):
     def form_valid(self, form):
         Category.objects.filter(id=form.cleaned_data['category_id']).delete()
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        return context
+
+
+class UpdateCategory(UpdateView):
+    model = Category
+    template_name = 'product/update_category.html'
+    success_url = reverse_lazy('product:show_categories_list_admin')
+    form_class = CreateCategoryForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
