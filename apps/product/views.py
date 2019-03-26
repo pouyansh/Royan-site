@@ -99,7 +99,7 @@ class ProductList(ListView, FormView):
 
 class ProductListAdmin(FormView):
     template_name = 'product/product_list_admin.html'
-    success_url = reverse_lazy('product:product_search_result',
+    success_url = reverse_lazy('product:product_search_result_admin',
                                kwargs={'keyword': ''})
     form_class = ProductListAdminForm
 
@@ -126,7 +126,7 @@ class ProductListAdmin(FormView):
             Product.objects.filter(id=deleted).delete()
             self.success_url = reverse_lazy('product:product_list_admin', kwargs={'category': '0'})
         else:
-            self.success_url = reverse_lazy('product:product_search_result', kwargs={'keyword': keyword})
+            self.success_url = reverse_lazy('product:product_search_result_admin', kwargs={'keyword': keyword})
         return super(ProductListAdmin, self).form_valid(form)
 
 
@@ -155,6 +155,36 @@ class ProductSearchResult(ListView, FormView):
         keyword = form.cleaned_data['product']
         self.success_url = reverse_lazy('product:product_search_result', kwargs={'keyword': keyword})
         return super(ProductSearchResult, self).form_valid(form)
+
+
+class ProductSearchResultAdmin(FormView):
+    template_name = 'product/product_list_admin.html'
+    success_url = reverse_lazy('product:product_search_result_admin',
+                               kwargs={'keyword': ''})
+    form_class = ProductListAdminForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductSearchResultAdmin, self).get_context_data()
+        context['product_categories'] = Category.objects.all()
+        keyword = self.kwargs['keyword']
+        context['keyword'] = keyword
+        products = Product.objects.all()
+        searched_products = []
+        for product in products:
+            if keyword in product.name:
+                searched_products.append(product)
+        context['products'] = searched_products
+        return context
+
+    def form_valid(self, form):
+        keyword = form.cleaned_data['product']
+        deleted = form.cleaned_data['product_id']
+        if str(deleted) != '-1':
+            Product.objects.filter(id=deleted).delete()
+            self.success_url = reverse_lazy('product:product_list_admin', kwargs={'category': '0'})
+        else:
+            self.success_url = reverse_lazy('product:product_search_result_admin', kwargs={'keyword': keyword})
+        return super(ProductSearchResultAdmin, self).form_valid(form)
 
 
 class ProductDetails(DetailView):

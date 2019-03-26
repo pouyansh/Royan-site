@@ -14,5 +14,7 @@ urlpatterns = [
     url(r'products_admin/(?P<category>[0-9]+)/', staff_member_required(ProductListAdmin.as_view()),
         name='product_list_admin'),
     url(r'search_products_result/(?P<keyword>\w+)/', ProductSearchResult.as_view(), name='product_search_result'),
+    url(r'search_products_result_admin/(?P<keyword>\w+)/', staff_member_required(ProductSearchResultAdmin.as_view()),
+        name='product_search_result_admin'),
     url('product_details/(?P<pk>[0-9]+)/$', ProductDetails.as_view(), name='product_details')
 ]
