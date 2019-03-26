@@ -243,3 +243,23 @@ a.details-link:hover {
   padding: 20px;
   text-align: center;
 }
+
+.btn_admin {
+    min-width: 100px;
+    margin: 0 5px;
+    font-size: 18px;
+}
+
+.container_admin {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    margin-right: 10px;
+}
+
+.title_admin {
+    display: block;
+    text-align: center;
+}
+
