@@ -19,3 +19,9 @@ class CreateProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'description', 'price', 'count', 'image']
+
+
+class SearchProductForm(forms.Form):
+    product = forms.CharField(max_length=30)
+
+

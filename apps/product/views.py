@@ -56,9 +56,12 @@ class CreateProduct(CreateView):
         return super().form_valid(form)
 
 
-class ProductList(ListView):
+class ProductList(ListView, FormView):
     model = Product
     template_name = 'product/product_list.html'
+    success_url = reverse_lazy('product:product_search_result',
+                               kwargs={'keyword': ''})
+    form_class = SearchProductForm
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductList, self).get_context_data(**kwargs)
@@ -75,3 +78,35 @@ class ProductList(ListView):
             except:
                 context['products'] = []
         return context
+
+    def form_valid(self, form):
+        keyword = form.cleaned_data['product']
+        self.success_url = reverse_lazy('product:product_search_result', kwargs={'keyword': keyword})
+        return super(ProductList, self).form_valid(form)
+
+
+class ProductSearchResult(ListView, FormView):
+    model = Product
+    template_name = 'product/product_list.html'
+    success_url = reverse_lazy('product:product_search_result',
+                               kwargs={'keyword': ''})
+    form_class = SearchProductForm
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductSearchResult, self).get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        keyword = self.kwargs['keyword']
+        context['keyword'] = keyword
+        products = Product.objects.all()
+        searched_products = []
+        for product in products:
+            if keyword in product.name:
+                searched_products.append(product)
+        context['products'] = searched_products
+        context['category_id'] = -1
+        return context
+
+    def form_valid(self, form):
+        keyword = form.cleaned_data['product']
+        self.success_url = reverse_lazy('product:product_search_result', kwargs={'keyword': keyword})
+        return super(ProductSearchResult, self).form_valid(form)

@@ -5,6 +5,26 @@
 <div class="whole-wrap" dir="rtl">
     <div class="container-fluid">
         <div class="section-top-border text-right">
+            <div class="row" style="margin-bottom: 30px;">
+                <div class="col-lg-5 col-md-6 col-sm-6" style="margin: auto;">
+                    <div class="single-footer-widget news_widgets">
+                        <div id="mc_embed_signup">
+                            <form method="post" class="subscribe_form relative">
+                                {% csrf_token %}
+                                <div class="input-group d-flex flex-row" style="font-family: FarsiFont; font-size: 18px;">
+                                    <button class="btn sub-btn"
+                                            style="float: left; right: unset; left: 0px; font-size: 18px;">
+                                        جستجو</button>
+                                    <input name="product" placeholder="نام کالا" onfocus="this.placeholder = ''"
+                                           onblur="this.placeholder = 'نام کالا'" required="" type="text"
+                                        style="padding-right: 20px; font-size: 18px;">
+                                </div>
+                                <div class="mt-10 info"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-2 col-sm-12 nav-side" style="height: 100%; font-family: FarsiFont;">
                     <div class="container-fluid" style="text-align: center">
@@ -23,17 +43,17 @@
                         </li>
                         {% endif %}
                         {% for category in product_categories %}
-                            {% if category_id == category.id|stringformat:'i' %}
-                            <li class="nav-pills-item active">
-                                <a class="nav-a-tab active"
-                                   href="{% url 'product:product_list' category.id %}">{{category.name}}</a>
-                            </li>
-                            {% else %}
-                            <li class="nav-pills-item">
-                                <a class="nav-a-tab"
-                                   href="{% url 'product:product_list' category.id %}">{{category.name}}</a>
-                            </li>
-                            {% endif %}
+                        {% if category_id == category.id|stringformat:'i' %}
+                        <li class="nav-pills-item active">
+                            <a class="nav-a-tab active"
+                               href="{% url 'product:product_list' category.id %}">{{category.name}}</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-pills-item">
+                            <a class="nav-a-tab"
+                               href="{% url 'product:product_list' category.id %}">{{category.name}}</a>
+                        </li>
+                        {% endif %}
                         {% endfor %}
                     </ul>
                 </div>
