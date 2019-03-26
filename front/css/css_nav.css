@@ -193,6 +193,10 @@
     font-family: FarsiFont;
 }
 
+.nav-a-tab {
+    font-size: 18px;
+}
+
 .upper-nav-link {
     background: none;
     color: #eeeeee;

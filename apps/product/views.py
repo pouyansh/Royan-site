@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, FormView
 
@@ -54,3 +54,24 @@ class CreateProduct(CreateView):
         category = get_object_or_404(Category, pk=self.kwargs['pk'])
         form.instance.category = category
         return super().form_valid(form)
+
+
+class ProductList(ListView):
+    model = Product
+    template_name = 'product/product_list.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(ProductList, self).get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        category = self.kwargs['category']
+        context['category_id'] = category
+        if str(category) == '0':
+            context['products'] = Product.objects.all()
+        else:
+            try:
+                category_object = Category.objects.get(id=category)
+                if category_object:
+                    context['products'] = Product.objects.filter(category=category_object)
+            except:
+                context['products'] = []
+        return context

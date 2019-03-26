@@ -1,0 +1,60 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl">
+    <div class="container-fluid">
+        <div class="section-top-border text-right">
+            <div class="row">
+                <div class="col-lg-2 col-sm-12 nav-side" style="height: 100%; font-family: FarsiFont;">
+                    <div class="container-fluid" style="text-align: center">
+                        <h3 class="nav-side-name">دسته‌بندی‌</h3>
+                    </div>
+                    <ul class="nav nav-pills">
+                        {% if category_id == '0' %}
+                        <li class="nav-pills-item active">
+                            <a class="nav-a-tab active"
+                               href="{% url 'product:product_list' 0 %}">همه</a>
+                        </li>
+                        {% else %}
+                        <li class="nav-pills-item">
+                            <a class="nav-a-tab"
+                               href="{% url 'product:product_list' 0 %}">همه</a>
+                        </li>
+                        {% endif %}
+                        {% for category in product_categories %}
+                            {% if category_id == category.id|stringformat:'i' %}
+                            <li class="nav-pills-item active">
+                                <a class="nav-a-tab active"
+                                   href="{% url 'product:product_list' category.id %}">{{category.name}}</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-pills-item">
+                                <a class="nav-a-tab"
+                                   href="{% url 'product:product_list' category.id %}">{{category.name}}</a>
+                            </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-8 feature_inner row" dir="rtl">
+                    {% for product in products reversed %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="feature_item" style="height: 300px;">
+                            <div style="width: 100%; height: 150px; margin-bottom: 20px; text-align: center;">
+                                <img class="img-news" src="{{ product.image.url }}" alt=""
+                                     style="width: auto; height: 100%; max-width: 100%;">
+                            </div>
+                            <a href="#" class="text-info"
+                               style="font-size: 20px; text-align: center; display: block;">
+                                {{ product.name }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
