@@ -208,3 +208,20 @@ class ProductDetails(DetailView):
             context['related_products'] = []
         context['product_categories'] = Category.objects.all()
         return context
+
+
+class UpdateProduct(UpdateView):
+    model = Product
+    template_name = 'product/create_product.html'
+    success_url = reverse_lazy('product:product_list_admin', kwargs={'category': '0'})
+    form_class = CreateProductForm
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Product.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        return context
