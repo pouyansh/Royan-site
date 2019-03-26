@@ -145,13 +145,13 @@
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
-                                   role="button"
-                                   aria-haspopup="true" aria-expanded="false">Products</a>
+                                <a href="{% url 'product:product_list' 0 %}"
+                                   class="nav-link nav-padding dropdown-toggle">Products</a>
                                 <ul class="dropdown-menu" style="min-width: 250px;">
                                     {% for category in product_categories %}
                                     <li class="nav-item">
-                                        <a class="nav-link nav-no-padding" href="elements.html"
+                                        <a class="nav-link nav-no-padding"
+                                           href="{% url 'product:product_list' category.id %}"
                                            style="text-transform: none;">{{ category.name }}</a></li>
                                     {% endfor %}
                                 </ul>

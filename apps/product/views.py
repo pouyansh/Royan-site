@@ -66,7 +66,7 @@ class ProductList(ListView):
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
-            context['products'] = Product.objects.all()
+            context['products'] = reversed(Product.objects.filter())
         else:
             try:
                 category_object = Category.objects.get(id=category)
