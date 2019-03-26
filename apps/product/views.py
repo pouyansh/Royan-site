@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, FormView, DetailView
@@ -118,6 +119,13 @@ class ProductDetails(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(context)
+        product = Product.objects.filter(id=self.kwargs['pk'])
+        if product:
+            products = Product.objects.filter(category=product[0].category).exclude(name=product[0].name)
+            if len(products) > 4:
+                products = products[:4]
+            context['related_products'] = products
+        else:
+            context['related_products'] = []
         context['product_categories'] = Category.objects.all()
         return context
