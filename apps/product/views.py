@@ -97,6 +97,39 @@ class ProductList(ListView, FormView):
         return super(ProductList, self).form_valid(form)
 
 
+class ProductListAdmin(FormView):
+    template_name = 'product/product_list_admin.html'
+    success_url = reverse_lazy('product:product_search_result',
+                               kwargs={'keyword': ''})
+    form_class = ProductListAdminForm
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductListAdmin, self).get_context_data()
+        context['product_categories'] = Category.objects.all()
+        category = self.kwargs['category']
+        context['category_id'] = category
+        if str(category) == '0':
+            context['products'] = reversed(Product.objects.filter())
+        else:
+            try:
+                category_object = Category.objects.get(id=category)
+                if category_object:
+                    context['products'] = Product.objects.filter(category=category_object)
+            except:
+                context['products'] = []
+        return context
+
+    def form_valid(self, form):
+        keyword = form.cleaned_data['product']
+        deleted = form.cleaned_data['product_id']
+        if str(deleted) != '-1':
+            Product.objects.filter(id=deleted).delete()
+            self.success_url = reverse_lazy('product:product_list_admin', kwargs={'category': '0'})
+        else:
+            self.success_url = reverse_lazy('product:product_search_result', kwargs={'keyword': keyword})
+        return super(ProductListAdmin, self).form_valid(form)
+
+
 class ProductSearchResult(ListView, FormView):
     model = Product
     template_name = 'product/product_list.html'

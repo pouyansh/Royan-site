@@ -25,3 +25,6 @@ class SearchProductForm(forms.Form):
     product = forms.CharField(max_length=30)
 
 
+class ProductListAdminForm(forms.Form):
+    product = forms.CharField(max_length=30)
+    product_id = forms.CharField(max_length=10)

@@ -1,0 +1,152 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block internal_css %}
+<style>
+.popup {
+  font-family: FarsiFont;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.popup .popuptext {
+  visibility: hidden;
+  display: none;
+}
+
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+
+
+</style>
+{% endblock %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl">
+    <div class="container-fluid">
+        <div class="section-top-border text-right">
+            <form method="post">
+                <div class="row" style="margin-bottom: 30px;">
+                    <div class="col-lg-5 col-md-6 col-sm-6" style="margin: auto;">
+                        <div class="single-footer-widget news_widgets">
+                            <div id="mc_embed_signup">
+                                <div class="subscribe_form relative">
+                                    {% csrf_token %}
+                                    <div class="input-group d-flex flex-row"
+                                         style="font-family: FarsiFont; font-size: 18px;">
+                                        <button class="btn sub-btn"
+                                                style="float: left; right: unset; left: 0px; font-size: 18px;">
+                                            جستجو
+                                        </button>
+                                        <input name="product" placeholder="نام کالا" onfocus="this.placeholder = ''"
+                                               onblur="this.placeholder = 'نام کالا'" type="text" id="product"
+                                               style="padding-right: 20px; font-size: 18px;">
+                                    </div>
+                                    <div class="mt-10 info"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2 col-sm-12 nav-side" style="height: 100%; font-family: FarsiFont;">
+                        <div class="container-fluid" style="text-align: center">
+                            <h3 class="nav-side-name">دسته‌بندی‌</h3>
+                        </div>
+                        <ul class="nav nav-pills">
+                            {% if category_id == '0' %}
+                            <li class="nav-pills-item active">
+                                <a class="nav-a-tab active"
+                                   href="{% url 'product:product_list_admin' 0 %}">همه</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-pills-item">
+                                <a class="nav-a-tab"
+                                   href="{% url 'product:product_list_admin' 0 %}">همه</a>
+                            </li>
+                            {% endif %}
+                            {% for category in product_categories %}
+                            {% if category_id == category.id|stringformat:'i' %}
+                            <li class="nav-pills-item active">
+                                <a class="nav-a-tab active"
+                                   href="{% url 'product:product_list_admin' category.id %}">{{category.name}}</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-pills-item">
+                                <a class="nav-a-tab"
+                                   href="{% url 'product:product_list_admin' category.id %}">{{category.name}}</a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-8 feature_inner row" dir="rtl">
+                        <input type="text" name="product_id" id="id_category_id" style="display: none;" value="-1">
+                        {% for product in products %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="feature_item" style="height: 400px;">
+                                <div style="width: 100%; height: 150px; margin-bottom: 20px; text-align: center;">
+                                    <img class="img-news" src="{{ product.image.url }}" alt=""
+                                         style="width: auto; height: 100%; max-width: 100%;">
+                                </div>
+                                <a href="{% url 'product:product_details' product.id %}" class="text-info"
+                                   style="font-size: 20px; text-align: center; display: block; margin-bottom: 20px;">
+                                    {{ product.name }}</a>
+                                <div class="row">
+                                    <a href="{% url 'product:update_category' product.id %}"
+                                       class="btn btn-info circle"
+                                       style="font-size: 18px; width: 60%; margin: auto;">ویرایش</a>
+                                    <div onclick="myFunction({{ product.id }})" class="popup btn btn-danger circle"
+                                         style="font-size: 18px; margin: 20px auto; width: 60%;">حذف
+                                        <div class="popuptext" id="myPopup{{ product.id }}">
+                                            مطمئن هستید؟
+                                            <button type="submit" onclick="myDelete({{ product.id }})"
+                                                    class="btn btn-danger circle" style="font-size: 18px;">بله
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+
+{% block script %}
+<script>
+function myFunction(id) {
+    var popup = document.getElementById("myPopup"+id);
+    popup.classList.toggle("show");
+}
+function myDelete(i) {
+    $("#id_category_id").val(i);
+    $("#product").val(i);
+    console.log($("#id_category_id").val());
+}
+
+
+</script>
+{% endblock %}
