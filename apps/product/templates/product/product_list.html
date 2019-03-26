@@ -66,7 +66,7 @@
                                 <img class="img-news" src="{{ product.image.url }}" alt=""
                                      style="width: auto; height: 100%; max-width: 100%;">
                             </div>
-                            <a href="#" class="text-info"
+                            <a href="{% url 'product:product_details' product.id %}" class="text-info"
                                style="font-size: 20px; text-align: center; display: block;">
                                 {{ product.name }}</a>
                         </div>

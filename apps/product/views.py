@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, FormView
+from django.views.generic import CreateView, ListView, FormView, DetailView
 
 from apps.product.forms import *
 from apps.product.models import *
@@ -110,3 +110,14 @@ class ProductSearchResult(ListView, FormView):
         keyword = form.cleaned_data['product']
         self.success_url = reverse_lazy('product:product_search_result', kwargs={'keyword': keyword})
         return super(ProductSearchResult, self).form_valid(form)
+
+
+class ProductDetails(DetailView):
+    model = Product
+    template_name = 'product/product_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        context['product_categories'] = Category.objects.all()
+        return context
