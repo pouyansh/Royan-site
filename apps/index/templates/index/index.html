@@ -68,7 +68,7 @@
                 <div class="interior_text" style="margin-right: 100px;">
                     <h4>{{ product1.name }}</h4>
                     <p>{{ product1.description }}</p>
-                    <a class="main_btn" href="#">جزئیات محصول</a>
+                    <a class="main_btn" href="{% url 'product:product_details' product1.id %}">جزئیات محصول</a>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
                 <div class="interior_text" style="margin-left: 100px;">
                     <h4>{{ product2.name }}</h4>
                     <p>{{ product2.description }}</p>
-                    <a class="main_btn" href="#">جزئیات محصول</a>
+                    <a class="main_btn" href="{% url 'product:product_details' product2.id %}">جزئیات محصول</a>
                 </div>
             </div>
             <div class="col-lg-6"  style="text-align: center;">
