@@ -1,5 +1,4 @@
-from django.db.models import Q
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, FormView, DetailView
 
@@ -116,6 +115,11 @@ class ProductSearchResult(ListView, FormView):
 class ProductDetails(DetailView):
     model = Product
     template_name = 'product/product_details.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Product.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

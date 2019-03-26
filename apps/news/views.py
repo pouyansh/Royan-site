@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, FormView
 
@@ -42,6 +43,11 @@ class ShowNewsDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
         return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if not News.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ShowNewsList(ListView):
