@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'django_jalali',
     'apps.registration',
     'apps.index',
     'apps.news',
@@ -100,7 +99,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'backend_settings.wsgi.application'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

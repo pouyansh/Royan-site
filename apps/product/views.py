@@ -58,7 +58,6 @@ class CreateProduct(CreateView):
         category = get_object_or_404(Category, pk=self.kwargs['pk'])
         context['category'] = category
         kwargs['category'] = category
-        print(category.name)
         context['product_categories'] = Category.objects.all()
         return context
 
@@ -124,8 +123,10 @@ class ProductListAdmin(FormView):
         deleted = form.cleaned_data['product_id']
         if str(deleted) != '-1':
             Product.objects.filter(id=deleted).delete()
+            print('product_list_admin')
             self.success_url = reverse_lazy('product:product_list_admin', kwargs={'category': '0'})
         else:
+            print('product_search_result_admin')
             self.success_url = reverse_lazy('product:product_search_result_admin', kwargs={'keyword': keyword})
         return super(ProductListAdmin, self).form_valid(form)
 

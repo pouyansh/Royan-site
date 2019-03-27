@@ -1,0 +1,265 @@
+@font-face {
+    font-family:'FarsiFont';
+    src:url('../fonts/BNazanin.woff');
+    font-style:normal;
+    font-weight:normal;
+}
+
+h1, h2, h3, h4, h5, p, a {
+    font-family: FarsiFont;
+}
+
+.ordered-list-alpha {
+    margin: 0;
+    padding: 0;
+}
+
+.rotate {
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+    font-size: 20px;
+    line-height: 60px;
+    font-family: FarsiFont;
+    transition: 2s;
+    color: #eeeeee;
+}
+
+.my_chat {
+    position: fixed;
+    margin: 450px auto;
+    left: 10px;
+    width: 50px;
+    height: 50px;
+    background: #B37DC0;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 2s;
+    color: #eeeeee;
+    border-radius: 50%;
+}
+
+.my_chat:hover {
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -ms-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+    transition: transform 1s;
+    color: #eeeeee;
+}
+
+.my_chat:hover .rotate{
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition: 1s;
+    color: #eeeeee;
+}
+
+a:not([href]):not([tabindex]) {
+    color: #eeeeee;
+    max-width: 30%;
+}
+
+.fa-comment {
+    color: #666666;
+}
+.fa-comment:hover {
+    color: #bbbbbb;
+}
+
+input[type=number] {
+    -webkit-appearance: none;
+    -moz-appearance:textfield;
+    appearance: none;
+}
+
+a .footer_helpnote {
+    border-radius: 10px;
+    background: #eeeeee;
+    position: absolute;
+    top: -20px;
+    display: inline-block;
+    color: #444444;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s;
+}
+
+a:hover .footer_helpnote {
+    visibility: visible;
+    opacity: 1;
+    transition: 1s;
+}
+
+.submit_service_excel {
+    margin: 20px auto;
+    margin-left: 10%;
+    width: 30%;
+    display: inline-block;
+    float: left;
+    border-radius: 5px;
+    padding: 10px 0;
+    background: rgb(143,109,252);
+    text-align: center;
+    color: #eeeeee;
+    font-size: 20px;
+}
+
+.submit_service_excel:hover {
+    color: rgb(143,109,252);
+    background: #eeeeee;
+}
+
+.submit_service_register_parts {
+    display: block;
+    border-radius: 5px;
+    border: solid 1px #777777;
+    padding: 20px;
+    margin: 30px;
+    transition: 2s;
+}
+
+#table {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin: 20px 0;
+    transition: 1s;
+    font-family: "Roboto", sans-serif;
+}
+
+.fade {
+    display: none;
+}
+
+.fade.active {
+    display: inherit;
+}
+
+.li-header {
+    display: inline-block;
+    float: right;
+    width: 50%;
+    text-align: center;
+}
+
+.li-body {
+    font-weight: bold;
+    display: inline-block;
+    float: right;
+    width: 50%;
+    text-align: center;
+}
+
+.feature_item {
+    display: flow-root;
+    margin-bottom: 30px;
+}
+
+.banner_index{
+    width: 100%;
+    height: auto;
+    display: block;
+    padding: 0;
+    transform: scaleX(-1);
+}
+
+@media (max-width: 991px) {
+    .my_chat {
+        visibility: hidden:
+        display: none;
+    }
+
+    .banner_index {
+        background: url('../img/banner2.jpg');
+        width: 100vw;
+        height: 100vh;
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-position:center;
+        -webkit-background-size:contain;
+        -moz-background-size:cover;
+        -o-background-size:cover;
+    }
+}
+
+.img-news {
+    width: 100%;
+    height: auto;
+}
+
+a.details-link {
+    color: #222222;
+}
+
+a.details-link:hover {
+    color: rgb(143,109,252);
+}
+
+.footer-link {
+    color: #aaaaaa;
+    display: block;
+}
+
+.footer-link:hover {
+    color: rgb(143,109,252);
+}
+
+.login_body {
+    background-image: url('../img/DNA3.png');
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+}
+
+.bg-text {
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  color: white;
+  font-weight: bold;
+  border: 3px solid #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 40%;
+  padding: 20px;
+  text-align: center;
+}
+
+.btn_admin {
+    min-width: 100px;
+    margin: 0 5px;
+    font-size: 18px;
+}
+
+.container_admin {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    margin-right: 10px;
+}
+
+.title_admin {
+    display: block;
+    text-align: center;
+}
+
