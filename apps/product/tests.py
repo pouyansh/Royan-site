@@ -93,6 +93,7 @@ class Test(TestCase):
 
     # check if delete product works fine
     def test_delete_product(self):
+        self.client.post(reverse('registration:login'), data={'username': 'admin', 'password': 'admin1234'})
         products = Product.objects.all()
         product0 = products[len(products) - 5]
         product1 = products[len(products) - 4]
@@ -100,22 +101,19 @@ class Test(TestCase):
         product3 = products[len(products) - 2]
         product4 = products[len(products) - 1]
 
-        response = self.client.post(reverse('product:product_list_admin', kwargs={'category': 0}),
-                                    data={'product': 'prod', 'product_id': 1})
-        self.assertTrue(str(response.url).endswith('products_admin/0/'), True)
-        response = self.client.get(reverse('product:product_list_admin', kwargs={'category': '0'}))
-        products = response.context['products']
+        self.client.post(reverse('product:product_list_admin', kwargs={'category': 0}),
+                         data={'product': 'prod', 'product_id': product0.id})
+        products = Product.objects.all()
+        print(products, product0.id)
         self.assertEqual(False, product0 in products)
         self.assertEqual(True, product1 in products)
         self.assertEqual(True, product2 in products)
         self.assertEqual(True, product3 in products)
         self.assertEqual(True, product4 in products)
 
-        response = self.client.post(reverse('product:product_list_admin', kwargs={'category': 0}),
-                                    data={'product': 'prod', 'product_id': 5})
-        self.assertTrue(str(response.url).endswith('products_admin/0/'), True)
-        response = self.client.get(reverse('product:product_list_admin', kwargs={'category': '0'}))
-        products = response.context['products']
+        self.client.post(reverse('product:product_list_admin', kwargs={'category': 0}),
+                         data={'product': 'prod', 'product_id': product4.id})
+        products = Product.objects.all()
         self.assertEqual(False, product0 in products)
         self.assertEqual(True, product1 in products)
         self.assertEqual(True, product2 in products)

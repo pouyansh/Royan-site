@@ -1,0 +1,20 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl">
+    <div class="container" style="min-height: 300px;">
+        <h3 style="width: 100%; text-align: right; margin: 30px 0 10px 0;">لطفا یکی از دسته‌بندی‌های زیر را انتخاب کنید.</h3>
+        <div class="row">
+            {% for category in object_list %}
+            <div class="col-lg-12" style="text-align: right; border-bottom: 1px solid #dddddd;">
+                <a href="{% url 'product:add_product' category.id %}" class="btn btn-info circle"
+                   style="margin: 10px; min-width: 250px; font-size: 18px; line-height: 100%;
+                   display: inline-block; height: 30px; line-height: 30px;">{{category.name}}</a>
+                <h5 style="display: inline-block;">{{category.description}}</h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

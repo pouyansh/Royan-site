@@ -9,6 +9,7 @@ urlpatterns = [
     path('category_list_admin/', staff_member_required(ShowCategoryListAdmin.as_view()),
          name='show_categories_list_admin'),
     url('update_category/(?P<pk>[0-9]+)/$', staff_member_required(UpdateCategory.as_view()), name='update_category'),
+    path('choose_category/', staff_member_required(ChooseCategory.as_view()), name='choose_category'),
     url('add_product/(?P<pk>[0-9]+)/$', staff_member_required(CreateProduct.as_view()), name='add_product'),
     url('update_product/(?P<pk>[0-9]+)/$', staff_member_required(UpdateProduct.as_view()), name='update_product'),
     url(r'products/(?P<category>[0-9]+)/', ProductList.as_view(), name='product_list'),

@@ -47,6 +47,17 @@ class UpdateCategory(UpdateView):
         return context
 
 
+class ChooseCategory(ListView):
+    model = Category
+    template_name = 'product/choose_category.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        print(context)
+        return context
+
+
 class CreateProduct(CreateView):
     model = Product
     success_url = reverse_lazy('index:index')
