@@ -58,90 +58,23 @@
                                 <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
                                    role="button"
                                    aria-haspopup="true" aria-expanded="false">Services</a>
-                                <ul class="mega-dropdown-menu dropdown-menu">
-                                    <li class="col-lg-3 col-sm-12">
+                                <ul class="mega-dropdown-menu dropdown-menu" style="display:table;">
+                                    {% for field in service_fields %}
+                                    <li style="display:table-cell;">
                                         <ol class="ordered-list-alpha">
                                             <li class="dropdown-header">
-                                                Next Generation Sequencing
+                                                {{ field.name }}
                                             </li>
+                                            {% for service in services %}
+                                            {% if service.field.id == field.id %}
                                             <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >RNA Sequencing</a></li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding"
-                                                                    href="elements.html">
-                                                nRNA Sequencing
-                                            </a></li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >Whole Exome Sequencing
-                                                (WES)</a></li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >Whole Genome Sequencing
-                                                (WGS)</a></li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >MetaGenome Sequencing</a>
+                                            >{{service.name}}</a>
                                             </li>
+                                            {% endif %}
+                                            {% endfor %}
                                         </ol>
                                     </li>
-                                    <li class="col-lg-3 col-sm-12">
-                                        <ol class="ordered-list-alpha">
-                                            <li class="dropdown-header">Sanger
-                                                Sequencing
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >Purified Templates</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >PCR purification</a></li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >Direct Colony
-                                                Sequencing</a></li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >Standard Sanger
-                                                Sequencing</a></li>
-                                        </ol>
-                                    </li>
-
-                                    <li class="col-lg-2 col-sm-12">
-
-                                        <ol class="ordered-list-alpha">
-                                            <li class="dropdown-header">
-                                                Genetic
-                                                Services
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >Oligo DNA Synthesis</a>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li class="col-lg-2 col-sm-12">
-
-                                        <ol class="ordered-list-alpha">
-                                            <li class="dropdown-header">Gene Synthesis
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >Standard Gene
-                                                Synthesis</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >ssDNA Synthesis</a>
-                                            </li>
-
-                                        </ol>
-                                    </li>
-                                    <li class="col-lg-2 col-sm-12">
-
-                                        <ol class="ordered-list-alpha">
-                                            <li class="dropdown-header">
-                                                Bioinformatics
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >WES Analysis</a>
-                                            </li>
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >WGS Analysis</a>
-                                            </li>
-
-                                        </ol>
-                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">

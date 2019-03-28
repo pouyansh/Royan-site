@@ -4,6 +4,7 @@ from django.views.generic import CreateView, ListView, FormView, DetailView, Upd
 
 from apps.product.forms import *
 from apps.product.models import *
+from apps.service.models import Service, Field
 
 
 class CreateCategory(CreateView):
@@ -54,6 +55,8 @@ class ChooseCategory(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context
 
 
@@ -69,6 +72,8 @@ class CreateProduct(CreateView):
         context['category'] = category
         kwargs['category'] = category
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context
 
     def form_valid(self, form):
@@ -87,6 +92,8 @@ class ProductList(ListView, FormView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductList, self).get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -115,6 +122,8 @@ class ProductListAdmin(FormView):
     def get_context_data(self, **kwargs):
         context = super(ProductListAdmin, self).get_context_data()
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -151,6 +160,8 @@ class ProductSearchResult(ListView, FormView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductSearchResult, self).get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
         products = Product.objects.all()
@@ -177,6 +188,8 @@ class ProductSearchResultAdmin(FormView):
     def get_context_data(self, **kwargs):
         context = super(ProductSearchResultAdmin, self).get_context_data()
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
         products = Product.objects.all()
@@ -218,6 +231,8 @@ class ProductDetails(DetailView):
         else:
             context['related_products'] = []
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context
 
 
@@ -235,4 +250,6 @@ class UpdateProduct(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context

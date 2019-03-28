@@ -5,6 +5,7 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView, F
 from apps.news.forms import *
 from apps.news.models import News
 from apps.product.models import Category
+from apps.service.models import Service, Field
 
 
 class AddNews(CreateView):
@@ -20,6 +21,8 @@ class AddNews(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context
 
 
@@ -32,6 +35,8 @@ class UpdateNews(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context
 
 
@@ -42,6 +47,8 @@ class ShowNewsDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -57,6 +64,8 @@ class ShowNewsList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context
 
 
@@ -74,4 +83,6 @@ class ShowNewsListAdmin(ListView, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context

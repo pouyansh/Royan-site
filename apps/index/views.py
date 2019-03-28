@@ -22,4 +22,6 @@ class Index(TemplateView):
             context['product1'] = None
             context['product2'] = None
         context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
         return context

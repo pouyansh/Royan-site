@@ -12,6 +12,7 @@
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% for field in form %}
+                        {% if field.name != 'field' %}
                             {{ field.label }} {{ field }}
                             <br>
                             {% if field.errors %}
@@ -21,6 +22,7 @@
                                     {% endfor %}
                                 </ul>
                             {% endif %}
+                        {% endif %}
                         {% endfor %}
                         <br>
                         زمینه
