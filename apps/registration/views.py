@@ -1,6 +1,6 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, FormView, CreateView
+from django.views.generic import TemplateView, CreateView
 
 from apps.product.models import Category
 from apps.registration.forms import *
@@ -20,22 +20,6 @@ class Logout(LogoutView):
     model = User
 
 
-class RegisterUser(FormView):
-    form_class = SignUpOrganization
-    template_name = 'registration/register.html'
-    success_url = 'index:index'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        return context
-
-    def form_valid(self, form):
-        user_type = form.cleaned_data['type']
-        print(user_type)
-        return super(RegisterUser, self).form_valid(form)
-
-
 class RegisterPerson(CreateView):
     model = Person
     form_class = SignUpPerson
@@ -46,11 +30,6 @@ class RegisterPerson(CreateView):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
         return context
-
-    def form_valid(self, form):
-        username = form.cleaned_data['username']
-        print(username)
-        return super(RegisterPerson, self).form_valid(form)
 
 
 class RegisterOrganization(CreateView):
@@ -63,8 +42,3 @@ class RegisterOrganization(CreateView):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.all()
         return context
-
-    def form_valid(self, form):
-        username = form.cleaned_data['username']
-        print(username)
-        return super(RegisterOrganization, self).form_valid(form)
