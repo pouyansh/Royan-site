@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 
 from apps.news.models import *
 from apps.product.models import Category, Product
+from apps.service.models import Service, Field
 
 
 class Index(TemplateView):
