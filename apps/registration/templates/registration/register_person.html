@@ -1,0 +1,49 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+                    <h3 class="mb-30 title_color" style=" font-family: FarsiFont;">فرم ثبت نام</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                        <div id="{{field.name}}" class="mt-10" style="display: flex;">
+                            <label style="float: right; display: inline-block; width: 150px;">
+                                {% if field.field.required %}
+                                <div style="color: red; display: inline;">*</div>
+                                {% endif %}
+                                {{field.label}}</label>
+                            <div style="width: 100%;">
+                                {{field}}
+                                {% if field.errors %}
+                                <ul>
+                                    {% for error in field.errors %}
+                                    <li class="text-danger">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <br>
+                        <button type="submit" class="btn btn-success circle">ثبت</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block script %}
+<script>
+    $("input").addClass('single-input');
+    $("input").prop('required',false);
+    $("#id_national_id").prop('type','text');
+    $("#id_national_id").prop('pattern', "[0-9]*");
+</script>
+{% endblock script %}

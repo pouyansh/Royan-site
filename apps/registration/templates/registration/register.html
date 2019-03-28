@@ -30,8 +30,6 @@
                         </div>
                         {% endfor %}
                         <br>
-                        <script src='https://www.google.com/recaptcha/api.js'></script>
-                        <div class="g-recaptcha" data-sitekey="6LdRSRYUAAAAAFCqQ1aZnYfRGJIlAUMX3qkUWlcF"></div>
                         <button type="submit" class="genric-btn purplebtn circle">ثبت</button>
                     </form>
                 </div>
@@ -47,9 +45,9 @@
     $("input").prop('required',false);
     $("#id_national_id").prop('type','text');
     $("#id_national_id").prop('pattern', "[0-9]*");
-    $("#type").css('width', '50%');
-    $("#type").css('margin', '20px auto');
-    $('#type').on('change', function() {
+    $(".current").css('width', '50%');
+    $(".current").css('margin', '20px auto');
+    $('.current').on('change', function() {
         var val = $('.current').first().text();
         console.log($('.current').first().text());
         if (val == 'حقوقی') {

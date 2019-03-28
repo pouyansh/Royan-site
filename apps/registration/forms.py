@@ -1,10 +1,7 @@
 from math import ceil
 
 from django import forms
-from django.core.mail import send_mail
-from django.forms import ModelForm
-from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
-from django.contrib.auth.forms import PasswordChangeForm as DjangoPasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import get_object_or_404
 
 from apps.registration.models import *
@@ -23,7 +20,7 @@ class SignUpForm(UserCreationForm):
     type = forms.ChoiceField(choices={(2, "حقوقی"), (1, "حقیقی")})
 
     def __init__(self, *args, **kwargs):
-        super(UserCreationForm, self).__init__(*args, **kwargs)
+        super(SignUpForm, self).__init__(*args, **kwargs)
         self.fields['email'].label = "ایمیل"
         self.fields['email'].required = True
         self.fields['username'].label = "نام کاربری"
@@ -72,9 +69,7 @@ class SignUpForm(UserCreationForm):
 
     def clean_national_id(self):
         nid = self.cleaned_data['national_id']
-        print(nid)
         customer_type = self.cleaned_data['type']
-        print("customer_type: ", customer_type)
         if str(customer_type) == "1":
             user_exists = get_object_or_404(Person, national_id=nid)
             if user_exists:
@@ -145,6 +140,7 @@ class SignUpForm(UserCreationForm):
             self.instance.org = ""
         print(self.instance)
         print(cleaned_data)
+        return cleaned_data
 
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
@@ -154,6 +150,65 @@ class SignUpForm(UserCreationForm):
         print("user: ", user)
         return user
 
+
+class SignUpPerson(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(SignUpPerson, self).__init__(*args, **kwargs)
+        self.fields['email'].label = "ایمیل"
+        self.fields['email'].required = True
+        self.fields['username'].label = "نام کاربری"
+        self.fields['first_name'].label = "نام"
+        self.fields['first_name'].required = True
+        self.fields['last_name'].label = "نام خانوادگی"
+        self.fields['last_name'].required = True
+        self.fields['password1'].label = "رمز عبور"
+        self.fields['password2'].label = "تکرار رمز عبور"
+        self.fields['national_id'].label = "کد ملی"
+        self.fields['org'].label = "موسسه/آموزشگاه/سازمان"
+        self.fields['education'].label = "تحصیلات"
+        self.fields['phone_number'].label = "تلفن ثابت"
+        self.fields['fax'].label = "فکس"
+        self.fields['fax'].required = False
+        self.fields['address'].label = "آدرس"
+        self.fields['cellphone_number'].label = "تلفن همراه"
+
+    class Meta:
+        model = Person
+        fields = (
+            'first_name', 'last_name', 'national_id', 'education', 'org',
+            'email', 'phone_number', 'cellphone_number', 'fax', 'address',
+            'username', 'password1', 'password2')
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        try:
+            user_exists = Customer.objects.get(username=username)
+        except Customer.DoesNotExist:
+            user_exists = None
+        if user_exists:
+            raise forms.ValidationError("نام کاربری تکراری است.")
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        user_exists = Customer.objects.filter(email=email)
+        if len(user_exists) > 0:
+            raise forms.ValidationError("ایمیل وارد شده تکراری است.")
+        return email
+
+    def clean_national_id(self):
+        nid = self.cleaned_data['national_id']
+        customer_type = self.cleaned_data['type']
+        if str(customer_type) == "1":
+            user_exists = get_object_or_404(Person, national_id=nid)
+            if user_exists:
+                raise forms.ValidationError("کد ملی تکراری است.")
+            if len(str(nid)) != 10:
+                raise forms.ValidationError("کد ملی باید 10 رقمی باشد.")
+            print(nid)
+            return nid
+        else:
+            return 1
 
 class Hash:
     @staticmethod
