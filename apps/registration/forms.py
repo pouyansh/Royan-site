@@ -13,6 +13,7 @@ class SignUpOrganization(UserCreationForm):
         self.fields['username'].label = "نام کاربری"
         self.fields['password1'].label = "رمز عبور"
         self.fields['password2'].label = "تکرار رمز عبور"
+        self.fields['fax'].required = False
 
     class Meta:
         model = Organization
@@ -68,6 +69,7 @@ class SignUpPerson(UserCreationForm):
         self.fields['last_name'].required = True
         self.fields['password1'].label = "رمز عبور"
         self.fields['password2'].label = "تکرار رمز عبور"
+        self.fields['fax'].required = False
 
     class Meta:
         model = Person
@@ -97,42 +99,4 @@ class SignUpPerson(UserCreationForm):
             raise forms.ValidationError("کد ملی تکراری است.")
         if len(str(nid)) != 10:
             raise forms.ValidationError("کد ملی باید 10 رقمی باشد.")
-        print(nid)
         return nid
-
-
-class Hash:
-    @staticmethod
-    def dohash(name):
-        sums = [0 for _ in range(ceil(len(name) / 4))]
-        for j in range(ceil(len(name) / 4)):
-            for i in range(4):
-                if 4 * j + i < len(name):
-                    sums[j] = sums[j] * 256 + ord(name[4 * j + i])
-        res = ''
-        for j in range(ceil(len(name) / 4)):
-            current_sum = sums[j]
-            while current_sum > 25:
-                a = current_sum % 26
-                current_sum = (current_sum - a) / 26
-                res = chr(int(97 + a)) + res
-            res = chr(int(65 + current_sum)) + res
-        return res
-
-    @staticmethod
-    def unhash(hashed):
-        i = 0
-        dehashed = ''
-        while i < len(hashed):
-            sum_result = ord(hashed[i]) - 65
-            i += 1
-            while i < len(hashed) and ord(hashed[i]) >= 97:
-                a = ord(hashed[i]) - 97
-                sum_result = sum_result * 26 + a
-                i += 1
-            while sum_result > 255:
-                a = sum_result % 256
-                sum_result = (sum_result - a) / 256
-                dehashed = chr(int(a)) + dehashed
-            dehashed = chr(int(sum_result)) + dehashed
-        return dehashed

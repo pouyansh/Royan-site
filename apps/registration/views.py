@@ -1,4 +1,5 @@
 from django.contrib.auth.views import LoginView, LogoutView
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
 
@@ -34,6 +35,16 @@ class RegisterPerson(CreateView):
         context['service_fields'] = Field.objects.all()
         return context
 
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        username = form.cleaned_data['username']
+        hashed_data = '127.0.0.1:8000/verify_email/' + Hash.code(username + '#' + email)
+        send_mail('تایید ایمیل',
+                  'بسیار سپاس‌گزاریم که در سایت شرکت رویان توکاژن ثبت نام کردید. ' +
+                  'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
+                  hashed_data, 'tucagenesite@gmail.com', [email])
+        return super(RegisterPerson, self).form_valid(form)
+
 
 class RegisterOrganization(CreateView):
     model = Organization
@@ -47,3 +58,50 @@ class RegisterOrganization(CreateView):
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
         return context
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        username = form.cleaned_data['username']
+        hashed_data = '127.0.0.1:8000/verify_email/' + Hash.code(username + '#' + email)
+        send_mail('تایید ایمیل',
+                  'بسیار سپاس‌گزاریم که در سایت شرکت رویان توکاژن ثبت نام کردید. ' +
+                  'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
+                  hashed_data, 'tucagenesite@gmail.com', [email])
+        return super(RegisterOrganization, self).form_valid(form)
+
+
+class Hash:
+    @staticmethod
+    def code(name):
+        sums = [0 for _ in range(ceil(len(name) / 4))]
+        for j in range(ceil(len(name) / 4)):
+            for i in range(4):
+                if 4 * j + i < len(name):
+                    sums[j] = sums[j] * 256 + ord(name[4 * j + i])
+        result = ''
+        for j in range(ceil(len(name) / 4)):
+            current_sum = sums[j]
+            while current_sum > 25:
+                a = current_sum % 26
+                current_sum = (current_sum - a) / 26
+                result = chr(int(97 + a)) + result
+            result = chr(int(65 + current_sum)) + result
+        return result
+
+    @staticmethod
+    def decode(hashed):
+        i = 0
+        decoded = ''
+        while i < len(hashed):
+            sum_result = ord(hashed[i]) - 65
+            i += 1
+            while i < len(hashed) and ord(hashed[i]) >= 97:
+                a = ord(hashed[i]) - 97
+                sum_result = sum_result * 26 + a
+                i += 1
+            while sum_result > 255:
+                a = sum_result % 256
+                sum_result = (sum_result - a) / 256
+                decoded = chr(int(a)) + decoded
+            decoded = chr(int(sum_result)) + decoded
+        return decoded
