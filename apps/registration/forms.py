@@ -100,3 +100,24 @@ class SignUpPerson(UserCreationForm):
         if len(str(nid)) != 10:
             raise forms.ValidationError("کد ملی باید 10 رقمی باشد.")
         return nid
+
+
+class VerifyEmailForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    email = forms.EmailField()
+
+    def __init__(self, *args, **kwargs):
+        super(VerifyEmailForm, self).__init__(*args, **kwargs)
+        self.fields['email'].label = "ایمیل"
+        self.fields['username'].label = "نام کاربری"
+
+    def clean(self):
+        username = self.cleaned_data['username']
+        email = self.cleaned_data['email']
+        customer = Customer.objects.filter(username=username, email=email)
+        if len(customer) == 0:
+            raise forms.ValidationError("حساب کاربری با این نام کاربری و ایمیل یافت نشد.")
+        return super(VerifyEmailForm, self).clean()
+
+    def raise_error(self):
+        raise forms.ValidationError("نام کاربری وارد شده با لینک منطبق نمی‌باشد.")

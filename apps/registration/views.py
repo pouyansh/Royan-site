@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, FormView
 
 from apps.product.models import Category
 from apps.registration.forms import *
@@ -68,6 +68,30 @@ class RegisterOrganization(CreateView):
                   'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
                   hashed_data, 'tucagenesite@gmail.com', [email])
         return super(RegisterOrganization, self).form_valid(form)
+
+
+class VerifyEmail(FormView):
+    template_name = 'registration/verify_email.html'
+    form_class = VerifyEmailForm
+    success_url = reverse_lazy('index:index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
+        return context
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        email = form.cleaned_data['email']
+        hashed = self.kwargs['keyword']
+        decoded = Hash.decode(hashed)
+        if decoded == username + "#" + email:
+            customer = Customer.objects.get(username=username)
+            customer.email_verified = True
+            customer.save()
+        return super(VerifyEmail, self).form_valid(form)
 
 
 class Hash:
