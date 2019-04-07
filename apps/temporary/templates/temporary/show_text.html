@@ -1,5 +1,4 @@
 {% load static staticfiles %}
-
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -13,11 +12,9 @@
 <body>
 <div class="login_body"></div>
 <div class="bg-text" style="width: 60%;">
-    {% if request.user.organization %}
-    <h2>{{ request.user.organization.post }} عزیز شرکت {{request.user.organization.organization_name}}، شما با موفقیت وارد سایت شدید </h2>
-    {% else %}
-    <h2>{{ request.user.first_name }} {{ request.user.last_name }} عزیز، شما با موفقیت وارد سایت شدید </h2>
-    {% endif %}
+    <h2 class="text-success">{{success_text}}</h2>
+    <h2 class="text-danger">{{danger_text}}</h2>
+    <h2>{{text}}</h2>
     <a class="btn circle btn-dark" href="{% url 'index:index' %}"
             style="font-family: FarsiFont; font-size: 18px; min-width: 80px; margin: 10px;">خانه</a>
 </div>

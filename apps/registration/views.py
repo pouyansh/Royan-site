@@ -26,7 +26,7 @@ class RegisterPerson(CreateView):
     model = Person
     form_class = SignUpPerson
     template_name = 'registration/register_user.html'
-    success_url = reverse_lazy('index:index')
+    success_url = reverse_lazy('registration:registered')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -42,7 +42,7 @@ class RegisterPerson(CreateView):
         send_mail('تایید ایمیل',
                   'بسیار سپاس‌گزاریم که در سایت شرکت رویان توکاژن ثبت نام کردید. ' +
                   'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
-                  hashed_data, 'tucagenesite@gmail.com', [email])
+                  hashed_data + '/', 'tucagenesite@gmail.com', [email])
         return super(RegisterPerson, self).form_valid(form)
 
 
@@ -50,7 +50,7 @@ class RegisterOrganization(CreateView):
     model = Organization
     form_class = SignUpOrganization
     template_name = 'registration/register_user.html'
-    success_url = reverse_lazy('index:index')
+    success_url = reverse_lazy('registration:registered')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,14 +66,27 @@ class RegisterOrganization(CreateView):
         send_mail('تایید ایمیل',
                   'بسیار سپاس‌گزاریم که در سایت شرکت رویان توکاژن ثبت نام کردید. ' +
                   'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
-                  hashed_data, 'tucagenesite@gmail.com', [email])
+                  hashed_data + '/', 'tucagenesite@gmail.com', [email])
         return super(RegisterOrganization, self).form_valid(form)
+
+
+class RegisteredSuccessfully(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
+        context['text'] = "اطلاعات شما با موفقیت ثبت شد و ایمیلی برای شما ارسال شد." + \
+                          " لطفا به آدرس ایمیل خود بروید و برروی لینک ارسال شده کلیک نمایید تا حساب کاربری شما فعال شود"
+        return context
 
 
 class VerifyEmail(FormView):
     template_name = 'registration/verify_email.html'
     form_class = VerifyEmailForm
-    success_url = reverse_lazy('index:index')
+    success_url = reverse_lazy('registration:verified')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -91,7 +104,33 @@ class VerifyEmail(FormView):
             customer = Customer.objects.get(username=username)
             customer.email_verified = True
             customer.save()
+        else:
+            self.success_url = reverse_lazy('registration:not_verified')
         return super(VerifyEmail, self).form_valid(form)
+
+
+class VerifiedSuccessfully(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
+        context['text'] = "حساب کاربری شما با موفقیت فعال شد"
+        return context
+
+
+class VerifiedNotSuccessfully(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
+        context['text'] = "متاسفانه اطلاعات وارد شده با لینک مربوط به تایید همخوانی ندارد"
+        return context
 
 
 class Hash:
