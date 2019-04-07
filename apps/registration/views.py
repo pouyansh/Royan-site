@@ -11,7 +11,7 @@ from apps.service.models import Service, Field
 class Login(LoginView):
     model = User
     template_name = 'registration/login.html'
-    success_url = reverse_lazy('index:index')
+    success_url = reverse_lazy('registration:login_success')
 
 
 class LoginSuccess(TemplateView):
@@ -36,6 +36,9 @@ class RegisterPerson(CreateView):
         return context
 
     def form_valid(self, form):
+        person = form.save(commit=False)
+        person.is_active = False
+        person.save()
         email = form.cleaned_data['email']
         username = form.cleaned_data['username']
         hashed_data = '127.0.0.1:8000/verify_email/' + Hash.code(username + '#' + email)
@@ -60,6 +63,11 @@ class RegisterOrganization(CreateView):
         return context
 
     def form_valid(self, form):
+        organization = form.save(commit=False)
+        organization.first_name = organization.post
+        organization.last_name = organization.organization_name
+        organization.is_active = False
+        organization.save()
         email = form.cleaned_data['email']
         username = form.cleaned_data['username']
         hashed_data = '127.0.0.1:8000/verify_email/' + Hash.code(username + '#' + email)
@@ -102,7 +110,7 @@ class VerifyEmail(FormView):
         decoded = Hash.decode(hashed)
         if decoded == username + "#" + email:
             customer = Customer.objects.get(username=username)
-            customer.email_verified = True
+            customer.is_active = True
             customer.save()
         else:
             self.success_url = reverse_lazy('registration:not_verified')

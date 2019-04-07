@@ -1,8 +1,17 @@
-from math import ceil
-
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from apps.registration.models import *
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=30)
+    password = forms.PasswordInput()
+
+    def clean(self):
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+
+        return super(LoginForm, self).clean()
 
 
 class SignUpOrganization(UserCreationForm):

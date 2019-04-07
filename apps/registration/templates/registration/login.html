@@ -24,6 +24,9 @@
         <h2>ورود به سامانه</h2>
         <form method="post">
             {% csrf_token %}
+            {% if form.errors %}
+                <h4 class="text-warning">حساب کاربری فعالی با این نام کاربری و رمز عبور وجود ندارد</h4>
+            {% endif %}
             <div class="row" dir="rtl" style="margin: 10px; display: flex;">
                 <h4 style="display: inline-block; text-align: center; line-height: 40px;">نام کاربری: </h4>
                 <input class="single-input"
