@@ -1,7 +1,8 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView, CreateView, FormView
+from django.views.generic import TemplateView, CreateView, FormView, UpdateView
+from math import ceil
 
 from apps.product.models import Category
 from apps.registration.forms import *
@@ -33,6 +34,7 @@ class RegisterPerson(CreateView):
         context['product_categories'] = Category.objects.all()
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
+        context['title'] = "فرم ثبت نام"
         return context
 
     def form_valid(self, form):
@@ -60,6 +62,7 @@ class RegisterOrganization(CreateView):
         context['product_categories'] = Category.objects.all()
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
+        context['title'] = "فرم ثبت نام"
         return context
 
     def form_valid(self, form):
@@ -138,6 +141,41 @@ class VerifiedNotSuccessfully(TemplateView):
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
         context['text'] = "متاسفانه اطلاعات وارد شده با لینک مربوط به تایید همخوانی ندارد"
+        return context
+
+
+class UpdateCustomer(UpdateView):
+    model = Customer
+    form_class = UpdateOrganizationForm
+    template_name = 'registration/register_user.html'
+    success_url = reverse_lazy('registration:updated')
+
+    def get_object(self, queryset=None):
+        organization = Organization.objects.filter(username=self.request.user.username)
+        if len(organization) > 0:
+            self.form_class = UpdateOrganizationForm
+            return organization[0]
+        self.form_class = SignUpPerson
+        person = Person.objects.filter(username=self.request.user.username)
+        return person[0]
+
+    def get_context_data(self, **kwargs):
+        context = super(UpdateCustomer, self).get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
+        return context
+
+
+class UpdatedSuccessfully(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
+        context['text'] = "اطلاعات شما با موفقیت ثبت شد و ایمیلی برای شما ارسال شد."
         return context
 
 

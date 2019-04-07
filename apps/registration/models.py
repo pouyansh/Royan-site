@@ -8,12 +8,18 @@ class Customer(User):
     address = models.CharField(max_length=500, verbose_name='آدرس')
     email_verified = models.BooleanField(default=False, verbose_name="ایمیل تایید شده است")
 
+    def get_full_name(self):
+        return self.first_name + " " + self.last_name
+
 
 class Organization(Customer):
     organization_name = models.CharField(max_length=100, verbose_name="نام شرکت")
     post = models.CharField(max_length=100, verbose_name="سمت")
     submit_id = models.IntegerField(verbose_name="شماره ثبت")
     economic_id = models.IntegerField(verbose_name="شماره اقتصادی")
+
+    def get_full_name(self):
+        return str(self.post) + " " + str(self.organization_name)
 
 
 class Person(Customer):

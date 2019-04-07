@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'verify_email/(?P<keyword>\w+)/', VerifyEmail.as_view(), name='verify_email'),
     path('verified/', VerifiedSuccessfully.as_view(), name='verified'),
     path('verify_error/', VerifiedNotSuccessfully.as_view(), name='not_verified'),
+    path('update_customer/', UpdateCustomer.as_view(), name='customer-update'),
+    path('updated/', UpdatedSuccessfully.as_view(), name='updated'),
 ]

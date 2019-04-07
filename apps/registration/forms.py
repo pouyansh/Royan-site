@@ -3,17 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from apps.registration.models import *
 
 
-class LoginForm(forms.Form):
-    username = forms.CharField(max_length=30)
-    password = forms.PasswordInput()
-
-    def clean(self):
-        username = self.cleaned_data['username']
-        password = self.cleaned_data['password']
-
-        return super(LoginForm, self).clean()
-
-
 class SignUpOrganization(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(SignUpOrganization, self).__init__(*args, **kwargs)
@@ -130,3 +119,52 @@ class VerifyEmailForm(forms.Form):
 
     def raise_error(self):
         raise forms.ValidationError("نام کاربری وارد شده با لینک منطبق نمی‌باشد.")
+
+
+class UpdateOrganizationForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UpdateOrganizationForm, self).__init__(*args, **kwargs)
+        self.fields['email'].label = "ایمیل"
+        self.fields['email'].required = True
+        self.fields['fax'].required = False
+
+    class Meta:
+        model = Organization
+        fields = (
+            'organization_name', 'post', 'submit_id', 'economic_id', 'email', 'phone_number', 'fax', 'address')
+
+    def clean_email(self):
+        organization = Organization.objects.get(email=list(self.initial.values())[0])
+        email = self.cleaned_data['email']
+        if organization.email != email:
+            user_exists = Customer.objects.filter(email=email)
+            if len(user_exists) > 0:
+                raise forms.ValidationError("ایمیل وارد شده تکراری است.")
+        return email
+
+    def clean_organization_name(self):
+        organization = Organization.objects.get(email=list(self.initial.values())[0])
+        org_name = self.cleaned_data['organization_name']
+        if organization.organization_name != org_name:
+            user_exists = Organization.objects.filter(organization_name=org_name)
+            if len(user_exists) > 0:
+                raise forms.ValidationError("نام شرکت تکراری است.")
+        return org_name
+
+    def clean_economic_id(self):
+        organization = Organization.objects.get(email=list(self.initial.values())[0])
+        eid = self.cleaned_data['economic_id']
+        if organization.economic_id != eid:
+            user_exists = Organization.objects.filter(economic_id=eid)
+            if user_exists:
+                raise forms.ValidationError("شماره اقتصادی تکراری است.")
+        return eid
+
+    def clean_submit_id(self):
+        organization = Organization.objects.get(email=list(self.initial.values())[0])
+        sid = self.cleaned_data['submit_id']
+        if organization.submit_id != sid:
+            user_exists = Organization.objects.filter(submit_id=sid)
+            if user_exists:
+                raise forms.ValidationError("شماره ثبت تکراری است.")
+        return sid
