@@ -20,3 +20,7 @@ class CreateServiceForm(forms.ModelForm):
     class Meta:
         model = Service
         fields = ['name', 'description']
+
+
+class ServiceListAdminForm(forms.Form):
+    service_id = forms.CharField(max_length=10)

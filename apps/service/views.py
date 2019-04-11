@@ -151,3 +151,34 @@ class ServiceDetails(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         return context
+
+
+class ShowServiceListAdmin(ListView, FormView):
+    model = Service
+    template_name = 'service/show_service_list_admin.html'
+
+    success_url = reverse_lazy('service:delete_service_successful')
+    form_class = ServiceListAdminForm
+
+    def form_valid(self, form):
+        Service.objects.filter(id=form.cleaned_data['service_id']).delete()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        return context
+
+
+class DeleteServiceSuccessful(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['text'] = "سرویس مدنظر شما با موفقیت پاک شد"
+        return context
