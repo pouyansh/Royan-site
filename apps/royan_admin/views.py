@@ -9,9 +9,9 @@ class AdminPanel(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AdminPanel, self).get_context_data()
-        context['product_categories'] = Category.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
         context['admin'] = self.request.user
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 

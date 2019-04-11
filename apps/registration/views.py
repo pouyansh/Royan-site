@@ -31,9 +31,9 @@ class RegisterPerson(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['title'] = "فرم ثبت نام"
         return context
 
@@ -59,9 +59,9 @@ class RegisterOrganization(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['title'] = "فرم ثبت نام"
         return context
 
@@ -86,9 +86,9 @@ class RegisteredSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['text'] = "اطلاعات شما با موفقیت ثبت شد و ایمیلی برای شما ارسال شد." + \
                           " لطفا به آدرس ایمیل خود بروید و برروی لینک ارسال شده کلیک نمایید تا حساب کاربری شما فعال شود"
         return context
@@ -101,9 +101,9 @@ class VerifyEmail(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -125,9 +125,9 @@ class VerifiedSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['text'] = "حساب کاربری شما با موفقیت فعال شد"
         return context
 
@@ -137,9 +137,9 @@ class VerifiedNotSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['text'] = "متاسفانه اطلاعات وارد شده با لینک مربوط به تایید همخوانی ندارد"
         return context
 
@@ -161,9 +161,9 @@ class UpdateCustomer(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(UpdateCustomer, self).get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -172,9 +172,9 @@ class UpdatedSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['text'] = "اطلاعات شما با موفقیت ثبت شد و ایمیلی برای شما ارسال شد."
         return context
 

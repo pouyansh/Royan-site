@@ -22,7 +22,7 @@ class Index(TemplateView):
         if len(products) == 0:
             context['product1'] = None
             context['product2'] = None
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context

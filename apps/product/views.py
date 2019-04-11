@@ -15,9 +15,9 @@ class CreateCategory(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -34,9 +34,9 @@ class ShowCategoryListAdmin(ListView, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -48,9 +48,9 @@ class UpdateCategory(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -60,9 +60,9 @@ class ChooseCategory(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -77,9 +77,9 @@ class CreateProduct(CreateView):
         category = get_object_or_404(Category, pk=self.kwargs['pk'])
         context['category'] = category
         kwargs['category'] = category
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -97,9 +97,9 @@ class ProductList(ListView, FormView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductList, self).get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -127,9 +127,9 @@ class ProductListAdmin(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductListAdmin, self).get_context_data()
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -165,9 +165,9 @@ class ProductSearchResult(ListView, FormView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductSearchResult, self).get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
         products = Product.objects.all()
@@ -193,9 +193,9 @@ class ProductSearchResultAdmin(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductSearchResultAdmin, self).get_context_data()
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
         products = Product.objects.all()
@@ -236,9 +236,9 @@ class ProductDetails(DetailView):
             context['related_products'] = products
         else:
             context['related_products'] = []
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -255,7 +255,7 @@ class UpdateProduct(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
