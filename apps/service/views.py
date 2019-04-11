@@ -1,5 +1,6 @@
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, FormView, UpdateView, TemplateView
+from django.views.generic import CreateView, ListView, FormView, UpdateView, TemplateView, DetailView
 
 from apps.product.models import Category
 from apps.service.forms import *
@@ -77,6 +78,31 @@ class UpdateField(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all()
+        context['services'] = Service.objects.all()
+        context['service_fields'] = Field.objects.all()
+        return context
+
+
+class ProductDetails(DetailView):
+    model = Field
+    template_name = 'service/field_details.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Field.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product = Field.objects.filter(id=self.kwargs['pk'])
+        if product:
+            products = Field.objects.filter(category=product[0].category).exclude(name=product[0].name)
+            if len(products) > 4:
+                products = products[:4]
+            context['related_products'] = products
+        else:
+            context['related_products'] = []
         context['product_categories'] = Category.objects.all()
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
