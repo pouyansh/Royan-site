@@ -5,6 +5,7 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from apps.product.forms import ProductListAdminForm
 from apps.product.models import *
 
 
@@ -68,11 +69,11 @@ class Test(TestCase):
         product2 = products[len(products) - 3]
         product3 = products[len(products) - 2]
         product4 = products[len(products) - 1]
-        response = self.client.post(reverse('product:product_list_admin', kwargs={'category': 0}),
-                                    data={'product': 'prod'})
-        print(response.url)
+        form = ProductListAdminForm({'product': 'prod', 'product_id': -1})
+        self.assertEqual(form.is_valid(), True)
+        Client().post(reverse('product:product_list_admin', kwargs={'category': 0}),
+                      data={'product': 'prod', 'product_id': -1}, follow=True)
         print(Product.objects.all())
-        self.assertTrue(str(response.url).endswith('search_products_result_admin/prod/'), True)
         response = self.client.get(reverse('product:product_search_result_admin', kwargs={'keyword': 'prod'}))
         products = response.context['products']
         self.assertEqual(True, product0 in products)
@@ -94,7 +95,6 @@ class Test(TestCase):
 
     # check if delete product works fine
     def test_delete_product(self):
-        self.client.post(reverse('registration:login'), data={'username': 'admin', 'password': 'admin1234'})
         products = Product.objects.all().order_by('id')
         product0 = products[len(products) - 5]
         product1 = products[len(products) - 4]
@@ -104,9 +104,9 @@ class Test(TestCase):
 
         c = Client()
         response = c.post("/products_admin/0/",
-                          data={'product': 'prod', 'product_id': product0.id}, follow=True)
-        print(response)
-        products = Product.objects.all().order_by('id')
+                          data={'product': 'prod', 'product_id': product0.id})
+        print(response['location'])
+        products = Product.objects.filter(is_active=True).order_by('id')
         print(products, product0.id)
         self.assertEqual(False, product0 in products)
         self.assertEqual(True, product1 in products)
