@@ -44,9 +44,9 @@
                 {% for service in services %}
                 <div class="row" style="padding: 20px; margin: auto;border-bottom: 1px solid #aaaaaa; width: 80%;">
                     <div class="col-lg-9">
-                        <h3 class="text-info"
-                           style="font-size: 20px; font-family: FarsiFont">{{ service.name }}</h3>
-                        <div style="font-family: FarsiFont;">{{ service.description }}</div>
+                        <a href="{% url 'service:service_details' service.id %}" class="text-info"
+                           style="font-size: 20px; font-family: FarsiFont">{{ service.name }}</a>
+                        <h5>field: {{service.field.name}}</h5>
                     </div>
                     <div class="col-lg-3">
                         <a href="{% url 'service:update_service' service.id %}" class="btn btn-info circle"
@@ -75,7 +75,7 @@ function myFunction(id) {
     popup.classList.toggle("show");
 }
 function myDelete(i) {
-    $("#id_field_id").val(i);
+    $("#id_service_id").val(i);
 }
 
 </script>

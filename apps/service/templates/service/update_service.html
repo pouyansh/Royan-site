@@ -1,0 +1,41 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 18px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+                    <h3 class="mb-30 title_color" style=" font-family: FarsiFont;">ویرایش سرویس</h3>
+
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            {{ field.label }} {{ field }}
+                            <br>
+                            {% if field.errors %}
+                                <ul>
+                                    {% for error in field.errors %}
+                                        <li class="text-danger">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                        <br>
+                        <button type="submit" class="btn btn-success circle"
+                                style="min-width: 60px; float: left; font-size: 18px;">ثبت</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block script %}
+<script>
+    $("input").addClass('single-input');
+    $("textarea").addClass('single-input');
+</script>
+{% endblock script %}

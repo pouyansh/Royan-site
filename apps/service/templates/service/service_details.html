@@ -6,7 +6,8 @@
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <div>
-                <h3 style="color: #444444; margin-bottom: 20px;">نام سرویس: {{ object.name }}</h3>
+                <h3 style="color: #444444; margin-bottom: 20px;">نام سرویس: <div style="display: inline;" dir="ltr">{{ object.name }}</div></h3>
+                <h4 style="color: #444444; margin-bottom: 20px;"> زمینه: {{object.field.name}}</h4>
                 <h4 style="color: #444444;">توضیجات: {{ object.description }}</h4>
             </div>
 
@@ -17,7 +18,7 @@
                     {% for service in related_services %}
                     <div class="col-lg-3 col-md-6">
                         <div class="feature_item" style="height: 150px;" dir="ltr">
-                            <a href="{% url 'service:field_details' service.id %}" class="text-info"
+                            <a href="{% url 'service:service_details' service.id %}" class="text-info"
                                style="font-size: 20px; text-align: center; display: block;">
                                 {{ service.name }}</a>
                         </div>

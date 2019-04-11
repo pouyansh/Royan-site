@@ -44,8 +44,8 @@
                 {% for field in fields %}
                 <div class="row" style="padding: 20px; margin: auto;border-bottom: 1px solid #aaaaaa; width: 80%;">
                     <div class="col-lg-9">
-                        <h3 class="text-info"
-                           style="font-size: 20px; font-family: FarsiFont">{{ field.name }}</h3>
+                        <a href="{% url 'service:field_details' field.id %}" class="text-info"
+                           style="font-size: 20px; font-family: FarsiFont">{{ field.name }}</a>
                         <div style="font-family: FarsiFont;">{{ field.description }}</div>
                     </div>
                     <div class="col-lg-3">

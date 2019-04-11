@@ -182,3 +182,17 @@ class DeleteServiceSuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['text'] = "سرویس مدنظر شما با موفقیت پاک شد"
         return context
+
+
+class UpdateService(UpdateView):
+    model = Service
+    template_name = 'service/update_service.html'
+    success_url = reverse_lazy('service:show_service_list_admin')
+    form_class = UpdateServiceForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        return context
