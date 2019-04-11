@@ -10,6 +10,10 @@ class CreateFieldForm(forms.ModelForm):
         fields = ['name', 'description']
 
 
+class FieldListAdminForm(forms.Form):
+    field_id = forms.CharField(max_length=10)
+
+
 class CreateServiceForm(forms.ModelForm):
     field = forms.CharField(max_length=10)
 
