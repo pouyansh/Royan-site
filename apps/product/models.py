@@ -4,6 +4,7 @@ from django.db import models
 class Category(models.Model):
     name = models.CharField(verbose_name="نام", max_length=100)
     description = models.TextField(verbose_name="توضیحات", max_length=2000)
+    is_active = models.BooleanField(default=True)
 
 
 class Product(models.Model):
@@ -14,3 +15,4 @@ class Product(models.Model):
     count = models.IntegerField(verbose_name="تعداد", default=0)
     image = models.ImageField(default='')
     category = models.ForeignKey(Category, default=None, on_delete="Restrict")
+    is_active = models.BooleanField(default=True)

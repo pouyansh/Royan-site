@@ -1,6 +1,7 @@
 import pdb
+from urllib.parse import urlencode
 
-from django.test import TestCase
+from django.test import TestCase, Client
 from django.urls import reverse
 from django.core.files.uploadedfile import SimpleUploadedFile
 
@@ -94,16 +95,18 @@ class Test(TestCase):
     # check if delete product works fine
     def test_delete_product(self):
         self.client.post(reverse('registration:login'), data={'username': 'admin', 'password': 'admin1234'})
-        products = Product.objects.all()
+        products = Product.objects.all().order_by('id')
         product0 = products[len(products) - 5]
         product1 = products[len(products) - 4]
         product2 = products[len(products) - 3]
         product3 = products[len(products) - 2]
         product4 = products[len(products) - 1]
 
-        self.client.post(reverse('product:product_list_admin', kwargs={'category': 0}),
-                         data={'product': 'prod', 'product_id': product0.id})
-        products = Product.objects.all()
+        c = Client()
+        response = c.post("/products_admin/0/",
+                          data={'product': 'prod', 'product_id': product0.id}, follow=True)
+        print(response)
+        products = Product.objects.all().order_by('id')
         print(products, product0.id)
         self.assertEqual(False, product0 in products)
         self.assertEqual(True, product1 in products)
