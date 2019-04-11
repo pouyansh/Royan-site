@@ -44,8 +44,8 @@
                 {% for field in fields %}
                 <div class="row" style="padding: 20px; margin: auto;border-bottom: 1px solid #aaaaaa; width: 80%;">
                     <div class="col-lg-9">
-                        <a href="" class="text-info"
-                           style="font-size: 20px; font-family: FarsiFont">{{ field.name }}</a>
+                        <h3 class="text-info"
+                           style="font-size: 20px; font-family: FarsiFont">{{ field.name }}</h3>
                         <div style="font-family: FarsiFont;">{{ field.description }}</div>
                     </div>
                     <div class="col-lg-3">
@@ -75,7 +75,7 @@ function myFunction(id) {
     popup.classList.toggle("show");
 }
 function myDelete(i) {
-    $("#id_category_id").val(i);
+    $("#id_field_id").val(i);
 }
 
 </script>

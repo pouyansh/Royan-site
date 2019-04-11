@@ -29,9 +29,9 @@ class ShowFieldListAdmin(ListView, FormView):
 
     def form_valid(self, form):
         field = Field.objects.filter(id=form.cleaned_data['field_id'])
-        services = Service.objects.filter(field=field)
-        if len(services) > 0:
-            self.success_url = reverse_lazy('service:delete_field_not_successful')
+        services = Service.objects.filter(field=field[0])
+        if services:
+            self.success_url = reverse_lazy('service:delete_field_unsuccessful')
         else:
             Field.objects.filter(id=form.cleaned_data['field_id']).delete()
         return super().form_valid(form)
@@ -53,11 +53,11 @@ class DeleteFieldSuccessful(TemplateView):
         context['product_categories'] = Category.objects.all()
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
-        context['text'] = "زمینه مدنظر شما با موفقیت پاک شد."
+        context['text'] = "زمینه مدنظر شما با موفقیت پاک شد"
         return context
 
 
-class DeleteFieldNotSuccessful(TemplateView):
+class DeleteFieldUnsuccessful(TemplateView):
     template_name = 'temporary/show_text.html'
 
     def get_context_data(self, **kwargs):
@@ -65,7 +65,7 @@ class DeleteFieldNotSuccessful(TemplateView):
         context['product_categories'] = Category.objects.all()
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
-        context['text'] = "متاسفانه سرویسی در این فیلد وجود دارد و امکان حذف این فیلد وجود ندارد."
+        context['text'] = "متاسفانه سرویسی در این فیلد وجود دارد و امکان حذف این فیلد وجود ندارد"
         return context
 
 

@@ -27,11 +27,9 @@
         <div class="row" style="margin: 30px 0; text-align: center;">
             <div class="col-lg-3">
                 <h3>Services</h3>
-                <a href="#" class="footer-link">Next Generation Sequencing</a>
-                <a href="#" class="footer-link">Sanger Sequencing</a>
-                <a href="#" class="footer-link">Genetic Services</a>
-                <a href="#" class="footer-link">Gene Synthesis</a>
-                <a href="#" class="footer-link">Bioinformatics</a>
+                {% for field in service_fields %}
+                <a href="#" class="footer-link">{{field.name}}</a>
+                {% endfor %}
             </div>
             <div class="col-lg-3">
                 <h3>Products</h3>
