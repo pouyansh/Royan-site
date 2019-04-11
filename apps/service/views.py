@@ -15,9 +15,9 @@ class CreateField(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -39,10 +39,10 @@ class ShowFieldListAdmin(ListView, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
-        context['fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -51,9 +51,9 @@ class DeleteFieldSuccessful(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['text'] = "زمینه مدنظر شما با موفقیت پاک شد"
         return context
 
@@ -63,9 +63,9 @@ class DeleteFieldUnsuccessful(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         context['text'] = "متاسفانه سرویسی در این فیلد وجود دارد و امکان حذف این فیلد وجود ندارد"
         return context
 
@@ -78,9 +78,9 @@ class UpdateField(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -103,9 +103,9 @@ class FieldDetails(DetailView):
             context['related_services'] = services
         else:
             context['related_services'] = []
-        context['product_categories'] = Category.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
 
@@ -117,12 +117,37 @@ class CreateService(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['product_categories'] = Category.objects.all()
-        context['fields'] = Field.objects.all()
-        context['services'] = Service.objects.all()
-        context['service_fields'] = Field.objects.all()
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['fields'] = Field.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
         form.instance.field = Field.objects.get(id=form.cleaned_data['field'])
         return super(CreateService, self).form_valid(form)
+
+
+class ServiceDetails(DetailView):
+    model = Service
+    template_name = 'service/service_details.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Service.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        service = Service.objects.filter(id=self.kwargs['pk'])
+        if service:
+            services = Service.objects.filter(field=service[0].field).exclude(name=service[0].name)
+            if len(services) > 4:
+                services = services[:4]
+            context['related_services'] = services
+        else:
+            context['related_services'] = []
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        return context

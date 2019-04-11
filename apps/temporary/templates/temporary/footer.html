@@ -28,7 +28,7 @@
             <div class="col-lg-3">
                 <h3>Services</h3>
                 {% for field in service_fields %}
-                <a href="#" class="footer-link">{{field.name}}</a>
+                <a href="{% url 'service:field_details' field.id %}" class="footer-link">{{field.name}}</a>
                 {% endfor %}
             </div>
             <div class="col-lg-3">

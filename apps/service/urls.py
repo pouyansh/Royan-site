@@ -14,4 +14,5 @@ urlpatterns = [
          name='delete_field_successful'),
     url('field_details/(?P<pk>[0-9]+)/', FieldDetails.as_view(), name='field_details'),
     path('create_service/', staff_member_required(CreateService.as_view()), name='create_service'),
+    url('service_details/(?P<pk>[0-9]+)/', ServiceDetails.as_view(), name='service_details'),
 ]

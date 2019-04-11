@@ -62,12 +62,15 @@
                                     <li style="display:table-cell;">
                                         <ol class="ordered-list-alpha">
                                             <li class="dropdown-header">
-                                                {{ field.name }}
+                                                <a class="dropdown-header"
+                                                   href="{% url 'service:field_details' field.id %}">{{ field.name }}</a>
                                             </li>
                                             {% for service in services %}
                                             {% if service.field.id == field.id %}
-                                            <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                            >{{service.name}}</a>
+                                            <li class="nav-item">
+                                                <a class="nav-link nav-no-padding"
+                                                   href="{% url 'service:service_details' service.id %}">
+                                                    {{service.name}}</a>
                                             </li>
                                             {% endif %}
                                             {% endfor %}
