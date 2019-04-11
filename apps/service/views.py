@@ -84,7 +84,7 @@ class UpdateField(UpdateView):
         return context
 
 
-class ProductDetails(DetailView):
+class FieldDetails(DetailView):
     model = Field
     template_name = 'service/field_details.html'
 
@@ -95,14 +95,14 @@ class ProductDetails(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        product = Field.objects.filter(id=self.kwargs['pk'])
-        if product:
-            products = Field.objects.filter(category=product[0].category).exclude(name=product[0].name)
-            if len(products) > 4:
-                products = products[:4]
-            context['related_products'] = products
+        field = Field.objects.filter(id=self.kwargs['pk'])
+        if field:
+            services = Service.objects.filter(field=field[0])
+            if len(services) > 4:
+                services = services[:4]
+            context['related_services'] = services
         else:
-            context['related_products'] = []
+            context['related_services'] = []
         context['product_categories'] = Category.objects.all()
         context['services'] = Service.objects.all()
         context['service_fields'] = Field.objects.all()
