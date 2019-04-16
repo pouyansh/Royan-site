@@ -11,4 +11,5 @@ urlpatterns = [
     url('tutorial/(?P<pk>[0-9]+)/$', ShowTutorialDetail.as_view(), name='show_tutorial'),
     path('tutorial_list_admin/', staff_member_required(ShowTutorialListAdmin.as_view()),
          name='show_tutorial_list_admin'),
+    url('create_link/(?P<pk>[0-9]+)/$', staff_member_required(CreateLink.as_view()), name='add_link'),
 ]

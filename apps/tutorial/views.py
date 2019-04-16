@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, FormView
 
@@ -6,7 +6,7 @@ from apps.product.models import Category
 from apps.research.models import ResearchArea
 from apps.service.models import *
 from apps.tutorial.forms import *
-from apps.tutorial.models import Tutorial
+from apps.tutorial.models import *
 
 
 class AddTutorial(CreateView):
@@ -82,3 +82,30 @@ class ShowTutorialListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+
+
+class CreateLink(CreateView):
+    model = Links
+    form_class = AddLinkForm
+    template_name = 'tutorial/create_link.html'
+    success_url = reverse_lazy('tutorial:show_tutorial_list_admin')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Tutorial.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['tutorial'] = Tutorial.objects.get(id=self.kwargs['pk'])
+        return context
+
+    def form_valid(self, form):
+        tutorial = get_object_or_404(Tutorial, pk=self.kwargs['pk'])
+        form.instance.tutorial = tutorial
+        return super().form_valid(form)
