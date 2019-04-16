@@ -34,6 +34,7 @@ urlpatterns = [
                   path('', include(('apps.royan_admin.urls', 'royan_admin'), 'royan_admin')),
                   path('', include(('apps.service.urls', 'service'), 'service')),
                   path('', include(('apps.research.urls', 'research'), 'research')),
+                  path('', include(('apps.tutorial.urls', 'tutorial'), 'tutorial')),
                   path('', include(('apps.index.urls', 'index'), 'index')),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

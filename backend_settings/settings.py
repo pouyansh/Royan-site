@@ -59,7 +59,8 @@ INSTALLED_APPS = [
     'apps.product',
     'apps.royan_admin',
     'apps.service',
-    'apps.research'
+    'apps.research',
+    'apps.tutorial'
 ]
 
 MIDDLEWARE = [
@@ -87,6 +88,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'apps', 'news', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'service', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'research', 'templates'),
+            os.path.join(BASE_DIR, 'apps', 'tutorial', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'index', 'templates'),
             os.path.join(BASE_DIR, 'templates'),
         ],
