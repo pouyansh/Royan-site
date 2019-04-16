@@ -1,15 +1,15 @@
 from django import forms
 
-from apps.research.models import ResearchArea
+from apps.tutorial.models import Tutorial
 
 
-class AddResearchAreaForm(forms.ModelForm):
+class AddTutorialForm(forms.ModelForm):
 
     class Meta:
-        model = ResearchArea
+        model = Tutorial
         fields = ['name', 'description']
 
 
-class ResearchAreaListAdminForm(forms.Form):
-    research_area_id = forms.CharField(max_length=10)
+class TutorialListAdminForm(forms.Form):
+    tutorial_id = forms.CharField(max_length=10)
 

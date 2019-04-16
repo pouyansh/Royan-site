@@ -3,12 +3,13 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.urls import path
 
 from apps.research.views import *
+from apps.tutorial.views import *
 
 urlpatterns = [
-    path('create_research_area/', AddResearchArea.as_view(), name='add_research_area'),
-    url('update_research_area/(?P<pk>[0-9]+)/$', staff_member_required(UpdateResearchArea.as_view()),
-        name='update_research_area'),
-    url('research_area/(?P<pk>[0-9]+)/$', ShowResearchAreaDetail.as_view(), name='show_research_area'),
-    path('research_area_list_admin/', staff_member_required(ShowResearchAreaListAdmin.as_view()),
-         name='show_research_area_list_admin'),
+    path('create_tutorial/', staff_member_required(AddTutorial.as_view()), name='add_tutorial'),
+    url('update_tutorial/(?P<pk>[0-9]+)/$', staff_member_required(UpdateResearchArea.as_view()),
+        name='update_tutorial'),
+    url('tutorial/(?P<pk>[0-9]+)/$', ShowResearchAreaDetail.as_view(), name='show_tutorial'),
+    path('tutorial_list_admin/', staff_member_required(ShowResearchAreaListAdmin.as_view()),
+         name='show_tutorial_list_admin'),
 ]
