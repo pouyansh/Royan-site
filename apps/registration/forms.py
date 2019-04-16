@@ -177,3 +177,4 @@ class ForgetPasswordForm(forms.Form):
         customers = Customer.objects.filter(email=self.cleaned_data['email'], is_active=True)
         if len(customers) != 1:
             raise forms.ValidationError("هیچ حساب کاربری فعالی با این ایمیل در سیستم ثبت نشده است")
+        return self.cleaned_data['email']

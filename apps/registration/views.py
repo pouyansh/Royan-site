@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
@@ -191,6 +194,18 @@ class ForgetPassword(FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         return context
 
+    def form_valid(self, form):
+        customer = Customer.objects.get(email=form.cleaned_data['email'])
+        newpass = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+        customer.set_password(newpass)
+        customer.save()
+        send_mail('تغییر رمز عبور',
+                  'کاربر گرامی، رمز عبور جدیدی برای حساب کاربری شما ساخته شد که در ادامه مشاهده می‌فرمایید. ' +
+                  'خواهشمند است به منظور حفظ مسائل امنیتی، رمز عبور حساب کاربری خود را تغییر دهید.\n' +
+                  'username: ' + customer.username + '\n new password: ' + newpass + '\n 127.0.0.1:8000/login/'
+                  , 'tucagenesite@gmail.com', [customer.email])
+        return super(ForgetPassword, self).form_valid(form)
+
 
 class ForgetPasswordSuccessful(TemplateView):
     template_name = 'temporary/show_text.html'
@@ -200,7 +215,8 @@ class ForgetPasswordSuccessful(TemplateView):
         context['product_categories'] = Category.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
-        context['text'] = "رمز عبور جدید به آدرس ایمیل شما ارسال شد. لطفا با استفاده از آن، وارد شوید و رمز عبور خود را تغییر دهید."
+        context[
+            'text'] = "رمز عبور جدید به آدرس ایمیل شما ارسال شد. لطفا با استفاده از آن، وارد شوید و رمز عبور خود را تغییر دهید."
         return context
 
 
