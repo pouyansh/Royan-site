@@ -110,3 +110,25 @@ class CreateLink(CreateView):
         tutorial = get_object_or_404(Tutorial, pk=self.kwargs['pk'])
         form.instance.tutorial = tutorial
         return super().form_valid(form)
+
+
+class UpdateLink(UpdateView):
+    model = Links
+    template_name = 'tutorial/update_link.html'
+    form_class = AddLinkForm
+    success_url = reverse_lazy('tutorial:show_tutorial_list_admin')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['tutorial'] = Tutorial.objects.get(id=Links.objects.get(id=self.kwargs['pk']).tutorial.id)
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Links.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
