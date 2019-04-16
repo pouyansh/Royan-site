@@ -7,6 +7,7 @@ from apps.news.models import News
 from apps.product.models import Category
 from apps.research.models import ResearchArea
 from apps.service.models import Service, Field
+from apps.tutorial.models import Tutorial
 
 
 class AddNews(CreateView):
@@ -25,6 +26,7 @@ class AddNews(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -40,6 +42,7 @@ class UpdateNews(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -53,6 +56,7 @@ class ShowNewsDetail(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -71,6 +75,7 @@ class ShowNewsList(ListView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -91,4 +96,5 @@ class ShowNewsListAdmin(ListView, FormView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context

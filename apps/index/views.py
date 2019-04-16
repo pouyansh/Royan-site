@@ -4,6 +4,7 @@ from apps.news.models import *
 from apps.product.models import Category, Product
 from apps.research.models import ResearchArea
 from apps.service.models import Service, Field
+from apps.tutorial.models import Tutorial
 
 
 class Index(TemplateView):
@@ -27,4 +28,5 @@ class Index(TemplateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context

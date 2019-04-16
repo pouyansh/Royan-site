@@ -22,6 +22,7 @@ class AddTutorial(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -37,6 +38,7 @@ class UpdateTutorial(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -50,6 +52,7 @@ class ShowTutorialDetail(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         tutorial = Tutorial.objects.get(id=self.kwargs['pk'])
         context['tutorial'] = tutorial
         context['related_papers'] = Paper.objects.filter(tutorial=tutorial)
@@ -61,7 +64,7 @@ class ShowTutorialDetail(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class ShowResearchAreaListAdmin(ListView, FormView):
+class ShowTutorialListAdmin(ListView, FormView):
     model = Tutorial
     template_name = 'tutorial/show_tutorial_list_admin.html'
 
