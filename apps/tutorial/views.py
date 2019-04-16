@@ -6,7 +6,7 @@ from apps.product.models import Category
 from apps.research.models import ResearchArea
 from apps.service.models import *
 from apps.tutorial.forms import *
-from apps.tutorial.models import Tutorial, Paper
+from apps.tutorial.models import Tutorial
 
 
 class AddTutorial(CreateView):
@@ -55,7 +55,6 @@ class ShowTutorialDetail(DetailView):
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         tutorial = Tutorial.objects.get(id=self.kwargs['pk'])
         context['tutorial'] = tutorial
-        context['related_papers'] = Paper.objects.filter(tutorial=tutorial)
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -83,5 +82,3 @@ class ShowTutorialListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
-
-
