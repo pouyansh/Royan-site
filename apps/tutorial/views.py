@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 
 from apps.product.models import Category
 from apps.research.models import ResearchArea
@@ -22,3 +22,19 @@ class AddTutorial(CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context
+
+
+class UpdateTutorial(UpdateView):
+    model = Tutorial
+    template_name = 'tutorial/update_tutorial.html'
+    form_class = AddTutorialForm
+    success_url = reverse_lazy('tutorial:show_tutorial_list_admin')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        return context
+
