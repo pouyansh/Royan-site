@@ -11,4 +11,4 @@ class Paper(models.Model):
     authors = models.CharField(max_length=200, verbose_name="نویسندگان")
     summary = models.TextField(max_length=1000, verbose_name="چکیده")
     research_area = models.ForeignKey(ResearchArea, on_delete="Restrict", verbose_name="زمینه تحقیقاتی")
-    link = models.FileField(verbose_name="مقاله", name="paper", upload_to="", storage="")
+    paper = models.FileField(verbose_name="مقاله", name="paper")

@@ -1,10 +1,10 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, FormView
 
 from apps.product.models import Category
 from apps.research.forms import *
-from apps.research.models import ResearchArea
+from apps.research.models import ResearchArea, Paper
 from apps.service.models import *
 from apps.tutorial.models import Tutorial
 
@@ -81,3 +81,30 @@ class ShowResearchAreaListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+
+
+class CreatePaper(CreateView):
+    model = Paper
+    form_class = AddPaperForm
+    template_name = 'research/create_paper.html'
+    success_url = reverse_lazy('research:show_research_area_list_admin')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not ResearchArea.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['research_area'] = ResearchArea.objects.get(id=self.kwargs['pk'])
+        return context
+
+    def form_valid(self, form):
+        research_area = get_object_or_404(ResearchArea, pk=self.kwargs['pk'])
+        form.instance.research_area = research_area
+        return super().form_valid(form)
