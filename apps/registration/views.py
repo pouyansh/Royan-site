@@ -179,6 +179,31 @@ class UpdatedSuccessfully(TemplateView):
         return context
 
 
+class ForgetPassword(FormView):
+    form_class = ForgetPasswordForm
+    template_name = 'registration/forget_password.html'
+    success_url = reverse_lazy('registration:forget_password_success')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        return context
+
+
+class ForgetPasswordSuccessful(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['text'] = "رمز عبور جدید به آدرس ایمیل شما ارسال شد. لطفا با استفاده از آن، وارد شوید و رمز عبور خود را تغییر دهید."
+        return context
+
+
 class Hash:
     @staticmethod
     def code(name):

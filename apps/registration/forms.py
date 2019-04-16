@@ -168,3 +168,12 @@ class UpdateOrganizationForm(forms.ModelForm):
             if user_exists:
                 raise forms.ValidationError("شماره ثبت تکراری است.")
         return sid
+
+
+class ForgetPasswordForm(forms.Form):
+    email = forms.EmailField()
+
+    def clean_email(self):
+        customers = Customer.objects.filter(email=self.cleaned_data['email'], is_active=True)
+        if len(customers) != 1:
+            raise forms.ValidationError("هیچ حساب کاربری فعالی با این ایمیل در سیستم ثبت نشده است")
