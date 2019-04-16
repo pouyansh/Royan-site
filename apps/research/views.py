@@ -53,7 +53,9 @@ class ShowResearchAreaDetail(DetailView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        context['research_area'] = ResearchArea.objects.get(id=self.kwargs['pk'])
+        research_area = ResearchArea.objects.get(id=self.kwargs['pk'])
+        context['research_area'] = research_area
+        context['related_papers'] = Paper.objects.filter(research_area=research_area)
         return context
 
     def dispatch(self, request, *args, **kwargs):

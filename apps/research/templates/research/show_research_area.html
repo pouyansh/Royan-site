@@ -10,9 +10,20 @@
                 <div class="col-md-9">
                     <p style="font-family: FarsiFont; font-size: 20px;">توضیحات: {{ research_area.description }}</p>
                 </div>
-                <a href="{% url 'index:index' %}" class="btn btn-info circle"
-                   style="font-family: FarsiFont;font-size: 18px;min-width: 60px;;">خانه</a>
             </div>
+            <h4 class="mb-30 title_color" style="margin-top: 20px;">مقالات منتشر شده در زمینه تحقیقاتی</h4>
+            {% for paper in related_papers %}
+                <div class="row" style="padding: 20px; margin: 20px;border-bottom: 1px solid #aaaaaa;">
+                    <div class="col-lg-9">
+                        <h5 style="font-size: 18px; display: inline;"> عنوان: </h5>
+                        <a href="{% url 'research:show_research_area' 1%}" class="text-info"
+                           style="font-size: 20px; font-family: FarsiFont; margin-bottom: 30px; display: inline;"
+                        >{{ paper.title }}</a>
+                        <h4 style="margin: 20px 0;">نویسندگان: {{paper.authors}}</h4>
+                    </div>
+
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
