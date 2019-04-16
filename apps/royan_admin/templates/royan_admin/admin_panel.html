@@ -63,17 +63,29 @@
                 </div>
                 <div class="container_admin">
                     <h3 class="title_admin">زمینه‌های تحقیقاتی</h3>
-                    <a class="btn_admin btn btn-info circle" href="{% url 'service:show_field_list_admin'%}">
+                    <a class="btn_admin btn btn-info circle" href="{% url 'research:show_research_area_list_admin'%}">
                         مدیریت زمینه‌ها
                     </a>
-                    <a class="btn_admin btn btn-info circle" href="{% url 'service:create_field'%}">
+                    <a class="btn_admin btn btn-info circle" href="{% url 'research:add_research_area'%}">
                         افزودن زمینه
                     </a>
-                    <a class="btn_admin btn btn-info circle" href="{% url 'service:show_service_list_admin' %}">
+                    <a class="btn_admin btn btn-info circle" href="{% url 'research:show_paper_list_admin' %}">
                         مدیریت مقاله‌ها
                     </a>
-                    <a class="btn_admin btn btn-info circle" href="{% url 'service:create_service'%}">
+                    <a class="btn_admin btn btn-info circle" href="{% url 'research:choose_research_area'%}">
                         افزودن مقاله
+                    </a>
+                </div>
+                <div class="container_admin">
+                    <h3 class="title_admin">توتوریال‌ها</h3>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'tutorial:show_tutorial_list_admin'%}">
+                        مدیریت توتوریال‌ها
+                    </a>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'tutorial:add_tutorial'%}">
+                        افزودن توتوریال
+                    </a>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'tutorial:choose_tutorial'%}">
+                        افزودن لینک
                     </a>
                 </div>
             </div>

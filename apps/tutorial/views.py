@@ -85,6 +85,20 @@ class ShowTutorialListAdmin(ListView, FormView):
         return context
 
 
+class ChooseTutorial(ListView):
+    model = Tutorial
+    template_name = 'tutorial/choose_tutorial.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        return context
+
+
 class CreateLink(CreateView):
     model = Links
     form_class = AddLinkForm
