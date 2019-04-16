@@ -55,6 +55,7 @@ class ShowTutorialDetail(DetailView):
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         tutorial = Tutorial.objects.get(id=self.kwargs['pk'])
         context['tutorial'] = tutorial
+        context['links'] = Links.objects.filter(tutorial=tutorial).order_by('rank')
         return context
 
     def dispatch(self, request, *args, **kwargs):

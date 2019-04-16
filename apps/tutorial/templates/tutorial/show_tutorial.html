@@ -11,15 +11,19 @@
             </div>
 
             <div class="row" style="margin-top: 50px;">
-                <h4
-                        style="color: #444444; font-size: 25px; margin-bottom: 30px; width: 100%;">لیست مقالات در این
-                    بخش</h4>
-                <div class="col-lg-12 feature_inner row" dir="rtl">
-                    {% for paper in related_papers %}
-                    <div class="row">
-                        <a href="#" class="text-info"
-                           style="font-size: 20px; text-align: center; display: block;">
-                            {{ paper.title }}</a>
+                <div class="col-lg-12 feature_inner" dir="rtl">
+                    {% for link in links %}
+                    <div style="display: block; border-bottom: 1px solid #dddddd; margin-bottom: 30px;
+                                padding-bottom: 20px;">
+                        <h3 class="text-info"
+                           style="font-size: 20px; display: block;">عنوان:
+                            {{ link.title }}</h3><br>
+                        <h4 style="margin: 10px 0;font-size: 18px; display: block;">توضیحات: {{link.description}}</h4>
+
+                        <h4 style="font-size: 18px;">                        برای کسب اطلاعات بیشتر، از این
+                        <a href="{{link.link}}" class="text-info">لینک</a>
+                        استفاده نمایید
+                        </h4>
                     </div>
                     {% endfor %}
                 </div>
