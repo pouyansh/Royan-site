@@ -6,6 +6,7 @@ from apps.product.models import Category
 from apps.research.forms import *
 from apps.research.models import ResearchArea
 from apps.service.models import *
+from apps.tutorial.models import Tutorial
 
 
 class AddResearchArea(CreateView):
@@ -21,6 +22,7 @@ class AddResearchArea(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -36,6 +38,7 @@ class UpdateResearchArea(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -49,6 +52,7 @@ class ShowResearchAreaDetail(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['research_area'] = ResearchArea.objects.get(id=self.kwargs['pk'])
         return context
 
@@ -75,4 +79,5 @@ class ShowResearchAreaListAdmin(ListView, FormView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context

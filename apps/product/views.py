@@ -6,6 +6,7 @@ from apps.product.forms import *
 from apps.product.models import *
 from apps.research.models import ResearchArea
 from apps.service.models import Service, Field
+from apps.tutorial.models import Tutorial
 
 
 class CreateCategory(CreateView):
@@ -20,6 +21,7 @@ class CreateCategory(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -43,6 +45,7 @@ class ShowCategoryListAdmin(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['category_list'] = Category.objects.filter(is_active=True).order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -58,6 +61,7 @@ class UpdateCategory(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -71,6 +75,7 @@ class ChooseCategory(ListView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -89,6 +94,7 @@ class CreateProduct(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -110,6 +116,7 @@ class ProductList(ListView, FormView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -141,6 +148,7 @@ class ProductListAdmin(FormView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -209,6 +217,7 @@ class ProductSearchResultAdmin(FormView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
         products = Product.objects.filter(is_active=True, category__is_active=True)
@@ -256,6 +265,7 @@ class ProductDetails(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -276,4 +286,5 @@ class UpdateProduct(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context

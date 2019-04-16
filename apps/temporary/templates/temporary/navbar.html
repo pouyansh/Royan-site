@@ -11,7 +11,12 @@
                     <div class="navbar-brand"
                          style="font-size: 20px; padding-top: 15px; margin-left: 20px; color: #eeeeee;">
                         Royan
-                        <div class="text-danger" style="display: inline; margin: 0; padding: 0;">T</div>u<div class="text-primary" style="display: inline; margin: 0; padding: 0;">C</div><div class="text-success" style="display: inline; margin: 0; padding: 0;">A</div><div class="text-dark" style="display: inline; margin: 0; padding: 0;">G</div>ene
+                        <div class="text-danger" style="display: inline; margin: 0; padding: 0;"
+                        >T</div
+                        >u<div class="text-primary" style="display: inline; margin: 0; padding: 0;"
+                        >C</div><div class="text-success" style="display: inline; margin: 0; padding: 0;"
+                        >A</div><div class="text-dark" style="display: inline; margin: 0; padding: 0;"
+                        >G</div>ene
                     </div>
                 </div>
 
@@ -54,7 +59,8 @@
                             </ul>
                         </div>
                         <ul class="nav navbar-nav menu_nav ml-auto nav-right">
-                            <li class="nav-item active"><a class="nav-link nav-padding" href="{% url 'index:index' %}">Home</a>
+                            <li class="nav-item active"><a class="nav-link nav-padding" href="{% url 'index:index' %}"
+                            >Home</a>
                             </li>
                             <li class="nav-item submenu dropdown mega-dropdown">
                                 <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
@@ -66,7 +72,8 @@
                                         <ol class="ordered-list-alpha">
                                             <li class="dropdown-header">
                                                 <a class="dropdown-header"
-                                                   href="{% url 'service:field_details' field.id %}">{{ field.name }}</a>
+                                                   href="{% url 'service:field_details' field.id %}"
+                                                >{{ field.name }}</a>
                                             </li>
                                             {% for service in services %}
                                             {% if service.field.id == field.id %}
@@ -111,18 +118,11 @@
                                    role="button"
                                    aria-haspopup="true" aria-expanded="false">Tutorials</a>
                                 <ul class="dropdown-menu" style="min-width: 250px; margin-left: -20px;">
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Cancer Research</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Genome Editing and
-                                        Engineering</a>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Metagenomics</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Infectious Diseases</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Synthetic Biology</a></li>
+                                    {% for tutorial in tutorials %}
+                                    <li class="nav-item"><a class="nav-link nav-no-padding"
+                                                            href="{% url 'tutorial:show_tutorial' tutorial.id %}"
+                                                            style="text-transform: none;">{{ tutorial.name }}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="nav-item"><a class="nav-link nav-padding" href="contact.html">About Us</a></li>

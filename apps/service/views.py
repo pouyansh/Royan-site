@@ -6,6 +6,7 @@ from apps.product.models import Category
 from apps.research.models import ResearchArea
 from apps.service.forms import *
 from apps.service.models import *
+from apps.tutorial.models import Tutorial
 
 
 class CreateField(CreateView):
@@ -207,4 +208,5 @@ class UpdateService(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
