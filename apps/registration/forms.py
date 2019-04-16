@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from apps.registration.models import *
 
 
@@ -178,3 +178,9 @@ class ForgetPasswordForm(forms.Form):
         if len(customers) != 1:
             raise forms.ValidationError("هیچ حساب کاربری فعالی با این ایمیل در سیستم ثبت نشده است")
         return self.cleaned_data['email']
+
+
+# class ChangePasswordForm(PasswordChangeForm):
+#     def __init__(self):
+#         context = super(ChangePasswordForm, self).__init__()
+#         context[]

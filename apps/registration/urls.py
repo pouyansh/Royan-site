@@ -17,4 +17,6 @@ urlpatterns = [
     path('updated/', UpdatedSuccessfully.as_view(), name='updated'),
     path('forget_password/', ForgetPassword.as_view(), name='forget_password'),
     path('forget_password_successful/', ForgetPasswordSuccessful.as_view(), name='forget_password_success'),
+    path('change_password/', ChangePassword.as_view(), name='change_password'),
+    path('forget_password_successful/', ChangePasswordSuccessful.as_view(), name='change_password_success'),
 ]

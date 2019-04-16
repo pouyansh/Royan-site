@@ -1,7 +1,8 @@
 import random
 import string
 
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, FormView, UpdateView
@@ -217,6 +218,32 @@ class ForgetPasswordSuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context[
             'text'] = "رمز عبور جدید به آدرس ایمیل شما ارسال شد. لطفا با استفاده از آن، وارد شوید و رمز عبور خود را تغییر دهید."
+        return context
+
+
+class ChangePassword(PasswordChangeView):
+    form_class = PasswordChangeForm
+    template_name = 'registration/change_password.html'
+    success_url = reverse_lazy('registration:change_password_success')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        return context
+
+
+class ChangePasswordSuccessful(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context[
+            'text'] = "رمز عبور شما با موفقیت تغییر یافت"
         return context
 
 
