@@ -1,0 +1,19 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl">
+    <div class="container" style="min-height: 300px;">
+        <h3 style="width: 100%; text-align: right; margin: 30px 0 10px 0;">لطفا یکی از زمینه‌های زیر را انتخاب کنید.</h3>
+        <div class="row">
+            {% for research_area in object_list %}
+            <div class="col-lg-12" style="text-align: right; border-bottom: 1px solid #dddddd;">
+                <a href="{% url 'research:add_paper' research_area.id %}" class="btn btn-info circle"
+                   style="margin: 10px; min-width: 250px; font-size: 18px; line-height: 100%;
+                   display: inline-block; height: 30px; line-height: 30px;">{{research_area.name}}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

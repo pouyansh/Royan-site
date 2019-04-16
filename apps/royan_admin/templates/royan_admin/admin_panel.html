@@ -61,6 +61,21 @@
                         افزودن سرویس
                     </a>
                 </div>
+                <div class="container_admin">
+                    <h3 class="title_admin">زمینه‌های تحقیقاتی</h3>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'service:show_field_list_admin'%}">
+                        مدیریت زمینه‌ها
+                    </a>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'service:create_field'%}">
+                        افزودن زمینه
+                    </a>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'service:show_service_list_admin' %}">
+                        مدیریت مقاله‌ها
+                    </a>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'service:create_service'%}">
+                        افزودن مقاله
+                    </a>
+                </div>
             </div>
             <div id="returned_services" class="tab-pane fade in active show">
                 <div class="feature_item">
