@@ -110,3 +110,24 @@ class CreatePaper(CreateView):
         research_area = get_object_or_404(ResearchArea, pk=self.kwargs['pk'])
         form.instance.research_area = research_area
         return super().form_valid(form)
+
+
+class ShowPaperDetail(DetailView):
+    model = Paper
+    template_name = 'research/show_paper.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        paper = Paper.objects.get(id=self.kwargs['pk'])
+        context['related_papers'] = Paper.objects.filter(research_area=paper.research_area).exclude(title=paper.title)
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Paper.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
