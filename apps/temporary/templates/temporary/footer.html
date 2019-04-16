@@ -40,7 +40,7 @@
             <div class="col-lg-3">
                 <h3>Research areas</h3>
                 {% for research in research_areas %}
-                <a class="footer-link" href="elements.html">{{research.name}}</a>
+                <a class="footer-link" href="{% url 'research:show_research_area' research.id %}">{{research.name}}</a>
                 {% endfor %}
             </div>
             <div class="col-lg-3">

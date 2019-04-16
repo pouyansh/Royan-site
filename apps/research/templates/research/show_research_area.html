@@ -1,0 +1,22 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border text-right" style="font-family: FarsiFont">
+            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">نام زمینه تحقیقاتی: {{ research_area.name }}</h3>
+            <div class="row">
+                <div class="col-md-9">
+                    <p style="font-family: FarsiFont; font-size: 20px;">توضیحات: {{ research_area.description }}</p>
+                </div>
+                <div class="col-md-3">
+                    <img src="{{ news.image.url }}" alt="" class="img-fluid">
+                </div>
+                <a href="{% url 'index:index' %}" class="btn btn-info circle"
+                   style="font-family: FarsiFont;font-size: 18px;min-width: 60px;;">خانه</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}

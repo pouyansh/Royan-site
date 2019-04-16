@@ -12,9 +12,17 @@
                          style="font-size: 20px; padding-top: 15px; margin-left: 20px; color: #eeeeee;">
                         Royan
                         <div class="text-danger" style="display: inline; margin: 0; padding: 0;"
-                        >T</div>u<div class="text-primary" style="display: inline; margin: 0; padding: 0;"
-                        >C</div><div class="text-success" style="display: inline; margin: 0; padding: 0;"
-                        >A</div><div class="text-dark" style="display: inline; margin: 0; padding: 0;">G</div>ene
+                        >T
+                        </div>
+                        u
+                        <div class="text-primary" style="display: inline; margin: 0; padding: 0;"
+                        >C
+                        </div>
+                        <div class="text-success" style="display: inline; margin: 0; padding: 0;"
+                        >A
+                        </div>
+                        <div class="text-dark" style="display: inline; margin: 0; padding: 0;">G</div>
+                        ene
                     </div>
                 </div>
 
@@ -69,7 +77,8 @@
                                         <ol class="ordered-list-alpha">
                                             <li class="dropdown-header">
                                                 <a class="dropdown-header"
-                                                   href="{% url 'service:field_details' field.id %}">{{ field.name }}</a>
+                                                   href="{% url 'service:field_details' field.id %}">{{ field.name
+                                                    }}</a>
                                             </li>
                                             {% for service in services %}
                                             {% if service.field.id == field.id %}
@@ -103,7 +112,8 @@
                                    aria-haspopup="true" aria-expanded="false">Research areas</a>
                                 <ul class="dropdown-menu" style="min-width: 250px;">
                                     {% for research in research_areas %}
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
+                                    <li class="nav-item"><a class="nav-link nav-no-padding"
+                                                            href="{% url 'research:show_research_area' research.id %}"
                                                             style="text-transform: none;">{{research.name}}</a></li>
                                     {% endfor %}
                                 </ul>
