@@ -131,3 +131,19 @@ class ShowPaperDetail(DetailView):
         if not Paper.objects.filter(id=self.kwargs['pk']):
             return redirect('index:index')
         return super().dispatch(request, *args, **kwargs)
+
+
+class UpdatePaper(UpdateView):
+    model = Paper
+    template_name = 'research/update_paper.html'
+    form_class = AddPaperForm
+    success_url = reverse_lazy('research:show_research_area_list_admin')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        return context

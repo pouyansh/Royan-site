@@ -12,5 +12,6 @@ urlpatterns = [
     path('research_area_list_admin/', staff_member_required(ShowResearchAreaListAdmin.as_view()),
          name='show_research_area_list_admin'),
     url('create_paper/(?P<pk>[0-9]+)/$', staff_member_required(CreatePaper.as_view()), name='add_paper'),
+    url('update_paper/(?P<pk>[0-9]+)/$', staff_member_required(UpdatePaper.as_view()), name='update_paper'),
     url('paper/(?P<pk>[0-9]+)/$', ShowPaperDetail.as_view(), name='show_paper'),
 ]
