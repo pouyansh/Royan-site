@@ -1,9 +1,9 @@
 import random
 import string
 
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
 from django.core.mail import send_mail
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView, FormView, UpdateView
 from math import ceil
@@ -17,6 +17,11 @@ class Login(LoginView):
     model = User
     template_name = 'registration/login.html'
     success_url = reverse_lazy('registration:login_success')
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
 
 
 class LoginSuccess(TemplateView):
