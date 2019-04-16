@@ -137,7 +137,7 @@ class UpdatePaper(UpdateView):
     model = Paper
     template_name = 'research/update_paper.html'
     form_class = AddPaperForm
-    success_url = reverse_lazy('research:show_research_area_list_admin')
+    success_url = reverse_lazy('research:show_paper_list_admin')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -146,4 +146,26 @@ class UpdatePaper(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        return context
+
+
+class ShowPaperListAdmin(ListView, FormView):
+    model = Paper
+    template_name = 'research/show_paper_list_admin.html'
+
+    success_url = reverse_lazy('research:show_paper_list_admin')
+    form_class = PaperListAdminForm
+
+    def form_valid(self, form):
+        Paper.objects.filter(id=form.cleaned_data['paper_id']).delete()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['papers'] = Paper.objects.all().order_by('id')
         return context

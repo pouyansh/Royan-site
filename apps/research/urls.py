@@ -14,4 +14,5 @@ urlpatterns = [
     url('create_paper/(?P<pk>[0-9]+)/$', staff_member_required(CreatePaper.as_view()), name='add_paper'),
     url('update_paper/(?P<pk>[0-9]+)/$', staff_member_required(UpdatePaper.as_view()), name='update_paper'),
     url('paper/(?P<pk>[0-9]+)/$', ShowPaperDetail.as_view(), name='show_paper'),
+    path('paper_list_admin/', staff_member_required(ShowPaperListAdmin.as_view()), name='show_paper_list_admin'),
 ]

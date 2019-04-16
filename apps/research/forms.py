@@ -20,3 +20,7 @@ class AddPaperForm(forms.ModelForm):
         model = Paper
         fields = ['title', 'authors', 'summary', 'paper']
 
+
+class PaperListAdminForm(forms.Form):
+    paper_id = forms.CharField(max_length=10)
+
