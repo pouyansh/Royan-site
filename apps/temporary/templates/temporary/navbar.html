@@ -102,18 +102,10 @@
                                    role="button"
                                    aria-haspopup="true" aria-expanded="false">Research areas</a>
                                 <ul class="dropdown-menu" style="min-width: 250px;">
+                                    {% for research in research_areas %}
                                     <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Cancer Research</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Genome Editing and
-                                        Engineering</a>
-                                    </li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Metagenomics</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Infectious Diseases</a></li>
-                                    <li class="nav-item"><a class="nav-link nav-no-padding" href="elements.html"
-                                                            style="text-transform: none;">Synthetic Biology</a></li>
+                                                            style="text-transform: none;">{{research.name}}</a></li>
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">

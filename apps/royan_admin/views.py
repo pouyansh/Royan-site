@@ -1,6 +1,7 @@
 from django.views.generic import TemplateView
 
 from apps.product.models import Category
+from apps.research.models import ResearchArea
 from apps.service.models import *
 
 
@@ -13,5 +14,6 @@ class AdminPanel(TemplateView):
         context['admin'] = self.request.user
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context
 

@@ -5,6 +5,7 @@ from django.views.generic import CreateView, DetailView, ListView, UpdateView, F
 from apps.news.forms import *
 from apps.news.models import News
 from apps.product.models import Category
+from apps.research.models import ResearchArea
 from apps.service.models import Service, Field
 
 
@@ -23,6 +24,7 @@ class AddNews(CreateView):
         context['product_categories'] = Category.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context
 
 
@@ -37,6 +39,7 @@ class UpdateNews(UpdateView):
         context['product_categories'] = Category.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context
 
 
@@ -49,6 +52,7 @@ class ShowNewsDetail(DetailView):
         context['product_categories'] = Category.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -66,6 +70,7 @@ class ShowNewsList(ListView):
         context['product_categories'] = Category.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context
 
 
@@ -85,4 +90,5 @@ class ShowNewsListAdmin(ListView, FormView):
         context['product_categories'] = Category.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context

@@ -20,4 +20,5 @@ class AddResearchArea(CreateView):
         context['product_categories'] = Category.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
         return context
