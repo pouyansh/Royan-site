@@ -1,8 +1,8 @@
 from django.conf.urls import url
 from django.urls import path
 
-from apps.index.views import *
+from apps.order.views import *
 
 urlpatterns = [
-    url('', Index.as_view(), name='index'),
+    path('order_service/', SubmitOrderService.as_view(), name='order_service')
 ]

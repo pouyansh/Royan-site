@@ -210,14 +210,3 @@ class UpdateService(UpdateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
-
-
-class SubmitOrderService(FormView):
-    form_class = OrderServiceFrom
-    template_name = 'service/order_service.html'
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['columns'] = [['name', 'text', 'نام', 30], ['seq', 'text', 'توالی', 20],
-                             ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]]]
-        return kwargs
