@@ -411,6 +411,8 @@
         for(var i = 2; i <= count; i ++){
             var newtd = $("#first_row td:nth-child(" + i + ")").clone();
             newtd.children().attr("id", newtd.children().attr('id') + form_count);
+            newtd.children().attr("name", newtd.children().attr('name') + form_count);
+            newtd.children().val('');
             newrow.append(newtd);
         }
         $('#table').append(newrow);

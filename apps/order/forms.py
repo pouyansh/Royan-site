@@ -20,3 +20,6 @@ class OrderServiceFrom(forms.Form):
                     self.fields[str(col[0])+'_{index}'.format(index=index)] = forms.ChoiceField(choices=col[3])
                 self.fields[str(col[0])+'_{index}'.format(index=index)].label = col[2]
 
+    def clean(self):
+        print(self.cleaned_data['extra_field_count'])
+        return super(OrderServiceFrom, self).clean()

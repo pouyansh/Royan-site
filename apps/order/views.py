@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from apps.order.forms import *
@@ -13,6 +14,7 @@ from apps.tutorial.models import Tutorial
 class SubmitOrderService(FormView):
     form_class = OrderServiceFrom
     template_name = 'order/order_service.html'
+    success_url = reverse_lazy('index:index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -38,3 +40,7 @@ class SubmitOrderService(FormView):
                              ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
                              ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
         return kwargs
+
+    def form_valid(self, form):
+        print(form)
+        return super(SubmitOrderService, self).form_valid(form)
