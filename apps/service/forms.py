@@ -38,6 +38,13 @@ class OrderServiceFrom(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super().__init__()
-        temp = kwargs.pop('temp')
-        print(temp[0], temp[1])
+        columns = kwargs.pop('columns')
+        for col in columns:
+            if col[1] == "text":
+                self.fields[col[0]] = forms.CharField(max_length=col[3])
+            if col[1] == "number":
+                self.fields[col[0]] = forms.IntegerField()
+            if col[1] == "choice":
+                self.fields[col[0]] = forms.ChoiceField(choices=col[3])
+            self.fields[col[0]].label = col[2]
 
