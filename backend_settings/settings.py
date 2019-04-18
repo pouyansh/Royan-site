@@ -60,7 +60,8 @@ INSTALLED_APPS = [
     'apps.royan_admin',
     'apps.service',
     'apps.research',
-    'apps.tutorial'
+    'apps.tutorial',
+    'django_unused_media',
 ]
 
 MIDDLEWARE = [
