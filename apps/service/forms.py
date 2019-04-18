@@ -31,3 +31,13 @@ class UpdateServiceForm(forms.ModelForm):
 
 class ServiceListAdminForm(forms.Form):
     service_id = forms.CharField(max_length=10)
+
+
+class OrderServiceFrom(forms.Form):
+    name = forms.CharField(max_length=30)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__()
+        temp = kwargs.pop('temp')
+        print(temp[0], temp[1])
+

@@ -12,3 +12,4 @@ class Service(models.Model):
     field = models.ForeignKey(Field, on_delete="Restrict", verbose_name='زمینه‌ی سرویس')
     file = models.FileField(verbose_name="فرم ثبت سفارش", default='front/primer.xls', blank=True,
                             null=True)
+    has_form = models.BooleanField(default=False, verbose_name="آیا فرم ثبت سفارش دارد؟")

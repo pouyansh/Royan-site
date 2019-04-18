@@ -210,3 +210,17 @@ class UpdateService(UpdateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+
+
+class SubmitOrderService(FormView):
+    fields = ['#']
+    form_class = OrderServiceFrom
+    template_name = 'service/order_service.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+
+        # Here you can pass additional kwargs arguments to the form.
+        kwargs['temp'] = ['temp', 'text']
+
+        return kwargs
