@@ -35,6 +35,7 @@
                         <div class="row" style="width: 100%;">
                             <ul class="nav" style="margin: 0 50px 0 auto;">
                                 <li class="nav-item"><a class="upper-nav-link" href="#">Contact</a></li>
+                                <li class="nav-item"><a class="upper-nav-link" href="#">About us</a></li>
                                 {% if request.user.is_authenticated %}
                                 <li class="nav-item">
                                     <div class="upper-nav-link" style="display: inline-block;">Welcome,</div>
@@ -125,7 +126,8 @@
                                     {% endfor %}
                                 </ul>
                             </li>
-                            <li class="nav-item"><a class="nav-link nav-padding" href="contact.html">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link nav-padding" href="{% url 'news:show_news_list' %}"
+                            >News</a></li>
                         </ul>
                     </div>
                 </div>
