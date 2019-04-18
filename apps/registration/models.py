@@ -7,6 +7,7 @@ class Customer(User):
     fax = models.IntegerField(null=True, verbose_name="فکس")
     address = models.CharField(max_length=500, verbose_name='آدرس')
     email_verified = models.BooleanField(default=False, verbose_name="ایمیل تایید شده است")
+    is_person = models.BooleanField(default=False)
 
     def get_full_name(self):
         return self.first_name + " " + self.last_name

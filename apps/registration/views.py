@@ -53,6 +53,7 @@ class RegisterPerson(CreateView):
     def form_valid(self, form):
         person = form.save(commit=False)
         person.is_active = False
+        person.is_person = True
         person.save()
         email = form.cleaned_data['email']
         username = form.cleaned_data['username']
@@ -228,8 +229,8 @@ class ForgetPassword(FormView):
         send_mail('تغییر رمز عبور',
                   'کاربر گرامی، رمز عبور جدیدی برای حساب کاربری شما ساخته شد که در ادامه مشاهده می‌فرمایید. ' +
                   'خواهشمند است به منظور حفظ مسائل امنیتی، رمز عبور حساب کاربری خود را تغییر دهید.\n' +
-                  'username: ' + customer.username + '\n new password: ' + newpass + '\n 127.0.0.1:8000/login/'
-                  , 'tucagenesite@gmail.com', [customer.email])
+                  'username: ' + customer.username + '\n new password: ' + newpass + '\n 127.0.0.1:8000/login/',
+                  'tucagenesite@gmail.com', [customer.email])
         return super(ForgetPassword, self).form_valid(form)
 
 
@@ -244,7 +245,8 @@ class ForgetPasswordSuccessful(TemplateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context[
-            'text'] = "رمز عبور جدید به آدرس ایمیل شما ارسال شد. لطفا با استفاده از آن، وارد شوید و رمز عبور خود را تغییر دهید."
+            'text'] = "رمز عبور جدید به آدرس ایمیل شما ارسال شد." \
+                      " لطفا با استفاده از آن، وارد شوید و رمز عبور خود را تغییر دهید."
         return context
 
 

@@ -93,56 +93,95 @@
                             <label class="mb-30 title_color" style="float: right; display: inline-block; width: 100px;">نوع
                                 حساب
                                 کاربری</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">حقیقی</h4>
+                            {% if request.user.is_superuser %}
+                            <h4 style="display: inline-block; font-family: FarsiFont;">ادمین</h4>
+                            {% else %}
+                                {% if logged_in_customer.is_person %}
+                                <h4 style="display: inline-block; font-family: FarsiFont;">حقیقی</h4>
+                                {% else %}
+                                <h4 style="display: inline-block; font-family: FarsiFont;">حقوقی</h4>
+                                {% endif %}
+                            {% endif %}
                         </div>
-                        <div id="first_name" class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                نام:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">پویان</h4>
-                        </div>
-                        <div id="last_name" class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                نام خانوادگی:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">شیرزادیان</h4>
-                        </div>
-                        <div id="national_ID" class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                کد ملی:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">0440700140</h4>
-                        </div>
-                        <div id="education" class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                مقطع تحصیلی:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">دیپلم</h4>
-                        </div>
-                        <div class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                ایمیل:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">pshirzadian26@gmail.com</h4>
-                        </div>
+                        {% if request.user.is_superuser %}
+                        {% else %}
+                            {% if logged_in_customer.is_person %}
+                            <div id="first_name" class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    نام:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.first_name}}</h4>
+                            </div>
+                            <div id="last_name" class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    نام خانوادگی:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.last_name}}</h4>
+                            </div>
+                            <div id="national_ID" class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    کد ملی:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.national_id}}</h4>
+                            </div>
+                            <div id="education" class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    مقطع تحصیلی:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.education}}</h4>
+                            </div>
+                            <div id="organization" class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    موسسه/سازمان/آموزشگاه:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.org}}</h4>
+                            </div>
+                            {% else %}
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    نام شرکت:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.organization_name}}</h4>
+                            </div>
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    سمت:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.post}}</h4>
+                            </div>
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    شماره ثبت:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.submit_id}}</h4>
+                            </div>
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    شماره اقتصادی:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.economic_id}}</h4>
+                            </div>
+                            {% endif %}
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    ایمیل:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.email}}</h4>
+                            </div>
 
-
-                        <div id="organization" class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                موسسه/سازمان/آموزشگاه:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">دانشگاه صنعتی شریف</h4>
-                        </div>
-                        <div class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                تلفن:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">09126804295</h4>
-                        </div>
-                        <div class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                فکس:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">----</h4>
-                        </div>
-                        <div class="mt-10" style="display: flex;">
-                            <label style="float: right; display: inline-block; width: 100px;">
-                                آدرس:</label>
-                            <h4 style="display: inline-block; font-family: FarsiFont;">تهران-پژوهشکده رویان</h4>
-                        </div>
-
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    تلفن:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.phone_number}}</h4>
+                            </div>
+                            {% if logged_in_customer.is_person %}
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    تلفن همراه:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.phone_number}}</h4>
+                            </div>
+                            {% endif %}
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    فکس:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.fax}}</h4>
+                            </div>
+                            <div class="mt-10" style="display: flex;">
+                                <label style="float: right; display: inline-block; width: 100px;">
+                                    آدرس:</label>
+                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.address}}</h4>
+                            </div>
+                        {% endif %}
                         <div class="mt-10" style="display: flex; margin-top: 30px;">
                             <label style="float: right; display: inline-block; width: 150px;">
                                 <div style="color: red; display: inline;">*</div>
@@ -165,7 +204,7 @@
         <div class="container">
             <div class="section-top-border">
                 <div class="row">
-                    <div class="col-lg-8 col-md-8" style="margin: auto">
+                    <div class="col-lg-10 col-md-8" style="margin: auto">
 
                         <h5>
                             برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
@@ -198,31 +237,32 @@
                                 خود را از
                                 طریق جدول زیر، وارد کنید.
                             </div>
-                            <div style="height: 100%; transition: 1s;" id="div_type_2">
+                            <div style="height: 100%; transition: 1s; text-align: center;" id="div_type_2">
                                 <table dir="ltr" id="table" lang="en">
                                     <thead>
                                     <tr style="font-size: 12px;">
-                                        <th>num</th>
-                                        <th>Oligo name</th>
-                                        <th>Oligo Sequence</th>
-                                        <th style="width: 15%;">Concentration</th>
-                                        <th style="width: 15%;">Purification</th>
-                                        <th style="width: 15%;">Modification</th>
-                                    </tr>
-                                    </thead>
-                                    <tr id="first_row">
-                                        <td>1</td>
+                                        <th>#</th>
                                         {% for field in form %}
                                         {% if field.name != "extra_field_count" %}
-                                        <td>{{field}}</td>
+                                        <th>{{ field.label }}</th>
                                         {% endif %}
                                         {% endfor %}
                                     </tr>
-                                    <tr id="temp_row">
+                                    </thead>
+                                    <tr style="font-size: 12px;" id="temp_row">
                                     </tr>
+                                    <tr style="font-size: 12px;" id="first_row">
+                                        <td>1</td>
+                                        {% for field in form %}
+                                        {% if field.name != "extra_field_count" %}
+                                        <td style="padding: 0 5px;">{{field}}</td>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </tr>
+
                                 </table>
                                 <a class="genric-btn purplebtn circle" id="addbtn"
-                                   style="display: inline-block; transition: 1s;">اضافه
+                                   style="display: inline-block; transition: 1s; margin-right: auto;">اضافه
                                 </a>
                             </div>
                         </div>
