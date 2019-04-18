@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'apps.service',
     'apps.research',
     'apps.tutorial',
+    'apps.order',
     'django_unused_media',
 ]
 
@@ -90,6 +91,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'apps', 'service', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'research', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'tutorial', 'templates'),
+            os.path.join(BASE_DIR, 'apps', 'order', 'templates'),
             os.path.join(BASE_DIR, 'apps', 'index', 'templates'),
             os.path.join(BASE_DIR, 'templates'),
         ],
