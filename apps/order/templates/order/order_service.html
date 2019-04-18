@@ -211,9 +211,14 @@
                                     </tr>
                                     </thead>
                                     <tr id="first_row">
+                                        <td>1</td>
                                         {% for field in form %}
+                                        {% if field.name != "extra_field_count" %}
                                         <td>{{field}}</td>
+                                        {% endif %}
                                         {% endfor %}
+                                    </tr>
+                                    <tr id="temp_row">
                                     </tr>
                                 </table>
                                 <a class="genric-btn purplebtn circle" id="addbtn"
@@ -356,19 +361,22 @@
 
 {% block script %}
 <script>
-    $(document).ready(function(){
-        $("#table").append(addNewRow(1));
-    });
-    form_count = Number($("[name=extra_field_count]").val());
+    var form_count = 1;
     $("#addbtn").click(function() {
-        form_count ++;
-
-        element = $('<input type="text"/>');
-        element.attr('name', 'extra_field_' + form_count);
-        $("#div_type_2").append(element);
+        form_count = form_count + 1;
+        console.log(form_count);
+        var newrow = $("#temp_row").clone().attr("id", "row_"+form_count);
+        newrow.append("<td>"+form_count+"</td>");
+        var count = $("#first_row").children().length;
+        for(var i = 2; i <= count; i ++){
+            var newtd = $("#first_row td:nth-child(" + i + ")").clone();
+            newtd.children().attr("id", newtd.children().attr('id') + form_count);
+            newrow.append(newtd);
+        }
+        $('#table').append(newrow);
 
         $("[name=extra_field_count]").val(form_count);
-    })
+    });
 
     function changed () {
         var value = $('#checkbox').prop("checked");
