@@ -132,7 +132,7 @@
                                     <tr style="font-size: 12px;">
                                         <th>#</th>
                                         {% for field in form %}
-                                        {% if field.name != "extra_field_count" and "_0_" in field.name  %}
+                                        {% if field.name != "extra_field_count" and "_1_" in field.name  %}
                                         <th>{{ field.label }}</th>
                                         {% endif %}
                                         {% endfor %}
@@ -141,13 +141,18 @@
                                     <tr style="font-size: 12px;" id="temp_row">
                                     </tr>
                                     {% for i in extra_fields %}
-                                    <tr style="font-size: 12px;" id="first_row">
+                                    {% with y=i|stringformat:"s" %}
+                                    {% with template="row_"|add:y %}
+                                    <tr style="font-size: 12px;" id={{template}}>
+                                    {% endwith %}
+                                    {% endwith %}
                                         <td>{{i}}</td>
                                         {% for field in form %}
                                         {% with y=i|stringformat:"s" %}
                                         {% with template="_"|add:y|add:"_" %}
                                         {% if field.name != "extra_field_count" and template in field.name %}
                                         <td style="padding: 0 5px;">{{field}}</td>
+                                        {{field.errors}}
                                         {% endif %}
                                         {% endwith %}
                                         {% endwith %}
