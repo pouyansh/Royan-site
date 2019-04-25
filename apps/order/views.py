@@ -32,8 +32,6 @@ class SubmitOrderService(FormView):
                 context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
             else:
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        context['data'] = [['a1', 'm1', '0.01', 'yes', 'no'], ['a2', 'm2', '0.5', 'no', 'no'],
-                           ['a3', 'm3', '0.1', 'yes', 'yes']]
         service = Service.objects.get(id=self.kwargs['pk'])
         if not self.request.user.is_superuser:
             customer = Customer.objects.get(username=self.request.user.username)
@@ -44,24 +42,33 @@ class SubmitOrderService(FormView):
             order = orders[0]
             content = csv.reader(open(order.file.path, 'r'))
             order.file.close()
-            print(content)
         else:
             if not self.request.user.is_superuser:
                 customer = Customer.objects.get(username=self.request.user.username)
                 order = Order(customer=customer, service=service)
-            else:
-                order = []
+                order.save()
             content = []
         context['data'] = content
         return context
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs['columns'] = [['name', 'text', 'Oligo name', 20], ['sequence', 'text', 'Oligo Sequence', 20],
-                             ['Concentration', 'choice', 'concentration',
-                              [(1, '0.01'), (2, '0.02'), (2, '0.1'), (2, '0.5')]],
-                             ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
-                             ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
+        service = Service.objects.get(id=self.kwargs['pk'])
+        content = csv.reader(open(service.fields.path, 'r'))
+        data = []
+        for row in content:
+            temp = [row[0], row[1], row[2]]
+            if row[1] == "text":
+                temp.append(row[3])
+            if row[1] == "choice":
+                tempchoices = []
+                for i in range(3, len(row)):
+                    if row[i]:
+                        tempchoices.append((row[i], row[i]))
+                temp.append(tempchoices)
+            data.append(temp)
+        print(data)
+        kwargs['columns'] = data
         return kwargs
 
     def form_valid(self, form):
