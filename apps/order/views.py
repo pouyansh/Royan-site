@@ -1,3 +1,5 @@
+import csv
+
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic import FormView
@@ -32,16 +34,23 @@ class SubmitOrderService(FormView):
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         context['data'] = [['a1', 'm1', '0.01', 'yes', 'no'], ['a2', 'm2', '0.5', 'no', 'no'],
                            ['a3', 'm3', '0.1', 'yes', 'yes']]
-        service = Service.objects.all().order_by('id')[0]
-        user = User.objects.get(username=self.request.user.username)
-        orders = Order.objects.filter(user=user, service=service, is_finished=False)
+        service = Service.objects.get(id=self.kwargs['pk'])
+        if not self.request.user.is_superuser:
+            customer = Customer.objects.get(username=self.request.user.username)
+            orders = Order.objects.filter(customer=customer, service=service, is_finished=False)
+        else:
+            orders = []
         if orders:
             order = orders[0]
-            order.file.open(mode="rb")
-            content = order.file.read()
+            content = csv.reader(open(order.file.path, 'r'))
             order.file.close()
+            print(content)
         else:
-            order = Order(user=user, service=service)
+            if not self.request.user.is_superuser:
+                customer = Customer.objects.get(username=self.request.user.username)
+                order = Order(customer=customer, service=service)
+            else:
+                order = []
             content = []
         context['data'] = content
         return context
