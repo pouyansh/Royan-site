@@ -28,7 +28,8 @@ class SubmitOrderService(FormView):
                 context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
             else:
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        context['extra_fields'] = range(1, 2)
+        context['data'] = [['a1', 'm1', '0.01', 'yes', 'no'], ['a2', 'm2', '0.5', 'no', 'no'],
+                           ['a3', 'm3', '0.1', 'yes', 'yes']]
         return context
 
     def get_form_kwargs(self):

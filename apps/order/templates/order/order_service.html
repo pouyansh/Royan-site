@@ -3,6 +3,33 @@
 
 {% block internal_css %}
 <style>
+.popup {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.popup .popuptext {
+  visibility: hidden;
+  display: none;
+}
+
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
     .greenbtn {
         background-color: rgb(56,208,30);
         color: #eeeeee;
@@ -42,6 +69,8 @@
         color: rgb(188,91,254);
         background-color: #eeeeee;
     }
+
+
 
 
 </style>
@@ -85,7 +114,7 @@
     <div class="container">
         <div class="section-top-border">
             <div class="row">
-                <div class="col-lg-10 col-md-8" style="margin: auto">
+                <div class="col-lg-11 col-md-8" style="margin: auto">
 
                     <h5>
                         برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
@@ -128,18 +157,53 @@
                                         {% for field in form %}
                                         <th>{{ field.label }}</th>
                                         {% endfor %}
+                                        <th>change</th>
                                     </tr>
                                     </thead>
+                                    {% for row in data %}
+                                    <tr style="font-size: 12px;">
+                                        <td>{{forloop.counter}}</td>
+                                        {% for field in row %}
+                                        <td style="padding: 0 5px; font-size: 15px;">{{field}}</td>
+                                        {% endfor %}
+                                        <td>
+                                            {% with y=forloop.counter|stringformat:"s" %}
+                                            <div onclick="myFunction({{forloop.counter}})"
+                                                 class="popup btn text-danger circle"
+                                                 style="font-size: 15px; min-width: 80px; display: block;
+                                                 ">
+                                                {% with id="id"|add:y %}
+                                                <div id="{{id}}">delete</div>
+                                                {% endwith %}
+                                                {% with mypopup="myPopup"|add:y %}
+                                                <div class="popuptext" id="{{mypopup}}">
+                                                {% endwith %}
+                                                    <div onclick="myFunction({{forloop.counter}})"
+                                                         class="popup btn text-danger circle"
+                                                         style="font-size: 15px; min-width: 80px; display: block;"
+                                                    >Are you sure?
+                                                        <button type="submit" onclick="myDelete({{ y }})"
+                                                                class="popup btn text-danger circle"
+                                                                style="font-size: 15px; background: none;">yes
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endwith %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
                                     <tr style="font-size: 12px;" id="1">
-                                        <td>1</td>
+                                        <td></td>
                                         {% for field in form %}
                                         <td style="padding: 0 5px;">{{field}}</td>
                                         {{field.errors}}
                                         {% endfor %}
+                                        <td style="text-align: center;"><button type="submit" class="btn generic-btn text-success"
+                                                    style="font-size: 15px; width: 100%; display: block; background: none;
+                                                 ">add</button></td>
                                     </tr>
-
                                 </table>
-                                <button type="submit" class="genric-btn purplebtn circle">اضافه</button>
                             </form>
                         </div>
                     </div>
@@ -160,6 +224,13 @@
 
 {% block script %}
 <script>
+    function myFunction(id) {
+        var popup = document.getElementById("myPopup"+id);
+        popup.classList.toggle("show");
+    }
+    function myDelete(i) {
+        $("#id_news_id").val(i);
+    }
     var form_count = 1;
     $("#addbtn").click(function() {
         form_count = form_count + 1;
@@ -244,6 +315,8 @@
         }
         return false;
     }
+
+
 
 
 
