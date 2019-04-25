@@ -1,7 +1,9 @@
+from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
 from apps.order.forms import *
+from apps.order.models import Order
 from apps.product.models import Category
 from apps.registration.models import Person, Organization, Customer
 from apps.research.models import ResearchArea
@@ -30,6 +32,18 @@ class SubmitOrderService(FormView):
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         context['data'] = [['a1', 'm1', '0.01', 'yes', 'no'], ['a2', 'm2', '0.5', 'no', 'no'],
                            ['a3', 'm3', '0.1', 'yes', 'yes']]
+        service = Service.objects.all().order_by('id')[0]
+        user = User.objects.get(username=self.request.user.username)
+        orders = Order.objects.filter(user=user, service=service, is_finished=False)
+        if orders:
+            order = orders[0]
+            order.file.open(mode="rb")
+            content = order.file.read()
+            order.file.close()
+        else:
+            order = Order(user=user, service=service)
+            content = []
+        context['data'] = content
         return context
 
     def get_form_kwargs(self):
