@@ -60,12 +60,12 @@
 {% block main_content %}
 <div class="multi-step container">
     <div class="col-lg-2">
-        <div id="progress_btn_1" class="circle btn-primary">1</div>
+        <div id="progress_btn_1" class="circle btn-success">1</div>
         <label class="progress-bar-label">ثبت مشخصات فاکتور شونده</label>
     </div>
     <div class="col-lg-1 connecting-line"></div>
     <div class="col-lg-2">
-        <div id="progress_btn_2" class="circle">2</div>
+        <div id="progress_btn_2" class="circle btn-primary">2</div>
         <label class="progress-bar-label">ثبت اطلاعات توالی‌ها</label>
     </div>
     <div class="col-lg-1 connecting-line"></div>
@@ -80,127 +80,11 @@
     </div>
 </div>
 <!--================Start Form=====================-->
-<form>
-    <!--================Start Section1 =================-->
-    <div id="sec1" class="whole-wrap" dir="rtl"
-         style="display: block; text-align: right; font-family: FarsiFont; font-size: 16px;">
-        <div class="container">
-            <div class="section-top-border">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8" style="margin: auto">
-
-                        <div id="type" class="mt-10" style="display: flex;">
-                            <label class="mb-30 title_color" style="float: right; display: inline-block; width: 100px;">نوع
-                                حساب
-                                کاربری</label>
-                            {% if request.user.is_superuser %}
-                            <h4 style="display: inline-block; font-family: FarsiFont;">ادمین</h4>
-                            {% else %}
-                                {% if logged_in_customer.is_person %}
-                                <h4 style="display: inline-block; font-family: FarsiFont;">حقیقی</h4>
-                                {% else %}
-                                <h4 style="display: inline-block; font-family: FarsiFont;">حقوقی</h4>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                        {% if request.user.is_superuser %}
-                        {% else %}
-                            {% if logged_in_customer.is_person %}
-                            <div id="first_name" class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    نام:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.first_name}}</h4>
-                            </div>
-                            <div id="last_name" class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    نام خانوادگی:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.last_name}}</h4>
-                            </div>
-                            <div id="national_ID" class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    کد ملی:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.national_id}}</h4>
-                            </div>
-                            <div id="education" class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    مقطع تحصیلی:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.education}}</h4>
-                            </div>
-                            <div id="organization" class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    موسسه/سازمان/آموزشگاه:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.org}}</h4>
-                            </div>
-                            {% else %}
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    نام شرکت:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.organization_name}}</h4>
-                            </div>
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    سمت:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.post}}</h4>
-                            </div>
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    شماره ثبت:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.submit_id}}</h4>
-                            </div>
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    شماره اقتصادی:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.economic_id}}</h4>
-                            </div>
-                            {% endif %}
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    ایمیل:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.email}}</h4>
-                            </div>
-
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    تلفن:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.phone_number}}</h4>
-                            </div>
-                            {% if logged_in_customer.is_person %}
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    تلفن همراه:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.phone_number}}</h4>
-                            </div>
-                            {% endif %}
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    فکس:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.fax}}</h4>
-                            </div>
-                            <div class="mt-10" style="display: flex;">
-                                <label style="float: right; display: inline-block; width: 100px;">
-                                    آدرس:</label>
-                                <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.address}}</h4>
-                            </div>
-                        {% endif %}
-                        <div class="mt-10" style="display: flex; margin-top: 30px;">
-                            <label style="float: right; display: inline-block; width: 150px;">
-                                <div style="color: red; display: inline;">*</div>
-                                نام فاکتور شونده:</label>
-                            <input type="text" required name="address" class="single-input">
-                        </div>
-                        <a class="genric-btn purplebtn circle" onclick="goto(2, 1)"
-                           style="float: left; margin: 10px; display: inline-block">ادامه
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--================End Section1 =================-->
-
+<form method="post">
+    {% csrf_token %}
     <!--================Start Section2 =================-->
     <div id="sec2" class="whole-wrap" dir="rtl"
-         style="display: none; text-align: right; font-family: FarsiFont; font-size: 16px;">
+         style="display: block; text-align: right; font-family: FarsiFont; font-size: 16px;">
         <div class="container">
             <div class="section-top-border">
                 <div class="row">
@@ -237,13 +121,18 @@
                                 خود را از
                                 طریق جدول زیر، وارد کنید.
                             </div>
+                            {% for field in form %}
+                            {% if field.name == "extra_field_count" %}
+                            {{field}}
+                            {% endif %}
+                            {% endfor %}
                             <div style="height: 100%; transition: 1s; text-align: center;" id="div_type_2">
                                 <table dir="ltr" id="table" lang="en">
                                     <thead>
                                     <tr style="font-size: 12px;">
                                         <th>#</th>
                                         {% for field in form %}
-                                        {% if field.name != "extra_field_count" %}
+                                        {% if field.name != "extra_field_count" and "_0_" in field.name  %}
                                         <th>{{ field.label }}</th>
                                         {% endif %}
                                         {% endfor %}
@@ -251,14 +140,20 @@
                                     </thead>
                                     <tr style="font-size: 12px;" id="temp_row">
                                     </tr>
+                                    {% for i in extra_fields %}
                                     <tr style="font-size: 12px;" id="first_row">
-                                        <td>1</td>
+                                        <td>{{i}}</td>
                                         {% for field in form %}
-                                        {% if field.name != "extra_field_count" %}
+                                        {% with y=i|stringformat:"s" %}
+                                        {% with template="_"|add:y|add:"_" %}
+                                        {% if field.name != "extra_field_count" and template in field.name %}
                                         <td style="padding: 0 5px;">{{field}}</td>
                                         {% endif %}
+                                        {% endwith %}
+                                        {% endwith %}
                                         {% endfor %}
                                     </tr>
+                                    {% endfor %}
 
                                 </table>
                                 <a class="genric-btn purplebtn circle" id="addbtn"
@@ -270,9 +165,7 @@
                             <a class="genric-btn purplebtn circle" onclick="goto(3, 2)"
                                style="float: left; margin: 10px; display: inline-block">ادامه
                             </a>
-                            <a class="genric-btn purplebtn circle" onclick="goto(1, 2)"
-                               style="float: right; margin: 10px; display: inline-block">بازگشت
-                            </a>
+                            <button type="submit" class="genric-btn purplebtn circle">submit</button>
                         </div>
                     </div>
                 </div>
@@ -404,7 +297,6 @@
     var form_count = 1;
     $("#addbtn").click(function() {
         form_count = form_count + 1;
-        console.log(form_count);
         var newrow = $("#temp_row").clone().attr("id", "row_"+form_count);
         newrow.append("<td>"+form_count+"</td>");
         var count = $("#first_row").children().length;
@@ -422,9 +314,7 @@
 
     function changed () {
         var value = $('#checkbox').prop("checked");
-        console.log(value);
         if (value == true) {
-            console.log("1");
             $('#btn').css('display', 'inline-block');
             $('#btn1').css('display', 'none');
         }

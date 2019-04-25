@@ -30,6 +30,7 @@ class SubmitOrderService(FormView):
                 context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
             else:
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        context['extra_fields'] = range(1, 6)
         return context
 
     def get_form_kwargs(self):
@@ -39,8 +40,13 @@ class SubmitOrderService(FormView):
                               [(1, '0.01'), (2, '0.02'), (2, '0.1'), (2, '0.5')]],
                              ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
                              ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
+        kwargs['extra_field_count'] = range(1, 6)
         return kwargs
 
     def form_valid(self, form):
         print(form)
         return super(SubmitOrderService, self).form_valid(form)
+
+    def form_invalid(self, form):
+        print(form.fields)
+        return super(SubmitOrderService, self).form_invalid(form)
