@@ -21,5 +21,8 @@ class OrderServiceFrom(forms.Form):
                 self.fields[str(col[0]) + '_{index}_'.format(index=index)].label = col[2]
 
     def clean(self):
-        print("here", self.cleaned_data['extra_field_count'])
+        print("here")
         return super(OrderServiceFrom, self).clean()
+
+    def chert(self):
+        return self.fields['extra_field_count']

@@ -40,6 +40,7 @@ class SubmitOrderService(FormView):
                               [(1, '0.01'), (2, '0.02'), (2, '0.1'), (2, '0.5')]],
                              ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
                              ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
+        kwargs['columns'] = [['name', 'text', 'name', 10]]
         kwargs['extra_field_count'] = 1
         return kwargs
 
@@ -48,5 +49,5 @@ class SubmitOrderService(FormView):
         return super(SubmitOrderService, self).form_valid(form)
 
     def form_invalid(self, form):
-        print(form.errors)
+        print(form.chert())
         return super(SubmitOrderService, self).form_invalid(form)
