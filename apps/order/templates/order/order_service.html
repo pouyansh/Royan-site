@@ -80,219 +80,203 @@
     </div>
 </div>
 <!--================Start Form=====================-->
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <!--================Start Section2 =================-->
-    <div id="sec2" class="whole-wrap" dir="rtl"
-         style="display: block; text-align: right; font-family: FarsiFont; font-size: 16px;">
-        <div class="container">
-            <div class="section-top-border">
-                <div class="row">
-                    <div class="col-lg-10 col-md-8" style="margin: auto">
 
-                        <h5>
-                            برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
-                        </h5>
-                        ‌
-                        <div class="submit_service_register_parts">
-                            <input type="radio" name="type_1" id="type_1" style="display: inline-block;"
-                                   onclick="radiochanged(1)">
-                            <h5 style="display: inline-block">روش اول:</h5>
-                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید ابتدا فایل اکسل
-                                داده شده را دانلود کرده و
-                                سپس تکمیل شده‌ی آن را آپلود کنید.
-                            </div>
-                            <div id="div_type_1"
-                                 style="margin: auto; display: flex; height: 100%; transition: 1s;">
-                                <a style="transition: 1s;" id="div_type_1_btn_1"
-                                   href="{% static 'primer.xls' %}" download class="submit_service_excel">دانلود فایل
-                                    نمونه</a>
-                                <a style="transition: 1s;" id="div_type_1_btn_2"
-                                   href="{% static 'primer.xls' %}" download class="submit_service_excel">درگاه
-                                    آپلود</a>
-                            </div>
+<!--================Start Section2 =================-->
+<div id="sec2" class="whole-wrap" dir="rtl"
+     style="display: block; text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-10 col-md-8" style="margin: auto">
+
+                    <h5>
+                        برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
+                    </h5>
+                    ‌
+                    <div class="submit_service_register_parts">
+                        <input type="radio" name="type_1" id="type_1" style="display: inline-block;"
+                               onclick="radiochanged(1)">
+                        <h5 style="display: inline-block">روش اول:</h5>
+                        <div style="font-size: 20px; display: inline-block">در این روش، شما باید ابتدا فایل اکسل
+                            داده شده را دانلود کرده و
+                            سپس تکمیل شده‌ی آن را آپلود کنید.
                         </div>
+                        <div id="div_type_1"
+                             style="margin: auto; display: flex; height: 100%; transition: 1s;">
+                            <a style="transition: 1s;" id="div_type_1_btn_1"
+                               href="{% static 'primer.xls' %}" download class="submit_service_excel">دانلود فایل
+                                نمونه</a>
+                            <a style="transition: 1s;" id="div_type_1_btn_2"
+                               href="{% static 'primer.xls' %}" download class="submit_service_excel">درگاه
+                                آپلود</a>
+                        </div>
+                    </div>
 
-                        <div class="submit_service_register_parts">
-                            <input type="radio" name="type_2" id="type_2" style="display: inline-block;"
-                                   onclick="radiochanged(2)">
-                            <h5 style="display: inline-block">روش دوم:</h5>
-                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید جزئیات توالی‌های
-                                خود را از
-                                طریق جدول زیر، وارد کنید.
-                            </div>
-                            {% for field in form %}
-                            {% if field.name == "extra_field_count" %}
-                            {{field}}
-                            {% endif %}
-                            {% endfor %}
-                            <div style="height: 100%; transition: 1s; text-align: center;" id="div_type_2">
+                    <div class="submit_service_register_parts">
+                        <input type="radio" name="type_2" id="type_2" style="display: inline-block;"
+                               onclick="radiochanged(2)">
+                        <h5 style="display: inline-block">روش دوم:</h5>
+                        <div style="font-size: 20px; display: inline-block">در این روش، شما باید جزئیات توالی‌های
+                            خود را از
+                            طریق جدول زیر، وارد کنید.
+                        </div>
+                        <div style="height: 100%; transition: 1s; text-align: center;" id="div_type_2">
+                            <form method="post">
+                                {% csrf_token %}
                                 <table dir="ltr" id="table" lang="en">
                                     <thead>
                                     <tr style="font-size: 12px;">
                                         <th>#</th>
                                         {% for field in form %}
-                                        {% if field.name != "extra_field_count" and "_1_" in field.name  %}
                                         <th>{{ field.label }}</th>
-                                        {% endif %}
                                         {% endfor %}
                                     </tr>
                                     </thead>
                                     <tr style="font-size: 12px;" id="temp_row">
                                     </tr>
-                                    {% for i in extra_fields %}
-                                    {% with y=i|stringformat:"s" %}
-                                    {% with template="row_"|add:y %}
-                                    <tr style="font-size: 12px;" id={{template}}>
-                                    {% endwith %}
-                                    {% endwith %}
-                                        <td>{{i}}</td>
+                                    <tr style="font-size: 12px;" id="1">
+                                        <td>1</td>
                                         {% for field in form %}
-                                        {% with y=i|stringformat:"s" %}
-                                        {% with template="_"|add:y|add:"_" %}
-                                        {% if field.name != "extra_field_count" and template in field.name %}
                                         <td style="padding: 0 5px;">{{field}}</td>
                                         {{field.errors}}
-                                        {% endif %}
-                                        {% endwith %}
-                                        {% endwith %}
                                         {% endfor %}
+<!--                                        <td><input name="name" id="id_name" type="text"></td>-->
                                     </tr>
-                                    {% endfor %}
 
                                 </table>
                                 <a class="genric-btn purplebtn circle" id="addbtn"
                                    style="display: inline-block; transition: 1s; margin-right: auto;">اضافه
                                 </a>
-                            </div>
-                        </div>
-                        <div class="pager">
-                            <a class="genric-btn purplebtn circle" onclick="goto(3, 2)"
-                               style="float: left; margin: 10px; display: inline-block">ادامه
-                            </a>
-                            <button type="submit" class="genric-btn purplebtn circle">submit</button>
+                                <button type="submit" class="genric-btn purplebtn circle">submit</button>
+                            </form>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--================End Section2 =================-->
-
-    <!--================Start Section3 =================-->
-    <div id="sec3" class="whole-wrap" dir="rtl"
-         style="display: none; text-align: right; font-size: 16px;">
-        <div class="container">
-            <div class="section-top-border">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8" style="margin: auto">
-
-                        <table dir="ltr" id="table2"
-                               style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
-                            <thead>
-                            <tr style="font-size: 12px;">
-                                <th>num</th>
-                                <th>Oligo name</th>
-                                <th>Oligo Sequence</th>
-                                <th style="width: 15%;">Concentration</th>
-                                <th style="width: 15%;">Purification</th>
-                                <th style="width: 15%;">Modification</th>
-                            </tr>
-                            </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>O1</td>
-                                <td>5'-ACTGTGGGGTAAA-3'</td>
-                                <td>0.1</td>
-                                <td>Yes</td>
-                                <td>a1</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>O1</td>
-                                <td>5'-ACTGTGGGGTAAA-3'</td>
-                                <td>0.1</td>
-                                <td>Yes</td>
-                                <td>a1</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>O1</td>
-                                <td>5'-ACTGTGGGGTAAA-3'</td>
-                                <td>0.1</td>
-                                <td>Yes</td>
-                                <td>a1</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>O1</td>
-                                <td>5'-ACTGTGGGGTAAA-3'</td>
-                                <td>0.1</td>
-                                <td>Yes</td>
-                                <td>a1</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>O1</td>
-                                <td>5'-ACTGTGGGGTAAA-3'</td>
-                                <td>0.1</td>
-                                <td>Yes</td>
-                                <td>a1</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>O1</td>
-                                <td>5'-ACTGTGGGGTAAA-3'</td>
-                                <td>0.1</td>
-                                <td>Yes</td>
-                                <td>a1</td>
-                            </tr>
-
-                        </table>
-                        <input type="checkbox" id="checkbox" onchange="changed()">
-                        <div style="font-family: FarsiFont; display: inline;">
-                            صحت موارد ثبت شده را تایید می نمایم.
-                        </div>
-                        <br>
-                        <a onclick="goto(2, 3)" class="genric-btn purplebtn circle"
-                           style="display: inline-block; font-family: FarsiFont;">
-                            بازگشت
+                    <div class="pager">
+                        <a class="genric-btn purplebtn circle" onclick="goto(3, 2)"
+                           style="float: left; margin: 10px; display: inline-block">ادامه
                         </a>
-                        <button type="submit" id="btn" class="genric-btn greenbtn circle"
-                                style="display: none; float: left; font-family: FarsiFont;">ثبت نهایی
-                        </button>
-                        <div id="btn1" class="genric-btn graybtn circle"
-                             style="display: inline-block; float: left; font-family: FarsiFont;">
-                            ثبت نهایی
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--================End Section3 =================-->
-
-    <!--================Start Section4 =================-->
-    <div id="sec4" class="whole-wrap" dir="rtl"
-         style="display: none; text-align: right; font-family: FarsiFont; font-size: 16px;">
-        <div class="container">
-            <div class="section-top-border">
-                <div class="row">
-                    <div class="col-lg-8 col-md-8" style="margin: auto">
-                        <div style="font-family: FarsiFont; text-align: center; background: rgb(156,239,141); width: 100%; height: 100px; display: block; color: #222222">
-                            <h4 style="font-family: FarsiFont; padding-top: 20px;">سفارش شما با موفقیت انجام شد. پیش
-                                فاکتور جهت تایید نهایی سفارش، به زودی به ایمیل شما ارسال خواهد گردید. </h4>
-                            <h3 style="font-family: FarsiFont;">کد رهگیری: PR-971210-1</h3>
-                        </div>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--================End Section4 =================-->
+</div>
+<!--================End Section2 =================-->
 
-</form>
+<!--================Start Section3 =================-->
+<div id="sec3" class="whole-wrap" dir="rtl"
+     style="display: none; text-align: right; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+
+                    <table dir="ltr" id="table2"
+                           style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
+                        <thead>
+                        <tr style="font-size: 12px;">
+                            <th>num</th>
+                            <th>Oligo name</th>
+                            <th>Oligo Sequence</th>
+                            <th style="width: 15%;">Concentration</th>
+                            <th style="width: 15%;">Purification</th>
+                            <th style="width: 15%;">Modification</th>
+                        </tr>
+                        </thead>
+                        <tr>
+                            <td>1</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>O1</td>
+                            <td>5'-ACTGTGGGGTAAA-3'</td>
+                            <td>0.1</td>
+                            <td>Yes</td>
+                            <td>a1</td>
+                        </tr>
+
+                    </table>
+                    <input type="checkbox" id="checkbox" onchange="changed()">
+                    <div style="font-family: FarsiFont; display: inline;">
+                        صحت موارد ثبت شده را تایید می نمایم.
+                    </div>
+                    <br>
+                    <a onclick="goto(2, 3)" class="genric-btn purplebtn circle"
+                       style="display: inline-block; font-family: FarsiFont;">
+                        بازگشت
+                    </a>
+                    <button type="submit" id="btn" class="genric-btn greenbtn circle"
+                            style="display: none; float: left; font-family: FarsiFont;">ثبت نهایی
+                    </button>
+                    <div id="btn1" class="genric-btn graybtn circle"
+                         style="display: inline-block; float: left; font-family: FarsiFont;">
+                        ثبت نهایی
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================End Section3 =================-->
+
+<!--================Start Section4 =================-->
+<div id="sec4" class="whole-wrap" dir="rtl"
+     style="display: none; text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+                    <div style="font-family: FarsiFont; text-align: center; background: rgb(156,239,141); width: 100%; height: 100px; display: block; color: #222222">
+                        <h4 style="font-family: FarsiFont; padding-top: 20px;">سفارش شما با موفقیت انجام شد. پیش
+                            فاکتور جهت تایید نهایی سفارش، به زودی به ایمیل شما ارسال خواهد گردید. </h4>
+                        <h3 style="font-family: FarsiFont;">کد رهگیری: PR-971210-1</h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================End Section4 =================-->
+
 <!--================End Form=======================-->
 {% endblock main_content %}
 

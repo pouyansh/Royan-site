@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
@@ -6,7 +5,6 @@ from apps.order.forms import *
 from apps.product.models import Category
 from apps.registration.models import Person, Organization, Customer
 from apps.research.models import ResearchArea
-from apps.royan_admin.models import RoyanAdmin
 from apps.service.models import Service, Field
 from apps.tutorial.models import Tutorial
 
@@ -33,21 +31,21 @@ class SubmitOrderService(FormView):
         context['extra_fields'] = range(1, 2)
         return context
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['columns'] = [['name', 'text', 'Oligo name', 20], ['sequence', 'text', 'Oligo Sequence', 20],
-                             ['Concentration', 'choice', 'concentration',
-                              [(1, '0.01'), (2, '0.02'), (2, '0.1'), (2, '0.5')]],
-                             ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
-                             ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
-        kwargs['columns'] = [['name', 'text', 'name', 10]]
-        kwargs['extra_field_count'] = 1
-        return kwargs
+    # def get_form_kwargs(self):
+    #     kwargs = super().get_form_kwargs()
+    #     kwargs['columns'] = [['name', 'text', 'Oligo name', 20], ['sequence', 'text', 'Oligo Sequence', 20],
+    #                          ['Concentration', 'choice', 'concentration',
+    #                           [(1, '0.01'), (2, '0.02'), (2, '0.1'), (2, '0.5')]],
+    #                          ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
+    #                          ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
+    #     kwargs['columns'] = []
+    #     kwargs['extra_field_count'] = 1
+    #     return kwargs
 
     def form_valid(self, form):
-        print(form)
+        print("valid", form)
         return super(SubmitOrderService, self).form_valid(form)
 
     def form_invalid(self, form):
-        print(form.chert())
+        print("invalid", form)
         return super(SubmitOrderService, self).form_invalid(form)
