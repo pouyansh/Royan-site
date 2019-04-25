@@ -2,6 +2,7 @@ from django import forms
 
 
 class OrderServiceFrom(forms.Form):
+    order_id = forms.IntegerField()
 
     def __init__(self, *args, **kwargs):
         columns = kwargs.pop('columns')

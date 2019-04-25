@@ -18,6 +18,8 @@ class SubmitOrderService(FormView):
     template_name = 'order/order_service.html'
     success_url = reverse_lazy('index:index')
 
+    # TODO check for admin and service existence
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
@@ -43,10 +45,6 @@ class SubmitOrderService(FormView):
             content = csv.reader(open(order.file.path, 'r'))
             order.file.close()
         else:
-            if not self.request.user.is_superuser:
-                customer = Customer.objects.get(username=self.request.user.username)
-                order = Order(customer=customer, service=service)
-                order.save()
             content = []
         context['data'] = content
         return context
@@ -67,12 +65,33 @@ class SubmitOrderService(FormView):
                         tempchoices.append((row[i], row[i]))
                 temp.append(tempchoices)
             data.append(temp)
-        print(data)
         kwargs['columns'] = data
         return kwargs
 
     def form_valid(self, form):
         print("valid", form.cleaned_data['name'])
+        service = Service.objects.get(id=self.kwargs['pk'])
+        if not self.request.user.is_superuser:
+            customer = Customer.objects.get(username=self.request.user.username)
+            orders = Order.objects.filter(customer=customer, service=service, is_finished=False)
+        else:
+            orders = []
+        if orders:
+            order = orders[0]
+            content = csv.reader(open(order.file.path, 'r'))
+            order.file.close()
+        else:
+            customer = Customer.objects.get(username=self.request.user.username)
+            order = Order(customer=customer, service=service)
+            order.save()
+            content = []
+        fields = csv.reader(open(service.fields.path, 'r'))
+        data = []
+        for row in fields:
+            data.append(form.cleaned_data[row[2]])
+        content.append(data)
+
+        # TODO create file and write content on it and set it for order
         return super(SubmitOrderService, self).form_valid(form)
 
     def form_invalid(self, form):
