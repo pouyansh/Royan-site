@@ -31,19 +31,17 @@ class SubmitOrderService(FormView):
         context['extra_fields'] = range(1, 2)
         return context
 
-    # def get_form_kwargs(self):
-    #     kwargs = super().get_form_kwargs()
-    #     kwargs['columns'] = [['name', 'text', 'Oligo name', 20], ['sequence', 'text', 'Oligo Sequence', 20],
-    #                          ['Concentration', 'choice', 'concentration',
-    #                           [(1, '0.01'), (2, '0.02'), (2, '0.1'), (2, '0.5')]],
-    #                          ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
-    #                          ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
-    #     kwargs['columns'] = []
-    #     kwargs['extra_field_count'] = 1
-    #     return kwargs
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['columns'] = [['name', 'text', 'Oligo name', 20], ['sequence', 'text', 'Oligo Sequence', 20],
+                             ['Concentration', 'choice', 'concentration',
+                              [(1, '0.01'), (2, '0.02'), (2, '0.1'), (2, '0.5')]],
+                             ['purification', 'choice', 'purification', [(1, 'yes'), (2, 'no')]],
+                             ['modification', 'choice', 'modification', [(1, 'yes'), (2, 'no')]]]
+        return kwargs
 
     def form_valid(self, form):
-        print("valid", form)
+        print("valid", form.cleaned_data['name'])
         return super(SubmitOrderService, self).form_valid(form)
 
     def form_invalid(self, form):
