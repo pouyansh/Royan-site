@@ -126,8 +126,13 @@ class SubmitOrderService(FormView):
             content_data = []
         if str(final) == "1":
             order_type = form.cleaned_data['type']
-            if str(order_type) == "2":
-                order.is_finished = True
+            data = []
+            if '2' in order_type:
+                for row in content_data:
+                    data.append(row)
+            if '1' in order_type:
+                # content = self.request.POST['file'].read()
+                print(self.request.FILES)
             self.success_url = reverse_lazy("index:index")
         else:
             try:

@@ -31,7 +31,7 @@ class OrderServiceFrom(forms.Form):
 
     def clean_type(self):
         if not self.cleaned_data['type']:
-            return 2
+            raise forms.ValidationError("باید حداقل یکی از این دو مورد را انتخاب کنید")
         return self.cleaned_data['type']
 
     def clean(self):
