@@ -41,15 +41,13 @@
   margin: 1em 0;
 }
 .js .file-return {
-  font-style: italic;
-  font-size: .9em;
-  font-weight: bold;
 }
 .js .file-return:not(:empty):before {
   content: "Selected file: ";
   font-style: normal;
   font-weight: normal;
 }
+
 </style>
 {% endblock internal_css %}
 
@@ -97,41 +95,41 @@
                         برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
                     </h5>
                     ‌
-                    <div class="submit_service_register_parts">
-                        <input type="radio" name="type_1" id="type_1" style="display: inline-block;"
-                               onclick="radiochanged(1)">
-                        <h5 style="display: inline-block">روش اول:</h5>
-                        <div style="font-size: 20px; display: inline-block">در این روش، شما باید ابتدا فایل اکسل
-                            داده شده را دانلود کرده و
-                            سپس تکمیل شده‌ی آن را آپلود کنید.
-                        </div>
-                        <div id="div_type_1"
-                             style="margin: auto; display: flex; height: 100%; transition: 1s;">
-                            <a id="div_type_1_btn_1"
-                               href="{{ service.file.path }}" download class="submit_service_excel">دانلود فایل
-                                نمونه</a>
-                            <input class="input-file" id="my-file" type="file">
-                            <div class="submit_service_excel" style="padding: 0;">
-                                <label tabindex="0" for="my-file" id="input-file-trigger"
-                                       style="font-weight: unset; width: 100%; height: 100%;
-                                       padding-top: 10px; cursor: pointer;">درگاه آپلود فایل</label>
+                    <form method="post">
+                        <div class="submit_service_register_parts" style="padding-bottom: 60px;">
+                            <input type="radio" name="type" id="id_type_1" style="display: inline-block;"
+                                   onclick="radiochanged(1)" value="1">
+                            <h5 style="display: inline-block">روش اول:</h5>
+                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید ابتدا فایل اکسل
+                                داده شده را دانلود کرده و
+                                سپس تکمیل شده‌ی آن را آپلود کنید.
                             </div>
-                            <p class="file-return"></p>
+                            <div id="div_type_1"
+                                 style="margin: auto; display: flex; height: 100%; transition: 1s;">
+                                <a id="div_type_1_btn_1"
+                                   href="{{ service.file.path }}" download class="submit_service_excel">دانلود فایل
+                                    نمونه</a>
+                                <div class="submit_service_excel" style="padding: 0;" id="div_type_1_btn_2">
+                                    <input class="input-file" id="my-file" type="file">
+                                    <label tabindex="0" for="my-file" id="input-file-trigger"
+                                           style="font-weight: unset; width: 100%; height: 100%;
+                                       padding-top: 10px; cursor: pointer;">درگاه آپلود فایل</label>
+                                </div>
+                            </div>
+                            <p class="file-return" style="float: left;"></p>
                         </div>
-                    </div>
 
-                    <div class="submit_service_register_parts">
-                        <input type="radio" name="type_2" id="type_2" style="display: inline-block;"
-                               onclick="radiochanged(2)">
-                        <h5 style="display: inline-block">روش دوم:</h5>
-                        <div style="font-size: 20px; display: inline-block">در این روش، شما باید جزئیات توالی‌های
-                            خود را از
-                            طریق جدول زیر، وارد کنید.
-                        </div>
-                        <div style="height: 100%; transition: 1s; text-align: center;" id="div_type_2">
-                            <form method="post">
+                        <div class="submit_service_register_parts">
+                            <input type="radio" name="type" id="id_type_2" style="display: inline-block;"
+                                   onclick="radiochanged(2)" value="2">
+                            <h5 style="display: inline-block">روش دوم:</h5>
+                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید جزئیات توالی‌های
+                                خود را از
+                                طریق جدول زیر، وارد کنید.
+                            </div>
+                            <div style="height: 100%; transition: 1s; text-align: center;" id="div_type_2">
                                 {% csrf_token %}
-                                <input type="text" name="order_id" id="id_order_id" style="display: none;">
+                                <input type="text" name="order_id" id="id_order_id" style="display: none;" value="-1">
                                 <table dir="ltr" id="table" lang="en">
                                     <thead>
                                     <tr style="font-size: 12px;">
@@ -161,7 +159,7 @@
                                                 {% endwith %}
                                                 {% with mypopup="myPopup"|add:y %}
                                                 <div class="popuptext" id="{{mypopup}}">
-                                                {% endwith %}
+                                                    {% endwith %}
                                                     <div onclick="myFunction({{forloop.counter}})"
                                                          class="popup btn text-danger circle"
                                                          style="font-size: 15px; min-width: 80px; display: block;"
@@ -189,12 +187,15 @@
                                             <button type="submit" class="btn generic-btn text-success"
                                                     style="font-size: 15px; width: 100%; display: block;
                                                     background: none;
-                                                 ">add</button></td>
+                                                 " id="button_add">add
+                                            </button>
+                                        </td>
                                     </tr>
                                 </table>
-                            </form>
+
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <div class="pager">
                         <a class="genric-btn purplebtn circle" onclick="goto(3, 2)"
                            style="float: left; margin: 10px; display: inline-block">ادامه
@@ -213,7 +214,7 @@
 {% block script %}
 <script>
     document.querySelector("html").classList.add('js');
-    $("input").prop('required',true);
+    $("#1").children().prop('required',true);
     function myFunction(id) {
         var popup = document.getElementById("myPopup"+id);
         popup.classList.toggle("show");
@@ -224,8 +225,7 @@
     }
 
     function radiochanged (id) {
-        if ($('#type_'+id).prop("checked") == true){
-            $('#type_'+(3-id)).prop("checked", false)
+        if ($('#id_type_'+id).prop("checked") == true){
             if (id == 2) {
                 $('#div_type_1').css("height", "0px");
                 $('#div_type_1_btn_1').css("opacity", 0);
@@ -255,6 +255,7 @@
     var fileInput  = document.querySelector( ".input-file" ),
     button     = document.querySelector( "#input-file-trigger" ),
     the_return = document.querySelector(".file-return");
+    addbtn = document.querySelector("#button_add");
 
     button.addEventListener( "keydown", function( event ) {
         if ( event.keyCode == 13 || event.keyCode == 32 ) {
@@ -268,5 +269,10 @@
     fileInput.addEventListener( "change", function( event ) {
         the_return.innerHTML = this.value;
     });
+
+    addbtn.addEventListener("click", function(event) {
+        $("#id_order_id").value = -1;
+    });
+
 </script>
 {% endblock script %}

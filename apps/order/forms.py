@@ -18,4 +18,3 @@ class OrderServiceFrom(forms.Form):
                 self.fields[str(col[0])] = forms.ChoiceField(choices=col[3])
             self.fields[str(col[0])].label = col[2]
             self.fields[str(col[0])].required = False
-
