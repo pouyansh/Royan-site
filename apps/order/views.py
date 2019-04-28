@@ -101,6 +101,7 @@ class SubmitOrderService(FormView):
                 temp.append(tempchoices)
             data.append(temp)
         kwargs['columns'] = data
+        print(kwargs)
         return kwargs
 
     def form_valid(self, form):
