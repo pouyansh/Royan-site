@@ -1,5 +1,6 @@
 import csv
 
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
@@ -17,7 +18,12 @@ class SubmitOrderService(FormView):
     template_name = 'order/order_service.html'
     success_url = reverse_lazy('index:index')
 
-    # TODO check for admin and service existence
+    def dispatch(self, request, *args, **kwargs):
+        if not Service.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        if self.request.user.is_superuser:
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
