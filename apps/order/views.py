@@ -125,7 +125,9 @@ class SubmitOrderService(FormView):
             order.save()
             content_data = []
         if str(final) == "1":
-            order.is_finished = True
+            order_type = form.cleaned_data['type']
+            if str(order_type) == "2":
+                order.is_finished = True
             self.success_url = reverse_lazy("index:index")
         else:
             try:

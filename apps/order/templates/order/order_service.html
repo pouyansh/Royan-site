@@ -99,8 +99,7 @@
                     ‌
                     <form method="post">
                         <div class="submit_service_register_parts" style="padding-bottom: 60px;">
-                            <input type="radio" name="type" id="id_type_1" style="display: inline-block;"
-                                   onclick="radiochanged(1)" value="1">
+                            <input type="checkbox" name="type" id="id_type_1" style="display: inline-block;" value="1">
                             <h5 style="display: inline-block">روش اول:</h5>
                             <div style="font-size: 20px; display: inline-block">در این روش، شما باید ابتدا فایل اکسل
                                 داده شده را دانلود کرده و
@@ -112,8 +111,8 @@
                                    href="{{ service.file.path }}" download class="submit_service_excel">دانلود فایل
                                     نمونه</a>
                                 <div class="submit_service_excel" style="padding: 0;" id="div_type_1_btn_2">
-                                    <input class="input-file" id="my-file" type="file">
-                                    <label tabindex="0" for="my-file" id="input-file-trigger"
+                                    <input class="input-file" name="file" id="id_file" type="file">
+                                    <label tabindex="0" for="id_file" id="input-file-trigger"
                                            style="font-weight: unset; width: 100%; height: 100%;
                                        padding-top: 10px; cursor: pointer;">درگاه آپلود فایل</label>
                                 </div>
@@ -122,8 +121,7 @@
                         </div>
 
                         <div class="submit_service_register_parts">
-                            <input type="radio" name="type" id="id_type_2" style="display: inline-block;"
-                                   onclick="radiochanged(2)" value="2">
+                            <input type="checkbox" name="type" id="id_type_2" style="display: inline-block;" value="2">
                             <h5 style="display: inline-block">روش دوم:</h5>
                             <div style="font-size: 20px; display: inline-block">در این روش، شما باید جزئیات توالی‌های
                                 خود را از
@@ -139,7 +137,7 @@
                                         <th>#</th>
                                         {% for field in form %}
                                         {% if field.name != "order_id" and field.name != "type" %}
-                                        {% if field.name != "final" %}
+                                        {% if field.name != "final" and field.name != "file" %}
                                         <th>{{ field.label }}</th>
                                         {% endif %}
                                         {% endif %}
@@ -184,7 +182,7 @@
                                         <td></td>
                                         {% for field in form %}
                                         {% if field.name != "order_id" and field.name != "type" %}
-                                        {% if field.name != "final" %}
+                                        {% if field.name != "final" and field.name != "file" %}
                                         <td style="padding: 0 5px;">{{field}}</td>
                                         {{field.errors}}
                                         {% endif %}

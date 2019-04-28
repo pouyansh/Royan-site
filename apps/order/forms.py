@@ -5,8 +5,13 @@ class OrderServiceFrom(forms.Form):
     order_id = forms.IntegerField()
     CHOICES = [(1, 1),
                (2, 2)]
-    type = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+    type = forms.MultipleChoiceField(
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        choices=CHOICES,
+    )
     final = forms.IntegerField(required=False)
+    file = forms.FileField(required=False)
 
     def __init__(self, *args, **kwargs):
         columns = kwargs.pop('columns')
