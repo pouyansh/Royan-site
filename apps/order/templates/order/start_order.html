@@ -183,15 +183,12 @@
                         <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.address}}</h4>
                     </div>
                     {% endif %}
-                    <div class="mt-10" style="display: flex; margin-top: 30px;">
-                        <label style="float: right; display: inline-block; width: 150px;">
-                            <div style="color: red; display: inline;">*</div>
-                            نام فاکتور شونده:</label>
-                        <input type="text" required name="name" id="id_name" class="single-input">
-                    </div>
-                    <a class="genric-btn purplebtn circle" onclick="goto(2, 1)"
+                    {% if request.user.is_superuser %}
+                    {% else %}
+                    <a href="{% url 'order:order_service' service.id %}" class="genric-btn purplebtn circle"
                        style="float: left; margin: 10px; display: inline-block">ادامه
                     </a>
+                    {% endif %}
                 </div>
             </div>
         </div>

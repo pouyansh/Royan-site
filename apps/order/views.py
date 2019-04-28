@@ -2,7 +2,7 @@ import csv
 
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import FormView
+from django.views.generic import FormView, TemplateView
 
 from apps.order.forms import *
 from apps.order.models import Order
@@ -11,6 +11,35 @@ from apps.registration.models import Person, Organization, Customer
 from apps.research.models import ResearchArea
 from apps.service.models import Service, Field
 from apps.tutorial.models import Tutorial
+
+
+class StartOrderService(TemplateView):
+    template_name = "order/start_order.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Service.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        if self.request.user.is_superuser:
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        if not self.request.user.is_superuser:
+            customer = Customer.objects.get(username=self.request.user.username)
+            context['logged_in_customer'] = customer
+            if customer.is_person:
+                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+            else:
+                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        service = Service.objects.get(id=self.kwargs['pk'])
+        context['service'] = service
+        return context
 
 
 class SubmitOrderService(FormView):
@@ -105,7 +134,7 @@ class SubmitOrderService(FormView):
                         f.truncate()
                         writer = csv.writer(f)
                         for i in range(len(content_data)):
-                            if i != order_id-1:
+                            if i != order_id - 1:
                                 writer.writerow(content_data[i])
                 else:
                     fields = csv.reader(open(service.fields.path, 'r'))
