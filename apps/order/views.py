@@ -1,6 +1,5 @@
 import csv
 
-from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 
@@ -80,20 +79,27 @@ class SubmitOrderService(FormView):
             order = orders[0]
             content = csv.reader(open(order.file.path, 'r'))
             order.file.close()
+            content_data = []
+            for row in content:
+                content_data.append(row)
         else:
             customer = Customer.objects.get(username=self.request.user.username)
             order = Order(customer=customer, service=service)
             order.save()
-            content = []
+            content_data = []
         fields = csv.reader(open(service.fields.path, 'r'))
         data = []
         for row in fields:
-            data.append(form.cleaned_data[row[2]])
-        content.append(data)
+            data.append(form.cleaned_data[row[0]])
+        content_data.append(data)
 
-        # TODO create file and write content on it and set it for order
+        with open(order.file.path, 'a') as f:
+            writer = csv.writer(f)
+            writer.writerow(data)
+
+        self.success_url = reverse_lazy('order:order_service', kwargs={'pk': self.kwargs['pk']})
         return super(SubmitOrderService, self).form_valid(form)
 
     def form_invalid(self, form):
-        print("invalid", form)
+        print("invalid")
         return super(SubmitOrderService, self).form_invalid(form)

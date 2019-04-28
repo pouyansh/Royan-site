@@ -156,7 +156,9 @@
                                     <tr style="font-size: 12px;">
                                         <th>#</th>
                                         {% for field in form %}
+                                        {% if field.name != "order_id" %}
                                         <th>{{ field.label }}</th>
+                                        {% endif %}
                                         {% endfor %}
                                         <th>change</th>
                                     </tr>
@@ -197,8 +199,10 @@
                                     <tr style="font-size: 12px;" id="1">
                                         <td></td>
                                         {% for field in form %}
+                                        {% if field.name != "order_id" %}
                                         <td style="padding: 0 5px;">{{field}}</td>
                                         {{field.errors}}
+                                        {% endif %}
                                         {% endfor %}
                                         <td style="text-align: center;"><button type="submit" class="btn generic-btn text-success"
                                                     style="font-size: 15px; width: 100%; display: block; background: none;
