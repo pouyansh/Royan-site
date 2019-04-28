@@ -68,7 +68,7 @@ class SubmitOrderService(FormView):
         return kwargs
 
     def form_valid(self, form):
-        print("valid", form.cleaned_data['name'])
+        order_id = form.cleaned_data['order_id']
         service = Service.objects.get(id=self.kwargs['pk'])
         if not self.request.user.is_superuser:
             customer = Customer.objects.get(username=self.request.user.username)
@@ -87,15 +87,24 @@ class SubmitOrderService(FormView):
             order = Order(customer=customer, service=service)
             order.save()
             content_data = []
-        fields = csv.reader(open(service.fields.path, 'r'))
-        data = []
-        for row in fields:
-            data.append(form.cleaned_data[row[0]])
-        content_data.append(data)
+        if order_id != -1:
+            print(order_id)
+            with open(order.file.path, 'w+') as f:
+                f.truncate()
+                writer = csv.writer(f)
+                for i in range(len(content_data)):
+                    if i != order_id-1:
+                        writer.writerow(content_data[i])
+        else:
+            fields = csv.reader(open(service.fields.path, 'r'))
+            data = []
+            for row in fields:
+                data.append(form.cleaned_data[row[0]])
+            content_data.append(data)
 
-        with open(order.file.path, 'a') as f:
-            writer = csv.writer(f)
-            writer.writerow(data)
+            with open(order.file.path, 'a') as f:
+                writer = csv.writer(f)
+                writer.writerow(data)
 
         self.success_url = reverse_lazy('order:order_service', kwargs={'pk': self.kwargs['pk']})
         return super(SubmitOrderService, self).form_valid(form)
