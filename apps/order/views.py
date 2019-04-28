@@ -34,6 +34,7 @@ class SubmitOrderService(FormView):
             else:
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         service = Service.objects.get(id=self.kwargs['pk'])
+        context['service'] = service
         if not self.request.user.is_superuser:
             customer = Customer.objects.get(username=self.request.user.username)
             orders = Order.objects.filter(customer=customer, service=service, is_finished=False)
