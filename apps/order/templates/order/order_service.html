@@ -49,6 +49,7 @@
 }
 
 
+
 </style>
 {% endblock internal_css %}
 
@@ -131,13 +132,16 @@
                             <div style="height: 100%; transition: 1s; text-align: center;" id="div_type_2">
                                 {% csrf_token %}
                                 <input type="text" name="order_id" id="id_order_id" style="display: none;" value="-1">
+                                <input type="text" name="final" id="id_final" style="display: none;" value="-1">
                                 <table dir="ltr" id="table" lang="en">
                                     <thead>
                                     <tr style="font-size: 12px;">
                                         <th>#</th>
                                         {% for field in form %}
                                         {% if field.name != "order_id" and field.name != "type" %}
+                                        {% if field.name != "final" %}
                                         <th>{{ field.label }}</th>
+                                        {% endif %}
                                         {% endif %}
                                         {% endfor %}
                                         <th>change</th>
@@ -180,8 +184,10 @@
                                         <td></td>
                                         {% for field in form %}
                                         {% if field.name != "order_id" and field.name != "type" %}
+                                        {% if field.name != "final" %}
                                         <td style="padding: 0 5px;">{{field}}</td>
                                         {{field.errors}}
+                                        {% endif %}
                                         {% endif %}
                                         {% endfor %}
                                         <td style="text-align: center;">
@@ -198,7 +204,7 @@
                         </div>
                         <div class="pager">
                             <button type="submit" class="genric-btn purplebtn circle" onclick="makeRequired()"
-                               style="float: left; margin: 10px; display: inline-block">ادامه
+                                    style="float: left; margin: 10px; display: inline-block">ثبت
                             </button>
 
                         </div>
@@ -229,6 +235,7 @@
     function makeRequired () {
         $("#1").children().prop('required',false);
         $("input[type=radio]").prop("required", true);
+        $("#id_final").val(1);
     }
 
     function radiochanged (id) {
@@ -280,6 +287,7 @@
     addbtn.addEventListener("click", function(event) {
         $("#id_order_id").value = -1;
     });
+
 
 
 </script>

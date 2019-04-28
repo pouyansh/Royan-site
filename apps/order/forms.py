@@ -6,6 +6,7 @@ class OrderServiceFrom(forms.Form):
     CHOICES = [(1, 1),
                (2, 2)]
     type = forms.ChoiceField(choices=CHOICES, widget=forms.RadioSelect)
+    final = forms.IntegerField(required=False)
 
     def __init__(self, *args, **kwargs):
         columns = kwargs.pop('columns')
