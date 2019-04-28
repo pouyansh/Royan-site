@@ -48,6 +48,7 @@
   font-weight: normal;
 }
 
+
 </style>
 {% endblock internal_css %}
 
@@ -135,7 +136,7 @@
                                     <tr style="font-size: 12px;">
                                         <th>#</th>
                                         {% for field in form %}
-                                        {% if field.name != "order_id" %}
+                                        {% if field.name != "order_id" and field.name != "type" %}
                                         <th>{{ field.label }}</th>
                                         {% endif %}
                                         {% endfor %}
@@ -178,7 +179,7 @@
                                     <tr style="font-size: 12px;" id="1">
                                         <td></td>
                                         {% for field in form %}
-                                        {% if field.name != "order_id" %}
+                                        {% if field.name != "order_id" and field.name != "type" %}
                                         <td style="padding: 0 5px;">{{field}}</td>
                                         {{field.errors}}
                                         {% endif %}
@@ -195,13 +196,14 @@
 
                             </div>
                         </div>
-                    </form>
-                    <div class="pager">
-                        <a class="genric-btn purplebtn circle" onclick="goto(3, 2)"
-                           style="float: left; margin: 10px; display: inline-block">ادامه
-                        </a>
+                        <div class="pager">
+                            <button type="submit" class="genric-btn purplebtn circle" onclick="makeRequired()"
+                               style="float: left; margin: 10px; display: inline-block">ادامه
+                            </button>
 
-                    </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -222,6 +224,11 @@
     function myDelete(i) {
         $("#id_order_id").val(i);
         $("input").prop('required',false);
+    }
+
+    function makeRequired () {
+        $("#1").children().prop('required',false);
+        $("input[type=radio]").prop("required", true);
     }
 
     function radiochanged (id) {
@@ -273,6 +280,7 @@
     addbtn.addEventListener("click", function(event) {
         $("#id_order_id").value = -1;
     });
+
 
 </script>
 {% endblock script %}

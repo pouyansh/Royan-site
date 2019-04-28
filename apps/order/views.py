@@ -90,7 +90,6 @@ class SubmitOrderService(FormView):
             content_data = []
         try:
             if order_id != -1:
-                print(order_id)
                 with open(order.file.path, 'w+') as f:
                     f.truncate()
                     writer = csv.writer(f)
