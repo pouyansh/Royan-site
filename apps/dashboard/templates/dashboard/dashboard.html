@@ -9,7 +9,7 @@
                 {% if logged_in_customer.is_person %}
                 <h3 class="nav-side-name">{{logged_in_user.first_name}} {{logged_in_user.last_name}}</h3>
                 {% else %}
-                <h3 class="nav-side-name">{{logged_in_user.organization_name}}-{{logged_in_user.post}}</h3>
+                <h3 class="nav-side-name">{{logged_in_user.post}} {{logged_in_user.organization_name}}</h3>
                 {% endif %}
             </div>
             <ul class="nav nav-pills">
@@ -120,7 +120,8 @@
                         </div>
                         {% endif %}
                     </div>
-                    <button class="btn btn-secondary circle" style="float: left; margin: 20px; font-size: 18px;">ویرایش اطلاعات شخصی</button>
+                    <a href="{% url 'registration:customer-update' %}" class="btn btn-secondary circle" style="float: left; margin: 20px; font-size: 18px;"
+                    >ویرایش اطلاعات شخصی</a>
                 </div>
             </div>
             <div id="menu1" class="tab-pane fade">
