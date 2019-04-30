@@ -2,6 +2,7 @@ from django import forms
 
 
 class OrderServiceFrom(forms.Form):
+    final = forms.IntegerField(required=False)
     order_id = forms.IntegerField()
     CHOICES = [(1, 1),
                (2, 2)]
@@ -10,7 +11,6 @@ class OrderServiceFrom(forms.Form):
         widget=forms.CheckboxSelectMultiple,
         choices=CHOICES,
     )
-    final = forms.IntegerField(required=False)
     file = forms.FileField(required=False)
 
     def __init__(self, *args, **kwargs):
@@ -18,6 +18,7 @@ class OrderServiceFrom(forms.Form):
         super(OrderServiceFrom, self).__init__(*args, **kwargs)
         self.fields['order_id'].required = False
         self.fields['order_id'].initial = -1
+        self.fields['final'].initial = -1
         self.fields['type'].required = False
         for col in columns:
             if col[1] == "text":
@@ -30,7 +31,8 @@ class OrderServiceFrom(forms.Form):
             self.fields[str(col[0])].required = False
 
     def clean_type(self):
-        if not self.cleaned_data['type']:
+        print(self.cleaned_data)
+        if not self.cleaned_data['type'] and str(self.cleaned_data['final']) != "-1":
             raise forms.ValidationError("باید حداقل یکی از این دو مورد را انتخاب کنید")
         return self.cleaned_data['type']
 

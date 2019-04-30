@@ -292,10 +292,9 @@
     });
 
     addbtn.addEventListener("click", function(event) {
-        $("#id_order_id").value = -1;
+        $("#id_order_id").val(-1);
+        $("input[type=checkbox]").prop('required',false);
+        $("#id_final").val(-1);
     });
-
-
-
 </script>
 {% endblock script %}
