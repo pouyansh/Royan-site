@@ -41,3 +41,8 @@ class OrderServiceFrom(forms.Form):
 class CheckDataFrom(forms.Form):
     confirm = forms.BooleanField(required=True)
     name = forms.CharField(max_length=40)
+
+    def clean_confirm(self):
+        confirm = self.cleaned_data['confirm']
+        if not confirm:
+            raise forms.ValidationError("باید صحبت اطلاعات را تایید کنید.")

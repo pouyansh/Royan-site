@@ -69,11 +69,17 @@
                             <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
                                 نام فاکتور شونده:</label>
                             <input type="text" required name="name" id="id_name" class="single-input">
+                            {% for error in form.name %}
+                                <p class="text-danger">{{error}}</p>
+                            {% endfor %}
                         </div>
                         <input type="checkbox" name="confirm" id="id_confirm" onchange="changed()">
                         <div style="font-family: FarsiFont; display: inline;">
                             صحت موارد ثبت شده را تایید می نمایم.
                         </div>
+                        {% for error in form.confirm %}
+                        <p class="text-danger">{{error}}</p>
+                        {% endfor %}
                         <br>
                         <a href="{% url 'order:order_service' service.id %} " class="genric-btn purplebtn circle"
                            style="display: inline-block; font-family: FarsiFont;">

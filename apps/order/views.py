@@ -218,3 +218,17 @@ class CheckData(FormView):
             content = []
         context['data'] = content
         return context
+
+    def form_valid(self, form):
+        service = Service.objects.get(id=self.kwargs['pk'])
+        customer = Customer.objects.get(username=self.request.user.username)
+        orders = Order.objects.filter(customer=customer, service=service, is_finished=False)
+        order = orders[0]
+        order.is_finished = True
+        order.name = form.cleaned_data['name']
+        order.save()
+        return super(CheckData, self).form_valid(form)
+
+
+class GetCode(TemplateView):
+    template_name = "order/get_code.html"
