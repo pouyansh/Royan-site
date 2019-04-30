@@ -93,62 +93,20 @@
                            style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
                         <thead>
                         <tr style="font-size: 12px;">
-                            <th>num</th>
-                            <th>Oligo name</th>
-                            <th>Oligo Sequence</th>
-                            <th style="width: 15%;">Concentration</th>
-                            <th style="width: 15%;">Purification</th>
-                            <th style="width: 15%;">Modification</th>
+                            <th>#</th>
+                            {% for field in fields %}
+                            <th>{{field}}</th>
+                            {% endfor %}
                         </tr>
                         </thead>
+                        {% for row in data %}
                         <tr>
-                            <td>1</td>
-                            <td>O1</td>
-                            <td>5'-ACTGTGGGGTAAA-3'</td>
-                            <td>0.1</td>
-                            <td>Yes</td>
-                            <td>a1</td>
+                            <td>{{forloop.counter}}</td>
+                            {% for cell in row %}
+                            <td>{{cell}}</td>
+                            {% endfor %}
                         </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>O1</td>
-                            <td>5'-ACTGTGGGGTAAA-3'</td>
-                            <td>0.1</td>
-                            <td>Yes</td>
-                            <td>a1</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>O1</td>
-                            <td>5'-ACTGTGGGGTAAA-3'</td>
-                            <td>0.1</td>
-                            <td>Yes</td>
-                            <td>a1</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>O1</td>
-                            <td>5'-ACTGTGGGGTAAA-3'</td>
-                            <td>0.1</td>
-                            <td>Yes</td>
-                            <td>a1</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>O1</td>
-                            <td>5'-ACTGTGGGGTAAA-3'</td>
-                            <td>0.1</td>
-                            <td>Yes</td>
-                            <td>a1</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>O1</td>
-                            <td>5'-ACTGTGGGGTAAA-3'</td>
-                            <td>0.1</td>
-                            <td>Yes</td>
-                            <td>a1</td>
-                        </tr>
+                        {% endfor %}
 
                     </table>
                     <div class="mt-10" style="display: flex; margin-top: 30px;">
@@ -157,7 +115,7 @@
                             نام فاکتور شونده:</label>
                         <input type="text" required name="name" id="id_name" class="single-input">
                     </div>
-                    <input type="checkbox" id="checkbox" onchange="changed()">
+                    <input type="checkbox" name="confirm" id="id_confirm" onchange="changed()">
                     <div style="font-family: FarsiFont; display: inline;">
                         صحت موارد ثبت شده را تایید می نمایم.
                     </div>
@@ -184,26 +142,8 @@
 
 {% block script %}
 <script>
-    var form_count = 1;
-    $("#addbtn").click(function() {
-        form_count = form_count + 1;
-        var newrow = $("#temp_row").clone().attr("id", "row_"+form_count);
-        newrow.append("<td>"+form_count+"</td>");
-        var count = $("#first_row").children().length;
-        for(var i = 2; i <= count; i ++){
-            var newtd = $("#first_row td:nth-child(" + i + ")").clone();
-            newtd.children().attr("id", newtd.children().attr('id') + form_count);
-            newtd.children().attr("name", newtd.children().attr('name') + form_count);
-            newtd.children().val('');
-            newrow.append(newtd);
-        }
-        $('#table').append(newrow);
-
-        $("[name=extra_field_count]").val(form_count);
-    });
-
     function changed () {
-        var value = $('#checkbox').prop("checked");
+        var value = $('#id_confirm').prop("checked");
         if (value == true) {
             $('#btn').css('display', 'inline-block');
             $('#btn1').css('display', 'none');
@@ -213,64 +153,5 @@
             $('#btn').css('display', 'none');
         }
     }
-
-    function radiochanged (id) {
-        if ($('#type_'+id).prop("checked") == true){
-            $('#type_'+(3-id)).prop("checked", false)
-            if (id == 2) {
-                $('#div_type_1').css("height", "0px");
-                $('#div_type_1_btn_1').css("opacity", 0);
-                $('#div_type_1_btn_1').css("visibility", "hidden");
-                $('#div_type_1_btn_2').css("opacity", 0);
-                $('#div_type_1_btn_2').css("visibility", "hidden");
-                $('#div_type_2').css("height", "100%");
-                $('#table').css("opacity", 1);
-                $('#table').css("visibility", "visible");
-                $('#addbtn').css("opacity", 1);
-                $('#addbtn').css("visibility", "visible");
-            }
-            if (id == 1) {
-                $('#div_type_1').css("height", "100%");
-                $('#div_type_1_btn_1').css("opacity", 1);
-                $('#div_type_1_btn_1').css("visibility", "visible");
-                $('#div_type_1_btn_2').css("opacity", 1);
-                $('#div_type_1_btn_2').css("visibility", "visible");
-                $('#div_type_2').css("height", "0px");
-                $('#table').css("opacity", 0);
-                $('#table').css("visibility", "hidden");
-                $('#addbtn').css("opacity", 0);
-                $('#addbtn').css("visibility", "hidden");
-            }
-        }
-    }
-
-    function goto (i, j) {
-        var body = $("html, body");
-        body.stop().animate({scrollTop:200}, 500, 'swing');
-        var id = "sec"+i;
-        $("#sec1").css('display', 'none');
-        $("#sec2").css('display', 'none');
-        $("#sec3").css('display', 'none');
-        $("#sec4").css('display', 'none');
-        $("#"+id).css('display', 'block');
-        $("#progress_btn_"+i).addClass("btn-primary");
-        $("#progress_btn_"+i).removeClass("btn-muted");
-        $("#progress_btn_"+i).removeClass("btn-success");
-        if (j > i) {
-            $("#progress_btn_"+j).removeClass("btn-primary");
-            $("#progress_btn_"+j).addClass("btn-muted");
-            $("#progress_btn_"+j).removeClass("btn-success");
-        }
-        else {
-            $("#progress_btn_"+j).removeClass("btn-primary");
-            $("#progress_btn_"+j).removeClass("btn-muted");
-            $("#progress_btn_"+j).addClass("btn-success");
-        }
-        return false;
-    }
-
-
-
-
 </script>
 {% endblock script %}
