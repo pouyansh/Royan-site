@@ -233,7 +233,7 @@ class CheckData(FormView):
         order.code = code
         order.date = jdatetime.datetime.now()
         order.save()
-        self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': self.kwargs['pk']})
+        self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': order.id})
         return super(CheckData, self).form_valid(form)
 
 
