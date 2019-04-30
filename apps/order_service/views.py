@@ -1,4 +1,5 @@
 import csv
+import datetime
 
 import jdatetime
 from django.shortcuts import redirect
@@ -229,6 +230,7 @@ class CheckData(FormView):
         order.name = form.cleaned_data['name']
         code = service.name + "-" + str(jdatetime.datetime.now().date()) + "-" + order.id
         order.code = code
+        order.date = datetime.datetime.now()
         order.save()
         return super(CheckData, self).form_valid(form)
 
@@ -270,4 +272,3 @@ class GetCode(TemplateView):
             content = []
         context['data'] = content
         return context
-

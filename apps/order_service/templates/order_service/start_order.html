@@ -185,7 +185,7 @@
                     {% endif %}
                     {% if request.user.is_superuser %}
                     {% else %}
-                    <a href="{% url 'order:order_service' service.id %}" class="genric-btn purplebtn circle"
+                    <a href="{% url 'order_service:order_service' service.id %}" class="genric-btn purplebtn circle"
                        style="float: left; margin: 10px; display: inline-block">ادامه
                     </a>
                     {% endif %}

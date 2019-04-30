@@ -15,4 +15,4 @@ class OrderService(models.Model):
     file = models.FileField(verbose_name="فایل", upload_to=user_directory_path, blank=True)
     is_finished = models.BooleanField(default=False)
     code = models.CharField(default="PR", blank=True, max_length=40, verbose_name="کد")
-    date = models.DateTimeField(verbose_name="تاریخ")
+    date = models.DateTimeField(verbose_name="تاریخ", blank=True, null=True)
