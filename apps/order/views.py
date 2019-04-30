@@ -1,8 +1,10 @@
 import csv
 
+import openpyxl as openpyxl
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
+import xlrd
 
 from apps.order.forms import *
 from apps.order.models import Order
@@ -101,7 +103,6 @@ class SubmitOrderService(FormView):
                 temp.append(tempchoices)
             data.append(temp)
         kwargs['columns'] = data
-        print(kwargs)
         return kwargs
 
     def form_valid(self, form):
@@ -132,8 +133,24 @@ class SubmitOrderService(FormView):
                 for row in content_data:
                     data.append(row)
             if '1' in order_type:
-                # content = self.request.POST['file'].read()
-                print(self.request.FILES)
+                content = form.cleaned_data['file'].read()
+                book = xlrd.open_workbook(file_contents=content)
+                sheet = book.sheet_by_index(0)
+                fields = []
+                for j in range(1, sheet.ncols):
+                    if sheet.cell_value(1, j):
+                        fields.append(sheet.cell_value(1, j))
+                for i in range(2, sheet.nrows):
+                    row = []
+                    for j in range(1, sheet.ncols):
+                        if sheet.cell_value(i, j):
+                            row.append(sheet.cell_value(i, j))
+                    if len(row) == len(fields):
+                        data.append(row)
+                with open(order.file.path, 'w') as f:
+                    writer = csv.writer(f)
+                    for row in data:
+                        writer.writerow(row)
             self.success_url = reverse_lazy("index:index")
         else:
             try:
