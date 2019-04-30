@@ -1,5 +1,4 @@
 import csv
-import datetime
 
 import jdatetime
 from django.shortcuts import redirect
@@ -187,6 +186,13 @@ class CheckData(FormView):
     template_name = "order_service/check_data.html"
     success_url = reverse_lazy("index:index")
 
+    def dispatch(self, request, *args, **kwargs):
+        if not Service.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        if self.request.user.is_superuser:
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
@@ -239,6 +245,13 @@ class CheckData(FormView):
 
 class GetCode(TemplateView):
     template_name = "order_service/get_code.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not OrderService.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        if self.request.user.is_superuser:
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

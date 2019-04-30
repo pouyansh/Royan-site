@@ -6,7 +6,11 @@
     <div class="container-fluid" style="padding-right: 0; padding-left: 0; min-height: 500px;">
         <div class="col-lg-2 col-sm-12 nav-side" style="height: 100%;">
             <div class="container-fluid" style="text-align: center">
-                <h3 class="nav-side-name">پویان شیرزادیان</h3>
+                {% if logged_in_customer.is_person %}
+                <h3 class="nav-side-name">{{logged_in_user.first_name}} {{logged_in_user.last_name}}</h3>
+                {% else %}
+                <h3 class="nav-side-name">{{logged_in_user.organization_name}}-{{logged_in_user.post}}</h3>
+                {% endif %}
             </div>
             <ul class="nav nav-pills">
                 <li class="nav-pills-item active"><a class="nav-a-tab active" data-toggle="pill" href="#home">اطلاعات شخصی</a>
@@ -22,36 +26,99 @@
                 <div class="feature_item">
                     <h4 style="font-family: FarsiFont;">اطلاعات شخصی</h4>
                     <div class="table table-bordered">
+                        {% if logged_in_customer.is_person %}
                         <div class="col-lg-4 col-sm-12"
                              style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
                             <div class="li-header">نام</div>
-                            <div class="li-body">پویان</div>
+                            <div class="li-body">{{logged_in_user.first_name}}</div>
                         </div>
                         <div class="col-lg-4 col-sm-12"
                              style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
                             <div class="li-header">نام خانوادگی</div>
-                            <div class="li-body">شیرزادیان</div>
+                            <div class="li-body">{{logged_in_user.last_name}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">ایمیل</div>
+                            <div class="li-body">{{logged_in_user.email}}</div>
                         </div>
                         <div class="col-lg-4 col-sm-12"
                              style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
                             <div class="li-header">کد ملی</div>
-                            <div class="li-body">۰۴۴۰۷۰۰۱۴۰</div>
+                            <div class="li-body">{{logged_in_user.national_id}}</div>
                         </div>
                         <div class="col-lg-4 col-sm-12"
                              style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
                             <div class="li-header">تحصیلات</div>
-                            <div class="li-body">دیپلم</div>
+                            <div class="li-body">{{logged_in_user.education}}</div>
                         </div>
                         <div class="col-lg-4 col-sm-12"
                              style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
                             <div class="li-header">سازمان/موسسه</div>
-                            <div class="li-body">رویان</div>
+                            <div class="li-body">{{logged_in_user.org}}</div>
                         </div>
                         <div class="col-lg-4 col-sm-12"
                              style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
                             <div class="li-header">تلفن</div>
-                            <div class="li-body">۰۹۱۲۶۸۰۴۲۹۵</div>
+                            <div class="li-body">{{logged_in_user.phone_number}}</div>
                         </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">تلفن همراه</div>
+                            <div class="li-body">{{logged_in_user.cellphone_number}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">فکس</div>
+                            <div class="li-body">{{logged_in_user.fax}}</div>
+                        </div>
+                        <div class="col-lg-12 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">آدرس</div>
+                            <div class="li-body">{{logged_in_user.address}}</div>
+                        </div>
+                        {% else %}
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">نام شرکت</div>
+                            <div class="li-body">{{logged_in_user.organization_name}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">سمت</div>
+                            <div class="li-body">{{logged_in_user.post}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">ایمیل</div>
+                            <div class="li-body">{{logged_in_user.email}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">شماره ثبت</div>
+                            <div class="li-body">{{logged_in_user.submit_id}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">شماره اقتصادی</div>
+                            <div class="li-body">{{logged_in_user.economic_id}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">تلفن</div>
+                            <div class="li-body">{{logged_in_user.phone_number}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">فکس</div>
+                            <div class="li-body">{{logged_in_user.fax}}</div>
+                        </div>
+                        <div class="col-lg-8 col-sm-12"
+                             style="float: right; border: 1px solid #cccccc; padding: 15px 0; display: flex">
+                            <div class="li-header">آدرس</div>
+                            <div class="li-body">{{logged_in_user.address}}</div>
+                        </div>
+                        {% endif %}
                     </div>
                     <button class="btn btn-secondary circle" style="float: left; margin: 20px; font-size: 18px;">ویرایش اطلاعات شخصی</button>
                 </div>
