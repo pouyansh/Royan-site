@@ -320,90 +320,60 @@
                 <div class="feature_item">
                     <h4 style="font-family: FarsiFont; padding: 20px; border-bottom: 1px solid #dddddd;">سرویس‌های سفارش
                         داده شده</h4>
+                    <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های کامل نشده</h5>
+                    <div class="table-responsive">
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام فاکتور شونده</th>
+                                <th>نام کاربری</th>
+                                <th>کد رهگیری سفارش</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت سفارش</th>
+                                <th>جزئیات</th>
+                            </tr>
+                            </thead>
+                            {% for order in orders_not_finished %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{order.name}}</td>
+                                <td>{{order.customer.username}}</td>
+                                <td>{{order.code}}</td>
+                                <td>{{order.date}}</td>
+                                <td class="text-danger">کامل نشده</td>
+                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
                     <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های در انتظار پیش فاکتور</h5>
                     <div class="table-responsive">
                         <table class="table" style="text-align: center;">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>نام کاربر</th>
-                                <th>کد رهگیری سفارش</th>
-                                <th>تاریخ</th>
-                                <th>وضعیت سفارش</th>
-                                <th>جزئیات</th>
-                            </tr>
-                            </thead>
-                            <tr>
-                                <td>1</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>Primer-971201-1</td>
-                                <td>۹۷/۱۲/۰۱</td>
-                                <td class="text-warning">در انتظار پیش فاکتور</td>
-                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>Primer-971211-4</td>
-                                <td>۹۷/۱۲/۰۴</td>
-                                <td class="text-warning">در انتظار پیش فاکتور</td>
-                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>Primer-971215-12</td>
-                                <td>۹۷/۱۲/۱۵</td>
-                                <td class="text-warning">در انتظار پیش فاکتور</td>
-                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های تحویل داده نشده</h5>
-                    <div class="table-responsive">
-                        <table class="table" style="text-align: center;">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>نام کاربر</th>
+                                <th>نام فاکتور شونده</th>
+                                <th>نام کاربری</th>
                                 <th>کد رهگیری سفارش</th>
                                 <th>تاریخ</th>
                                 <th>وضعیت سفارش</th>
                                 <th>مبلغ کل</th>
-                                <th>وضعیت تحویل سفارش</th>
                                 <th>جزئیات</th>
                             </tr>
                             </thead>
+                            {% for order in orders_not_invoice %}
                             <tr>
-                                <td>1</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>Primer-971201-1</td>
-                                <td>۹۷/۱۲/۰۱</td>
-                                <td class="text-success">تایید شده</td>
-                                <td>۱۲۰۰۰۰۰</td>
-                                <td class="text-danger">تایید نشده</td>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{order.name}}</td>
+                                <td>{{order.customer.username}}</td>
+                                <td>{{order.code}}</td>
+                                <td>{{order.date}}</td>
+                                <td class="text-warning">در انتظار پیش فاکتور</td>
+                                <td>{{order.payment}}</td>
                                 <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>Primer-971211-4</td>
-                                <td>۹۷/۱۲/۰۴</td>
-                                <td class="text-success">تایید شده</td>
-                                <td>۱۲۰۰۰۰۰</td>
-                                <td class="text-danger">تایید نشده</td>
-                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>Primer-971215-12</td>
-                                <td>۹۷/۱۲/۱۵</td>
-                                <td class="text-success">تایید شده</td>
-                                <td>۱۲۰۰۰۰۰</td>
-                                <td class="text-danger">تایید نشده</td>
-                                <td><a class="details-link" href="#"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
+                            {% endfor %}
                         </table>
                     </div>
                     <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های در انتظار پرداخت هزینه</h5>

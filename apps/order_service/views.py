@@ -83,6 +83,7 @@ class SubmitOrderService(FormView):
             content = csv.reader(open(order.file.path, 'r'))
             order.file.close()
         else:
+            
             content = []
         context['data'] = content
         return context
@@ -230,7 +231,7 @@ class CheckData(FormView):
         order.name = form.cleaned_data['name']
         code = service.name + "-" + str(jdatetime.datetime.now().date()) + "-" + str(order.id)
         order.code = code
-        order.date = datetime.datetime.now()
+        order.date = jdatetime.datetime.now()
         order.save()
         self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': self.kwargs['pk']})
         return super(CheckData, self).form_valid(form)

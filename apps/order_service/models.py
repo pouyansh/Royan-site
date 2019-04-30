@@ -1,4 +1,5 @@
 from django.db import models
+from django_jalali.db import models as jmodels
 
 from apps.registration.models import Customer
 from apps.service.models import Service
@@ -15,7 +16,8 @@ class OrderService(models.Model):
     file = models.FileField(verbose_name="فایل", upload_to=user_directory_path, blank=True)
     is_finished = models.BooleanField(default=False, verbose_name="وضعیت سفارش")
     code = models.CharField(default="PR", blank=True, max_length=40, verbose_name="کد")
-    date = models.DateTimeField(verbose_name="تاریخ", blank=True, null=True)
+    date = jmodels.jDateField(verbose_name="تاریخ", blank=True, null=True)
     invoice = models.BooleanField(default=False, verbose_name="وضعیت پیش فاکتور")
     received = models.BooleanField(default=False, verbose_name="وضعیت تحویل")
     payed = models.BooleanField(default=False, verbose_name="وضعیت پرداخت")
+    payment = models.IntegerField(default=0, verbose_name="مبلغ")
