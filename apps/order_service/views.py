@@ -83,7 +83,7 @@ class SubmitOrderService(FormView):
             content = csv.reader(open(order.file.path, 'r'))
             order.file.close()
         else:
-            
+
             content = []
         context['data'] = content
         return context
