@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 
+from apps.order_service.models import OrderService
 from apps.product.models import Category
 from apps.registration.models import Customer, Person, Organization
 from apps.research.models import ResearchArea
@@ -23,11 +24,11 @@ class CustomerDashboard(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            context['logged_in_customer'] = customer
-            if customer.is_person:
-                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
-            else:
-                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        customer = Customer.objects.get(username=self.request.user.username)
+        context['logged_in_customer'] = customer
+        if customer.is_person:
+            context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+        else:
+            context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        context['orders'] = OrderService.objects.filter(customer=customer)
         return context
