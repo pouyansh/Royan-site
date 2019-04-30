@@ -152,7 +152,7 @@ class SubmitOrderService(FormView):
                     writer = csv.writer(f)
                     for row in data:
                         writer.writerow(row)
-            self.success_url = reverse_lazy("index:index")
+            self.success_url = reverse_lazy('order_service:check_data', kwargs={'pk': self.kwargs['pk']})
         else:
             try:
                 if order_id != -1:
@@ -228,10 +228,11 @@ class CheckData(FormView):
         order = orders[0]
         order.is_finished = True
         order.name = form.cleaned_data['name']
-        code = service.name + "-" + str(jdatetime.datetime.now().date()) + "-" + order.id
+        code = service.name + "-" + str(jdatetime.datetime.now().date()) + "-" + str(order.id)
         order.code = code
         order.date = datetime.datetime.now()
         order.save()
+        self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': self.kwargs['pk']})
         return super(CheckData, self).form_valid(form)
 
 
@@ -252,23 +253,6 @@ class GetCode(TemplateView):
                 context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
             else:
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        service = Service.objects.get(id=self.kwargs['pk'])
-        context['service'] = service
-        fields_file = csv.reader(open(service.fields.path, 'r'))
-        fields = []
-        for row in fields_file:
-            fields.append(row[2])
-        context['fields'] = fields
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
-        else:
-            orders = []
-        if orders:
-            order = orders[0]
-            content = csv.reader(open(order.file.path, 'r'))
-            order.file.close()
-        else:
-            content = []
-        context['data'] = content
+        order = OrderService.objects.get(id=self.kwargs['pk'])
+        context['code'] = order.code
         return context
