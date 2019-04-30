@@ -36,6 +36,7 @@ urlpatterns = [
                   path('', include(('apps.research.urls', 'research'), 'research')),
                   path('', include(('apps.tutorial.urls', 'tutorial'), 'tutorial')),
                   path('', include(('apps.order_service.urls', 'order_service'), 'order_service')),
+                  path('', include(('apps.dashboard.urls', 'dashboard'), 'dashboard')),
                   path('', include(('apps.index.urls', 'index'), 'index')),
 
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
