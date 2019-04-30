@@ -200,10 +200,11 @@ class CheckData(FormView):
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
-        fields_file = csv.reader(open(service.fields, 'r'))
+        fields_file = csv.reader(open(service.fields.path, 'r'))
         fields = []
         for row in fields_file:
             fields.append(row[2])
+        context['fields'] = fields
         if not self.request.user.is_superuser:
             customer = Customer.objects.get(username=self.request.user.username)
             orders = Order.objects.filter(customer=customer, service=service, is_finished=False)

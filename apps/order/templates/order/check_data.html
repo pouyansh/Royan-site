@@ -1,53 +1,6 @@
 {% extends "temporary/mother_panel.html" %}
 {% load static staticfiles %}
 
-{% block internal_css %}
-<style>
-    .greenbtn {
-        background-color: rgb(56,208,30);
-        color: #eeeeee;
-        border: 1px solid rgb(56,208,30);
-        min-width: 100px;
-        font-size: 16px;
-        display: block;
-        margin: 20px auto;
-    }
-    .greenbtn:hover {
-        color: rgb(56,208,30);
-        background-color: #eeeeee;
-    }
-
-    .graybtn {
-        background-color: #bbbbbb;
-        color: #eeeeee;
-        border: 1px solid #bbbbbb;
-        min-width: 100px;
-        font-size: 16px;
-        display: block;
-        margin: 20px auto;
-        cursor: not-allowed;
-    }
-
-    .purplebtn {
-        background-color: rgb(188,91,254);
-        color: #eeeeee;
-        border: 1px solid rgb(188,91,254);
-        min-width: 100px;
-        font-size: 16px;
-        display: block;
-        margin: 20px auto;
-    }
-
-    .purplebtn:hover {
-        color: rgb(188,91,254);
-        background-color: #eeeeee;
-    }
-
-
-
-</style>
-{% endblock internal_css %}
-
 {% block banner_content %}
 <h2>Submit Primer</h2>
 <div class="page_link">
@@ -61,17 +14,17 @@
 {% block main_content %}
 <div class="multi-step container">
     <div class="col-lg-2">
-        <div id="progress_btn_1" class="circle btn-primary">1</div>
+        <div id="progress_btn_1" class="circle btn-success">1</div>
         <label class="progress-bar-label">ثبت مشخصات فاکتور شونده</label>
     </div>
     <div class="col-lg-1 connecting-line"></div>
     <div class="col-lg-2">
-        <div id="progress_btn_2" class="circle">2</div>
+        <div id="progress_btn_2" class="circle btn-success">2</div>
         <label class="progress-bar-label">ثبت اطلاعات توالی‌ها</label>
     </div>
     <div class="col-lg-1 connecting-line"></div>
     <div class="col-lg-2">
-        <div id="progress_btn_3" class="circle">3</div>
+        <div id="progress_btn_3" class="circle btn-primary">3</div>
         <label class="progress-bar-label">تایید اطلاعات توالی‌ها</label>
     </div>
     <div class="col-lg-1 connecting-line"></div>
@@ -83,14 +36,14 @@
 
 <!--================Start Section3 =================-->
 <div id="sec3" class="whole-wrap" dir="rtl"
-     style="display: none; text-align: right; font-size: 16px;">
+     style="text-align: right; font-size: 16px;">
     <div class="container">
         <div class="section-top-border">
             <div class="row">
                 <div class="col-lg-8 col-md-8" style="margin: auto">
 
                     <table dir="ltr" id="table2"
-                           style="float: left; width: 100%; border: 1px solid #222222; padding: 20px; text-align: center; margin: 20px 0;">
+                           style="width: 100%; padding: 20px; text-align: center; margin: 20px 0;">
                         <thead>
                         <tr style="font-size: 12px;">
                             <th>#</th>
@@ -109,28 +62,31 @@
                         {% endfor %}
 
                     </table>
-                    <div class="mt-10" style="display: flex; margin-top: 30px;">
-                        <label style="float: right; display: inline-block; width: 150px;">
-                            <div style="color: red; display: inline;">*</div>
-                            نام فاکتور شونده:</label>
-                        <input type="text" required name="name" id="id_name" class="single-input">
-                    </div>
-                    <input type="checkbox" name="confirm" id="id_confirm" onchange="changed()">
-                    <div style="font-family: FarsiFont; display: inline;">
-                        صحت موارد ثبت شده را تایید می نمایم.
-                    </div>
-                    <br>
-                    <a onclick="goto(2, 3)" class="genric-btn purplebtn circle"
-                       style="display: inline-block; font-family: FarsiFont;">
-                        بازگشت
-                    </a>
-                    <button type="submit" id="btn" class="genric-btn greenbtn circle"
-                            style="display: none; float: left; font-family: FarsiFont;">ثبت نهایی
-                    </button>
-                    <div id="btn1" class="genric-btn graybtn circle"
-                         style="display: inline-block; float: left; font-family: FarsiFont;">
-                        ثبت نهایی
-                    </div>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mt-10" style="display: flex; margin: 30px 0;">
+                            <div style="color: red; display: inline; margin: 0 5px;">*</div>
+                            <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
+                                نام فاکتور شونده:</label>
+                            <input type="text" required name="name" id="id_name" class="single-input">
+                        </div>
+                        <input type="checkbox" name="confirm" id="id_confirm" onchange="changed()">
+                        <div style="font-family: FarsiFont; display: inline;">
+                            صحت موارد ثبت شده را تایید می نمایم.
+                        </div>
+                        <br>
+                        <a href="{% url 'order:order_service' service.id %} " class="genric-btn purplebtn circle"
+                           style="display: inline-block; font-family: FarsiFont;">
+                            بازگشت
+                        </a>
+                        <button type="submit" id="btn" class="genric-btn greenbtn circle"
+                                style="display: none; float: left; font-family: FarsiFont;">ثبت نهایی
+                        </button>
+                        <div id="btn1" class="genric-btn graybtn circle"
+                             style="display: inline-block; float: left; font-family: FarsiFont;">
+                            ثبت نهایی
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -153,5 +109,6 @@
             $('#btn').css('display', 'none');
         }
     }
+
 </script>
 {% endblock script %}
