@@ -19,6 +19,4 @@ requests==2.18.4
 recaptcha
 django-unused-media==0.1.13
 django-cleanup==3.2.0
-pandas
 xlrd
-openpyxl

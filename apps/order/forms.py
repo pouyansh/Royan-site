@@ -36,3 +36,8 @@ class OrderServiceFrom(forms.Form):
 
     def clean(self):
         return super(OrderServiceFrom, self).clean()
+
+
+class CheckDataFrom(forms.Form):
+    confirm = forms.BooleanField(required=True)
+    name = forms.CharField(max_length=40)

@@ -1,6 +1,5 @@
 import csv
 
-import openpyxl as openpyxl
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
@@ -179,6 +178,38 @@ class SubmitOrderService(FormView):
             self.success_url = reverse_lazy('order:order_service', kwargs={'pk': self.kwargs['pk']})
         return super(SubmitOrderService, self).form_valid(form)
 
-    def form_invalid(self, form):
-        print("invalid")
-        return super(SubmitOrderService, self).form_invalid(form)
+
+class CheckData(FormView):
+    form_class = CheckDataFrom
+    template_name = "order/check_data.html"
+    success_url = reverse_lazy("index:index")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        if not self.request.user.is_superuser:
+            customer = Customer.objects.get(username=self.request.user.username)
+            context['logged_in_customer'] = customer
+            if customer.is_person:
+                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+            else:
+                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        service = Service.objects.get(id=self.kwargs['pk'])
+        context['service'] = service
+        if not self.request.user.is_superuser:
+            customer = Customer.objects.get(username=self.request.user.username)
+            orders = Order.objects.filter(customer=customer, service=service, is_finished=False)
+        else:
+            orders = []
+        if orders:
+            order = orders[0]
+            content = csv.reader(open(order.file.path, 'r'))
+            order.file.close()
+        else:
+            content = []
+        context['data'] = content
+        return context
