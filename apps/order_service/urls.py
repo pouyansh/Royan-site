@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.urls import path
 
-from apps.order.views import *
+from apps.order_service.views import *
 
 urlpatterns = [
     url('start_order_service/(?P<pk>[0-9]+)/', StartOrderService.as_view(), name='start_order'),
