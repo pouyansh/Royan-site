@@ -1,5 +1,7 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView
 
 from apps.message.forms import *
 from apps.message.models import Message
@@ -10,11 +12,16 @@ from apps.service.models import Service, Field
 from apps.tutorial.models import Tutorial
 
 
-class CustomerCreateMessage(CreateView):
+class CustomerCreateMessage(LoginRequiredMixin, CreateView):
     model = Message
     form_class = CreateMessageForm
     template_name = "message/create_message.html"
     success_url = reverse_lazy("dashboard:dashboard")
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_superuser:
+            return render(request, "temporary/show_text.html", {'text': "این صفحه مخصوص کاربران است"})
+        return super(CustomerCreateMessage, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -31,11 +38,16 @@ class CustomerCreateMessage(CreateView):
         return super(CustomerCreateMessage, self).form_valid(form)
 
 
-class AdminCreateMessage(CreateView):
+class AdminCreateMessage(LoginRequiredMixin, CreateView):
     model = Message
     form_class = CreateMessageForm
     template_name = "message/create_message_admin.html"
     success_url = reverse_lazy("royan_admin:admin_panel")
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Customer.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "کاربر مورد نظر یافت نشد"})
+        return super(AdminCreateMessage, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,7 +65,7 @@ class AdminCreateMessage(CreateView):
         return super(AdminCreateMessage, self).form_valid(form)
 
 
-class MessageDetails(CreateView):
+class MessageDetails(LoginRequiredMixin, CreateView):
     model = Message
     template_name = "message/message_details.html"
     form_class = CreateMessageForm
@@ -61,11 +73,12 @@ class MessageDetails(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if not Message.objects.filter(id=self.kwargs['pk']):
-            return reverse("index:index")
+            return render(request, "temporary/show_text.html", {'text': "پیام مورد نظر یافت نشد"})
         msg = Message.objects.get(id=self.kwargs['pk'])
         if self.request.user.is_authenticated and not self.request.user.is_superuser:
             if msg.customer.username != self.request.user.username:
-                return reverse("index:index")
+                return render(request, "temporary/show_text.html",
+                              {'text': "کاربر گرامی شما اجازه دسترسی به این پیام را ندارید"})
             else:
                 msg.is_opened = True
                 msg.save()
@@ -73,9 +86,6 @@ class MessageDetails(CreateView):
                     msg = msg.parent
                     msg.is_opened = True
                     msg.save()
-        if not self.request.user.is_authenticated:
-            return reverse("index:index")
-
         return super(MessageDetails, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
