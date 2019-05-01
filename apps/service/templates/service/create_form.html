@@ -18,7 +18,8 @@
         <div class="section-top-border">
             <div class="row">
                 <div class="col-lg-11 col-md-8" style="margin: auto">
-                    <h4>ثبت فرم ثبت سفارش برای سرویس {{service.name}}</h4>                    ‌
+                    <h4>ثبت فرم ثبت سفارش برای سرویس</h4>
+                    <h4 dir="ltr">{{service.name}}</h4>                    ‌
                     <form method="post" enctype="multipart/form-data">
                         <div style="font-size: 20px; display: inline-block"
                         >فایل اکسل مربوط به این سرویس را از طریق این درگاه، آپلود کنید.
@@ -47,6 +48,31 @@
                                     {{cell}}
                                 {% endif %}
                                 {% endfor %}
+                                </td>
+                                <td>
+                                    {% with y=forloop.counter|stringformat:"s" %}
+                                    <div onclick="myFunction({{forloop.counter}})"
+                                         class="popup btn text-danger circle"
+                                         style="font-size: 15px; min-width: 80px; display: block;
+                                         ">
+                                        {% with id="id"|add:y %}
+                                        <div id="{{id}}">delete</div>
+                                        {% endwith %}
+                                        {% with mypopup="myPopup"|add:y %}
+                                        <div class="popuptext" id="{{mypopup}}">
+                                            {% endwith %}
+                                            <div onclick="myFunction({{forloop.counter}})"
+                                                 class="popup btn text-danger circle"
+                                                 style="font-size: 15px; min-width: 80px; display: block;"
+                                            >Are you sure?
+                                                <button type="submit" onclick="myDelete({{ y }})"
+                                                        class="popup btn text-danger circle"
+                                                        style="font-size: 15px; background: none;">yes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endwith %}
                                 </td>
                             </tr>
                             {% endfor %}

@@ -34,10 +34,15 @@ class ServiceListAdminForm(forms.Form):
 
 
 class CreateFormForm(forms.Form):
-    final = forms.CharField(max_length=20)
-    name = forms.CharField(max_length=30)
+    final = forms.CharField(max_length=20, required=False)
+    name = forms.CharField(max_length=30, required=False)
     type = forms.ChoiceField(choices=[("text", "text"), ("number", "number"), ("choice", "choice")])
-    description = forms.CharField(max_length=100)
-    file = forms.FileField()
-    field_id = forms.IntegerField()
+    description = forms.CharField(max_length=100, required=False)
+    file = forms.FileField(required=False)
+    field_id = forms.IntegerField(required=False)
+    
+    def clean(self):
+        print(self.cleaned_data)
+        return super(CreateFormForm, self).clean()
+        
 

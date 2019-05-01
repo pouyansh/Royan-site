@@ -243,14 +243,31 @@ class CreateFormForService(FormView):
         if str(form.cleaned_data['final']) == "1":
             service.has_form = True
         else:
-            row = [form.cleaned_data['name'], form.cleaned_data['type']]
-            if form.cleaned_data['type'] == "text":
-                row.append(form.cleaned_data['description'])
-            if form.cleaned_data['type'] == "choice":
-                choices = form.cleaned_data['type'].split(',')
-                for choice in choices:
-                    row.append(choice)
-            with open(service.fields.path, 'a') as f:
-                fields_file = csv.writer(f)
-                fields_file.writerow(row)
+            if str(form.cleaned_data['field_id']) != "-1":
+                with open(service.fields.path, 'r') as f:
+                    fields_file = csv.reader(f)
+                    fields = []
+                    for row in fields_file:
+                        fields.append(row)
+                new_fields = []
+                for i in range(len(fields)):
+                    if i + 1 != int(form.cleaned_data['field_id']):
+                        new_fields.append(fields[i])
+                with open(service.fields.path, 'w') as f:
+                    fields_file = csv.writer(f)
+                    for row in new_fields:
+                        fields_file.writerow(row)
+            else:
+                row = [form.cleaned_data['name'], form.cleaned_data['type'], form.cleaned_data['name']]
+                if form.cleaned_data['type'] == "text":
+                    row.append(form.cleaned_data['description'])
+                if form.cleaned_data['type'] == "choice":
+                    choices = form.cleaned_data['type'].split(',')
+                    for choice in choices:
+                        row.append(choice)
+                with open(service.fields.path, 'a') as f:
+                    fields_file = csv.writer(f)
+                    fields_file.writerow(row)
+            self.success_url = reverse_lazy("service:create_form", kwargs={'pk': self.kwargs['pk']})
+        return super(CreateFormForService, self).form_valid(form)
 
