@@ -7,7 +7,7 @@
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             {% for msg in parents %}
             <div class="parent_msg">
-                {% if request.user.is_superuser %}
+                {% if request.user.is_superuser and not msg.is_sender %}
                     {% if msg.is_opened %}
                     <h4>{{msg.title}} (مشاهده شده)</h4>
                     {% else %}
@@ -27,7 +27,7 @@
                 <h5>{{msg.text}}</h5>
             </div>
             {% endfor %}
-            {% if request.user.is_superuser %}
+            {% if request.user.is_superuser and not message.is_sender %}
                 {% if message.is_opened %}
                 <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">{{message.title}} (مشاهده شده)</h3>
                 {% else %}

@@ -436,38 +436,35 @@
                                 <th>مشاهده</th>
                             </tr>
                             </thead>
+                            {% for msg in messages %}
+                            {% if msg.is_opened %}
                             <tr>
-                                <td>۱</td>
-                                <td>مهدی توتونچی</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>۹۷/۱۲/۰۱</td>
-                                <td class="text-danger">مشاهده نشده</td>
-                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
+                            {% else %}
+                            <tr style="font-weight: 800; color: blue;">
+                            {% endif %}
+                                <td>{{forloop.counter}}</td>
+                                {% if msg.is_sender %}
+                                    <td>{{msg.customer.username}}</td>
+                                    <td>مدیر سایت</td>
+                                {% else %}
+                                    <td>مدیر سایت</td>
+                                    <td>{{msg.customer.username}}</td>
+                                {% endif %}
+
+                                <td dir="ltr">{{msg.date|date:'Y-m-d H:i'}}</td>
+                                {% if msg.is_sender %}
+                                <td>-</td>
+                                {% else %}
+                                    {% if msg.is_opened %}
+                                    <td>مشاهده شده</td>
+                                    {% else %}
+                                    <td>مشاهده نشده</td>
+                                    {% endif %}
+                                {% endif %}
+                                <td><a href="{% url 'message:message_details' msg.id %}" class="details-link">
+                                    <i class='fa fa-angle-left'></i></a></td>
                             </tr>
-                            <tr>
-                                <td>۲</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>مهدی توتونچی</td>
-                                <td>۹۷/۱۲/۰۱</td>
-                                <td class="text-success">مشاهده شده</td>
-                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>۳</td>
-                                <td>مهدی توتونچی</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>۹۷/۱۲/۰۱</td>
-                                <td class="text-success">مشاهده شده</td>
-                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
-                            <tr>
-                                <td>۴</td>
-                                <td>پویان شیرزادیان</td>
-                                <td>مهدی توتونچی</td>
-                                <td>۹۷/۱۲/۰۱</td>
-                                <td class="text-success">مشاهده شده</td>
-                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
-                            </tr>
+                            {% endfor %}
                         </table>
                     </div>
                 </div>
