@@ -13,6 +13,11 @@
                 <a class="main_btn" href="{% url 'order_service:start_order' object.id %}"
                 style="font-family: FarsiFont; font-size: 18px; margin-top: 20px;">سفارش</a>
                 {% endif %}
+
+                {% if request.user.is_superuser %}
+                <a class="main_btn" href="{% url 'service:create_form' service.id %}"
+                style="font-family: FarsiFont; font-size: 18px; margin-top: 20px;">ساخت فرم</a>
+                {% endif %}
             </div>
 
             <div class="row" style="margin-top: 50px;">

@@ -263,7 +263,8 @@ class CreateFormForService(FormView):
                         fields_file.writerow(row)
             else:
                 row = [form.cleaned_data['name'], form.cleaned_data['type'], form.cleaned_data['name']]
-                if form.cleaned_data['type'] == "text":
+                print(form.cleaned_data['type'])
+                if form.cleaned_data['type'] == "text" or form.cleaned_data['type'] == "oligo":
                     row.append(form.cleaned_data['description'])
                 if form.cleaned_data['type'] == "choice":
                     choices = form.cleaned_data['description'].split(',')

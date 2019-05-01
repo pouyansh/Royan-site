@@ -94,7 +94,7 @@ class SubmitOrderService(FormView):
         data = []
         for row in content:
             temp = [row[0], row[1], row[2]]
-            if row[1] == "text":
+            if row[1] in ["text", "oligo"]:
                 temp.append(row[3])
             if row[1] == "choice":
                 tempchoices = []
