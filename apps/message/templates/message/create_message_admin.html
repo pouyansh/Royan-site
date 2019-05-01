@@ -1,0 +1,19 @@
+{% extends "temporary/create_page.html" %}
+{% load static staticfiles %}
+
+{% block title %}
+{% if customer.is_person %}
+ثبت پیام جدید به {{customer.first_name}} {{customer.last_name}}
+{% else %}
+ثبت پیام جدید به شرکت {{customer.username}}
+{% endif %}
+{% endblock %}
+
+{% block script %}
+<script>
+    $("input").addClass('single-input');
+    $("textarea").addClass('single-input');
+    $(".nice-select").css("display", "none");
+    $("select").css("display", "inline-block");
+</script>
+{% endblock %}
