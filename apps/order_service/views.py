@@ -276,7 +276,10 @@ class OrderDetails(TemplateView):
     template_name = "order_service/order_details.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if not OrderService.objects.filter(id=self.kwargs['pk']):
+        if not OrderService.objects.filter(id=self.kwargs['pk']) or not self.request.user.is_authenticated:
+            return redirect('index:index')
+        order = OrderService.objects.get(id=self.kwargs['pk'])
+        if self.request.user.username != order.customer.username and not self.request.user.is_superuser:
             return redirect('index:index')
         return super().dispatch(request, *args, **kwargs)
 
