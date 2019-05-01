@@ -17,7 +17,9 @@
                     سفارش داده شده</a>
                 </li>
                 <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu3">پیام‌های من</a></li>
-                <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu3">تغییر رمز عبور</a></li>
+                <li class="nav-pills-item"><a class="nav-a-tab" data-toggle="pill" href="#menu4">لیست کاربران</a></li>
+                <li class="nav-pills-item">
+                    <a class="nav-a-tab" href="{% url 'registration:change_password' %}">تغییر رمز عبور</a></li>
             </ul>
         </div>
         <div class="col-lg-9 col-sm-12" style="float: right; padding-top: 30px;">
@@ -462,6 +464,40 @@
                                     {% endif %}
                                 {% endif %}
                                 <td><a href="{% url 'message:message_details' msg.id %}" class="details-link">
+                                    <i class='fa fa-angle-left'></i></a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="menu4" class="tab-pane fade">
+                <div class="feature_item">
+                    <h4>لیست کاربران</h4>
+                    <div class="table-responsive">
+                        <table class="table" style="text-align: center;">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام کاربری</th>
+                                <th>ایمیل</th>
+                                <th>وضعیت</th>
+                                <th>ارسال پیام</th>
+                                <th>مشاهده</th>
+                            </tr>
+                            </thead>
+                            {% for customer in customers %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{customer.username}}</td>
+                                <td>{{customer.email}}</td>
+                                {% if customer.email_verified %}
+                                <td class="text-success">تایید شده</td>
+                                {% else %}
+                                <td class="text-danger">تایید نشده</td>
+                                {% endif %}
+                                <td><a class="text-dark" href="{% url 'message:admin_create_message' customer.id %}">ارسال</a> </td>
+                                <td><a href="#" class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}

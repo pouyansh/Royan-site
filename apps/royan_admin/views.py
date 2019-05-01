@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from apps.message.models import Message
 from apps.order_service.models import OrderService
 from apps.product.models import Category
+from apps.registration.models import Customer
 from apps.research.models import ResearchArea
 from apps.service.models import *
 from apps.tutorial.models import Tutorial
@@ -28,4 +29,5 @@ class AdminPanel(TemplateView):
         context['orders_not_invoice'] = OrderService.objects.filter(is_finished=True, invoice=False).order_by('id')
         context['orders_not_finished'] = OrderService.objects.filter(is_finished=False).order_by('id')
         context['messages'] = Message.objects.all().order_by('-id')
+        context['customers'] = Customer.objects.all().order_by('-id')
         return context
