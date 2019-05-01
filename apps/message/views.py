@@ -73,5 +73,16 @@ class MessageDetails(CreateView):
         while parent_msg.parent:
             parent_msg = parent_msg.parent
             parents.append(parent_msg)
+        parents.reverse()
         context['parents'] = parents
         return context
+
+    def form_valid(self, form):
+        msg = Message.objects.get(id=self.kwargs['pk'])
+        form.instance.customer = msg.customer
+        if self.request.user.is_superuser:
+            form.instance.is_sender = False
+        else:
+            form.instance.is_sender = True
+        form.instance.parent = msg
+        return super(MessageDetails, self).form_valid(form)
