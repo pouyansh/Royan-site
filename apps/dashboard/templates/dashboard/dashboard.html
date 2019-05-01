@@ -171,12 +171,8 @@
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                {% if not order.is_finished %}
-                                <td><a href="{% url 'order_service:order_service' order.service.id %}"
+                                <td><a href="{% url 'order_service:order_details' order.id %}"
                                        class="details-link"><i class='fa fa-angle-left'></i></a></td>
-                                {% else %}
-                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
-                                {% endif %}
                             </tr>
                             {% endfor %}
                         </table>
