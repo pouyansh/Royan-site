@@ -270,3 +270,39 @@ class GetCode(TemplateView):
         order = OrderService.objects.get(id=self.kwargs['pk'])
         context['code'] = order.code
         return context
+
+
+class OrderDetails(TemplateView):
+    template_name = "order_service/order_details.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        if not OrderService.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        if not self.request.user.is_superuser:
+            customer = Customer.objects.get(username=self.request.user.username)
+            context['logged_in_customer'] = customer
+            if customer.is_person:
+                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+            else:
+                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        order = OrderService.objects.get(id=self.kwargs['pk'])
+        context['order'] = order
+        service = order.service
+        context['service'] = service
+        fields_file = csv.reader(open(service.fields.path, 'r'))
+        fields = []
+        for row in fields_file:
+            fields.append(row[2])
+        context['fields'] = fields
+        content = csv.reader(open(order.file.path, 'r'))
+        context['data'] = content
+        return context

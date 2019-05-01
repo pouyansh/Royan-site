@@ -1,0 +1,104 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block banner_content %}
+<h2>Submit Primer</h2>
+<div class="page_link">
+    <a href="index.html">Home</a>
+    <a href="elements.html">Services</a>
+    <a href="elements.html">Primer</a>
+    <a href="elements.html">Submit Primer</a>
+</div>
+{% endblock banner_content %}
+
+{% block main_content %}
+
+<div id="sec3" class="whole-wrap" dir="rtl"
+     style="text-align: right; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+
+                    <h3>جزپیات سفارش مربوط به سرویس {{service.name}}</h3>
+                    <div class="mt-10" style="display: flex; margin: 30px 0;">
+                        <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
+                            وضعیت سفارش:</label>
+                        {% if order.is_finished %}
+                            {% if order.invoice %}
+                                <h4 class="text-success">تایید شده</h4>
+                            {% else %}
+                                <h4 class="text-warning">در انتظار پیش فاکتور</h4>
+                            {% endif %}
+                        {% else %}
+                            <h4 class="text-danger">تکمیل نشده
+                                {% if not request.user.is_superuser %}
+                                <a href="{% url 'order_service:order_service' service.id %}"
+                                    style="margin-right: 10px;" class="text-dark">(تکمیل)</a>
+                                {% endif %}
+                            </h4>
+                        {% endif %}
+                    </div>
+                    <div class="mt-10" style="display: flex; margin: 30px 0;">
+                        <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
+                            وضعیت تحویل سفارش:</label>
+                        {% if order.is_finished and order.invoice %}
+                            {% if order.received %}
+                                <h4 class="text-success">تایید شده</h4>
+                            {% else %}
+                                <h4 class="text-danger">تایید نشده</h4>
+                            {% endif %}
+                        {% else %}
+                            <h4 class="text-dark">-</h4>
+                        {% endif %}
+                    </div>
+                    <div class="mt-10" style="display: flex; margin: 30px 0;">
+                        <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
+                            وضعیت پرداخت:</label>
+                        {% if order.is_finished and order.invoice %}
+                            {% if order.payed %}
+                                <h4 class="text-success">تایید شده</h4>
+                            {% else %}
+                                <h4 class="text-danger">تایید نشده</h4>
+                            {% endif %}
+                        {% else %}
+                            <h4 class="text-dark">-</h4>
+                        {% endif %}
+                    </div>
+                    <table dir="ltr" id="table2"
+                           style="width: 100%; padding: 20px; text-align: center; margin: 20px 0;">
+                        <thead>
+                        <tr style="font-size: 12px;">
+                            <th>#</th>
+                            {% for field in fields %}
+                            <th>{{field}}</th>
+                            {% endfor %}
+                        </tr>
+                        </thead>
+                        {% for row in data %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            {% for cell in row %}
+                            <td>{{cell}}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+
+                    </table>
+                    <div class="mt-10" style="display: flex; margin: 30px 0;">
+                        <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
+                            نام فاکتور شونده:</label>
+                        <h4>{{order.name}}</h4>
+                    </div>
+                    <div class="mt-10" style="display: flex; margin: 30px 0;">
+                        <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
+                            نام کاربری:</label>
+                        <h4>{{order.customer.username}}</h4>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
