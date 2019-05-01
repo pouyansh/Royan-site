@@ -16,7 +16,7 @@
                 {% else %}
                 <h4>{{msg.title}}</h4>
                 {% endif %}
-                <h5>{{msg.date}}</h5>
+                <h5>{{msg.date.date}}</h5>
                 {% if msg.is_sender %}
                     <h5>فرستنده: {{msg.customer.username}}</h5>
                     <h5>گیرنده: ادمین</h5>
@@ -36,7 +36,7 @@
             {% else %}
             <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">{{message.title}}</h3>
             {% endif %}
-            <h4>{{message.date}}</h4>
+            <h4>{{message.date.date}}</h4>
             {% if message.is_sender %}
                 <h4>فرستنده: {{message.customer.username}}</h4>
                 <h4>گیرنده: ادمین</h4>

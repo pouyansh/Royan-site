@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 
+from apps.message.models import Message
 from apps.order_service.models import OrderService
 from apps.product.models import Category
 from apps.registration.models import Customer, Person, Organization
@@ -30,5 +31,6 @@ class CustomerDashboard(TemplateView):
             context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
         else:
             context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        context['orders'] = OrderService.objects.filter(customer=customer)
+        context['orders'] = OrderService.objects.filter(customer=customer).order_by('id')
+        context['messages'] = Message.objects.filter(customer=customer).order_by('-id')
         return context
