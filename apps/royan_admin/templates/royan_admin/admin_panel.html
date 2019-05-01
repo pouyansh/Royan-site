@@ -497,7 +497,7 @@
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
                                 <td><a class="text-dark" href="{% url 'message:admin_create_message' customer.id %}">ارسال</a> </td>
-                                <td><a href="#" class="details-link">
+                                <td><a href="{% url 'royan_admin:customer_profile' customer.id %}" class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}

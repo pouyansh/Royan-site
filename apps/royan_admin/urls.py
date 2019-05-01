@@ -5,5 +5,6 @@ from django.urls import path
 from apps.royan_admin.views import *
 
 urlpatterns = [
-    path('admin_panel/', staff_member_required(AdminPanel.as_view()), name='admin_panel')
+    path('admin_panel/', staff_member_required(AdminPanel.as_view()), name='admin_panel'),
+    url('customer_details/(?P<pk>[0-9]+)/', staff_member_required((CustomerDetails.as_view())), name='customer_profile')
 ]
