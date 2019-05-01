@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 
@@ -10,12 +11,12 @@ from apps.service.models import *
 from apps.tutorial.models import Tutorial
 
 
-class CustomerDashboard(TemplateView):
+class CustomerDashboard(LoginRequiredMixin, TemplateView):
     template_name = 'dashboard/dashboard.html'
 
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_superuser:
-            return redirect('index:index')
+            return redirect('royan_admin:admin_panel')
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

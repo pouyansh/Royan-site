@@ -3,7 +3,3 @@ sequence,text,Oligo Sequence,20,,,
 Concentration,choice,concentration,0.01,0.05,0.1,0.5
 purification,choice,purification,yes,no,,
 modification,choice,modification,yes,no,,
-oligo,oligo,oligo,10
-oligo2,oligo,oligo2,12
-text,text,text,13
-a1,oligo,a1,20
