@@ -243,6 +243,9 @@ class CreateFormForService(FormView):
         if str(form.cleaned_data['final']) == "1":
             service.has_form = True
             service.save()
+        elif str(form.cleaned_data['final']) == "2":
+            service.has_form = False
+            service.save()
         else:
             if str(form.cleaned_data['field_id']) != "-1":
                 with open(service.fields.path, 'r') as f:

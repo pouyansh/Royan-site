@@ -102,10 +102,12 @@
                         فیلد را به صورت کلماتی که با کاراکتر ',' از هم جدا شده‌اند وارد کنید. </h4>
 
                         <div class="pager">
-                            <button type="submit" class="genric-btn purplebtn circle" onclick="makeRequired()"
-                                    style="float: left; margin: 10px; display: inline-block">ثبت
+                            <button type="submit" class="genric-btn greenbtn circle" onclick="makeRequired(1)"
+                                    style="float: left; margin: 10px; display: inline-block">ساخت لیست
                             </button>
-
+                            <button type="submit" class="genric-btn purplebtn circle" onclick="makeRequired(2)"
+                                    style="float: left; margin: 10px; display: inline-block">حذف لیست سفارش از صفحه مشتری
+                            </button>
                         </div>
                     </form>
 
@@ -129,8 +131,8 @@
         $("#id_field_id").val(i);
     }
 
-    function makeRequired () {
-        $("#id_final").val(1);
+    function makeRequired (i) {
+        $("#id_final").val(i);
     }
     var fileInput  = document.querySelector( ".input-file" ),
     button     = document.querySelector( "#input-file-trigger" ),
