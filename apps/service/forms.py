@@ -40,9 +40,3 @@ class CreateFormForm(forms.Form):
     description = forms.CharField(max_length=100, required=False)
     file = forms.FileField(required=False)
     field_id = forms.IntegerField(required=False)
-    
-    def clean(self):
-        print(self.cleaned_data)
-        return super(CreateFormForm, self).clean()
-        
-

@@ -242,6 +242,7 @@ class CreateFormForService(FormView):
             service.file = form.cleaned_data['file']
         if str(form.cleaned_data['final']) == "1":
             service.has_form = True
+            service.save()
         else:
             if str(form.cleaned_data['field_id']) != "-1":
                 with open(service.fields.path, 'r') as f:
@@ -262,7 +263,7 @@ class CreateFormForService(FormView):
                 if form.cleaned_data['type'] == "text":
                     row.append(form.cleaned_data['description'])
                 if form.cleaned_data['type'] == "choice":
-                    choices = form.cleaned_data['type'].split(',')
+                    choices = form.cleaned_data['description'].split(',')
                     for choice in choices:
                         row.append(choice)
                 with open(service.fields.path, 'a') as f:
