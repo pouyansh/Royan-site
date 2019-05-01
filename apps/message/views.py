@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 
 from apps.message.forms import *
 from apps.message.models import Message
@@ -51,3 +51,27 @@ class AdminCreateMessage(CreateView):
         form.instance.customer = Customer.objects.get(id=self.kwargs['pk'])
         form.instance.is_sender = False
         return super(AdminCreateMessage, self).form_valid(form)
+
+
+class MessageDetails(CreateView):
+    model = Message
+    template_name = "message/message_details.html"
+    form_class = CreateMessageForm
+    success_url = reverse_lazy("dashboard:dashboard")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        msg = Message.objects.get(id=self.kwargs['pk'])
+        context['message'] = msg
+        parents = []
+        parent_msg = msg
+        while parent_msg.parent:
+            parent_msg = parent_msg.parent
+            parents.append(parent_msg)
+        context['parents'] = parents
+        return context

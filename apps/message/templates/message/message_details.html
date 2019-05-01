@@ -1,0 +1,68 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block main_content %}
+<div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border text-right" style="font-family: FarsiFont">
+            {% for msg in parents %}
+            <div class="parent_msg">
+                <h4>{{msg.title}}</h4>
+                <h5>{{msg.date}}</h5>
+                {% if msg.is_sender %}
+                    <h5>فرستنده: {{msg.customer.username}}</h5>
+                    <h5>گیرنده: ادمین</h5>
+                {% else %}
+                    <h5>فرستنده: ادمین</h5>
+                    <h5>گیرنده: {{msg.customer.username}}</h5>
+                {% endif %}
+                <h5>{{msg.text}}</h5>
+            </div>
+            {% endfor %}
+            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">{{ message.title }}</h3>
+            <h4>{{message.date}}</h4>
+            {% if message.is_sender %}
+                <h4>فرستنده: {{message.customer.username}}</h4>
+                <h4>گیرنده: ادمین</h4>
+            {% else %}
+                <h4>فرستنده: ادمین</h4>
+                <h4>گیرنده: {{message.customer.username}}</h4>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-9">
+                    <p style="font-family: FarsiFont; font-size: 20px;">{{ message.text }}</p>
+                </div>
+            </div>
+
+            <div class="parent_msg">
+                <h3>پاسخ به پیام</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{ field.label }} {{ field }}
+                        <br>
+                        {% if field.errors %}
+                            <ul>
+                                {% for error in field.errors %}
+                                    <li class="text-danger">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                    <br>
+
+                    <button type="submit" class="btn btn-success circle"
+                            style="min-width: 60px; margin-right: 90%; font-size: 18px;">ثبت</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+{% block script %}
+<script>
+    $("input").addClass('single-input');
+    $("textarea").addClass('single-input');
+</script>
+{% endblock script %}

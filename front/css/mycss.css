@@ -334,3 +334,11 @@ a.details-link:hover {
     color: rgb(188,91,254);
     background-color: #eeeeee;
 }
+
+.parent_msg {
+    border: 1px solid #bbbbbb;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    background: #eeeeee;
+}
