@@ -1,0 +1,15 @@
+{% extends "temporary/create_page.html" %}
+{% load static staticfiles %}
+
+{% block title %}
+ثبت پیام جدید
+{% endblock %}
+
+{% block script %}
+<script>
+    $("input").addClass('single-input');
+    $("textarea").addClass('single-input');
+    $(".nice-select").css("display", "none");
+    $("select").css("display", "inline-block");
+</script>
+{% endblock %}
