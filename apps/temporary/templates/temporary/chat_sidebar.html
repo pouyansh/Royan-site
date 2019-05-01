@@ -1,7 +1,11 @@
 {% load static staticfiles %}
-<button id="chat" class="btn btn-md my_chat">
+{% if request.user.is_authenticated %}
+{% if not request.user.is_superuser %}
+<a href="{% url 'message:customer_create_message' %}" id="chat" class="btn btn-md my_chat">
     <i class="fa fa-comment-o" style="font-size: 30px;"></i>
-</button>
+</a>
+{% endif %}
+{% endif %}
 
 <script src='{% static "js/jquery-3.2.1.min.js" %}'></script>
 <script>
