@@ -1,4 +1,14 @@
+import re
+
 from django import forms
+
+
+class OligoSequenceField(forms.CharField):
+    def clean(self, value):
+        if bool(re.match('^[ACTG]+$', value)):
+            return value
+        else:
+            raise forms.ValidationError("این رشته تنها باید از حروف مشخص شده در بالا تشکیل شود")
 
 
 class OrderServiceFrom(forms.Form):
@@ -27,6 +37,8 @@ class OrderServiceFrom(forms.Form):
                 self.fields[str(col[0])] = forms.IntegerField()
             if col[1] == "choice":
                 self.fields[str(col[0])] = forms.ChoiceField(choices=col[3])
+            if col[1] == "oligo":
+                self.fields[str(col[0])] = OligoSequenceField(max_length=col[3])
             self.fields[str(col[0])].label = col[2]
             self.fields[str(col[0])].required = False
 

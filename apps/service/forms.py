@@ -4,7 +4,6 @@ from apps.service.models import *
 
 
 class CreateFieldForm(forms.ModelForm):
-
     class Meta:
         model = Field
         fields = ['name', 'description']
@@ -23,7 +22,6 @@ class CreateServiceForm(forms.ModelForm):
 
 
 class UpdateServiceForm(forms.ModelForm):
-
     class Meta:
         model = Service
         fields = ['name', 'description']
@@ -36,7 +34,8 @@ class ServiceListAdminForm(forms.Form):
 class CreateFormForm(forms.Form):
     final = forms.CharField(max_length=20, required=False)
     name = forms.CharField(max_length=30, required=False)
-    type = forms.ChoiceField(choices=[("text", "text"), ("number", "number"), ("choice", "choice")])
+    type = forms.ChoiceField(
+        choices=[("text", "text"), ("number", "number"), ("choice", "choice"), ("oligo", "oligo")])
     description = forms.CharField(max_length=100, required=False)
     file = forms.FileField(required=False)
     field_id = forms.IntegerField(required=False)
