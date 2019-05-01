@@ -31,3 +31,13 @@ class UpdateServiceForm(forms.ModelForm):
 
 class ServiceListAdminForm(forms.Form):
     service_id = forms.CharField(max_length=10)
+
+
+class CreateFormForm(forms.Form):
+    final = forms.CharField(max_length=20)
+    name = forms.CharField(max_length=30)
+    type = forms.ChoiceField(choices=[("text", "text"), ("number", "number"), ("choice", "choice")])
+    description = forms.CharField(max_length=100)
+    file = forms.FileField()
+    field_id = forms.IntegerField()
+

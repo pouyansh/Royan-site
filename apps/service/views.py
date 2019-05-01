@@ -1,3 +1,5 @@
+import csv
+
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, FormView, UpdateView, TemplateView, DetailView
@@ -210,3 +212,45 @@ class UpdateService(UpdateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+
+
+class CreateFormForService(FormView):
+    template_name = "service/create_form.html"
+    form_class = CreateFormForm
+    success_url = reverse_lazy("index:index")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        service = Service.objects.get(id=self.kwargs['pk'])
+        context['service'] = service
+        with open(service.fields.path, 'r') as f:
+            fields_file = csv.reader(f)
+            fields = []
+            for row in fields_file:
+                fields.append(row)
+            context['fields'] = fields
+        return context
+
+    def form_valid(self, form):
+        service = Service.objects.get(id=self.kwargs['pk'])
+        if form.cleaned_data['file']:
+            service.file = form.cleaned_data['file']
+        if str(form.cleaned_data['final']) == "1":
+            service.has_form = True
+        else:
+            row = [form.cleaned_data['name'], form.cleaned_data['type']]
+            if form.cleaned_data['type'] == "text":
+                row.append(form.cleaned_data['description'])
+            if form.cleaned_data['type'] == "choice":
+                choices = form.cleaned_data['type'].split(',')
+                for choice in choices:
+                    row.append(choice)
+            with open(service.fields.path, 'a') as f:
+                fields_file = csv.writer(f)
+                fields_file.writerow(row)
+

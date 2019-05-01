@@ -19,4 +19,5 @@ urlpatterns = [
     url('update_service/(?P<pk>[0-9]+)/', staff_member_required(UpdateService.as_view()), name='update_service'),
     path('delete_service_successful/', staff_member_required(DeleteServiceSuccessful.as_view()),
          name='delete_service_successful'),
+    url('create_form/(?P<pk>[0-9]+)/', staff_member_required(CreateFormForService.as_view()), name='create_form'),
 ]

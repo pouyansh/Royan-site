@@ -301,11 +301,13 @@ class OrderDetails(TemplateView):
         context['order'] = order
         service = order.service
         context['service'] = service
-        fields_file = csv.reader(open(service.fields.path, 'r'))
-        fields = []
-        for row in fields_file:
-            fields.append(row[2])
-        context['fields'] = fields
-        content = csv.reader(open(order.file.path, 'r'))
-        context['data'] = content
+        with open(service.fields.path, 'r') as f:
+            fields_file = csv.reader(f)
+            fields = []
+            for row in fields_file:
+                fields.append(row[2])
+            context['fields'] = fields
+        with open(order.file.path, 'r') as f:
+            content = csv.reader(f)
+            context['data'] = content
         return context

@@ -1,0 +1,132 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block banner_content %}
+<h2>Submit Primer</h2>
+<div class="page_link">
+    <a href="index.html">Home</a>
+    <a href="elements.html">Services</a>
+    <a href="elements.html">Primer</a>
+    <a href="elements.html">Submit Primer</a>
+</div>
+{% endblock banner_content %}
+
+{% block main_content %}
+<div id="sec2" class="whole-wrap" dir="rtl"
+     style="display: block; text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-11 col-md-8" style="margin: auto">
+                    <h4>ثبت فرم ثبت سفارش برای سرویس {{service.name}}</h4>                    ‌
+                    <form method="post" enctype="multipart/form-data">
+                        <div style="font-size: 20px; display: inline-block"
+                        >فایل اکسل مربوط به این سرویس را از طریق این درگاه، آپلود کنید.
+                            اگر قبلا آن را آپلود کرده‌اید و قصد تغییر آن را ندارید، نیازی به بارگزاری مجدد نیست. </div>
+                        <input type="file" name="file" id="id_file">
+                        {% csrf_token %}
+                        <input type="text" name="field_id" id="id_field_id" style="display: none;" value="-1">
+                        <input type="text" name="final" id="id_final" style="display: none;" value="-1">
+                        <table dir="ltr" id="table" lang="en">
+                            <thead>
+                            <tr style="font-size: 12px;">
+                                <th>#</th>
+                                <th>نام فیلد</th>
+                                <th>نوع</th>
+                                <th>توضیحات</th>
+                            </tr>
+                            </thead>
+                            {% for row in fields %}
+                            <tr style="font-size: 12px;">
+                                <td>{{forloop.counter}}</td>
+                                <td>{{row.0}}</td>
+                                <td>{{row.1}}</td>
+                                <td>
+                                {% for cell in row %}
+                                {% if forloop.counter0 >= 3 and cell %}
+                                    {{cell}}
+                                {% endif %}
+                                {% endfor %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <tr style="font-size: 12px;" id="1">
+                                <td></td>
+                                <td><input type="text" name="name" id="id_name"></td>
+                                <td>
+                                    <select name="type" id="id_type">
+                                        <option value="text">text</option>
+                                        <option value="number">number</option>
+                                        <option value="choice">choice</option>
+                                    </select>
+                                </td>
+                                <td><input type="text" name="description" id="id_description"> </td>
+                                <td style="text-align: center;">
+                                    <button type="submit" class="btn generic-btn text-success"
+                                            style="font-size: 15px; width: 100%; display: block;
+                                            background: none;
+                                         " id="button_add">add
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                        <h4 class="text-danger">اگر نوع فیلد را text انتخاب کردید، در قسمت توضیحات تنها
+                        یک عدد بنویسید که به معنای بیشترین تعداد حرف مجاز برای آن فیلد است.
+                        همچنین اگر نوع فیلد را choice انتخاب کردید در قسمت توضیحات، گزینه‌های مربوط به
+                        فیلد را به صورت کلماتی که با کاراکتر ',' از هم جدا شده‌اند وارد کنید. </h4>
+
+                        <div class="pager">
+                            <button type="submit" class="genric-btn purplebtn circle" onclick="makeRequired()"
+                                    style="float: left; margin: 10px; display: inline-block">ثبت
+                            </button>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+
+{% block script %}
+<script>
+    document.querySelector("html").classList.add('js');
+    $("input").children().prop('required',false);
+    function myFunction(id) {
+        var popup = document.getElementById("myPopup"+id);
+        popup.classList.toggle("show");
+    }
+    function myDelete(i) {
+        $("#id_field_id").val(i);
+    }
+
+    function makeRequired () {
+        $("#id_final").val(1);
+    }
+    var fileInput  = document.querySelector( ".input-file" ),
+    button     = document.querySelector( "#input-file-trigger" ),
+    the_return = document.querySelector(".file-return");
+    addbtn = document.querySelector("#button_add");
+
+    button.addEventListener( "keydown", function( event ) {
+        if ( event.keyCode == 13 || event.keyCode == 32 ) {
+            fileInput.focus();
+        }
+    });
+    button.addEventListener( "click", function( event ) {
+       fileInput.focus();
+       return false;
+    });
+    fileInput.addEventListener( "change", function( event ) {
+        the_return.innerHTML = this.value;
+    });
+
+    addbtn.addEventListener("click", function(event) {
+        $("#id_field_id").val(-1);
+        $("#id_final").val(-1);
+    });
+</script>
+{% endblock script %}
