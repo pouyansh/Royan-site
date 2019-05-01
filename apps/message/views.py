@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView
 
 from apps.message.forms import *
@@ -58,6 +58,25 @@ class MessageDetails(CreateView):
     template_name = "message/message_details.html"
     form_class = CreateMessageForm
     success_url = reverse_lazy("dashboard:dashboard")
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Message.objects.filter(id=self.kwargs['pk']):
+            return reverse("index:index")
+        msg = Message.objects.get(id=self.kwargs['pk'])
+        if self.request.user.is_authenticated and not self.request.user.is_superuser:
+            if msg.customer.username != self.request.user.username:
+                return reverse("index:index")
+            else:
+                msg.is_opened = True
+                msg.save()
+                while msg.parent:
+                    msg = msg.parent
+                    msg.is_opened = True
+                    msg.save()
+        if not self.request.user.is_authenticated:
+            return reverse("index:index")
+
+        return super(MessageDetails, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

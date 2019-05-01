@@ -7,7 +7,15 @@
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             {% for msg in parents %}
             <div class="parent_msg">
+                {% if request.user.is_superuser %}
+                    {% if msg.is_opened %}
+                    <h4>{{msg.title}} (مشاهده شده)</h4>
+                    {% else %}
+                    <h4>{{msg.title}} (مشاهده نشده)</h4>
+                    {% endif %}
+                {% else %}
                 <h4>{{msg.title}}</h4>
+                {% endif %}
                 <h5>{{msg.date}}</h5>
                 {% if msg.is_sender %}
                     <h5>فرستنده: {{msg.customer.username}}</h5>
@@ -19,7 +27,15 @@
                 <h5>{{msg.text}}</h5>
             </div>
             {% endfor %}
-            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">{{ message.title }}</h3>
+            {% if request.user.is_superuser %}
+                {% if message.is_opened %}
+                <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">{{message.title}} (مشاهده شده)</h3>
+                {% else %}
+                <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">{{message.title}} (مشاهده نشده)</h3>
+                {% endif %}
+            {% else %}
+            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">{{message.title}}</h3>
+            {% endif %}
             <h4>{{message.date}}</h4>
             {% if message.is_sender %}
                 <h4>فرستنده: {{message.customer.username}}</h4>
