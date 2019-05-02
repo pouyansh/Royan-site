@@ -217,7 +217,9 @@
                                 {% endif %}
 
                                 <td dir="ltr">{{msg.date|date:'Y-m-d H:i'}}</td>
-                                <td><a href="{% url 'message:message_details' msg.id %}" class="details-link">
+                                <td><a href="
+                                        {% url 'message:message_details' messages|length|subtract:forloop.counter0 %}"
+                                       class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}

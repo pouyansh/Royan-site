@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView, UpdateView, FormView
 
@@ -13,12 +13,8 @@ from apps.tutorial.models import Tutorial
 class AddNews(CreateView):
     model = News
     template_name = 'news/add_news.html'
-
     form_class = AddNewsForm
     success_url = reverse_lazy('index:index')
-
-    def get_queryset(self):
-        return super(AddNews, self).get_queryset()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,6 +31,14 @@ class UpdateNews(UpdateView):
     template_name = 'news/update_news.html'
     form_class = UpdateNewsForm
     success_url = reverse_lazy('index:index')
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+            News.objects.get(id=self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "خبر مورد نظر یافت نشد"})
+        return super(UpdateNews, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
