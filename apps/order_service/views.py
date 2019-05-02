@@ -362,3 +362,32 @@ class CheckReceived(LoginRequiredMixin, TemplateView):
         context[
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تحویل گرفته شده قرار داده شد."
         return context
+
+
+class CheckPayed(TemplateView):
+    template_name = "temporary/show_text.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if len(OrderService.objects.all()) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        if not order.is_finished or not order.invoice:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر به مرحله پرداخت نرسیده است."})
+        print(order.code)
+        order.payed = True
+        order.save()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        print(order.code)
+        order.payed = True
+        order.save()
+        context[
+            'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت پرداخت شده قرار داده شد."
+        return context

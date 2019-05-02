@@ -70,7 +70,12 @@
                             {% if order.payed %}
                                 <h4 class="text-success">تایید شده</h4>
                             {% else %}
-                                <h4 class="text-danger">تایید نشده</h4>
+                                <h4 class="text-danger">تایید نشده
+                                    {% if request.user.is_superuser %}
+                                    <a href="{% url 'order_service:order_payed' order_id %}"
+                                        style="margin-right: 10px;" class="text-primary">(پرداخت شده)</a>
+                                    {% endif %}
+                                </h4>
                             {% endif %}
                         {% else %}
                             <h4 class="text-dark">-</h4>
