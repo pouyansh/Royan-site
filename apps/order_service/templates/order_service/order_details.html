@@ -20,7 +20,8 @@
             <div class="row">
                 <div class="col-lg-8 col-md-8" style="margin: auto">
 
-                    <h3>جزئیات سفارش مربوط به سرویس {{service.name}}</h3>
+                    <h3>جزئیات سفارش مربوط به سرویس</h3>
+                    <h3 dir="ltr">{{service.name}}</h3>
                     <div class="mt-10" style="display: flex; margin: 30px 0;">
                         <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
                             وضعیت سفارش:</label>
@@ -46,7 +47,10 @@
                             {% if order.received %}
                                 <h4 class="text-success">تایید شده</h4>
                             {% else %}
-                                <h4 class="text-danger">تایید نشده</h4>
+                                <h4 class="text-danger">تایید نشده
+                                    <a href="{% url 'order_service:order_received' order_id %}"
+                                        style="margin-right: 10px;" class="text-primary">(تحویل گرفته شده)</a>
+                                </h4>
                             {% endif %}
                         {% else %}
                             <h4 class="text-dark">-</h4>

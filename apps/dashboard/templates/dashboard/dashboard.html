@@ -161,17 +161,17 @@
                                 {% else %}
                                 <td>{{order.payment}}</td>
                                 {% endif %}
-                                {% if order.is_received %}
+                                {% if order.received %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                {% if order.is_payed %}
+                                {% if order.payed %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                <td><a href="{% url 'order_service:order_details' order.id %}"
+                                <td><a href="{% url 'order_service:order_details' forloop.counter %}"
                                        class="details-link"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}

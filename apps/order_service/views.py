@@ -2,7 +2,7 @@ import csv
 
 import jdatetime
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 import xlrd
@@ -277,11 +277,16 @@ class OrderDetails(LoginRequiredMixin, TemplateView):
     template_name = "order_service/order_details.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if not OrderService.objects.filter(id=self.kwargs['pk']) or not self.request.user.is_authenticated:
-            return redirect('index:index')
-        order = OrderService.objects.get(id=self.kwargs['pk'])
-        if self.request.user.username != order.customer.username and not self.request.user.is_superuser:
-            return redirect('index:index')
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if self.request.user.is_superuser:
+            if len(OrderService.objects.all()) < int(self.kwargs['pk']):
+                return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        else:
+            if len(OrderService.objects.filter(customer__username=self.request.user.username)) < int(self.kwargs['pk']):
+                return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -298,7 +303,11 @@ class OrderDetails(LoginRequiredMixin, TemplateView):
                 context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
             else:
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        order = OrderService.objects.get(id=self.kwargs['pk'])
+        if self.request.user.is_superuser:
+            order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        else:
+            order = OrderService.objects.filter(customer__username=self.request.user.username).order_by('id')[
+                int(self.kwargs['pk']) - 1]
         context['order'] = order
         service = order.service
         context['service'] = service
@@ -314,4 +323,42 @@ class OrderDetails(LoginRequiredMixin, TemplateView):
             for row in content:
                 data.append(row)
             context['data'] = data
+        context['order_id'] = self.kwargs['pk']
+        return context
+
+
+class CheckReceived(LoginRequiredMixin, TemplateView):
+    template_name = "temporary/show_text.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if self.request.user.is_superuser:
+            if len(OrderService.objects.all()) < int(self.kwargs['pk']):
+                return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        else:
+            if len(OrderService.objects.filter(customer__username=self.request.user.username)) < int(self.kwargs['pk']):
+                return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if self.request.user.is_superuser:
+            order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        else:
+            order = OrderService.objects.filter(customer__username=self.request.user.username).order_by('id')[
+                int(self.kwargs['pk']) - 1]
+        if not order.is_finished or not order.invoice:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر به مرحله تحویل نرسیده است."})
+        order.received = True
+        order.save()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_superuser:
+            order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        else:
+            order = OrderService.objects.filter(customer__username=self.request.user.username).order_by('id')[
+                int(self.kwargs['pk']) - 1]
+        context[
+            'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تحویل گرفته شده قرار داده شد."
         return context

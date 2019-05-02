@@ -7,5 +7,6 @@ urlpatterns = [
     url('order/service/(?P<pk>[0-9]+)/', SubmitOrderService.as_view(), name='order_service'),
     url('order/service/check_data/(?P<pk>[0-9]+)/', CheckData.as_view(), name='check_data'),
     url('order/service/get_code/(?P<pk>[0-9]+)/', GetCode.as_view(), name='get_code'),
-    url('order/service/details/(?P<pk>[0-9]+)/', OrderDetails.as_view(), name='order_details')
+    url(r'order/service/details/(?P<pk>\w+)/', OrderDetails.as_view(), name='order_details'),
+    url(r'order/service/received/(?P<pk>\w+)/', CheckReceived.as_view(), name='order_received')
 ]

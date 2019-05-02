@@ -117,7 +117,8 @@
                                 <td>{{order.code}}</td>
                                 <td>{{order.date}}</td>
                                 <td class="text-danger">کامل نشده</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -145,7 +146,8 @@
                                 <td>{{order.code}}</td>
                                 <td>{{order.date}}</td>
                                 <td class="text-warning">در انتظار پیش فاکتور</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -177,13 +179,14 @@
                                 <td>{{order.date}}</td>
                                 <td class="text-success">تایید شده</td>
                                 <td>{{order.payment}}</td>
-                                {% if order.is_received %}
+                                {% if order.received %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
                                 <td class="text-danger">تایید نشده</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -216,12 +219,13 @@
                                 <td class="text-success">تایید شده</td>
                                 <td>{{order.payment}}</td>
                                 <td class="text-danger">تایید نشده</td>
-                                {% if order.is_payed %}
+                                {% if order.payed %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -254,7 +258,8 @@
                                 <td>{{order.payment}}</td>
                                 <td class="text-success">تایید شده</td>
                                 <td class="text-success">تایید شده</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -288,7 +293,8 @@
                                 <td>{{order.code}}</td>
                                 <td>{{order.date}}</td>
                                 <td class="text-danger">کامل نشده</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -316,7 +322,8 @@
                                 <td>{{order.code}}</td>
                                 <td>{{order.date}}</td>
                                 <td class="text-warning">در انتظار پیش فاکتور</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -348,13 +355,14 @@
                                 <td>{{order.date}}</td>
                                 <td class="text-success">تایید شده</td>
                                 <td>{{order.payment}}</td>
-                                {% if order.is_received %}
+                                {% if order.received %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
                                 <td class="text-danger">تایید نشده</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -387,12 +395,13 @@
                                 <td class="text-success">تایید شده</td>
                                 <td>{{order.payment}}</td>
                                 <td class="text-danger">تایید نشده</td>
-                                {% if order.is_payed %}
+                                {% if order.payed %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -425,7 +434,8 @@
                                 <td>{{order.payment}}</td>
                                 <td class="text-success">تایید شده</td>
                                 <td class="text-success">تایید شده</td>
-                                <td><a class="details-link" href="{% url 'order_service:order_details' order.id %}">
+                                <td><a class="details-link"
+                                       href="{% url 'order_service:order_details' forloop.counter %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}

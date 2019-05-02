@@ -138,13 +138,13 @@
                                 <th>جزئیات</th>
                             </tr>
                             </thead>
-                            {% for order in orders %}
+                            {% for order in index_list %}
                             <tr>
                                 <td>{{forloop.counter}}</td>
-                                <td>{{order.code}}</td>
-                                <td>{{order.date}}</td>
-                                {% if order.is_finished %}
-                                    {% if order.invoice %}
+                                <td>{{order.0.code}}</td>
+                                <td>{{order.0.date}}</td>
+                                {% if order.0.is_finished %}
+                                    {% if order.0.invoice %}
                                         <td class="text-success">تایید شده</td>
                                     {% else %}
                                         <td class="text-warning">در انتظار پیش فاکتور</td>
@@ -152,27 +152,23 @@
                                 {% else %}
                                     <td class="text-danger">کامل نشده</td>
                                 {% endif %}
-                                {% if order.payment == 0 %}
+                                {% if order.0.payment == 0 %}
                                 <td>-</td>
                                 {% else %}
-                                <td>{{order.payment}}</td>
+                                <td>{{order.0.payment}}</td>
                                 {% endif %}
-                                {% if order.is_received %}
+                                {% if order.0.received %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                {% if order.is_payed %}
+                                {% if order.0.payed %}
                                 <td class="text-success">تایید شده</td>
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                {% if not order.is_finished %}
-                                <td><a href="{% url 'order_service:order_service' order.service.id %}"
+                                <td><a href="{% url 'order_service:order_details' order.1 %}"
                                        class="details-link"><i class='fa fa-angle-left'></i></a></td>
-                                {% else %}
-                                <td><a href="#" class="details-link"><i class='fa fa-angle-left'></i></a></td>
-                                {% endif %}
                             </tr>
                             {% endfor %}
                         </table>

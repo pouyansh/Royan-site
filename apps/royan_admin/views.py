@@ -55,6 +55,17 @@ class CustomerDetails(TemplateView):
             context['logged_in_user'] = Person.objects.get(username=customer.username)
         else:
             context['logged_in_user'] = Organization.objects.get(username=customer.username)
-        context['orders'] = OrderService.objects.filter(customer=customer).order_by('id')
+        orders = OrderService.objects.filter(customer=customer).order_by('id')
+        context['orders'] = orders
+        all_orders = OrderService.objects.all().order_by('id')
+        index_list = []
+        index = 0
+        index_all = 0
+        while index < len(orders):
+            if orders[index] == all_orders[index_all]:
+                index_list.append([orders[index], index_all + 1])
+                index += 1
+            index_all += 1
+        context['index_list'] = index_list
         context['messages'] = Message.objects.filter(customer=customer).order_by('-id')
         return context
