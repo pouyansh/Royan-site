@@ -4,3 +4,5 @@ from django.db import models
 
 class RoyanAdmin(User):
     level = models.IntegerField(default=1)
+
+

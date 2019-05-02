@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, FormView, DetailView, UpdateView
 
@@ -28,15 +28,8 @@ class CreateCategory(CreateView):
 class ShowCategoryListAdmin(ListView, FormView):
     model = Category
     template_name = 'product/show_category_list_admin.html'
-
     success_url = reverse_lazy('product:show_categories_list_admin')
     form_class = CategoryListAdminForm
-
-    def form_valid(self, form):
-        category = Category.objects.get(id=form.cleaned_data['category_id'], is_active=True)
-        category.is_active = False
-        category.save()
-        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -47,6 +40,12 @@ class ShowCategoryListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+    
+    def form_valid(self, form):
+        category = Category.objects.get(id=form.cleaned_data['category_id'], is_active=True)
+        category.is_active = False
+        category.save()
+        return super().form_valid(form)
 
 
 class UpdateCategory(UpdateView):
@@ -54,6 +53,11 @@ class UpdateCategory(UpdateView):
     template_name = 'product/update_category.html'
     success_url = reverse_lazy('product:show_categories_list_admin')
     form_class = CreateCategoryForm
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not Category.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "دسته بندی مورد نظر یافت نشد"})
+        return super(UpdateCategory, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
