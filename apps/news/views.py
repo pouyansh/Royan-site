@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView, FormView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView, FormView, TemplateView
 
 from apps.news.forms import *
 from apps.news.models import News
@@ -50,9 +50,18 @@ class UpdateNews(UpdateView):
         return context
 
 
-class ShowNewsDetail(DetailView):
+class ShowNewsDetail(TemplateView):
     model = News
     template_name = 'news/show_news.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "خبر مورد نظر یافت نشد"})
+        if len(News.objects.all()) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "خبر مورد نظر یافت نشد"})
+        return super(ShowNewsDetail, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -61,12 +70,8 @@ class ShowNewsDetail(DetailView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['news'] = News.objects.all().order_by('-id')[int(self.kwargs['pk']) - 1]
         return context
-
-    def dispatch(self, request, *args, **kwargs):
-        if not News.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
-        return super().dispatch(request, *args, **kwargs)
 
 
 class ShowNewsList(ListView):
@@ -86,13 +91,8 @@ class ShowNewsList(ListView):
 class ShowNewsListAdmin(ListView, FormView):
     model = News
     template_name = 'news/show_news_list_admin.html'
-
     success_url = reverse_lazy('news:show_news_list_admin')
     form_class = NewsListAdminForm
-
-    def form_valid(self, form):
-        News.objects.filter(id=form.cleaned_data['news_id']).delete()
-        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -102,3 +102,7 @@ class ShowNewsListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+
+    def form_valid(self, form):
+        News.objects.filter(id=form.cleaned_data['news_id']).delete()
+        return super().form_valid(form)

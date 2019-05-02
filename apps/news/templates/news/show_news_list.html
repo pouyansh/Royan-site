@@ -21,7 +21,7 @@
                     <img src="{{ news.image.url }}" alt="" class="img-fluid" style="margin: auto;">
                 </div>
                 <div class="col-md-9">
-                    <a href="{% url 'news:show_news' news.id%}" class="text-info"
+                    <a href="{% url 'news:show_news' forloop.counter %}" class="text-info"
                        style="font-size: 20px; font-family: FarsiFont">{{ news.title }}</a>
                     <div style="font-family: FarsiFont;">{{ news.summary }}</div>
                 </div>

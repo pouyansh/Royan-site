@@ -44,7 +44,7 @@
                     <div style="width: 100%; height: 150px; margin-bottom: 20px;; text-align: center;">
                         <img class="img-news" src="{{ new.image.url }}" alt="" style="width: auto; height: 100%; max-width: 100%;">
                     </div>
-                    <a href="{% url 'news:show_news' new.id %}" class="text-info"
+                    <a href="{% url 'news:show_news' forloop.counter %}" class="text-info"
                        style="font-size: 20px; font-family: FarsiFont;">{{ new.title }}</a>
                     <p>{{ new.summary }}</p>
                 </div>
