@@ -59,3 +59,13 @@ class CheckDataFrom(forms.Form):
         confirm = self.cleaned_data['confirm']
         if not confirm:
             raise forms.ValidationError("باید صحبت اطلاعات را تایید کنید.")
+
+
+class SetInvoiceForm(forms.Form):
+    payment = forms.IntegerField()
+
+    def clean_payment(self):
+        payment = self.cleaned_data['payment']
+        if payment < 0:
+            raise ValueError("هزینه نمی‌تواند منفی باشد.")
+        return payment

@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'order/service/get_code/(?P<pk>\w+)/', GetCode.as_view(), name='get_code'),
     url(r'order/service/details/(?P<pk>\w+)/', OrderDetails.as_view(), name='order_details'),
     url(r'order/service/received/(?P<pk>\w+)/', CheckReceived.as_view(), name='order_received'),
-    url(r'order/service/payed/(?P<pk>\w+)/', staff_member_required(CheckPayed.as_view()), name='order_payed')
+    url(r'order/service/payed/(?P<pk>\w+)/', staff_member_required(CheckPayed.as_view()), name='order_payed'),
+    url(r'order/service/invoice/(?P<pk>\w+)/', staff_member_required(CheckInvoice.as_view()), name='order_invoice')
 ]

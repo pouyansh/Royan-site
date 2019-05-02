@@ -2,13 +2,12 @@ import csv
 import os
 
 import jdatetime
+import xlrd
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.files import File
 from django.core.files.base import ContentFile
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
-import xlrd
 
 from apps.order_service.forms import *
 from apps.order_service.models import *
@@ -410,4 +409,62 @@ class CheckPayed(TemplateView):
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
         context[
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت پرداخت شده قرار داده شد."
+        return context
+
+
+class SetInvoice(FormView):
+    form_class = SetInvoiceForm
+    template_name = "order_service/set_invoice.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if len(OrderService.objects.all()) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        if not order.is_finished:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر به مرحله پرداخت نرسیده است."})
+        order.invoice = True
+        order.save()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        context['order'] = order
+        return super(SetInvoice, self).get_context_data()
+
+    def form_valid(self, form):
+        payment = form.cleaned_data['payment']
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        order.payment = payment
+        order.save()
+        self.success_url = reverse_lazy("order_service:check_invoice", kwargs={'pk': self.kwargs['pk']})
+        return super(SetInvoice, self).form_valid()
+
+
+class CheckInvoice(TemplateView):
+    template_name = "temporary/show_text.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if len(OrderService.objects.all()) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        if not order.is_finished:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر به مرحله پرداخت نرسیده است."})
+        order.invoice = True
+        order.save()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        context[
+            'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تایید شده قرار داده شد."
         return context
