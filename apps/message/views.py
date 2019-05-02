@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
 from apps.message.forms import *
@@ -45,7 +45,7 @@ class AdminCreateMessage(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("royan_admin:admin_panel")
 
     def dispatch(self, request, *args, **kwargs):
-        if not Customer.objects.filter(id=self.kwargs['pk']):
+        if not Customer.objects.filter(username=self.kwargs['username']):
             return render(request, "temporary/show_text.html", {'text': "کاربر مورد نظر یافت نشد"})
         return super(AdminCreateMessage, self).dispatch(request, args, kwargs)
 
@@ -56,11 +56,11 @@ class AdminCreateMessage(LoginRequiredMixin, CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        context['customer'] = Customer.objects.get(id=self.kwargs['pk'])
+        context['customer'] = Customer.objects.get(username=self.kwargs['username'])
         return context
 
     def form_valid(self, form):
-        form.instance.customer = Customer.objects.get(id=self.kwargs['pk'])
+        form.instance.customer = Customer.objects.get(username=self.kwargs['username'])
         form.instance.is_sender = False
         return super(AdminCreateMessage, self).form_valid(form)
 
@@ -72,9 +72,22 @@ class MessageDetails(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("dashboard:dashboard")
 
     def dispatch(self, request, *args, **kwargs):
-        if not Message.objects.filter(id=self.kwargs['pk']):
+        print("hi")
+        try:
+            int(self.kwargs['pk'])
+        except:
             return render(request, "temporary/show_text.html", {'text': "پیام مورد نظر یافت نشد"})
-        msg = Message.objects.get(id=self.kwargs['pk'])
+        if not self.request.user.is_superuser \
+                and len(Message.objects.filter(customer__username=self.request.user.username)) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "پیام مورد نظر یافت نشد"})
+        if self.request.user.is_superuser \
+                and len(Message.objects.all()) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "پیام مورد نظر یافت نشد"})
+        if self.request.user.is_superuser:
+            msg = Message.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        else:
+            msg = Message.objects.filter(customer__username=self.request.user.username).order_by('id')[
+                int(self.kwargs['pk']) - 1]
         if self.request.user.is_authenticated and not self.request.user.is_superuser:
             if msg.customer.username != self.request.user.username:
                 return render(request, "temporary/show_text.html",
@@ -84,8 +97,9 @@ class MessageDetails(LoginRequiredMixin, CreateView):
                 msg.save()
                 while msg.parent:
                     msg = msg.parent
-                    msg.is_opened = True
-                    msg.save()
+                    if not msg.is_sender:
+                        msg.is_opened = True
+                        msg.save()
         return super(MessageDetails, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
@@ -95,7 +109,11 @@ class MessageDetails(LoginRequiredMixin, CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        msg = Message.objects.get(id=self.kwargs['pk'])
+        if self.request.user.is_superuser:
+            msg = Message.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        else:
+            msg = Message.objects.filter(customer__username=self.request.user.username).order_by('id')[
+                int(self.kwargs['pk']) - 1]
         context['message'] = msg
         parents = []
         parent_msg = msg
@@ -107,7 +125,11 @@ class MessageDetails(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        msg = Message.objects.get(id=self.kwargs['pk'])
+        if self.request.user.is_superuser:
+            msg = Message.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        else:
+            msg = Message.objects.filter(customer__username=self.request.user.username).order_by('id')[
+                int(self.kwargs['pk']) - 1]
         form.instance.customer = msg.customer
         if self.request.user.is_superuser:
             form.instance.is_sender = False

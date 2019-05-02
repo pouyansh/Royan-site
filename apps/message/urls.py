@@ -5,8 +5,8 @@ from django.urls import path
 from apps.message.views import *
 
 urlpatterns = [
-    path('create_message/', CustomerCreateMessage.as_view(), name='customer_create_message'),
-    url(r'create_message/admin/(?P<pk>[0-9]+)/', staff_member_required(AdminCreateMessage.as_view()),
+    path('message/send/', CustomerCreateMessage.as_view(), name='customer_create_message'),
+    url(r'message/send/admin/(?P<username>\w+)/', staff_member_required(AdminCreateMessage.as_view()),
         name="admin_create_message"),
-    url('message_details/(?P<pk>[0-9]+)/', MessageDetails.as_view(), name="message_details")
+    url(r'message/details/(?P<pk>\w+)/', MessageDetails.as_view(), name="message_details")
 ]
