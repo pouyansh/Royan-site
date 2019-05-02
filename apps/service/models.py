@@ -1,11 +1,11 @@
 from django.db import models
 
 
-def file_directory_path(instance, filename):
+def file_directory_path(instance):
     return 'services_{0}/file.csv'.format(instance.id)
 
 
-def fields_directory_path(instance, filename):
+def fields_directory_path(instance):
     return 'services_{0}/fields.csv'.format(instance.id)
 
 

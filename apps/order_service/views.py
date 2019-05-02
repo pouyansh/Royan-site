@@ -1,7 +1,10 @@
 import csv
+import os
 
 import jdatetime
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files import File
+from django.core.files.base import ContentFile
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
@@ -20,10 +23,14 @@ class StartOrderService(LoginRequiredMixin, TemplateView):
     template_name = "order_service/start_order.html"
 
     def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
         if not Service.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
         if self.request.user.is_superuser:
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "ثبت سفارش مخصوص مشتریان است"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -33,13 +40,12 @@ class StartOrderService(LoginRequiredMixin, TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            context['logged_in_customer'] = customer
-            if customer.is_person:
-                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
-            else:
-                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        customer = Customer.objects.get(username=self.request.user.username)
+        context['logged_in_customer'] = customer
+        if customer.is_person:
+            context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+        else:
+            context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
         return context
@@ -51,10 +57,14 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
     success_url = reverse_lazy('index:index')
 
     def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
         if not Service.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
         if self.request.user.is_superuser:
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "ثبت سفارش مخصوص مشتریان است"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -64,26 +74,21 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            context['logged_in_customer'] = customer
-            if customer.is_person:
-                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
-            else:
-                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        customer = Customer.objects.get(username=self.request.user.username)
+        context['logged_in_customer'] = customer
+        if customer.is_person:
+            context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+        else:
+            context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
-        else:
-            orders = []
+        customer = Customer.objects.get(username=self.request.user.username)
+        orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
         if orders:
             order = orders[0]
             content = csv.reader(open(order.file.path, 'r'))
             order.file.close()
         else:
-
             content = []
         context['data'] = content
         return context
@@ -111,11 +116,8 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         final = form.cleaned_data['final']
         order_id = form.cleaned_data['order_id']
         service = Service.objects.get(id=self.kwargs['pk'])
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
-        else:
-            orders = []
+        customer = Customer.objects.get(username=self.request.user.username)
+        orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
         if orders:
             order = orders[0]
             content = csv.reader(open(order.file.path, 'r'))
@@ -124,9 +126,20 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             for row in content:
                 content_data.append(row)
         else:
-            customer = Customer.objects.get(username=self.request.user.username)
             order = OrderService(customer=customer, service=service)
             order.save()
+            if not os.path.exists("orders/"):
+                os.mkdir("orders/")
+            if not os.path.exists("orders/user_" + str(customer.username)):
+                os.mkdir("orders/user_" + str(customer.username))
+            if not os.path.exists("orders/user_" + str(customer.username) + "/service_" + str(service.id)):
+                os.mkdir("orders/user_" + str(customer.username) + "/service_" + str(service.id))
+            f = open("orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
+                order.id) + ".csv", "x")
+            f.close()
+            order.file.save("orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
+                order.id) + ".csv", ContentFile(''), save=True)
+            print(order.file)
             content_data = []
         if str(final) == "1":
             order_type = form.cleaned_data['type']
@@ -188,10 +201,19 @@ class CheckData(LoginRequiredMixin, FormView):
     success_url = reverse_lazy("index:index")
 
     def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
         if not Service.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
         if self.request.user.is_superuser:
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "ثبت سفارش مخصوص مشتریان است"})
+        service = Service.objects.get(id=self.kwargs['pk'])
+        customer = Customer.objects.get(username=self.request.user.username)
+        if not OrderService.objects.filter(customer=customer, service=service, is_finished=False):
+            return render(request, "temporary/show_text.html",
+                          {'text': "شما سفارش تکمیل نشده‌ای برای این سرویس ندارید"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -201,13 +223,12 @@ class CheckData(LoginRequiredMixin, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            context['logged_in_customer'] = customer
-            if customer.is_person:
-                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
-            else:
-                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        customer = Customer.objects.get(username=self.request.user.username)
+        context['logged_in_customer'] = customer
+        if customer.is_person:
+            context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+        else:
+            context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
         fields_file = csv.reader(open(service.fields.path, 'r'))
@@ -215,17 +236,10 @@ class CheckData(LoginRequiredMixin, FormView):
         for row in fields_file:
             fields.append(row[2])
         context['fields'] = fields
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
-        else:
-            orders = []
-        if orders:
-            order = orders[0]
-            content = csv.reader(open(order.file.path, 'r'))
-            order.file.close()
-        else:
-            content = []
+        orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
+        order = orders[0]
+        content = csv.reader(open(order.file.path, 'r'))
+        order.file.close()
         context['data'] = content
         return context
 
@@ -234,13 +248,17 @@ class CheckData(LoginRequiredMixin, FormView):
         customer = Customer.objects.get(username=self.request.user.username)
         orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
         order = orders[0]
+        index = 0
+        all_orders = OrderService.objects.filter(customer=customer).order_by('id')
+        while all_orders[index] != order:
+            index += 1
         order.is_finished = True
         order.name = form.cleaned_data['name']
-        code = service.name + "-" + str(jdatetime.datetime.now().date()) + "-" + str(order.id)
+        code = service.name + "-" + str(jdatetime.datetime.now().date()) + "-" + str(index)
         order.code = code
         order.date = jdatetime.datetime.now()
         order.save()
-        self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': order.id})
+        self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': index})
         return super(CheckData, self).form_valid(form)
 
 
@@ -248,10 +266,16 @@ class GetCode(LoginRequiredMixin, TemplateView):
     template_name = "order_service/get_code.html"
 
     def dispatch(self, request, *args, **kwargs):
-        if not OrderService.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
         if self.request.user.is_superuser:
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "ثبت سفارش مخصوص مشتریان است"})
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        print(int(self.kwargs['pk']))
+        print(OrderService.objects.filter(customer__username=self.request.user.username))
+        if len(OrderService.objects.filter(customer__username=self.request.user.username)) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -261,14 +285,14 @@ class GetCode(LoginRequiredMixin, TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        if not self.request.user.is_superuser:
-            customer = Customer.objects.get(username=self.request.user.username)
-            context['logged_in_customer'] = customer
-            if customer.is_person:
-                context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
-            else:
-                context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        order = OrderService.objects.get(id=self.kwargs['pk'])
+        customer = Customer.objects.get(username=self.request.user.username)
+        context['logged_in_customer'] = customer
+        if customer.is_person:
+            context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
+        else:
+            context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
+        order = OrderService.objects.filter(customer__username=self.request.user.username).order_by('id')[
+            int(self.kwargs['pk'])]
         context['code'] = order.code
         return context
 
@@ -377,7 +401,6 @@ class CheckPayed(TemplateView):
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
         if not order.is_finished or not order.invoice:
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر به مرحله پرداخت نرسیده است."})
-        print(order.code)
         order.payed = True
         order.save()
         return super().dispatch(request, *args, **kwargs)
@@ -385,9 +408,6 @@ class CheckPayed(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
-        print(order.code)
-        order.payed = True
-        order.save()
         context[
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت پرداخت شده قرار داده شد."
         return context

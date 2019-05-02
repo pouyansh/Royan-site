@@ -23,6 +23,7 @@ class CreateField(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -49,6 +50,7 @@ class ShowFieldListAdmin(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -61,6 +63,7 @@ class DeleteFieldSuccessful(TemplateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['text'] = "زمینه مدنظر شما با موفقیت پاک شد"
         return context
 
@@ -74,6 +77,7 @@ class DeleteFieldUnsuccessful(TemplateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['text'] = "متاسفانه سرویسی در این فیلد وجود دارد و امکان حذف این فیلد وجود ندارد"
         return context
 
@@ -90,6 +94,7 @@ class UpdateField(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -116,6 +121,7 @@ class FieldDetails(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -132,6 +138,7 @@ class CreateService(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -162,6 +169,7 @@ class ServiceDetails(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -182,6 +190,7 @@ class ShowServiceListAdmin(ListView, FormView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
 
@@ -194,6 +203,7 @@ class DeleteServiceSuccessful(TemplateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['text'] = "سرویس مدنظر شما با موفقیت پاک شد"
         return context
 

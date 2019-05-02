@@ -6,7 +6,8 @@
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <div>
-                <h3 style="color: #444444; margin-bottom: 20px;">نام سرویس: <div style="display: inline;" dir="ltr">{{ object.name }}</div></h3>
+                <div style="font-size: 20px; font-weight: 700;color: #444444; margin-bottom: 20px;">نام سرویس:
+                    <div style="display: inline;" dir="ltr">{{ object.name }}</div></div>
                 <h4 style="color: #444444; margin-bottom: 20px;"> زمینه: {{object.field.name}}</h4>
                 <h4 style="color: #444444;">توضیجات: {{ object.description }}</h4>
                 {% if object.has_form %}
