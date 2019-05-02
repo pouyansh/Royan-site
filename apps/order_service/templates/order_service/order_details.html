@@ -31,7 +31,7 @@
                             {% else %}
                                 <h4 class="text-warning">در انتظار پیش فاکتور
                                     {% if request.user.is_superuser %}
-                                    <a href="{% url 'order_service:order_invoice' order_id %}"
+                                    <a href="{% url 'order_service:set_invoice' order_id %}"
                                         style="margin-right: 10px;" class="text-primary">(ارسال شده)</a>
                                     {% endif %}
                                 </h4>

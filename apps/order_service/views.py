@@ -434,15 +434,15 @@ class SetInvoice(FormView):
         context = super().get_context_data(**kwargs)
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
         context['order'] = order
-        return super(SetInvoice, self).get_context_data()
+        return context
 
     def form_valid(self, form):
         payment = form.cleaned_data['payment']
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
         order.payment = payment
         order.save()
-        self.success_url = reverse_lazy("order_service:check_invoice", kwargs={'pk': self.kwargs['pk']})
-        return super(SetInvoice, self).form_valid()
+        self.success_url = reverse_lazy("order_service:order_invoice", kwargs={'pk': self.kwargs['pk']})
+        return super(SetInvoice, self).form_valid(form)
 
 
 class CheckInvoice(TemplateView):

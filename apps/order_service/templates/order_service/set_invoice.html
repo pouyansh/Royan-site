@@ -13,16 +13,15 @@
 <div class="login_body"></div>
 <div class="bg-text" style="display: flex;">
 
-    <div style="width: 100%; float: right;">
-        <h2>فراموشی رمز عبور</h2>
+    <div style="width: 100%; font-family: FarsiFont" dir="rtl">
         <div style="font-size: 20px; text-weight: 700;">نام کاربری:
-            <div dir="ltr">{{order.customer.username}}</div>
+            <div dir="ltr" style="display: inline;">{{order.customer.username}}</div>
         </div>
         <div style="font-size: 20px; text-weight: 700;">سرویس:
-            <div dir="ltr">{{order.service.name}}</div>
+            <div dir="ltr" style="display: inline;">{{order.service.name}}</div>
         </div>
         <div style="font-size: 20px; text-weight: 700;">کد سرویس:
-            <div dir="ltr">{{order.code}}</div>
+            <div dir="ltr" style="display: inline;">{{order.code}}</div>
         </div>
         <form method="post">
             {% csrf_token %}
