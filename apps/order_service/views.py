@@ -1,6 +1,7 @@
 import csv
 
 import jdatetime
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
@@ -15,7 +16,7 @@ from apps.service.models import Service, Field
 from apps.tutorial.models import Tutorial
 
 
-class StartOrderService(TemplateView):
+class StartOrderService(LoginRequiredMixin, TemplateView):
     template_name = "order_service/start_order.html"
 
     def dispatch(self, request, *args, **kwargs):
@@ -44,7 +45,7 @@ class StartOrderService(TemplateView):
         return context
 
 
-class SubmitOrderService(FormView):
+class SubmitOrderService(LoginRequiredMixin, FormView):
     form_class = OrderServiceFrom
     template_name = 'order_service/order_service.html'
     success_url = reverse_lazy('index:index')
@@ -181,7 +182,7 @@ class SubmitOrderService(FormView):
         return super(SubmitOrderService, self).form_valid(form)
 
 
-class CheckData(FormView):
+class CheckData(LoginRequiredMixin, FormView):
     form_class = CheckDataFrom
     template_name = "order_service/check_data.html"
     success_url = reverse_lazy("index:index")
@@ -243,7 +244,7 @@ class CheckData(FormView):
         return super(CheckData, self).form_valid(form)
 
 
-class GetCode(TemplateView):
+class GetCode(LoginRequiredMixin, TemplateView):
     template_name = "order_service/get_code.html"
 
     def dispatch(self, request, *args, **kwargs):
@@ -272,7 +273,7 @@ class GetCode(TemplateView):
         return context
 
 
-class OrderDetails(TemplateView):
+class OrderDetails(LoginRequiredMixin, TemplateView):
     template_name = "order_service/order_details.html"
 
     def dispatch(self, request, *args, **kwargs):
@@ -309,5 +310,8 @@ class OrderDetails(TemplateView):
             context['fields'] = fields
         with open(order.file.path, 'r') as f:
             content = csv.reader(f)
-            context['data'] = content
+            data = []
+            for row in content:
+                data.append(row)
+            context['data'] = data
         return context
