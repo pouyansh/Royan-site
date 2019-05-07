@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, FormView
 
@@ -32,6 +32,15 @@ class UpdateResearchArea(UpdateView):
     form_class = AddResearchAreaForm
     success_url = reverse_lazy('research:show_research_area_list_admin')
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "زمینه تحقیقاتی مورد نظر یافت نشد"})
+        if not ResearchArea.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "زمینه تحقیقاتی مورد نظر یافت نشد"})
+        return super(UpdateResearchArea, self).dispatch(request, args, kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
@@ -46,6 +55,15 @@ class ShowResearchAreaDetail(DetailView):
     model = ResearchArea
     template_name = 'research/show_research_area.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "زمینه تحقیقاتی مورد نظر یافت نشد"})
+        if not ResearchArea.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "زمینه تحقیقاتی مورد نظر یافت نشد"})
+        return super(ShowResearchAreaDetail, self).dispatch(request, args, kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
@@ -58,22 +76,12 @@ class ShowResearchAreaDetail(DetailView):
         context['related_papers'] = Paper.objects.filter(research_area=research_area)
         return context
 
-    def dispatch(self, request, *args, **kwargs):
-        if not ResearchArea.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
-        return super().dispatch(request, *args, **kwargs)
-
 
 class ShowResearchAreaListAdmin(ListView, FormView):
     model = ResearchArea
     template_name = 'research/show_research_area_list_admin.html'
-
     success_url = reverse_lazy('research:show_research_area_list_admin')
     form_class = ResearchAreaListAdminForm
-
-    def form_valid(self, form):
-        ResearchArea.objects.filter(id=form.cleaned_data['research_area_id']).delete()
-        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -83,6 +91,10 @@ class ShowResearchAreaListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+
+    def form_valid(self, form):
+        ResearchArea.objects.filter(id=form.cleaned_data['research_area_id']).delete()
+        return super().form_valid(form)
 
 
 class ChooseResearchArea(ListView):
@@ -107,7 +119,7 @@ class CreatePaper(CreateView):
 
     def dispatch(self, request, *args, **kwargs):
         if not ResearchArea.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "زمینه تحقیقاتی مورد نظر یافت نشد"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -143,7 +155,7 @@ class ShowPaperDetail(DetailView):
 
     def dispatch(self, request, *args, **kwargs):
         if not Paper.objects.filter(id=self.kwargs['pk']):
-            return redirect('index:index')
+            return render(request, "temporary/show_text.html", {'text': "مقاله مورد نظر یافت نشد"})
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -152,6 +164,11 @@ class UpdatePaper(UpdateView):
     template_name = 'research/update_paper.html'
     form_class = AddPaperForm
     success_url = reverse_lazy('research:show_paper_list_admin')
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Paper.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "مقاله مورد نظر یافت نشد"})
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
