@@ -40,7 +40,7 @@ class ShowCategoryListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
-    
+
     def form_valid(self, form):
         category = Category.objects.get(id=form.cleaned_data['category_id'], is_active=True)
         category.is_active = False
@@ -53,7 +53,7 @@ class UpdateCategory(UpdateView):
     template_name = 'product/update_category.html'
     success_url = reverse_lazy('product:show_categories_list_admin')
     form_class = CreateCategoryForm
-    
+
     def dispatch(self, request, *args, **kwargs):
         if not Category.objects.filter(id=self.kwargs['pk']):
             return render(request, "temporary/show_text.html", {'text': "دسته بندی مورد نظر یافت نشد"})
@@ -89,6 +89,11 @@ class CreateProduct(CreateView):
     form_class = CreateProductForm
     template_name = 'product/create_product.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if not Category.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "دسته بندی مورد نظر یافت نشد"})
+        return super(CreateProduct, self).dispatch(request, args, kwargs)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         category = get_object_or_404(Category, pk=self.kwargs['pk'])
@@ -102,7 +107,7 @@ class CreateProduct(CreateView):
         return context
 
     def form_valid(self, form):
-        category = get_object_or_404(Category, pk=self.kwargs['pk'])
+        category = Category.objects.get(id=self.kwargs['pk'])
         form.instance.category = category
         return super().form_valid(form)
 
@@ -127,16 +132,18 @@ class ProductList(ListView, FormView):
             context['products'] = reversed(Product.objects.filter(is_active=True, category__is_active=True))
         else:
             try:
-                category_object = Category.objects.get(id=category, is_active=True)
+                category_object = Category.objects.filter(id=category, is_active=True).order_by('id')
                 if category_object:
-                    context['products'] = Product.objects.filter(category=category_object, is_active=True)
+                    context['products'] = Product.objects.filter(category=category_object[0], is_active=True).order_by(
+                        'id')
             except:
-                context['products'] = []
+                context['products'] = Product.objects.filter(is_active=True, category__is_active=True).order_by('id')
         return context
 
     def form_valid(self, form):
         keyword = form.cleaned_data['product']
-        self.success_url = reverse_lazy('product:product_search_result', kwargs={'keyword': keyword})
+        self.success_url = reverse_lazy('product:product_search_result', kwargs={
+            'category': self.kwargs['category'], 'keyword': keyword})
         return super(ProductList, self).form_valid(form)
 
 
@@ -159,11 +166,12 @@ class ProductListAdmin(FormView):
             context['products'] = reversed(Product.objects.filter(is_active=True, category__is_active=True))
         else:
             try:
-                category_object = Category.objects.get(id=category, is_active=True)
+                category_object = Category.objects.filter(id=category, is_active=True).order_by('id')
                 if category_object:
-                    context['products'] = Product.objects.filter(category=category_object, is_active=True)
+                    context['products'] = Product.objects.filter(category=category_object[0], is_active=True).order_by(
+                        'id')
             except:
-                context['products'] = []
+                context['products'] = Product.objects.filter(is_active=True, category__is_active=True).order_by('id')
         return context
 
     def form_valid(self, form):
@@ -175,7 +183,8 @@ class ProductListAdmin(FormView):
             product.save()
             self.success_url = reverse_lazy('product:product_list_admin', kwargs={'category': '0'})
         else:
-            self.success_url = reverse_lazy('product:product_search_result_admin', kwargs={'keyword': keyword})
+            self.success_url = reverse_lazy('product:product_search_result_admin',
+                                            kwargs={'category': self.kwargs['category'], 'keyword': keyword})
         return super(ProductListAdmin, self).form_valid(form)
 
 
@@ -194,13 +203,17 @@ class ProductSearchResult(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
-        products = Product.objects.filter(is_active=True, category__is_active=True)
+        categories = Category.objects.filter(id=self.kwargs['category'], is_active=True)
+        if categories:
+            products = Product.objects.filter(is_active=True, category__is_active=True, category=categories[0])
+        else:
+            products = Product.objects.filter(is_active=True, category__is_active=True)
         searched_products = []
         for product in products:
             if keyword in product.name:
                 searched_products.append(product)
         context['products'] = searched_products
-        context['category_id'] = -1
+        context['category_id'] = self.kwargs['category']
         return context
 
     def form_valid(self, form):
@@ -224,12 +237,18 @@ class ProductSearchResultAdmin(FormView):
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
-        products = Product.objects.filter(is_active=True, category__is_active=True)
+        categories = Category.objects.filter(id=self.kwargs['category'], is_active=True)
+        if categories:
+            products = Product.objects.filter(is_active=True, category__is_active=True,
+                                              category=categories[0]).order_by('id')
+        else:
+            products = Product.objects.filter(is_active=True, category__is_active=True).order_by('id')
         searched_products = []
         for product in products:
             if keyword in product.name:
                 searched_products.append(product)
         context['products'] = searched_products
+        context['category_id'] = self.kwargs['category']
         return context
 
     def form_valid(self, form):
