@@ -138,7 +138,6 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             f.close()
             order.file.save("orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
                 order.id) + ".csv", ContentFile(''), save=True)
-            print(order.file)
             content_data = []
         if str(final) == "1":
             order_type = form.cleaned_data['type']

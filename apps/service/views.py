@@ -1,5 +1,7 @@
 import csv
+import os
 
+from django.core.files.base import ContentFile
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, FormView, UpdateView, TemplateView, DetailView
@@ -238,6 +240,14 @@ class CreateFormForService(FormView):
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
+        if not service.fields:
+            if not os.path.exists("services/"):
+                os.mkdir("services/")
+            if not os.path.exists("services/service_" + str(service.id)):
+                os.mkdir("services/service_" + str(service.id))
+            f = open("services/service_" + str(service.id) + "/fields.csv", "x")
+            f.close()
+            service.fields.save("services/service_" + str(service.id) + "/fields.csv", ContentFile(''), save=True)
         with open(service.fields.path, 'r') as f:
             fields_file = csv.reader(f)
             fields = []
@@ -250,6 +260,7 @@ class CreateFormForService(FormView):
         service = Service.objects.get(id=self.kwargs['pk'])
         if form.cleaned_data['file']:
             service.file = form.cleaned_data['file']
+            service.save()
         if str(form.cleaned_data['final']) == "1":
             service.has_form = True
             service.save()
