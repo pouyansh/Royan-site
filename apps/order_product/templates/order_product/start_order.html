@@ -1,0 +1,292 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+{% block internal_css %}
+<style>
+    .greenbtn {
+        background-color: rgb(56,208,30);
+        color: #eeeeee;
+        border: 1px solid rgb(56,208,30);
+        min-width: 100px;
+        font-size: 16px;
+        display: block;
+        margin: 20px auto;
+    }
+    .greenbtn:hover {
+        color: rgb(56,208,30);
+        background-color: #eeeeee;
+    }
+
+    .graybtn {
+        background-color: #bbbbbb;
+        color: #eeeeee;
+        border: 1px solid #bbbbbb;
+        min-width: 100px;
+        font-size: 16px;
+        display: block;
+        margin: 20px auto;
+        cursor: not-allowed;
+    }
+
+    .purplebtn {
+        background-color: rgb(188,91,254);
+        color: #eeeeee;
+        border: 1px solid rgb(188,91,254);
+        min-width: 100px;
+        font-size: 16px;
+        display: block;
+        margin: 20px auto;
+    }
+
+    .purplebtn:hover {
+        color: rgb(188,91,254);
+        background-color: #eeeeee;
+    }
+
+
+
+</style>
+{% endblock internal_css %}
+
+{% block banner_content %}
+<h2>Submit Primer</h2>
+<div class="page_link">
+    <a href="index.html">Home</a>
+    <a href="elements.html">Services</a>
+    <a href="elements.html">Primer</a>
+    <a href="elements.html">Submit Primer</a>
+</div>
+{% endblock banner_content %}
+
+{% block main_content %}
+<div class="multi-step container">
+    <div class="col-lg-2">
+        <div id="progress_btn_1" class="circle btn-primary">1</div>
+        <label class="progress-bar-label">ثبت مشخصات فاکتور شونده</label>
+    </div>
+    <div class="col-lg-1 connecting-line"></div>
+    <div class="col-lg-2">
+        <div id="progress_btn_2" class="circle">2</div>
+        <label class="progress-bar-label">ثبت اطلاعات توالی‌ها</label>
+    </div>
+    <div class="col-lg-1 connecting-line"></div>
+    <div class="col-lg-2">
+        <div id="progress_btn_3" class="circle">3</div>
+        <label class="progress-bar-label">تایید اطلاعات توالی‌ها</label>
+    </div>
+    <div class="col-lg-1 connecting-line"></div>
+    <div class="col-lg-2">
+        <div id="progress_btn_4" class="circle">4</div>
+        <label class="progress-bar-label">دریافت کد رهگیری</label>
+    </div>
+</div>
+
+<!--================Start Section1 =================-->
+<div id="sec1" class="whole-wrap" dir="rtl"
+     style="display: block; text-align: right; font-family: FarsiFont; font-size: 16px;">
+    <div class="container">
+        <div class="section-top-border">
+            <div class="row">
+                <div class="col-lg-8 col-md-8" style="margin: auto">
+
+                    <div id="type" class="mt-10" style="display: flex;">
+                        <label class="mb-30 title_color" style="float: right; display: inline-block; width: 100px;">نوع
+                            حساب
+                            کاربری</label>
+                        {% if request.user.is_superuser %}
+                        <h4 style="display: inline-block; font-family: FarsiFont;">ادمین</h4>
+                        {% else %}
+                        {% if logged_in_customer.is_person %}
+                        <h4 style="display: inline-block; font-family: FarsiFont;">حقیقی</h4>
+                        {% else %}
+                        <h4 style="display: inline-block; font-family: FarsiFont;">حقوقی</h4>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    {% if request.user.is_superuser %}
+                    {% else %}
+                    {% if logged_in_customer.is_person %}
+                    <div id="first_name" class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            نام:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.first_name}}</h4>
+                    </div>
+                    <div id="last_name" class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            نام خانوادگی:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.last_name}}</h4>
+                    </div>
+                    <div id="national_ID" class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            کد ملی:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.national_id}}</h4>
+                    </div>
+                    <div id="education" class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            مقطع تحصیلی:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.education}}</h4>
+                    </div>
+                    <div id="organization" class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            موسسه/سازمان/آموزشگاه:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.org}}</h4>
+                    </div>
+                    {% else %}
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            نام شرکت:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">
+                            {{logged_in_user.organization_name}}</h4>
+                    </div>
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            سمت:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.post}}</h4>
+                    </div>
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            شماره ثبت:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.submit_id}}</h4>
+                    </div>
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            شماره اقتصادی:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.economic_id}}</h4>
+                    </div>
+                    {% endif %}
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            ایمیل:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.email}}</h4>
+                    </div>
+
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            تلفن:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.phone_number}}</h4>
+                    </div>
+                    {% if logged_in_customer.is_person %}
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            تلفن همراه:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.phone_number}}</h4>
+                    </div>
+                    {% endif %}
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            فکس:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.fax}}</h4>
+                    </div>
+                    <div class="mt-10" style="display: flex;">
+                        <label style="float: right; display: inline-block; width: 100px;">
+                            آدرس:</label>
+                        <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.address}}</h4>
+                    </div>
+                    {% endif %}
+                    {% if request.user.is_superuser %}
+                    {% else %}
+                    <a href="{% url 'order_service:order_service' service.id %}" class="genric-btn purplebtn circle"
+                       style="float: left; margin: 10px; display: inline-block">ادامه
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--================End Section1 =================-->
+{% endblock main_content %}
+
+
+{% block script %}
+<script>
+    var form_count = 1;
+    $("#addbtn").click(function() {
+        form_count = form_count + 1;
+        var newrow = $("#temp_row").clone().attr("id", "row_"+form_count);
+        newrow.append("<td>"+form_count+"</td>");
+        var count = $("#first_row").children().length;
+        for(var i = 2; i <= count; i ++){
+            var newtd = $("#first_row td:nth-child(" + i + ")").clone();
+            newtd.children().attr("id", newtd.children().attr('id') + form_count);
+            newtd.children().attr("name", newtd.children().attr('name') + form_count);
+            newtd.children().val('');
+            newrow.append(newtd);
+        }
+        $('#table').append(newrow);
+
+        $("[name=extra_field_count]").val(form_count);
+    });
+
+    function changed () {
+        var value = $('#checkbox').prop("checked");
+        if (value == true) {
+            $('#btn').css('display', 'inline-block');
+            $('#btn1').css('display', 'none');
+        }
+        if (value == false) {
+            $('#btn1').css('display', 'inline-block');
+            $('#btn').css('display', 'none');
+        }
+    }
+
+    function radiochanged (id) {
+        if ($('#type_'+id).prop("checked") == true){
+            $('#type_'+(3-id)).prop("checked", false)
+            if (id == 2) {
+                $('#div_type_1').css("height", "0px");
+                $('#div_type_1_btn_1').css("opacity", 0);
+                $('#div_type_1_btn_1').css("visibility", "hidden");
+                $('#div_type_1_btn_2').css("opacity", 0);
+                $('#div_type_1_btn_2').css("visibility", "hidden");
+                $('#div_type_2').css("height", "100%");
+                $('#table').css("opacity", 1);
+                $('#table').css("visibility", "visible");
+                $('#addbtn').css("opacity", 1);
+                $('#addbtn').css("visibility", "visible");
+            }
+            if (id == 1) {
+                $('#div_type_1').css("height", "100%");
+                $('#div_type_1_btn_1').css("opacity", 1);
+                $('#div_type_1_btn_1').css("visibility", "visible");
+                $('#div_type_1_btn_2').css("opacity", 1);
+                $('#div_type_1_btn_2').css("visibility", "visible");
+                $('#div_type_2').css("height", "0px");
+                $('#table').css("opacity", 0);
+                $('#table').css("visibility", "hidden");
+                $('#addbtn').css("opacity", 0);
+                $('#addbtn').css("visibility", "hidden");
+            }
+        }
+    }
+
+    function goto (i, j) {
+        var body = $("html, body");
+        body.stop().animate({scrollTop:200}, 500, 'swing');
+        var id = "sec"+i;
+        $("#sec1").css('display', 'none');
+        $("#sec2").css('display', 'none');
+        $("#sec3").css('display', 'none');
+        $("#sec4").css('display', 'none');
+        $("#"+id).css('display', 'block');
+        $("#progress_btn_"+i).addClass("btn-primary");
+        $("#progress_btn_"+i).removeClass("btn-muted");
+        $("#progress_btn_"+i).removeClass("btn-success");
+        if (j > i) {
+            $("#progress_btn_"+j).removeClass("btn-primary");
+            $("#progress_btn_"+j).addClass("btn-muted");
+            $("#progress_btn_"+j).removeClass("btn-success");
+        }
+        else {
+            $("#progress_btn_"+j).removeClass("btn-primary");
+            $("#progress_btn_"+j).removeClass("btn-muted");
+            $("#progress_btn_"+j).addClass("btn-success");
+        }
+        return false;
+    }
+
+
+
+
+</script>
+{% endblock script %}

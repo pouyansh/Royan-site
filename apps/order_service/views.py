@@ -136,8 +136,9 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             f = open("media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
                 order.id) + ".csv", "x")
             f.close()
-            order.file.save("media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
-                order.id) + ".csv", ContentFile(''), save=True)
+            order.file.save(
+                "media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
+                    order.id) + ".csv", ContentFile(''), save=True)
             content_data = []
         if str(final) == "1":
             order_type = form.cleaned_data['type']

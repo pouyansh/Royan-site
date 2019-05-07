@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from apps.order_product.models import OrderProduct
+
+admin.site.register(OrderProduct)
