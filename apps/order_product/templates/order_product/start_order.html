@@ -66,13 +66,8 @@
     </div>
     <div class="col-lg-1 connecting-line"></div>
     <div class="col-lg-2">
-        <div id="progress_btn_2" class="circle">2</div>
-        <label class="progress-bar-label">ثبت اطلاعات توالی‌ها</label>
-    </div>
-    <div class="col-lg-1 connecting-line"></div>
-    <div class="col-lg-2">
         <div id="progress_btn_3" class="circle">3</div>
-        <label class="progress-bar-label">تایید اطلاعات توالی‌ها</label>
+        <label class="progress-bar-label">تایید اطلاعات</label>
     </div>
     <div class="col-lg-1 connecting-line"></div>
     <div class="col-lg-2">
@@ -183,12 +178,23 @@
                         <h4 style="display: inline-block; font-family: FarsiFont;">{{logged_in_user.address}}</h4>
                     </div>
                     {% endif %}
-                    {% if request.user.is_superuser %}
-                    {% else %}
-                    <a href="{% url 'order_service:order_service' service.id %}" class="genric-btn purplebtn circle"
-                       style="float: left; margin: 10px; display: inline-block">ادامه
-                    </a>
+
+                    <h4>توضیحات سفارش</h4>
+
+                    {% if product.has_explanation %}
+                        <p>{{product.explanations}}</p>
                     {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <textarea name="description" id="id_description">
+                        </textarea>
+
+                        <button type="submit"
+                                class="genric-btn purplebtn circle"
+                           style="float: left; margin: 10px; display: inline-block">ادامه
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
