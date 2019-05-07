@@ -127,16 +127,16 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         else:
             order = OrderService(customer=customer, service=service)
             order.save()
-            if not os.path.exists("orders/"):
-                os.mkdir("orders/")
-            if not os.path.exists("orders/user_" + str(customer.username)):
-                os.mkdir("orders/user_" + str(customer.username))
-            if not os.path.exists("orders/user_" + str(customer.username) + "/service_" + str(service.id)):
-                os.mkdir("orders/user_" + str(customer.username) + "/service_" + str(service.id))
-            f = open("orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
+            if not os.path.exists("media/orders/"):
+                os.mkdir("media/orders/")
+            if not os.path.exists("media/orders/user_" + str(customer.username)):
+                os.mkdir("media/orders/user_" + str(customer.username))
+            if not os.path.exists("media/orders/user_" + str(customer.username) + "/service_" + str(service.id)):
+                os.mkdir("media/orders/user_" + str(customer.username) + "/service_" + str(service.id))
+            f = open("media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
                 order.id) + ".csv", "x")
             f.close()
-            order.file.save("orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
+            order.file.save("media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
                 order.id) + ".csv", ContentFile(''), save=True)
             content_data = []
         if str(final) == "1":

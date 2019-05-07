@@ -5,10 +5,12 @@ from django import forms
 
 class OligoSequenceField(forms.CharField):
     def clean(self, value):
-        if bool(re.match('^[ACTG]+$', value)):
-            return value
-        else:
-            raise forms.ValidationError("این رشته تنها باید از حروف مشخص شده در بالا تشکیل شود")
+        if value:
+            if bool(re.match('^[ACTG]+$', value)):
+                return value
+            else:
+                raise forms.ValidationError("این رشته تنها باید از حروف مشخص شده در بالا تشکیل شود")
+        return value
 
 
 class OrderServiceFrom(forms.Form):

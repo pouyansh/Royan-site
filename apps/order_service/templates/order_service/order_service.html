@@ -155,6 +155,17 @@
                                         <th>change</th>
                                     </tr>
                                     </thead>
+                                    <tr style="font-size: 12px;">
+                                        <td></td>
+                                        {% for field in form %}
+                                        {% if field.name != "order_id" and field.name != "type" %}
+                                        {% if field.name != "final" and field.name != "file" %}
+                                        <td class="text-danger" style="list-style=none;">{{ field.errors }}</td>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% endfor %}
+                                        <td></td>
+                                    </tr>
                                     {% for row in data %}
                                     <tr style="font-size: 12px;">
                                         <td>{{forloop.counter}}</td>
