@@ -150,10 +150,20 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                 book = xlrd.open_workbook(file_contents=content)
                 sheet = book.sheet_by_index(0)
                 fields = []
+                index = 0
+                while True:
+                    check = 0
+                    for j in range(sheet.ncols):
+                        if sheet.cell_value(index, j):
+                            check += 1
+                    if check >= 2:
+                        break
+                    index += 1
                 for j in range(1, sheet.ncols):
-                    if sheet.cell_value(1, j):
-                        fields.append(sheet.cell_value(1, j))
-                for i in range(2, sheet.nrows):
+                    if sheet.cell_value(index, j):
+                        fields.append(sheet.cell_value(index, j))
+                index += 1
+                for i in range(index, sheet.nrows):
                     row = []
                     for j in range(1, sheet.ncols):
                         if sheet.cell_value(i, j):
