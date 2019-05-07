@@ -15,7 +15,7 @@ class OrderService(models.Model):
     service = models.ForeignKey(Service, on_delete="DoNothing", verbose_name="سرویس")
     file = models.FileField(verbose_name="فایل", blank=True, default=None)
     is_finished = models.BooleanField(default=False, verbose_name="وضعیت سفارش")
-    code = models.CharField(default="", blank=True, max_length=40, verbose_name="کد")
+    code = models.CharField(default="", blank=True, max_length=400, verbose_name="کد")
     date = jmodels.jDateField(verbose_name="تاریخ", blank=True, null=True)
     invoice = models.BooleanField(default=False, verbose_name="وضعیت پیش فاکتور")
     received = models.BooleanField(default=False, verbose_name="وضعیت تحویل")
