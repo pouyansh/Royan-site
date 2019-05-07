@@ -5,12 +5,12 @@ from django.urls import path
 from apps.tutorial.views import *
 
 urlpatterns = [
-    path('create_tutorial/', staff_member_required(AddTutorial.as_view()), name='add_tutorial'),
-    url('update_tutorial/(?P<pk>[0-9]+)/$', staff_member_required(UpdateTutorial.as_view()), name='update_tutorial'),
-    url('tutorial/(?P<pk>[0-9]+)/$', ShowTutorialDetail.as_view(), name='show_tutorial'),
-    path('choose_tutorial/', staff_member_required(ChooseTutorial.as_view()), name='choose_tutorial'),
-    path('tutorial_list_admin/', staff_member_required(ShowTutorialListAdmin.as_view()),
+    path('tutorial/create/', staff_member_required(AddTutorial.as_view()), name='add_tutorial'),
+    url('tutorial/edit/(?P<pk>[0-9]+)/$', staff_member_required(UpdateTutorial.as_view()), name='update_tutorial'),
+    url('tutorial/details/(?P<pk>[0-9]+)/$', ShowTutorialDetail.as_view(), name='show_tutorial'),
+    path('tutorial/choose/', staff_member_required(ChooseTutorial.as_view()), name='choose_tutorial'),
+    path('tutorial/list/admin/', staff_member_required(ShowTutorialListAdmin.as_view()),
          name='show_tutorial_list_admin'),
-    url('create_link/(?P<pk>[0-9]+)/$', staff_member_required(CreateLink.as_view()), name='add_link'),
-    url('update_link/(?P<pk>[0-9]+)/$', staff_member_required(UpdateLink.as_view()), name='update_link'),
+    url('link/create/(?P<pk>[0-9]+)/$', staff_member_required(CreateLink.as_view()), name='add_link'),
+    url('link/edit/(?P<pk>[0-9]+)/$', staff_member_required(UpdateLink.as_view()), name='update_link'),
 ]
