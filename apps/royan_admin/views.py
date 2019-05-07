@@ -113,5 +113,15 @@ class CustomerDetails(TemplateView):
                 index += 1
             index_all += 1
         context['index_list'] = index_list
-        context['messages'] = Message.objects.filter(customer=customer).order_by('-id')
+        all_messages = Message.objects.all().order_by('-id')
+        messages = Message.objects.filter(customer=customer).order_by('-id')
+        index_list = []
+        index = 0
+        index_all = 0
+        while index < len(messages):
+            if messages[index] == all_messages[index_all]:
+                index_list.append([messages[index], index_all + 1])
+                index += 1
+            index_all += 1
+        context['messages'] = index_list
         return context

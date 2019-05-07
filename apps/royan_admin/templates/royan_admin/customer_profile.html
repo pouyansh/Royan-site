@@ -190,13 +190,13 @@
                             </tr>
                             </thead>
                             {% for msg in messages %}
-                            {% if msg.is_opened %}
+                            {% if msg.0.is_opened %}
                             <tr>
                             {% else %}
                             <tr style="font-weight: 800; color: blue;">
                             {% endif %}
                                 <td>{{forloop.counter}}</td>
-                                {% if msg.is_sender %}
+                                {% if msg.0.is_sender %}
                                     {% if logged_in_customer.is_person %}
                                         <td>{{logged_in_user.first_name}} {{logged_in_user.last_name}}</td>
                                     {% else %}
@@ -212,8 +212,8 @@
                                     {% endif %}
                                 {% endif %}
 
-                                <td dir="ltr">{{msg.date|date:'Y-m-d H:i'}}</td>
-                                <td><a href="{% url 'message:message_details' msg.id %}" class="details-link">
+                                <td dir="ltr">{{msg.0.date|date:'Y-m-d H:i'}}</td>
+                                <td><a href="{% url 'message:message_details' msg.1 %}" class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}

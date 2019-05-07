@@ -9,9 +9,6 @@
                 <h3 class="nav-side-name">{{admin.first_name}} {{admin.last_name}}</h3>
             </div>
             <ul class="nav nav-pills">
-<!--                <li class="nav-pills-item active"><a class="nav-a-tab active" data-toggle="pill"-->
-<!--                                                     href="#returned_services">سفارش‌های ارسال شده به شما توسط مدیران-->
-<!--                    دیگر</a>-->
                 </li>
                 <li class="nav-pills-item active"><a class="nav-a-tab active" data-toggle="pill" href="#services">سرویس‌های
                     سفارش داده شده</a>
@@ -91,182 +88,6 @@
                     </a>
                 </div>
             </div>
-<!--            <div id="returned_services" class="tab-pane fade in active show">-->
-<!--                <div class="feature_item">-->
-<!--                    <h4 style="font-family: FarsiFont; padding: 20px; border-bottom: 1px solid #dddddd;">سرویس‌های سفارش-->
-<!--                        داده شده</h4>-->
-<!--                    <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های کامل نشده</h5>-->
-<!--                    <div class="table-responsive">-->
-<!--                        <table class="table" style="text-align: center;">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>#</th>-->
-<!--                                <th>نام فاکتور شونده</th>-->
-<!--                                <th>نام کاربری</th>-->
-<!--                                <th>کد رهگیری سفارش</th>-->
-<!--                                <th>تاریخ</th>-->
-<!--                                <th>وضعیت سفارش</th>-->
-<!--                                <th>جزئیات</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            {% for order in orders_not_finished_admin %}-->
-<!--                            <tr>-->
-<!--                                <td>{{forloop.counter}}</td>-->
-<!--                                <td>{{order.0.name}}</td>-->
-<!--                                <td>{{order.0.customer.username}}</td>-->
-<!--                                <td>{{order.0.code}}</td>-->
-<!--                                <td>{{order.0.date}}</td>-->
-<!--                                <td class="text-danger">کامل نشده</td>-->
-<!--                                <td><a class="details-link"-->
-<!--                                       href="{% url 'order_service:order_details' order.1 %}">-->
-<!--                                    <i class='fa fa-angle-left'></i></a></td>-->
-<!--                            </tr>-->
-<!--                            {% endfor %}-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                    <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های در انتظار پیش فاکتور</h5>-->
-<!--                    <div class="table-responsive">-->
-<!--                        <table class="table" style="text-align: center;">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>#</th>-->
-<!--                                <th>نام فاکتور شونده</th>-->
-<!--                                <th>نام کاربری</th>-->
-<!--                                <th>کد رهگیری سفارش</th>-->
-<!--                                <th>تاریخ</th>-->
-<!--                                <th>وضعیت سفارش</th>-->
-<!--                                <th>جزئیات</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            {% for order in orders_not_invoice_admin %}-->
-<!--                            <tr>-->
-<!--                                <td>{{forloop.counter}}</td>-->
-<!--                                <td>{{order.0.name}}</td>-->
-<!--                                <td>{{order.0.customer.username}}</td>-->
-<!--                                <td>{{order.0.code}}</td>-->
-<!--                                <td>{{order.0.date}}</td>-->
-<!--                                <td class="text-warning">در انتظار پیش فاکتور</td>-->
-<!--                                <td><a class="details-link"-->
-<!--                                       href="{% url 'order_service:order_details' order.1 %}">-->
-<!--                                    <i class='fa fa-angle-left'></i></a></td>-->
-<!--                            </tr>-->
-<!--                            {% endfor %}-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                    <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های در انتظار پرداخت هزینه</h5>-->
-<!--                    <div class="table-responsive">-->
-<!--                        <table class="table" style="text-align: center;">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>#</th>-->
-<!--                                <th>نام فاکتور شونده</th>-->
-<!--                                <th>نام کاربری</th>-->
-<!--                                <th>کد رهگیری سفارش</th>-->
-<!--                                <th>تاریخ</th>-->
-<!--                                <th>وضعیت سفارش</th>-->
-<!--                                <th>مبلغ کل</th>-->
-<!--                                <th>وضعیت تحویل سفارش</th>-->
-<!--                                <th>وضعیت پرداخت</th>-->
-<!--                                <th>جزئیات</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            {% for order in orders_not_payed_admin %}-->
-<!--                            <tr>-->
-<!--                                <td>{{forloop.counter}}</td>-->
-<!--                                <td>{{order.0.name}}</td>-->
-<!--                                <td>{{order.0.customer.username}}</td>-->
-<!--                                <td>{{order.0.code}}</td>-->
-<!--                                <td>{{order.0.date}}</td>-->
-<!--                                <td class="text-success">تایید شده</td>-->
-<!--                                <td>{{order.0.payment}}</td>-->
-<!--                                {% if order.0.received %}-->
-<!--                                <td class="text-success">تایید شده</td>-->
-<!--                                {% else %}-->
-<!--                                <td class="text-danger">تایید نشده</td>-->
-<!--                                {% endif %}-->
-<!--                                <td class="text-danger">تایید نشده</td>-->
-<!--                                <td><a class="details-link"-->
-<!--                                       href="{% url 'order_service:order_details' order.1 %}">-->
-<!--                                    <i class='fa fa-angle-left'></i></a></td>-->
-<!--                            </tr>-->
-<!--                            {% endfor %}-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                    <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های دریافت نشده</h5>-->
-<!--                    <div class="table-responsive">-->
-<!--                        <table class="table" style="text-align: center;">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>#</th>-->
-<!--                                <th>نام فاکتور شونده</th>-->
-<!--                                <th>نام کاربری</th>-->
-<!--                                <th>کد رهگیری سفارش</th>-->
-<!--                                <th>تاریخ</th>-->
-<!--                                <th>وضعیت سفارش</th>-->
-<!--                                <th>مبلغ کل</th>-->
-<!--                                <th>وضعیت تحویل سفارش</th>-->
-<!--                                <th>وضعیت پرداخت</th>-->
-<!--                                <th>جزئیات</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            {% for order in orders_not_received_admin %}-->
-<!--                            <tr>-->
-<!--                                <td>{{forloop.counter}}</td>-->
-<!--                                <td>{{order.0.name}}</td>-->
-<!--                                <td>{{order.0.customer.username}}</td>-->
-<!--                                <td>{{order.0.code}}</td>-->
-<!--                                <td>{{order.0.date}}</td>-->
-<!--                                <td class="text-success">تایید شده</td>-->
-<!--                                <td>{{order.0.payment}}</td>-->
-<!--                                <td class="text-danger">تایید نشده</td>-->
-<!--                                {% if order.0.payed %}-->
-<!--                                <td class="text-success">تایید شده</td>-->
-<!--                                {% else %}-->
-<!--                                <td class="text-danger">تایید نشده</td>-->
-<!--                                {% endif %}-->
-<!--                                <td><a class="details-link"-->
-<!--                                       href="{% url 'order_service:order_details' order.1 %}">-->
-<!--                                    <i class='fa fa-angle-left'></i></a></td>-->
-<!--                            </tr>-->
-<!--                            {% endfor %}-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                    <h5 style="font-family: FarsiFont; padding: 20px;">سفارش‌های اتمام یافته</h5>-->
-<!--                    <div class="table-responsive">-->
-<!--                        <table class="table" style="text-align: center;">-->
-<!--                            <thead>-->
-<!--                            <tr>-->
-<!--                                <th>#</th>-->
-<!--                                <th>نام کاربر</th>-->
-<!--                                <th>کد رهگیری سفارش</th>-->
-<!--                                <th>تاریخ</th>-->
-<!--                                <th>وضعیت سفارش</th>-->
-<!--                                <th>مبلغ کل</th>-->
-<!--                                <th>وضعیت تحویل سفارش</th>-->
-<!--                                <th>وضعیت پرداخت</th>-->
-<!--                                <th>جزئیات</th>-->
-<!--                            </tr>-->
-<!--                            </thead>-->
-<!--                            {% for order in finished_orders_admin %}-->
-<!--                            <tr>-->
-<!--                                <td>{{forloop.counter}}</td>-->
-<!--                                <td>{{order.0.name}}</td>-->
-<!--                                <td>{{order.0.customer.username}}</td>-->
-<!--                                <td>{{order.0.code}}</td>-->
-<!--                                <td>{{order.0.date}}</td>-->
-<!--                                <td class="text-success">تایید شده</td>-->
-<!--                                <td>{{order.0.payment}}</td>-->
-<!--                                <td class="text-success">تایید شده</td>-->
-<!--                                <td class="text-success">تایید شده</td>-->
-<!--                                <td><a class="details-link"-->
-<!--                                       href="{% url 'order_service:order_details' order.1 %}">-->
-<!--                                    <i class='fa fa-angle-left'></i></a></td>-->
-<!--                            </tr>-->
-<!--                            {% endfor %}-->
-<!--                        </table>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
             <div id="services" class="tab-pane fade in active show">
                 <div class="feature_item">
                     <h4 style="font-family: FarsiFont; padding: 20px; border-bottom: 1px solid #dddddd;">سرویس‌های سفارش
@@ -518,7 +339,7 @@
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                <td><a class="text-dark" href="{% url 'message:admin_create_message' customer.id %}">ارسال</a> </td>
+                                <td><a class="text-dark" href="{% url 'message:admin_create_message' customer.username %}">ارسال</a> </td>
                                 <td><a href="{% url 'royan_admin:customer_profile' customer.id %}" class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>

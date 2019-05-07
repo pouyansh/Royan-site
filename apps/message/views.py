@@ -72,7 +72,6 @@ class MessageDetails(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("dashboard:dashboard")
 
     def dispatch(self, request, *args, **kwargs):
-        print("hi")
         try:
             int(self.kwargs['pk'])
         except:
@@ -93,13 +92,23 @@ class MessageDetails(LoginRequiredMixin, CreateView):
                 return render(request, "temporary/show_text.html",
                               {'text': "کاربر گرامی شما اجازه دسترسی به این پیام را ندارید"})
             else:
-                msg.is_opened = True
-                msg.save()
+                if not msg.is_sender:
+                    msg.is_opened = True
+                    msg.save()
                 while msg.parent:
                     msg = msg.parent
                     if not msg.is_sender:
                         msg.is_opened = True
                         msg.save()
+        if self.request.user.is_superuser:
+            if msg.is_sender:
+                msg.is_opened = True
+                msg.save()
+            while msg.parent:
+                msg = msg.parent
+                if msg.is_sender:
+                    msg.is_opened = True
+                    msg.save()
         return super(MessageDetails, self).dispatch(request, args, kwargs)
 
     def get_context_data(self, **kwargs):
