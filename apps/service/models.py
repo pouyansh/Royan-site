@@ -12,6 +12,7 @@ def fields_directory_path(instance, filename):
 class Field(models.Model):
     name = models.CharField(max_length=30, verbose_name='نام زمینه')
     description = models.TextField(max_length=1000, verbose_name='توضیحات')
+    image = models.ImageField(verbose_name="عکس", default=None, null=True, blank=True)
 
 
 class Service(models.Model):

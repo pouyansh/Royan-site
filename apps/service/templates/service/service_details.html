@@ -5,20 +5,25 @@
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
-            <div>
-                <div style="font-size: 20px; font-weight: 700;color: #444444; margin-bottom: 20px;">نام سرویس:
-                    <div style="display: inline;" dir="ltr">{{ object.name }}</div></div>
-                <h4 style="color: #444444; margin-bottom: 20px;"> زمینه: {{object.field.name}}</h4>
-                <h4 style="color: #444444;">توضیجات: {{ object.description }}</h4>
-                {% if object.has_form %}
-                <a class="main_btn" href="{% url 'order_service:start_order' object.id %}"
-                style="font-family: FarsiFont; font-size: 18px; margin-top: 20px;">سفارش</a>
-                {% endif %}
+            <div class="row">
+                <div>
+                    <div style="font-size: 20px; font-weight: 700;color: #444444; margin-bottom: 20px;">نام سرویس:
+                        <div style="display: inline;" dir="ltr">{{ object.name }}</div></div>
+                    <h4 style="color: #444444; margin-bottom: 20px;"> زمینه: {{object.field.name}}</h4>
+                    <h4 style="color: #444444;">توضیجات: {{ object.description }}</h4>
+                    {% if object.has_form %}
+                    <a class="main_btn" href="{% url 'order_service:start_order' object.id %}"
+                    style="font-family: FarsiFont; font-size: 18px; margin-top: 20px;">سفارش</a>
+                    {% endif %}
 
-                {% if request.user.is_superuser %}
-                <a class="main_btn" href="{% url 'service:create_form' service.id %}"
-                style="font-family: FarsiFont; font-size: 18px; margin-top: 20px;">ساخت فرم</a>
-                {% endif %}
+                    {% if request.user.is_superuser %}
+                    <a class="main_btn" href="{% url 'service:create_form' service.id %}"
+                    style="font-family: FarsiFont; font-size: 18px; margin-top: 20px;">ساخت فرم</a>
+                    {% endif %}
+                </div>
+                <div style="margin-right: auto;">
+                    <img src="{{field.image.url}}" style="width: 300px; height: auto; margin-right: auto;">
+                </div>
             </div>
 
             <div class="row" style="margin-top: 50px;">

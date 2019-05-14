@@ -171,6 +171,7 @@ class ServiceDetails(DetailView):
         context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         service = Service.objects.filter(id=self.kwargs['pk'])
         if service:
+            context['field'] = service[0].field
             services = Service.objects.filter(field=service[0].field).exclude(name=service[0].name)
             if len(services) > 4:
                 services = services[:4]
