@@ -6,6 +6,7 @@ from apps.order_service.models import OrderService
 from apps.product.models import Category
 from apps.registration.models import Customer, Person, Organization
 from apps.research.models import ResearchArea
+from apps.royan_admin.models import RoyanTucagene
 from apps.service.models import *
 from apps.tutorial.models import Tutorial
 
@@ -15,6 +16,7 @@ class AdminPanel(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AdminPanel, self).get_context_data()
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['admin'] = self.request.user
         context['services'] = Service.objects.all().order_by('id')
@@ -23,7 +25,7 @@ class AdminPanel(TemplateView):
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         all_orders = OrderService.objects.all().order_by('id')
         orders = OrderService.objects.filter(is_finished=True, invoice=True, received=True,
-                                                                 payed=True).order_by('id')
+                                             payed=True).order_by('id')
         order_list = []
         index = 0
         index_all = 0
@@ -45,7 +47,7 @@ class AdminPanel(TemplateView):
             index_all += 1
         context['orders_not_payed'] = order_list
         orders = OrderService.objects.filter(is_finished=True, invoice=True,
-                                                                     received=False).order_by('id')
+                                             received=False).order_by('id')
         order_list = []
         index = 0
         index_all = 0
@@ -90,6 +92,7 @@ class CustomerDetails(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')

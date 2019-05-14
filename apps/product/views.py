@@ -5,6 +5,7 @@ from django.views.generic import CreateView, ListView, FormView, DetailView, Upd
 from apps.product.forms import *
 from apps.product.models import *
 from apps.research.models import ResearchArea
+from apps.royan_admin.models import RoyanTucagene
 from apps.service.models import Service, Field
 from apps.tutorial.models import Tutorial
 
@@ -17,6 +18,7 @@ class CreateCategory(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -33,6 +35,7 @@ class ShowCategoryListAdmin(ListView, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -61,6 +64,7 @@ class UpdateCategory(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -75,6 +79,7 @@ class ChooseCategory(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -96,6 +101,7 @@ class CreateProduct(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         category = get_object_or_404(Category, pk=self.kwargs['pk'])
         context['category'] = category
         kwargs['category'] = category
@@ -121,6 +127,7 @@ class ProductList(ListView, FormView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductList, self).get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -155,6 +162,7 @@ class ProductListAdmin(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductListAdmin, self).get_context_data()
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -197,6 +205,7 @@ class ProductSearchResult(ListView, FormView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductSearchResult, self).get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -230,6 +239,7 @@ class ProductSearchResultAdmin(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ProductSearchResultAdmin, self).get_context_data()
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -284,6 +294,8 @@ class ProductDetails(DetailView):
             context['related_products'] = products
         else:
             context['related_products'] = []
+
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -305,6 +317,7 @@ class UpdateProduct(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')

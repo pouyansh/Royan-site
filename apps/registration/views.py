@@ -11,6 +11,7 @@ from math import ceil
 from apps.product.models import Category
 from apps.registration.forms import *
 from apps.research.models import ResearchArea
+from apps.royan_admin.models import RoyanTucagene
 from apps.service.models import Service, Field
 from apps.tutorial.models import Tutorial
 
@@ -42,6 +43,7 @@ class RegisterPerson(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -73,6 +75,7 @@ class RegisterOrganization(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -102,6 +105,7 @@ class RegisteredSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -119,6 +123,7 @@ class VerifyEmail(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -145,6 +150,7 @@ class VerifiedSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -159,6 +165,7 @@ class VerifiedNotSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -185,6 +192,7 @@ class UpdateCustomer(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(UpdateCustomer, self).get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -198,6 +206,7 @@ class UpdatedSuccessfully(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -214,6 +223,7 @@ class ForgetPassword(FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -229,7 +239,7 @@ class ForgetPassword(FormView):
         send_mail('تغییر رمز عبور',
                   'کاربر گرامی، رمز عبور جدیدی برای حساب کاربری شما ساخته شد که در ادامه مشاهده می‌فرمایید. ' +
                   'خواهشمند است به منظور حفظ مسائل امنیتی، رمز عبور حساب کاربری خود را تغییر دهید.\n' +
-                  'username: ' + customer.username + '\n new password: ' + newpass + '\n 127.0.0.1:8000/login/',
+                  'username: ' + customer.username + '\n new password: ' + newpass + '\n www.royantucagene.com/login/',
                   'tucagenesite@gmail.com', [customer.email])
         return super(ForgetPassword, self).form_valid(form)
 
@@ -239,6 +249,7 @@ class ForgetPasswordSuccessful(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -257,6 +268,7 @@ class ChangePassword(PasswordChangeView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
@@ -270,6 +282,7 @@ class ChangePasswordSuccessful(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
