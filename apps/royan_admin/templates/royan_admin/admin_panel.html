@@ -331,6 +331,7 @@
                                 <th>ایمیل</th>
                                 <th>وضعیت</th>
                                 <th>ارسال پیام</th>
+                                <th>بلاک</th>
                                 <th>مشاهده</th>
                             </tr>
                             </thead>
@@ -339,12 +340,17 @@
                                 <td>{{forloop.counter}}</td>
                                 <td>{{customer.username}}</td>
                                 <td>{{customer.email}}</td>
-                                {% if customer.email_verified %}
-                                <td class="text-success">تایید شده</td>
+                                {% if customer.is_active %}
+                                    {% if customer.email_verified %}
+                                    <td class="text-success">ایمیل: تایید شده</td>
+                                    {% else %}
+                                    <td class="text-danger">ایمیل: تایید نشده</td>
+                                    {% endif %}
                                 {% else %}
-                                <td class="text-danger">تایید نشده</td>
+                                    <td class="text-danger">بلاک شده</td>
                                 {% endif %}
                                 <td><a class="text-dark" href="{% url 'message:admin_create_message' customer.username %}">ارسال</a> </td>
+                                <td><a class="text-danger" href="{% url 'royan_admin:block' customer.id %}">بلاک</a> </td>
                                 <td><a href="{% url 'royan_admin:customer_profile' customer.id %}" class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
