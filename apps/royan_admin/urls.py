@@ -9,5 +9,7 @@ urlpatterns = [
     url('customer_details/(?P<pk>[0-9]+)/', staff_member_required((CustomerDetails.as_view())),
         name='customer_profile'),
     url('update_info/(?P<pk>[0-9]+)/', staff_member_required((ChangeSystemInformation.as_view())),
-        name='update_info')
+        name='update_info'),
+    url('block_user/(?P<pk>[0-9]+)/', staff_member_required(BlockUser.as_view()), name='block'),
+    path('blocked/', staff_member_required(BlockSuccessful.as_view()), name='blocked'),
 ]

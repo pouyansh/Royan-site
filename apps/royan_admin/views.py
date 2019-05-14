@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, FormView, UpdateView
@@ -7,7 +8,7 @@ from apps.order_service.models import OrderService
 from apps.product.models import Category
 from apps.registration.models import Customer, Person, Organization
 from apps.research.models import ResearchArea
-from apps.royan_admin.forms import ChangeSystemInfoForm
+from apps.royan_admin.forms import ChangeSystemInfoForm, BlockForm
 from apps.royan_admin.models import RoyanTucagene
 from apps.service.models import *
 from apps.tutorial.models import Tutorial
@@ -148,3 +149,45 @@ class ChangeSystemInformation(UpdateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
+
+
+class BlockUser(FormView):
+    template_name = "royan_admin/block_user.html"
+    success_url = reverse_lazy("royan_admin:blocked")
+    form_class = BlockForm
+
+    def get_context_data(self, **kwargs):
+        context = super(BlockUser, self).get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['admin'] = self.request.user
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['user'] = User.objects.get(id=self.kwargs['pk'])
+        return context
+
+    def form_valid(self, form):
+        user = User.objects.get(id=self.kwargs['pk'])
+        print(user.is_active)
+        user.is_active = False
+        user.save()
+        return super(BlockUser, self).form_valid(form)
+
+
+class BlockSuccessful(TemplateView):
+    template_name = 'temporary/show_text.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context[
+            'text'] = "کاربر مورد نظر بلاک شد"
+        return context
+
