@@ -1,0 +1,25 @@
+{% extends "temporary/mother_panel.html" %}
+{% load static staticfiles %}
+
+
+{% block main_content %}
+<!--================Feature Area =================-->
+<section class="feature_area p_120" id="feature">
+    <div class="container">
+        <div class="main_title">
+            <h2 style="font-family: FarsiFont; text-align: right; margin-bottom: 20px;">شرکت رویان توکاژن</h2>
+        </div>
+        <div class="row" dir="rtl">
+            <div style="width: 40%; text-align: right; margin-right: 10%; border-left: 1px solid #aaaaaa;">
+                <p style="font-family: FarsiFont; font-size: 20px;">آدرس: {{RoyanTucagene.address}}</p>
+            </div>
+            <div style="width: 40%; text-align: right; margin-right: 5%;">
+                <p style="font-family: FarsiFont; font-size: 20px;">تلفن: {{RoyanTucagene.phone_number}}</p>
+                <p style="font-family: FarsiFont; font-size: 20px;">فکس: {{RoyanTucagene.fax}}</p>
+                <p style="font-family: FarsiFont; font-size: 20px;">ایمیل: {{RoyanTucagene.email}}</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Feature Area =================-->
+{% endblock main_content %}

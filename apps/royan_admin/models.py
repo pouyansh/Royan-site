@@ -13,3 +13,4 @@ class RoyanTucagene(models.Model):
     address = models.TextField(max_length=300, verbose_name="آدرس")
     about = models.TextField(max_length=3000, verbose_name="درباره شرکت")
     fax = models.IntegerField(verbose_name="فکس", null=True, blank=True)
+    email = models.EmailField(default="", null=True, blank=True)
