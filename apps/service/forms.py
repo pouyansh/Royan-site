@@ -6,7 +6,7 @@ from apps.service.models import *
 class CreateFieldForm(forms.ModelForm):
     class Meta:
         model = Field
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'image']
 
 
 class FieldListAdminForm(forms.Form):

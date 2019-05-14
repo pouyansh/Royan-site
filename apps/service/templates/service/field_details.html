@@ -5,9 +5,14 @@
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
-            <div>
-                <h3 style="color: #444444; margin-bottom: 20px;">نام زمینه: {{ object.name }}</h3>
-                <h4 style="color: #444444;">توضیجات: {{ object.description }}</h4>
+            <div class="row">
+                <div>
+                    <h3 style="color: #444444; margin-bottom: 20px;">نام زمینه: {{ object.name }}</h3>
+                    <h4 style="color: #444444;">توضیجات: {{ object.description }}</h4>
+                </div>
+                <div style="margin-right: auto;">
+                    <img src="{{field.image.url}}" style="width: 300px; height: auto; margin-right: auto;">
+                </div>
             </div>
 
             <div class="row" style="margin-top: 50px;">
