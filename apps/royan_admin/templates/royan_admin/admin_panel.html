@@ -9,7 +9,6 @@
                 <h3 class="nav-side-name">{{admin.first_name}} {{admin.last_name}}</h3>
             </div>
             <ul class="nav nav-pills">
-                </li>
                 <li class="nav-pills-item active"><a class="nav-a-tab active" data-toggle="pill" href="#services">سرویس‌های
                     سفارش داده شده</a>
                 </li>
@@ -18,8 +17,6 @@
                 <li class="nav-pills-item">
                     <a class="nav-a-tab" href="{% url 'registration:change_password' %}">تغییر رمز عبور</a></li>
             </ul>
-        </div>
-        <div class="col-lg-9 col-sm-12" style="float: right; padding-top: 30px;">
             <div class="tab-pane" style="margin: 10px 0 0 0; padding: 10px 20px;">
                 <div class="container_admin">
                     <h3 class="title_admin">اخبار</h3>
@@ -87,7 +84,15 @@
                         افزودن لینک
                     </a>
                 </div>
+                <div class="container_admin">
+                    <h3 class="title_admin">اطلاعات سیستم</h3>
+                    <a class="btn_admin btn btn-info circle" href="{% url 'royan_admin:update_info' 1%}">
+                        تغییر اطلاعات سیستم
+                    </a>
+                </div>
             </div>
+        </div>
+        <div class="col-lg-9 col-sm-12" style="float: right; padding-top: 30px;">
             <div id="services" class="tab-pane fade in active show">
                 <div class="feature_item">
                     <h4 style="font-family: FarsiFont; padding: 20px; border-bottom: 1px solid #dddddd;">سرویس‌های سفارش
