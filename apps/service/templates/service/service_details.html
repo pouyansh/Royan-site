@@ -10,7 +10,7 @@
                     <div style="font-size: 20px; font-weight: 700;color: #444444; margin-bottom: 20px;">نام سرویس:
                         <div style="display: inline;" dir="ltr">{{ object.name }}</div></div>
                     <h4 style="color: #444444; margin-bottom: 20px;"> زمینه: {{object.field.name}}</h4>
-                    <h4 style="color: #444444;">توضیجات: {{ object.description }}</h4>
+                    <h4 style="color: #444444; text-align: justify;">توضیجات: {{ object.description }}</h4>
                     {% if object.has_form %}
                     <a class="main_btn" href="{% url 'order_service:start_order' object.id %}"
                     style="font-family: FarsiFont; font-size: 18px; margin-top: 20px;">سفارش</a>
