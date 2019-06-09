@@ -14,3 +14,6 @@ class RoyanTucagene(models.Model):
     about = models.TextField(max_length=3000, verbose_name="درباره شرکت")
     fax = models.IntegerField(verbose_name="فکس", null=True, blank=True)
     email = models.EmailField(default="", null=True, blank=True)
+    instagram = models.URLField(verbose_name="اینستاگرام", default="")
+    telegram = models.URLField(verbose_name="تلگرام", default="")
+    twitter = models.URLField(verbose_name="توییتر", default="")

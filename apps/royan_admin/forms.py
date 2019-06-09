@@ -7,7 +7,7 @@ class ChangeSystemInfoForm(forms.ModelForm):
 
     class Meta:
         model = RoyanTucagene
-        fields = ['summary', 'logo', 'about', 'phone_number', 'address', 'fax', 'email']
+        fields = ['summary', 'logo', 'about', 'phone_number', 'address', 'fax', 'email', 'instagram', 'telegram', 'twitter']
 
 
 class BlockForm(forms.Form):
