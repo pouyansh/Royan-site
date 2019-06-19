@@ -173,7 +173,7 @@
 .header_area.navbar_fixed .main_menu .navbar .container-fluid .navbar-header .navbar-brand {
     display: inline-block;
     float: left;
-    margin-top: 30px;
+    margin-top: -40px;
 }
 .header_area.navbar_fixed .main_menu .navbar .container-fluid .navbar-header .navbar-brand-inverse {
     display: none;

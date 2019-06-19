@@ -8,6 +8,7 @@ class RoyanAdmin(User):
 
 class RoyanTucagene(models.Model):
     logo = models.ImageField(verbose_name="لوگو")
+    logo2 = models.ImageField(verbose_name="لوگو۲", blank=True, default=None, null=True)
     summary = models.TextField(max_length=1500, verbose_name="خلاصه (صفحه اصلی)")
     phone_number = models.IntegerField(verbose_name="تلفن")
     address = models.TextField(max_length=300, verbose_name="آدرس")
