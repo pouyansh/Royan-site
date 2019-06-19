@@ -175,7 +175,7 @@ a:hover .footer_helpnote {
     height: auto;
     display: block;
     padding: 0;
-    transform: scaleX(-1);
+
 }
 
 @media (max-width: 991px) {
