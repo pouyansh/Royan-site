@@ -176,7 +176,7 @@ a:hover .footer_helpnote {
     display: block;
     padding: 0;
     transform: scaleX(-1);
-    filter: blur(20px);
+    filter: blur(5px);
 }
 
 @media (max-width: 991px) {
