@@ -221,6 +221,7 @@ a.details-link:hover {
 
 .login_body {
     background-image: url('../img/DNA3.png');
+    filter: brightness(150%);
     width: 100vw;
     height: 100vh;
     background-repeat: no-repeat;
