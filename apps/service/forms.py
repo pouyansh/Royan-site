@@ -18,13 +18,13 @@ class CreateServiceForm(forms.ModelForm):
 
     class Meta:
         model = Service
-        fields = ['name', 'description', 'photo']
+        fields = ['name', 'description', 'image']
 
 
 class UpdateServiceForm(forms.ModelForm):
     class Meta:
         model = Service
-        fields = ['name', 'description', 'photo']
+        fields = ['name', 'description', 'image']
 
 
 class ServiceListAdminForm(forms.Form):
