@@ -103,7 +103,7 @@
 }
 
 .mega-dropdown-menu .dropdown-header {
-  color: rgb(119,71,251);
+  color: rgb(25, 150, 231);
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -227,4 +227,20 @@
     background-image: -webkit-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
     background-image: -o-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
     background-image: linear-gradient(to right, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
+}
+
+.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {
+    background-image: -moz-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+    background-image: -webkit-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+    background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+}
+
+.footer-bottom .footer-social a:hover {
+    background-image: -moz-linear-gradient(0deg, #444 0%, rgb(9, 56, 121) 100%);
+    background-image: -webkit-linear-gradient(0deg, #444 0%, rgb(9, 56, 121) 100%);
+    background-image: -ms-linear-gradient(0deg, #444 0%, rgb(9, 56, 121) 100%);
+}
+
+.footer-link:hover {
+    color: rgb(25, 150, 231);
 }
