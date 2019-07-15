@@ -6,10 +6,10 @@ from django import forms
 class OligoSequenceField(forms.CharField):
     def clean(self, value):
         if value:
-            if bool(re.match('^[ACTG]+$', value)):
+            if bool(re.match('^[A-Za-z]+$', value)):
                 return value
             else:
-                raise forms.ValidationError("این رشته تنها باید از حروف مشخص شده در بالا تشکیل شود")
+                raise forms.ValidationError("این رشته تنها باید از حروف انگلیسی تشکیل شود")
         return value
 
 
