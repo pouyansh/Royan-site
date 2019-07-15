@@ -222,23 +222,23 @@
     background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
 }
 
-.main_btn {
+.main_btn{
     background-image: -webkit-gradient(linear, left top, right top, from(#777), color-stop(51%, rgb(9, 56, 121)), to(#777));
     background-image: -webkit-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
     background-image: -o-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
     background-image: linear-gradient(to right, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
 }
 
-.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {
+.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link , .single-footer-widget .sub-btn {
     background-image: -moz-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
     background-image: -webkit-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
     background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
 }
 
 .footer-bottom .footer-social a:hover {
-    background-image: -moz-linear-gradient(0deg, #444 0%, rgb(9, 56, 121) 100%);
-    background-image: -webkit-linear-gradient(0deg, #444 0%, rgb(9, 56, 121) 100%);
-    background-image: -ms-linear-gradient(0deg, #444 0%, rgb(9, 56, 121) 100%);
+    background-image: -moz-linear-gradient(45deg, #777 0%, rgb(9, 56, 121) 100%);
+    background-image: -webkit-linear-gradient(45deg, #777 0%, rgb(9, 56, 121) 100%);
+    background-image: -ms-linear-gradient(45deg, #777 0%, rgb(9, 56, 121) 100%);
 }
 
 .footer-link:hover {
