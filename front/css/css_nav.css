@@ -215,3 +215,16 @@
     color: pink;
     outline = none;
 }
+
+.header_area.navbar_fixed .main_menu {
+    background-image: -moz-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+    background-image: -webkit-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+    background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+}
+
+.main_btn {
+    background-image: -webkit-gradient(linear, left top, right top, from(#777), color-stop(51%, rgb(9, 56, 121)), to(#777));
+    background-image: -webkit-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
+    background-image: -o-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
+    background-image: linear-gradient(to right, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
+}
