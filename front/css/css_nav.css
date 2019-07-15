@@ -31,7 +31,7 @@
 
 .header_area.navbar_fixed .main_menu .navbar .nav .nav-item .nav-padding,
 .header_area .navbar .nav .nav-item .nav-padding{
-    padding: 0px 20px;
+    padding: 0px 15px;
     line-height: 50px;
 }
 
@@ -164,9 +164,9 @@
 }
 
 .nav-pills .active, .nav-pills > li.active > a, .nav-pills > li.active > a:focus {
-    background: pink;
+    background: rgb(25, 150, 231);
     margin: 0;
-    color: #222222;
+    color: #eeeeee;
     border-radius: 5px;
 }
 
