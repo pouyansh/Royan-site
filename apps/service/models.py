@@ -23,3 +23,4 @@ class Service(models.Model):
     has_form = models.BooleanField(default=False, verbose_name="آیا فرم ثبت سفارش دارد؟")
     fields = models.FileField(verbose_name="فیلدهای فرم ثبت نام", blank=True, null=True)
     image = models.ImageField(verbose_name="عکس", default=None, null=True, blank=True)
+    logo = models.ImageField(verbose_name="لوگو", default=None, null=True, blank=True)
