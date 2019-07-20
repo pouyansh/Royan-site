@@ -92,7 +92,7 @@
                                             {% for field2 in fields2 %}
                                             {% if field2.field.id == field.id %}
                                                 <li class="dropdown-header">
-                                                    <a class="dropdown-header">{{ field2.name }}</a>
+                                                    <button class="dropdown-header">{{ field2.name }}</button>
                                                 {% for service in services %}
                                                 {% if service.field2.id == field2.id %}
                                                 <li class="nav-item">
