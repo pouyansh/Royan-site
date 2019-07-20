@@ -250,7 +250,7 @@
     display: none;
 }
 
-.header_area .navbar .nav .nav-item.submenu:hover .my_dropdown_menu {
+.header_area .navbar .nav .nav-item.submenu:focus .my_dropdown_menu {
     visibility: visible;
     display: block;
 }
@@ -260,7 +260,7 @@
     display: none;
 }
 
-.header_area .navbar .nav .nav-item.submenu:hover .my_dropdown_menu .nav-item {
+.header_area .navbar .nav .nav-item.submenu:focus .my_dropdown_menu .nav-item {
     visibility: visible;
     display: block;
 }
