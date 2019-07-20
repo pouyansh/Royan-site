@@ -13,6 +13,14 @@ class FieldListAdminForm(forms.Form):
     field_id = forms.CharField(max_length=10)
 
 
+class CreateField2Form(forms.ModelForm):
+    field = forms.CharField(max_length=10)
+
+    class Meta:
+        model = Service
+        fields = ['name', 'description']
+
+
 class CreateServiceForm(forms.ModelForm):
     field = forms.CharField(max_length=10)
 

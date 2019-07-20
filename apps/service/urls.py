@@ -6,6 +6,7 @@ from apps.service.views import *
 
 urlpatterns = [
     path('create_field/', staff_member_required(CreateField.as_view()), name='create_field'),
+    path('create_field_level2/', staff_member_required(CreateField2.as_view()), name='create_field2'),
     path('field_list_admin/', staff_member_required(ShowFieldListAdmin.as_view()), name='show_field_list_admin'),
     url('update_field/(?P<pk>[0-9]+)/', staff_member_required(UpdateField.as_view()), name='update_field'),
     path('delete_field_unsuccessful/', staff_member_required(DeleteFieldUnsuccessful.as_view()),

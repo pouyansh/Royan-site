@@ -135,6 +135,29 @@ class FieldDetails(DetailView):
         return context
 
 
+class CreateField2(CreateView):
+    model = Field2
+    template_name = 'service/create_field2.html'
+    success_url = reverse_lazy('index:index')
+    form_class = CreateServiceForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['fields'] = Field.objects.all().order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        return context
+
+    def form_valid(self, form):
+        field_id = form.cleaned_data['field']
+        form.instance.field = Field.objects.get(id=field_id)
+        return super(CreateField2, self).form_valid(form)
+
+
 class CreateService(CreateView):
     model = Service
     template_name = 'service/create_service.html'
@@ -155,7 +178,7 @@ class CreateService(CreateView):
 
     def form_valid(self, form):
         field_id = form.cleaned_data['field']
-        ids = id.split('-')
+        ids = field_id.split('-')
         form.instance.field = Field.objects.get(id=ids[0])
         form.instance.field2 = Field2.objects.get(id=ids[1])
         return super(CreateService, self).form_valid(form)
@@ -315,4 +338,3 @@ class CreateFormForService(FormView):
                     fields_file.writerow(row)
             self.success_url = reverse_lazy("service:create_form", kwargs={'pk': self.kwargs['pk']})
         return super(CreateFormForService, self).form_valid(form)
-
