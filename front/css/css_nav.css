@@ -265,10 +265,12 @@
 
 .header_area .navbar .nav .ordered-list-alpha .nav-item.submenu ul.my_dropdown_menu {
     visibility: hidden;
-    display: none;
-    transition-duration: 2s;
+    display: inline-block;
     opacity: 0;
     width: 100%;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
 }
 
 .header_area .navbar .nav .ordered-list-alpha .nav-item.submenu:hover ul.my_dropdown_menu {
@@ -276,19 +278,27 @@
     display: block;
     opacity: 1;
     position: inherit;
+    -webkit-transition: all 0.8s ease-in-out;
+    -moz-transition: all 0.8s ease-in-out;
+    transition: all 0.8s ease-in-out;
 }
 
 .header_area .navbar .nav .ordered-list-alpha .nav-item.submenu .my_dropdown_menu .nav-item{
     visibility: hidden;
     display: none;
-    transition-duration: 2s;
     opacity: 0;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
 }
 
 .header_area .navbar .nav .ordered-list-alpha .nav-item.submenu:hover .my_dropdown_menu .nav-item {
     visibility: visible;
     display: block;
     opacity: 1;
+    -webkit-transition: all 2s ease-in-out;
+    -moz-transition: all 2s ease-in-out;
+    transition: all 2s ease-in-out;
 }
 
 .header_area .navbar .nav .nav-item.submenu ul .nav-item {
