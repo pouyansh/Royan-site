@@ -244,3 +244,11 @@
 .footer-link:hover {
     color: rgb(25, 150, 231);
 }
+
+.nav-item .my_dropdown_menu {
+    visibility: hidden;
+}
+
+.nav-item:hover .my_dropdown_menu {
+    visibility: visible;
+}
