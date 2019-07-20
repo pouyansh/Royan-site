@@ -1,6 +1,13 @@
 @font-face {
     font-family:'FarsiFont';
-    src:url('../fonts/BNazanin.woff');
+    src:url('../fonts/B-NAZANIN.TTF');
+    font-style:normal;
+    font-weight:normal;
+}
+
+@font-face {
+    font-family:'EnglishFont';
+    src:url('../fonts/Crimson-Roman.ttf');
     font-style:normal;
     font-weight:normal;
 }
@@ -139,7 +146,7 @@ a:hover .footer_helpnote {
     text-align: center;
     margin: 20px 0;
     transition: 1s;
-    font-family: "Roboto", sans-serif;
+    font-family: EnglishFont;
 }
 
 .fade {
