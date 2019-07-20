@@ -15,7 +15,7 @@ from apps.product.models import Category
 from apps.registration.models import Person, Organization, Customer
 from apps.research.models import ResearchArea
 from apps.royan_admin.models import RoyanTucagene
-from apps.service.models import Service, Field
+from apps.service.models import Service, Field, Field2
 from apps.tutorial.models import Tutorial
 
 
@@ -49,6 +49,7 @@ class StartOrderService(LoginRequiredMixin, TemplateView):
             context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -93,6 +94,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         else:
             content = []
         context['data'] = content
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def get_form_kwargs(self):
@@ -254,6 +256,7 @@ class CheckData(LoginRequiredMixin, FormView):
         content = csv.reader(open(order.file.path, 'r'))
         order.file.close()
         context['data'] = content
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -308,6 +311,7 @@ class GetCode(LoginRequiredMixin, TemplateView):
         order = OrderService.objects.filter(customer__username=self.request.user.username).order_by('id')[
             int(self.kwargs['pk'])]
         context['code'] = order.code
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -363,6 +367,7 @@ class OrderDetails(LoginRequiredMixin, TemplateView):
                 data.append(row)
             context['data'] = data
         context['order_id'] = self.kwargs['pk']
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -400,6 +405,7 @@ class CheckReceived(LoginRequiredMixin, TemplateView):
                 int(self.kwargs['pk']) - 1]
         context[
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تحویل گرفته شده قرار داده شد."
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -425,6 +431,7 @@ class CheckPayed(TemplateView):
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
         context[
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت پرداخت شده قرار داده شد."
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 

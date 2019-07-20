@@ -25,6 +25,7 @@ class AddTutorial(CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -42,6 +43,7 @@ class UpdateTutorial(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -57,6 +59,7 @@ class ShowTutorialDetail(DetailView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         tutorial = Tutorial.objects.get(id=self.kwargs['pk'])
         context['tutorial'] = tutorial
         context['links'] = Links.objects.filter(tutorial=tutorial).order_by('rank')
@@ -87,6 +90,7 @@ class ShowTutorialListAdmin(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -100,6 +104,7 @@ class ChooseTutorial(ListView):
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
@@ -122,6 +127,7 @@ class CreateLink(CreateView):
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['tutorial'] = Tutorial.objects.get(id=self.kwargs['pk'])
@@ -145,6 +151,7 @@ class UpdateLink(UpdateView):
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['tutorial'] = Tutorial.objects.get(id=Links.objects.get(id=self.kwargs['pk']).tutorial.id)

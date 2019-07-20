@@ -28,6 +28,7 @@ class CreateField(CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -55,6 +56,7 @@ class ShowFieldListAdmin(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
@@ -70,6 +72,7 @@ class DeleteFieldSuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['text'] = "زمینه مدنظر شما با موفقیت پاک شد"
         return context
 
@@ -85,6 +88,7 @@ class DeleteFieldUnsuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['text'] = "متاسفانه سرویسی در این فیلد وجود دارد و امکان حذف این فیلد وجود ندارد"
         return context
 
@@ -103,6 +107,7 @@ class UpdateField(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -130,6 +135,7 @@ class FieldDetails(DetailView):
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
@@ -149,6 +155,7 @@ class CreateField2(CreateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
@@ -182,6 +189,7 @@ class ShowField2ListAdmin(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['fields'] = Field2.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
@@ -199,6 +207,7 @@ class UpdateField2(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
@@ -217,6 +226,7 @@ class CreateService(CreateView):
         context['fields2'] = Field2.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
@@ -254,6 +264,7 @@ class ServiceDetails(DetailView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
@@ -277,6 +288,7 @@ class ShowServiceListAdmin(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -291,6 +303,7 @@ class DeleteServiceSuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['text'] = "سرویس مدنظر شما با موفقیت پاک شد"
         return context
 
@@ -308,8 +321,10 @@ class UpdateService(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['fields'] = Field2.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -334,6 +349,8 @@ class CreateFormForService(FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
         if not service.fields:

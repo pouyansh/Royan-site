@@ -7,7 +7,7 @@ from apps.product.models import Product, Category
 from apps.registration.models import Customer, Person, Organization
 from apps.research.models import ResearchArea
 from apps.royan_admin.models import RoyanTucagene
-from apps.service.models import Service, Field
+from apps.service.models import Service, Field, Field2
 from apps.tutorial.models import Tutorial
 
 
@@ -40,6 +40,7 @@ class StartOrderProduct(LoginRequiredMixin, FormView):
         orders = OrderProduct.objects.filter(customer__username=self.request.user.username, is_finished=False)
         if orders:
             context['order'] = orders[0]
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):

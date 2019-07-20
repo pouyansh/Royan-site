@@ -12,7 +12,7 @@ from apps.product.models import Category
 from apps.registration.forms import *
 from apps.research.models import ResearchArea
 from apps.royan_admin.models import RoyanTucagene
-from apps.service.models import Service, Field
+from apps.service.models import Service, Field, Field2
 from apps.tutorial.models import Tutorial
 
 
@@ -50,6 +50,7 @@ class RegisterPerson(CreateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['title'] = "فرم ثبت نام"
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -82,6 +83,7 @@ class RegisterOrganization(CreateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['title'] = "فرم ثبت نام"
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -111,6 +113,7 @@ class RegisteredSuccessfully(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['text'] = "اطلاعات شما با موفقیت ثبت شد و ایمیلی برای شما ارسال شد." + \
                           " لطفا به آدرس ایمیل خود بروید و برروی لینک ارسال شده کلیک نمایید تا حساب کاربری شما فعال شود"
         return context
@@ -129,6 +132,7 @@ class VerifyEmail(FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -157,6 +161,7 @@ class VerifiedSuccessfully(TemplateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['text'] = "حساب کاربری شما با موفقیت فعال شد"
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -172,6 +177,7 @@ class VerifiedNotSuccessfully(TemplateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['text'] = "متاسفانه اطلاعات وارد شده با لینک مربوط به تایید همخوانی ندارد"
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -198,6 +204,7 @@ class UpdateCustomer(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -212,6 +219,7 @@ class UpdatedSuccessfully(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['text'] = "اطلاعات شما با موفقیت ثبت شد و ایمیلی برای شما ارسال شد."
         return context
 
@@ -229,6 +237,7 @@ class ForgetPassword(FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -255,6 +264,7 @@ class ForgetPasswordSuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context[
             'text'] = "رمز عبور جدید به آدرس ایمیل شما ارسال شد." \
                       " لطفا با استفاده از آن، وارد شوید و رمز عبور خود را تغییر دهید."
@@ -274,6 +284,7 @@ class ChangePassword(PasswordChangeView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -288,6 +299,7 @@ class ChangePasswordSuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context[
             'text'] = "رمز عبور شما با موفقیت تغییر یافت"
         return context

@@ -6,7 +6,7 @@ from apps.product.forms import *
 from apps.product.models import *
 from apps.research.models import ResearchArea
 from apps.royan_admin.models import RoyanTucagene
-from apps.service.models import Service, Field
+from apps.service.models import Service, Field, Field2
 from apps.tutorial.models import Tutorial
 
 
@@ -24,6 +24,7 @@ class CreateCategory(CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -42,6 +43,7 @@ class ShowCategoryListAdmin(ListView, FormView):
         context['category_list'] = Category.objects.filter(is_active=True).order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -70,6 +72,7 @@ class UpdateCategory(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -85,6 +88,7 @@ class ChooseCategory(ListView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -110,6 +114,7 @@ class CreateProduct(CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -133,6 +138,7 @@ class ProductList(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -168,6 +174,7 @@ class ProductListAdmin(FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         category = self.kwargs['category']
         context['category_id'] = category
         if str(category) == '0':
@@ -210,6 +217,7 @@ class ProductSearchResult(ListView, FormView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
         categories = Category.objects.filter(id=self.kwargs['category'], is_active=True)
@@ -245,6 +253,7 @@ class ProductSearchResultAdmin(FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         keyword = self.kwargs['keyword']
         context['keyword'] = keyword
         categories = Category.objects.filter(id=self.kwargs['category'], is_active=True)
@@ -301,6 +310,7 @@ class ProductDetails(DetailView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -323,4 +333,5 @@ class UpdateProduct(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context

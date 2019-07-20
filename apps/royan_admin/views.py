@@ -26,6 +26,7 @@ class AdminPanel(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         all_orders = OrderService.objects.all().order_by('id')
         orders = OrderService.objects.filter(is_finished=True, invoice=True, received=True,
                                              payed=True).order_by('id')
@@ -101,6 +102,7 @@ class CustomerDetails(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         customer = Customer.objects.get(id=self.kwargs['pk'])
         context['logged_in_customer'] = customer
         if customer.is_person:
@@ -148,6 +150,7 @@ class ChangeSystemInformation(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -166,6 +169,7 @@ class BlockUser(FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['user'] = User.objects.get(id=self.kwargs['pk'])
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -187,6 +191,7 @@ class BlockSuccessful(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context[
             'text'] = "کاربر مورد نظر بلاک شد"
         return context

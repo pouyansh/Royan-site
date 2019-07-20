@@ -25,6 +25,7 @@ class AddResearchArea(CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -51,6 +52,7 @@ class UpdateResearchArea(UpdateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -78,6 +80,7 @@ class ShowResearchAreaDetail(DetailView):
         research_area = ResearchArea.objects.get(id=self.kwargs['pk'])
         context['research_area'] = research_area
         context['related_papers'] = Paper.objects.filter(research_area=research_area)
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -95,6 +98,7 @@ class ShowResearchAreaListAdmin(ListView, FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
@@ -114,6 +118,7 @@ class ChooseResearchArea(ListView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
@@ -136,6 +141,7 @@ class CreatePaper(CreateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['research_area'] = ResearchArea.objects.get(id=self.kwargs['pk'])
         return context
 
@@ -157,6 +163,7 @@ class ShowPaperDetail(DetailView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         paper = Paper.objects.get(id=self.kwargs['pk'])
         context['related_papers'] = Paper.objects.filter(research_area=paper.research_area).exclude(title=paper.title)
         return context
@@ -185,6 +192,7 @@ class UpdatePaper(UpdateView):
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
@@ -209,4 +217,5 @@ class ShowPaperListAdmin(ListView, FormView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['papers'] = Paper.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
