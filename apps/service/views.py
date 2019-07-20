@@ -139,7 +139,7 @@ class CreateField2(CreateView):
     model = Field2
     template_name = 'service/create_field2.html'
     success_url = reverse_lazy('index:index')
-    form_class = CreateServiceForm
+    form_class = CreateField2Form
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
