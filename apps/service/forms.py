@@ -17,7 +17,7 @@ class CreateField2Form(forms.ModelForm):
     field = forms.CharField(max_length=10)
 
     class Meta:
-        model = Service
+        model = Field2
         fields = ['name', 'description']
 
 
