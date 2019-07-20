@@ -247,8 +247,20 @@
 
 .header_area .navbar .nav .nav-item.submenu .my_dropdown_menu {
     visibility: hidden;
+    display: none;
 }
 
 .header_area .navbar .nav .nav-item.submenu:hover .my_dropdown_menu {
     visibility: visible;
+    display: block;
+}
+
+.header_area .navbar .nav .nav-item.submenu .my_dropdown_menu .nav-item{
+    visibility: hidden;
+    display: none;
+}
+
+.header_area .navbar .nav .nav-item.submenu:hover .my_dropdown_menu .nav-item {
+    visibility: visible;
+    display: block;
 }
