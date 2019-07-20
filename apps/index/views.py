@@ -4,7 +4,7 @@ from apps.news.models import *
 from apps.product.models import Category, Product
 from apps.research.models import ResearchArea
 from apps.royan_admin.models import RoyanTucagene
-from apps.service.models import Service, Field
+from apps.service.models import Service, Field, Field2
 from apps.tutorial.models import Tutorial
 
 
@@ -31,6 +31,7 @@ class Index(TemplateView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
 
