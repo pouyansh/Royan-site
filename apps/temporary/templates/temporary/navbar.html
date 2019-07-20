@@ -80,22 +80,14 @@
                                                    href="{% url 'service:field_details' field.id %}"
                                                 >{{ field.name }}</a>
                                             </li>
-                                            {% for field2 in fields2 %}
-                                                {% if field2.field.id == field.id %}
-                                                    <li class="nav-item submenu dropdown">
-                                                        <a class="nav-link nav-padding dropdown-toggle">{{field2.name}}</a>
-                                                        <ul class="dropdown-menu" style="min-width: 250px;">
-                                                            {% for service in services %}
-                                                            {% if service.field2.id == field2.id %}
-                                                            <li class="nav-item">
-                                                                <a class="nav-link nav-no-padding"
-                                                                   href="{% url 'service:service_details' service.id %}"
-                                                                   style="text-transform: none;">{{service.name}}</a></li>
-                                                            {% endif %}
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </li>
-                                                {% endif %}
+                                            {% for service in services %}
+                                            {% if service.field.id == field.id %}
+                                            <li class="nav-item">
+                                                <a class="nav-link nav-no-padding"
+                                                   href="{% url 'service:service_details' service.id %}">
+                                                    {{service.name}}</a>
+                                            </li>
+                                            {% endif %}
                                             {% endfor %}
                                         </ol>
                                     </li>
