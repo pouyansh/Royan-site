@@ -242,14 +242,13 @@
 }
 
 .header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu:hover .nav-link {
-    background-image: -moz-linear-gradient(0deg, #bbb 0%, rgb(25, 150, 231) 100%);
-    background-image: -webkit-linear-gradient(0deg, #bbb 0%, rgb(25, 150, 231) 100%);
-    background-image: -ms-linear-gradient(0deg, #bbb 0%, rgb(25, 150, 231) 100%);
+    background-image: -moz-linear-gradient(0deg, #aaa 0%, rgb(25, 150, 231) 100%);
+    background-image: -webkit-linear-gradient(0deg, #aaa 0%, rgb(25, 150, 231) 100%);
+    background-image: -ms-linear-gradient(0deg, #aaa 0%, rgb(25, 150, 231) 100%);
 }
 
 .header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu .my_dropdown_menu .nav-item .nav-link {
     background-image: none;
-    color: #eeeeee;
 }
 
 .header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu .my_dropdown_menu .nav-item:hover .nav-link {
