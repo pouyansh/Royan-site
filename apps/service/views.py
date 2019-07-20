@@ -146,6 +146,7 @@ class CreateService(CreateView):
         context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
         context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
         context['fields'] = Field.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
         context['services'] = Service.objects.all().order_by('id')
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
@@ -153,7 +154,10 @@ class CreateService(CreateView):
         return context
 
     def form_valid(self, form):
-        form.instance.field = Field.objects.get(id=form.cleaned_data['field'])
+        field_id = form.cleaned_data['field']
+        ids = id.split('-')
+        form.instance.field = Field.objects.get(id=ids[0])
+        form.instance.field2 = Field2.objects.get(id=ids[1])
         return super(CreateService, self).form_valid(form)
 
 
