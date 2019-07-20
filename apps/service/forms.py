@@ -21,6 +21,13 @@ class CreateField2Form(forms.ModelForm):
         fields = ['name', 'description']
 
 
+class UpdateField2Form(forms.ModelForm):
+
+    class Meta:
+        model = Field2
+        fields = ['name', 'description']
+
+
 class CreateServiceForm(forms.ModelForm):
     field = forms.CharField(max_length=10)
 

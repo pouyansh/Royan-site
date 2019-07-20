@@ -190,7 +190,7 @@ class UpdateField2(UpdateView):
     model = Field2
     template_name = 'service/update_field.html'
     success_url = reverse_lazy('service:show_field_list_admin')
-    form_class = CreateField2Form
+    form_class = UpdateField2Form
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
