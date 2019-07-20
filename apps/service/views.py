@@ -158,6 +158,51 @@ class CreateField2(CreateView):
         return super(CreateField2, self).form_valid(form)
 
 
+class ShowField2ListAdmin(ListView, FormView):
+    model = Field2
+    template_name = 'service/show_field2_list_admin.html'
+
+    success_url = reverse_lazy('service:delete_field_successful')
+    form_class = FieldListAdminForm
+
+    def form_valid(self, form):
+        field = Field2.objects.filter(id=form.cleaned_data['field_id'])
+        services = Service.objects.filter(field2=field[0])
+        if services:
+            self.success_url = reverse_lazy('service:delete_field_unsuccessful')
+        else:
+            Field2.objects.filter(id=form.cleaned_data['field_id']).delete()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields'] = Field2.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        return context
+
+
+class UpdateField2(UpdateView):
+    model = Field2
+    template_name = 'service/update_field.html'
+    success_url = reverse_lazy('service:show_field_list_admin')
+    form_class = CreateField2Form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        return context
+
+
 class CreateService(CreateView):
     model = Service
     template_name = 'service/create_service.html'
