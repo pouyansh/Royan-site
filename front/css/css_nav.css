@@ -249,6 +249,7 @@
 
 .header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu .my_dropdown_menu .nav-item .nav-link {
     background-image: none;
+    color: #111111;
 }
 
 .header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu .my_dropdown_menu .nav-item:hover .nav-link {
