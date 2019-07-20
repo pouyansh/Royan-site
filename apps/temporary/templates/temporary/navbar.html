@@ -80,6 +80,15 @@
                                                    href="{% url 'service:field_details' field.id %}"
                                                 >{{ field.name }}</a>
                                             </li>
+                                            {% for service in services %}
+                                            {% if not service.field2 %}
+                                            <li class="nav-item">
+                                                <a class="nav-link nav-no-padding"
+                                                   href="{% url 'service:service_details' service.id %}">
+                                                    {{service.name}}</a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
                                             {% for field2 in fields2 %}
                                             {% if field2.field.id == field.id %}
                                                 <li class="dropdown-header">
