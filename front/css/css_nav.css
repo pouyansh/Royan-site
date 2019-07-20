@@ -241,10 +241,16 @@
     background-image: -ms-linear-gradient(45deg, #777 0%, rgb(9, 56, 121) 100%);
 }
 
-.header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link {
+.header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu:hover .nav-link {
+    background-image: none;
+    color: rgb(9, 56, 121);
+}
+
+.header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu .my_dropdown_menu .nav-item:hover .nav-link {
     background-image: -moz-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
     background-image: -webkit-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
     background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+    color: #eeeeee;
 }
 
 .footer-link:hover {
