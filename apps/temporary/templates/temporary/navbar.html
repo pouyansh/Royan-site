@@ -89,14 +89,11 @@
                                                             {% if service.field2.id == field2.id %}
                                                             <li class="nav-item">
                                                                 <a class="nav-link nav-no-padding"
-                                                                   href="{% url 'service:service_details' service.id %}">
-                                                                    {{service.name}}</a>
-                                                            </li>
-                                                            {% endif %}
+                                                                   href="{% url 'service:service_details' service.id %}"
+                                                                   style="text-transform: none;">{{service.name}}</a></li>
                                                             {% endfor %}
                                                         </ul>
                                                     </li>
-
                                                 {% endif %}
                                             {% endfor %}
                                         </ol>
