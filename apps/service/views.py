@@ -266,6 +266,14 @@ class UpdateService(UpdateView):
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         return context
 
+    def form_valid(self, form):
+        field_id = form.cleaned_data['field']
+        if str(field_id) != "-1":
+            ids = field_id.split('-')
+            form.instance.field = Field.objects.get(id=ids[0])
+            form.instance.field2 = Field2.objects.get(id=ids[1])
+        return super(UpdateService, self).form_valid(form)
+
 
 class CreateFormForService(FormView):
     template_name = "service/create_form.html"

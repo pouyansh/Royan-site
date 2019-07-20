@@ -30,6 +30,8 @@ class CreateServiceForm(forms.ModelForm):
 
 
 class UpdateServiceForm(forms.ModelForm):
+    field = forms.CharField(max_length=10)
+
     class Meta:
         model = Service
         fields = ['name', 'description', 'image', 'logo']

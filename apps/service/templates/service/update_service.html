@@ -23,6 +23,14 @@
                             {% endif %}
                         {% endfor %}
                         <br>
+                        زمینه
+                        <select name="field" id="id_field">
+                            <option selected="selected" value="-1">حالت فعلی</option>
+                            {% for field in fields2 %}
+                                <option value="{{field.field.id}}-{{field.id}}">{{field.field.name}}-{{field.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
                         <button type="submit" class="btn btn-success circle"
                                 style="min-width: 60px; float: left; font-size: 18px;">ثبت</button>
                     </form>
