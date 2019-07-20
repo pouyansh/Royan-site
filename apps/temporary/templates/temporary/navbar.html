@@ -81,7 +81,7 @@
                                                 >{{ field.name }}</a>
                                             </li>
                                             {% for service in services %}
-                                            {% if not service.field2 %}
+                                            {% if not service.field2 and service.field.id == field.id %}
                                             <li class="nav-item">
                                                 <a class="nav-link nav-no-padding"
                                                    href="{% url 'service:service_details' service.id %}">
@@ -92,7 +92,7 @@
                                             {% for field2 in fields2 %}
                                             {% if field2.field.id == field.id %}
                                                 <li class="dropdown-header">
-                                                    <button class="dropdown-header">{{ field2.name }}</button>
+                                                    <a class="dropdown-header" href="">{{ field2.name }}</a>
                                                 {% for service in services %}
                                                 {% if service.field2.id == field2.id %}
                                                 <li class="nav-item">
