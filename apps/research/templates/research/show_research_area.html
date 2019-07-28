@@ -5,10 +5,12 @@
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
-            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">نام زمینه تحقیقاتی: {{ research_area.name }}</h3>
+            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">نام زمینه تحقیقاتی:<br>
+                <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{ research_area.name }}</div></h3>
             <div class="row">
                 <div class="col-md-9">
-                    <p style="font-family: FarsiFont; font-size: 20px;">توضیحات: {{ research_area.description|safe }}</p>
+                    <p style="font-family: FarsiFont; font-size: 20px;">توضیحات:<br>
+                    <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{ research_area.description|safe }}</div></p>
                 </div>
             </div>
             <h4 class="mb-30 title_color" style="margin-top: 20px;">مقالات منتشر شده در زمینه تحقیقاتی</h4>

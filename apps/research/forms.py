@@ -18,7 +18,7 @@ class AddPaperForm(forms.ModelForm):
 
     class Meta:
         model = Paper
-        fields = ['title', 'authors', 'summary', 'paper']
+        fields = ['title', 'authors', 'summary', 'paper', 'link']
 
 
 class PaperListAdminForm(forms.Form):
