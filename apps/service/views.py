@@ -362,7 +362,10 @@ class UpdateService(UpdateView):
         if str(field_id) != "-1":
             ids = field_id.split('-')
             form.instance.field = Field.objects.get(id=ids[0])
-            form.instance.field2 = Field2.objects.get(id=ids[1])
+            if str(ids[1]) == '0':
+                form.instance.field2 = None
+            else:
+                form.instance.field2 = Field2.objects.get(id=ids[1])
         return super(UpdateService, self).form_valid(form)
 
 

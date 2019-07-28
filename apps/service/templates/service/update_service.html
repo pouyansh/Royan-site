@@ -31,6 +31,9 @@
                             {% for field in fields %}
                                 <option value="{{field.field.id}}-{{field.id}}">{{field.field.name}}-{{field.name}}</option>
                             {% endfor %}
+                            {% for field in service_fields %}
+                                <option value="{{field.id}}-0">{{field.name}}</option>
+                            {% endfor }
                         </select>
                         <br>
                         <button type="submit" class="btn btn-success circle"
