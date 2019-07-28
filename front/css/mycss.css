@@ -118,7 +118,7 @@ a:hover .footer_helpnote {
     float: left;
     border-radius: 5px;
     padding: 10px 0;
-    background: rgb(143,109,252);
+    background: rgb(9, 56, 121);
     text-align: center;
     color: #eeeeee;
     font-size: 20px;
@@ -127,8 +127,7 @@ a:hover .footer_helpnote {
 }
 
 .submit_service_excel:hover {
-    color: rgb(143,109,252);
-    background: #eeeeee;
+    background: #777;
 }
 
 .submit_service_register_parts {
