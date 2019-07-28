@@ -9,7 +9,7 @@
             <h4 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 18px;">نویسندگان: {{ paper.authors }}</h4>
             <div class="row">
                 <p class="mb-30 title_color" style="font-family: FarsiFont; font-size: 20px; ">چکیده:</p><br>
-                <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{ paper.summary }}</div>
+                <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{ paper.summary|safe }}</div>
             </div>
             <a href="{{paper.paper.url}}" download class="submit_service_excel"
                 style="float: none; margin: 10px auto; display: block;">دانلود مقاله</a>
