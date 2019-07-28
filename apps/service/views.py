@@ -353,8 +353,7 @@ class UpdateService(UpdateView):
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['fields2'] = Field2.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        context['fields'] = Field2.objects.all().order_by('id')
-        context['fields2'] = Field2.objects.all().order_by('id')
+        context['fields'] = Field.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
