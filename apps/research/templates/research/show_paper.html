@@ -5,8 +5,10 @@
 <div class="whole-wrap" dir="rtl" style="text-align: right; font-family: FarsiFont; font-size: 16px;">
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
-            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">عنوان مقاله: {{ paper.title }}</h3>
-            <h4 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 18px;">نویسندگان: {{ paper.authors }}</h4>
+            <h3 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 25px;">عنوان مقاله:<br>
+                <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{ paper.title }}</div></h3>
+            <h4 class="mb-30 title_color" style="font-family: FarsiFont; font-size: 18px;">نویسندگان:<br>
+                <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{ paper.authors }}</div></h4>
             <div class="row">
                 <p class="mb-30 title_color" style="font-family: FarsiFont; font-size: 20px; ">چکیده:</p><br>
                 <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{ paper.summary|safe }}</div>
