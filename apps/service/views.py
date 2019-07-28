@@ -212,6 +212,36 @@ class UpdateField2(UpdateView):
         return context
 
 
+class Field2Details(DetailView):
+    model = Field2
+    template_name = 'service/field2_details.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Field.objects.filter(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        field2 = Field2.objects.filter(id=self.kwargs['pk'])
+        if field2:
+            services = Service.objects.filter(field2=field2[0])
+            if len(services) > 4:
+                services = services[:4]
+            context['related_services'] = services
+        else:
+            context['related_services'] = []
+
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        return context
+
+
 class CreateService(CreateView):
     model = Service
     template_name = 'service/create_service.html'

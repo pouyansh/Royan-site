@@ -18,14 +18,14 @@ class CreateField2Form(forms.ModelForm):
 
     class Meta:
         model = Field2
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'image']
 
 
 class UpdateField2Form(forms.ModelForm):
 
     class Meta:
         model = Field2
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'image']
 
 
 class CreateServiceForm(forms.ModelForm):

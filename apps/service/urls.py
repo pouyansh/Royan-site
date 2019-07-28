@@ -16,6 +16,7 @@ urlpatterns = [
     path('delete_field_successful/', staff_member_required(DeleteFieldSuccessful.as_view()),
          name='delete_field_successful'),
     url('field_details/(?P<pk>[0-9]+)/', FieldDetails.as_view(), name='field_details'),
+    url('field_level2_details/(?P<pk>[0-9]+)/', Field2Details.as_view(), name='field2_details'),
     path('create_service/', staff_member_required(CreateService.as_view()), name='create_service'),
     url('service_details/(?P<pk>[0-9]+)/', ServiceDetails.as_view(), name='service_details'),
     path('service_list_admin/', staff_member_required(ShowServiceListAdmin.as_view()), name='show_service_list_admin'),

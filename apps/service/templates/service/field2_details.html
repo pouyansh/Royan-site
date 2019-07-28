@@ -7,7 +7,8 @@
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <div class="row">
                 <div>
-                    <h3 style="color: #444444; margin-bottom: 20px;">نام زمینه:<br> {{ object.name }}</h3>
+                    <h3 style="color: #444444; margin-bottom: 20px;">نام زمینه رده دوم:<br> {{ object.name }}</h3>
+                    <h4 style="color: #444444;">نام زمینه:<br> {{ object.field.name }}</h4>
                     <h4 style="color: #444444;">توضیحات:<br> {{ object.description|safe }}</h4>
                 </div>
                 {% if object.image %}
