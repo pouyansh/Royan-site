@@ -217,7 +217,7 @@ class Field2Details(DetailView):
     template_name = 'service/field2_details.html'
 
     def dispatch(self, request, *args, **kwargs):
-        if not Field.objects.filter(id=self.kwargs['pk']):
+        if not Field2.objects.filter(id=self.kwargs['pk']):
             return redirect('index:index')
         return super().dispatch(request, *args, **kwargs)
 
