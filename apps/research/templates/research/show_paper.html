@@ -21,17 +21,17 @@
                 style="float: none; margin: 50px auto; display: block;">دانلود مقاله</a>
             {% endif %}
             <h4 class="mb-30 title_color" style="margin-top: 20px;">مقالات مشابه منتشر شده در زمینه تحقیقاتی</h4>
-            {% for paper in related_papers %}
+            {% for paper1 in related_papers %}
                 <div class="row" style="padding: 20px; margin: 20px;border-bottom: 1px solid #aaaaaa;">
                     <div class="col-lg-12">
                         <h5 style="font-size: 18px; display: inline;"> عنوان: </h5><br>
                             <div dir="ltr" style="font-family: EnglishFont; text-align: justify">
-                                <a href="{% url 'research:show_paper' 1%}" class="text-info"
+                                <a href="{% url 'research:show_paper' paper1.id %}" class="text-info"
                                    style="font-size: 20px; font-family: EnglishFont; margin-bottom: 30px; display: inline;"
-                                >{{ paper.title }}</a>
+                                >{{ paper1.title }}</a>
                             </div>
                         <h4 style="margin: 20px 0;">نویسندگان:<br>
-                            <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{paper.authors}}</div></h4>
+                            <div dir="ltr" style="font-family: EnglishFont; text-align: justify"> {{paper1.authors}}</div></h4>
                     </div>
 
                 </div>
