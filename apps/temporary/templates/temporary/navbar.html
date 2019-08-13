@@ -93,7 +93,7 @@
                                             {% if field2.field.id == field.id %}
                                                 <li class="nav-item submenu dropdown">
                                                     <a class="nav-link nav-padding dropdown-toggle"
-                                                       href="{% url 'service:field2_details' field2.id %}">{{ field2.name }}</a>
+                                                       href="">{{ field2.name }}</a>
                                                     <ul class="my_dropdown_menu dropdown-menu">
                                                         {% for service in services %}
                                                         {% if service.field2.id == field2.id %}
