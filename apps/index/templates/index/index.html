@@ -60,13 +60,14 @@
 <section class="interior_area interior_two" style="text-align: right;">
     <div class="container">
         <div class="interior_inner row">
-            <div class="col-lg-6" style="text-align: center;">
+            <div class="col-lg-3" style="text-align: center;">
                 <img class="img-fluid" src="{{ product1.image.url }}" alt=""
                      style="max-height: 300px; width: auto; margin: 0 0 0 100px;">
             </div>
-            <div class="col-lg-5 offset-lg-1">
+            <div class="col-lg-8 offset-lg-1">
                 <div class="interior_text" style="margin-right: 100px;">
-                    <h4>{{ product1.name }}</h4>
+                    <h4 style="font-family: FarsiFont; font-size: 25px; text-align: right">نام محصول:</h4><br>
+                    <h4 style="font-family: EnglishFont; font-size: 25px; text-align: left; margin-left: 30px;">{{ product1.name }}</h4>
                     <p>{{ product1.description }}</p>
                     <a class="main_btn" href="{% url 'product:product_details' product1.id %}">جزئیات محصول</a>
                 </div>
@@ -85,7 +86,8 @@
         <div class="interior_inner row">
             <div class="col-lg-5 offset-lg-1">
                 <div class="interior_text" style="margin-left: 100px;">
-                    <h4>{{ product2.name }}</h4>
+                    <h4 style="font-family: FarsiFont; font-size: 25px; text-align: right">نام محصول:</h4><br>
+                    <h4 style="font-family: EnglishFont; font-size: 25px; text-align: left; margin-left: 30px;">{{ product2.name }}</h4>
                     <p>{{ product2.description }}</p>
                     <a class="main_btn" href="{% url 'product:product_details' product2.id %}">جزئیات محصول</a>
                 </div>
