@@ -26,9 +26,12 @@
                         {% endfor %}
                         <br>
                         زمینه
-                        <select name="field" id="id_field">
+                        <select name="field" id="id_field" required="required">
                             {% for field in fields2 %}
                                 <option value="{{field.field.id}}-{{field.id}}">{{field.field.name}}-{{field.name}}</option>
+                            {% endfor %}
+                            {% for field in fields %}
+                                <option value="{{field.id}}-0">{{field.name}}</option>
                             {% endfor %}
                         </select>
                         <button type="submit" class="btn btn-success circle"
