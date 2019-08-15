@@ -7,8 +7,10 @@
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <div class="row">
                 <div>
-                    <h3 style="color: #444444; margin-bottom: 20px;">نام زمینه:<br> {{ object.name }}</h3>
-                    <h4 style="color: #444444;">توضیحات:<br> {{ object.description|safe }}</h4>
+                    <div style="font-size: 20px; font-weight: 700;color: #444444; margin-bottom: 20px;">نام زمینه:<br>
+                        <div style="font-family: EnglishFont;" dir="ltr">{{ object.name }}</div></div>
+                    <div style="color: #444444; margin-bottom: 20px; text-align: justify; width: 100%">توضیحات:<br>
+                        <div style="font-family: EnglishFont;" dir="ltr">{{ object.description|safe }}</div></div>
                 </div>
                 {% if object.image %}
                 <div style="margin-right: auto;">
@@ -23,9 +25,15 @@
                 <div class="col-lg-12 feature_inner row" dir="rtl">
                     {% for service in related_services %}
                     <div class="col-lg-3 col-md-6">
-                        <div class="feature_item" style="height: 150px;" dir="ltr">
+                        <div class="feature_item" style="height: 300px;">
+                            <div style="width: 100%; height: auto; margin: 0 auto 20px auto; text-align: center;">
+                                {% if service.logo %}
+                                <img class="img-news" src="{{ service.logo.url }}" alt=""
+                                     style="width: auto; max-width: 100%;">
+                                {% endif %}
+                            </div>
                             <a href="{% url 'service:service_details' service.id %}" class="text-info"
-                               style="font-size: 20px; text-align: center; display: block;">
+                               style="font-size: 18px; text-align: center; display: block;">
                                 {{ service.name }}</a>
                         </div>
                     </div>

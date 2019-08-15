@@ -60,14 +60,16 @@
                 <div class="col-lg-1"></div>
                 <div class="col-lg-8 feature_inner row" dir="rtl">
                     {% for product in products %}
-                    <div class="col-lg-4 col-md-6">
+                    <div class="col-lg-3 col-md-6">
                         <div class="feature_item" style="height: 300px;">
-                            <div style="width: 100%; height: 150px; margin-bottom: 20px; text-align: center;">
+                            <div style="width: 100%; height: auto; margin: 0 auto 20px auto; text-align: center;">
+                                {% if product.image %}
                                 <img class="img-news" src="{{ product.image.url }}" alt=""
-                                     style="width: auto; height: 100%; max-width: 100%;">
+                                     style="width: auto; max-width: 100%;">
+                                {% endif %}
                             </div>
-                            <a href="{% url 'product:product_details' product.id %}" class="text-info"
-                               style="font-size: 20px; text-align: center; display: block;">
+                            <a href="{% url 'service:service_details' service.id %}" class="text-info"
+                               style="font-size: 18px; text-align: center; display: block;">
                                 {{ product.name }}</a>
                         </div>
                     </div>
