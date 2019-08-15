@@ -43,7 +43,7 @@
                             <div style="width: 100%; height: auto; margin: 0 auto 20px auto; text-align: center;">
                                 {% if service.logo %}
                                 <img class="img-news" src="{{ service.logo.url }}" alt=""
-                                     style="width: auto; max-width: 100%;">
+                                     style="width: auto; max-width: 100%; max-height: 120px;">
                                 {% endif %}
                             </div>
                             <a href="{% url 'service:service_details' service.id %}" class="text-info"
