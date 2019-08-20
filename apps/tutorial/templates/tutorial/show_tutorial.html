@@ -6,8 +6,8 @@
     <div class="container">
         <div class="section-top-border text-right" style="font-family: FarsiFont">
             <div>
-                <h3 style="color: #444444; margin-bottom: 20px;">نام توتوریال: {{ tutorial.name }}</h3>
-                <h4 style="color: #444444;">توضیجات: {{ tutorial.description }}</h4>
+                <h3 style="color: #444444; margin-bottom: 20px;">نام توتوریال:<br> {{ tutorial.name }}</h3><br>
+                <h4 style="color: #444444;">توضیجات:<br> {{ tutorial.description|safe }}</h4>
             </div>
 
             <div class="row" style="margin-top: 50px;">
@@ -16,9 +16,9 @@
                     <div style="display: block; border-bottom: 1px solid #dddddd; margin-bottom: 30px;
                                 padding-bottom: 20px;">
                         <h3 class="text-info"
-                           style="font-size: 20px; display: block;">عنوان:
+                           style="font-size: 20px; display: block;">عنوان:<br>
                             {{ link.title }}</h3><br>
-                        <h4 style="margin: 10px 0;font-size: 18px; display: block;">توضیحات: {{link.description}}</h4>
+                        <h4 style="margin: 10px 0;font-size: 18px; display: block;">توضیحات:<br> {{link.description|safe}}</h4>
 
                         <h4 style="font-size: 18px;">                        برای کسب اطلاعات بیشتر، از این
                         <a href="{{link.link}}" class="text-info">لینک</a>
