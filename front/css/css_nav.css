@@ -227,6 +227,7 @@
     background-image: -webkit-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
     background-image: -o-linear-gradient(left, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
     background-image: linear-gradient(to right, #777 0%, rgb(9, 56, 121) 51%, #777 100%);
+    font-family: FarsiFont;
 }
 
 .header_area .navbar .nav .nav-item.submenu ul .nav-item:hover .nav-link , .single-footer-widget .sub-btn {
