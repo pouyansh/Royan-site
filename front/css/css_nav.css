@@ -318,7 +318,7 @@
         display: inline-block;
         height: 80px;
         width: auto;
-        margin-left: -20px;
+        margin-left: 0px;
         transform: scale(1);
         padding-top: 0px;
         margin-top: 15px;
@@ -328,6 +328,6 @@
     }
     #space{
         display: inline-block;
-        width: 100px;
+        width: 120px;
     }
 }
