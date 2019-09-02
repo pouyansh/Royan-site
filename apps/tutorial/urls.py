@@ -13,4 +13,5 @@ urlpatterns = [
          name='show_tutorial_list_admin'),
     url('link/create/(?P<pk>[0-9]+)/$', staff_member_required(CreateLink.as_view()), name='add_link'),
     url('link/edit/(?P<pk>[0-9]+)/$', staff_member_required(UpdateLink.as_view()), name='update_link'),
+    url('tutorial/workshop/(?P<pk>[0-9]+)/$', ShowLink.as_view(), name='show_details'),
 ]

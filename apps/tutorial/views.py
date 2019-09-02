@@ -161,3 +161,25 @@ class UpdateLink(UpdateView):
         if not Links.objects.filter(id=self.kwargs['pk']):
             return redirect('index:index')
         return super().dispatch(request, *args, **kwargs)
+
+
+class ShowLink(DetailView):
+    model = Links
+    template_name = 'tutorial/show_link.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
+        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
+        context['services'] = Service.objects.all().order_by('id')
+        context['service_fields'] = Field.objects.all().order_by('id')
+        context['research_areas'] = ResearchArea.objects.all().order_by('id')
+        context['tutorials'] = Tutorial.objects.all().order_by('id')
+        context['fields2'] = Field2.objects.all().order_by('id')
+        context['link'] = Links.objects.get(id=self.kwargs['pk'])
+        return context
+
+    def dispatch(self, request, *args, **kwargs):
+        if not Links.objects.get(id=self.kwargs['pk']):
+            return redirect('index:index')
+        return super().dispatch(request, *args, **kwargs)

@@ -13,3 +13,4 @@ class Links(models.Model):
                            blank=True, verbose_name="لینک")
     tutorial = models.ForeignKey(Tutorial, verbose_name="توتوریال", default=None, on_delete="Restrict")
     rank = models.IntegerField(verbose_name="مکان نسبی", default=0)
+    image = models.ImageField(verbose_name="عکس", name="image", default=None, blank=True, null=True)
