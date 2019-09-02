@@ -359,4 +359,7 @@ a.details-link:hover {
     .interior_text {
         margin-left: 0;
     }
+    .img-fluid {
+        padding: 25px;
+    }
 }
