@@ -308,3 +308,15 @@
 .header_area .navbar .nav .nav-item.submenu ul .nav-item {
     text-align: center;
 }
+
+@media (max-width:991px){
+    .header_area .main_menu .navbar .container-fluid .navbar-header .navbar-logo {
+        display: inline-block;
+        height: 80px;
+        width: auto;
+        margin-left: -20px;
+        transform: scale(1);
+        padding-top: 0px;
+        margin-top: 0px;
+    }
+}
