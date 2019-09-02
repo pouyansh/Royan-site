@@ -350,3 +350,13 @@ a.details-link:hover {
     border-radius: 5px;
     background: #eeeeee;
 }
+
+.interior_text {
+    margin-left: 100px;
+}
+
+@media (max-width:991px){
+    .interior_text {
+        margin-left: 0;
+    }
+}
