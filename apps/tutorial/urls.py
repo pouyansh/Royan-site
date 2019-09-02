@@ -14,4 +14,6 @@ urlpatterns = [
     url('link/create/(?P<pk>[0-9]+)/$', staff_member_required(CreateLink.as_view()), name='add_link'),
     url('link/edit/(?P<pk>[0-9]+)/$', staff_member_required(UpdateLink.as_view()), name='update_link'),
     url('tutorial/workshop/(?P<pk>[0-9]+)/$', ShowLink.as_view(), name='show_details'),
+    path('tutorial/workshop/list/admin/', staff_member_required(ShowWorkshopListAdmin.as_view()),
+         name='show_workshop_list_admin'),
 ]

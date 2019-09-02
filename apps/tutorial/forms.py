@@ -14,6 +14,10 @@ class TutorialListAdminForm(forms.Form):
     tutorial_id = forms.CharField(max_length=10)
 
 
+class WorkshopListAdminForm(forms.Form):
+    workshop_id = forms.CharField(max_length=10)
+
+
 class AddLinkForm(forms.ModelForm):
 
     class Meta:
