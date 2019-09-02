@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DetailView, ListView, FormView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView, FormView, TemplateView
 
 from apps.product.models import Category
 from apps.research.models import ResearchArea
@@ -185,7 +185,7 @@ class ShowLink(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class ShowWorkshopListAdmin(FormView):
+class ShowWorkshopListAdmin(TemplateView, FormView):
     model = Links
     template_name = 'tutorial/show_workshop_list_admin.html'
 
