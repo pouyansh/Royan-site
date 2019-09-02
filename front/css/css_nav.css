@@ -323,4 +323,11 @@
         padding-top: 0px;
         margin-top: 15px;
     }
+    .header_area .main_menu .navbar .container-fluid .navbar-header .navbar-brand-inverse{
+        margin-top: 0px;
+    }
+    #space{
+        display: inline-block;
+        width: 100px;
+    }
 }
