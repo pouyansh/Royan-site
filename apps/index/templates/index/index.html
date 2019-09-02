@@ -64,10 +64,10 @@
             <p class="text-dark" style="font-family: FarsiFont; font-size: 30px;">آخرین محصولات</p>
         </div>
         <div class="interior_inner row">
-            <div class="col-lg-3" style="text-align: center;">
+            <div class="col-lg-3 col-md-9" style="text-align: center;">
                 <img class="img-fluid" src="{{ product1.image.url }}" alt="">
             </div>
-            <div class="col-lg-9" style="padding: 30px;">
+            <div class="col-lg-9 col-md-12" style="padding: 30px;">
                 <div class="interior_text" style="margin-right: 100px;">
                     <h4 style="font-family: FarsiFont; font-size: 25px; text-align: right; margin: 0;" dir="rtl">نام محصول:</h4>
                     <h4 style="font-family: EnglishFont; font-size: 25px; text-align: left; margin: 0;">{{ product1.name }}</h4>
@@ -87,7 +87,7 @@
 <section class="interior_area interior_one" style="text-align: right;">
     <div class="container">
         <div class="interior_inner row">
-            <div class="col-lg-9" style="padding: 30px;">
+            <div class="col-lg-9 col-md-12" style="padding: 30px;">
                 <div class="interior_text" style="margin-left: 100px;">
                     <h4 style="font-family: FarsiFont; font-size: 25px; text-align: right; margin: 0;" dir="rtl">نام محصول:</h4>
                     <h4 style="font-family: EnglishFont; font-size: 25px; text-align: left; margin: 0;">{{ product2.name }}</h4>
@@ -95,7 +95,7 @@
                     <a class="main_btn" href="{% url 'product:product_details' product2.id %}">جزئیات محصول</a>
                 </div>
             </div>
-            <div class="col-lg-3"  style="text-align: center;">
+            <div class="col-lg-3 col-md-9"  style="text-align: center;">
                 <img class="img-fluid" src="{{ product2.image.url }}" alt="">
             </div>
         </div>
