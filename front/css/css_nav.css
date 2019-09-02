@@ -183,7 +183,6 @@
     display: inline-block;
     height: 100px;
     width: auto;
-    transform: scale(2);
     padding-top: 30px;
     margin-left: 40px;
     margin-top: -30px
@@ -315,8 +314,7 @@
         height: 80px;
         width: auto;
         margin-left: -20px;
-        transform: scale(1);
         padding-top: 0px;
-        margin-top: 0px;
+        margin-top: 15px;
     }
 }
