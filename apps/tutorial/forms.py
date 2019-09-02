@@ -22,5 +22,5 @@ class AddLinkForm(forms.ModelForm):
 
     class Meta:
         model = Links
-        fields = ['title', 'description', 'link', 'rank']
+        fields = ['title', 'description', 'link', 'rank', 'image']
 
