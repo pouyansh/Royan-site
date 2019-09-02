@@ -15,12 +15,8 @@
                     <div style="display: block; border-bottom: 1px solid #dddddd; margin-bottom: 30px;
                                 padding-bottom: 20px;">
                         <h3 style="font-size: 20px; display: block;">عنوان کارگاه:<br>
-                            <a href="{% url 'tutorial:show_details' link.id %}">{{ link.title }}</a></h3>
-
-                        <h4 style="font-size: 18px;">                        برای کسب اطلاعات بیشتر، از این
-                        <a href="{{link.link}}" class="text-info">لینک</a>
-                        استفاده نمایید
-                        </h4>
+                            <a href="{% url 'tutorial:show_details' link.id %}">{{ link.title }}</a>
+                        </h3>
                     </div>
                     {% endfor %}
                 </div>

@@ -7,7 +7,7 @@ class Tutorial(models.Model):
 
 
 class Links(models.Model):
-    title = models.CharField(max_length=150, verbose_name="عنوان بخش")
+    title = models.CharField(max_length=350, verbose_name="عنوان بخش")
     description = models.TextField(max_length=10000, verbose_name="توضیحات")
     link = models.URLField(max_length=128,
                            blank=True, verbose_name="لینک")
