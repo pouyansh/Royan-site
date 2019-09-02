@@ -10,3 +10,4 @@ class News(models.Model):
     english_summary = models.CharField(max_length=1500, default='', blank=True, verbose_name="خلاصه خبر (انگلیسی)")
     english_description = models.TextField(max_length=4000, default='', blank=True, verbose_name="متن خبر (انگلیسی)")
     date = models.DateTimeField(verbose_name="تاریخ", auto_now_add=True, blank=True)
+    file = models.FileField(verbose_name="فایل", blank=True, default=None)

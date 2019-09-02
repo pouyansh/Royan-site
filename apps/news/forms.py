@@ -9,7 +9,7 @@ class AddNewsForm(forms.ModelForm):
         model = News
         fields = ['title', 'summary', 'description',
                   'english_title', 'english_summary', 'english_description',
-                  'image']
+                  'image', 'file']
 
 
 class UpdateNewsForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class UpdateNewsForm(forms.ModelForm):
         model = News
         fields = ['title', 'summary', 'description',
                   'english_title', 'english_summary', 'english_description',
-                  'image']
+                  'image', 'file']
 
 
 class NewsListAdminForm(forms.Form):

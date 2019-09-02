@@ -13,8 +13,10 @@
                 <div class="col-md-3">
                     <img src="{{ news.image.url }}" alt="" class="img-fluid">
                 </div>
-                <a href="{% url 'index:index' %}" class="btn btn-info circle"
-                   style="font-family: FarsiFont;font-size: 18px;min-width: 60px;;">خانه</a>
+                {% if news.file %}
+                <a href="{{news.file.url}}" class="btn btn-info circle"
+                   style="font-family: FarsiFont;font-size: 18px;min-width: 100px;">دانلود فایل خبر</a>
+                {% endif %}
             </div>
         </div>
     </div>
