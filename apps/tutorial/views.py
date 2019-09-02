@@ -185,7 +185,7 @@ class ShowLink(DetailView):
         return super().dispatch(request, *args, **kwargs)
 
 
-class ShowWorkshopListAdmin(ListView, FormView):
+class ShowWorkshopListAdmin(FormView):
     model = Links
     template_name = 'tutorial/show_workshop_list_admin.html'
 
