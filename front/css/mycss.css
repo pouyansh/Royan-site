@@ -355,11 +355,18 @@ a.details-link:hover {
     margin-left: 100px;
 }
 
+.border-lg {
+     border-left: 1px solid #aaaaaa;
+}
+
 @media (max-width:991px){
     .interior_text {
         margin-left: 0;
     }
     .img-fluid {
         padding: 25px;
+    }
+    .border-lg {
+        border: none;
     }
 }
