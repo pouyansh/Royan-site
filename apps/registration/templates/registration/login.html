@@ -13,14 +13,14 @@
 <div class="login_body"></div>
 <div class="bg-text" style="display: flex;">
 
-    <div style="width: 50%;">
+    <div class="col-lg-6 col-md-12">
         <h2>ثبت نام</h2>
         <a href="{% url 'registration:register_person' %}" class="btn btn-dark circle"
             style="width: 60%;margin: 10px 0; font-size: 18px;">حساب کاربری حقیقی</a>
         <a href="{% url 'registration:register_organization' %}" class="btn btn-dark circle"
             style="width: 60%;margin: 10px 0; font-size: 18px;">حساب کاربری حقوقی</a>
     </div>
-    <div style="width: 50%; border-left: 1px solid #eeeeee; float: right;">
+    <div class="col-lg-6 col-md-12 border-lg">
         <h2>ورود به سامانه</h2>
         <form method="post">
             {% csrf_token %}
