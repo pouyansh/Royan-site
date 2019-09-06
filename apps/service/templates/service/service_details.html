@@ -12,7 +12,7 @@
                     <div style="color: #444444; margin-bottom: 20px;"> زمینه:<br>
                         <div style="font-family: EnglishFont;"> {{object.field.name}}</div></div>
                     <div>
-                        <h4 style="color: #444444; text-align: justify; width: 100%">توضیحات:<br> {{ object.description|safe }}</h4>
+                        <h4 style="color: #444444; text-align: justify; width: 100%; font-weight: 300;">توضیحات:<br> {{ object.description|safe }}</h4>
                         {% if object.image %}
                         <div style="margin-right: 10%; width: 80%;">
                             <img src="{{object.image.url}}" style="width: 80%; height: auto; margin: 0 10%;">

@@ -10,8 +10,8 @@
                     <div style="font-size: 20px; font-weight: 700;color: #444444; margin-bottom: 20px;">نام محصول:
                         <br><div style="font-family: EnglishFont;" dir="ltr">{{ object.name }}</div></div>
                     <div style="color: #444444; margin-bottom: 20px;"> دسته بندی:<br>
-                        <div style="font-family: EnglishFont;"> {{object.field.name}}</div></div>
-                    <h4 style="color: #444444; text-align: justify; width: 100%">توضیحات:<br> {{ object.description|safe }}</h4>
+                        <div style="font-family: EnglishFont;"> {{object.category.name}}</div></div>
+                    <h4 style="color: #444444; text-align: justify; width: 100%; font-weight: 300;">توضیحات:<br> {{ object.description|safe }}</h4>
                 </div>
                 <div class="col-md-12 col-lg-4" style="text-align: center;">
                     <img src="{{ object.image.url }}" alt="" class="img-fluid" style="max-height: 300px;">
