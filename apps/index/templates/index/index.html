@@ -135,9 +135,12 @@
     $("#news1").css("display", "block");
     var news_id = 1;
     var timer = setInterval(next, 15000);
+    var number = $("#all_news").children().length;
+    if (number == 1){
+        $(".details-link").css("display", "none");
+    }
 
     function change(id, step) {
-        var number = $("#all_news").children().length;
         if(step == 1){
             if(id < number){
                 $("#news"+id).css("display", "none");
