@@ -383,6 +383,12 @@
     .tutorial {
         margin-left: 0;
     }
+    .mega-dropdown-menu {
+        display:none!important;
+    }
+    .mega-dropdown-menu.show {
+        display:table!important;
+    }
 }
 
 @media (min-width: 768px) {
