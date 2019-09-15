@@ -69,7 +69,8 @@
                             >Home</a>
                             </li>
                             <li class="nav-item submenu dropdown mega-dropdown">
-                                <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                <a class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false"
                                    role="button">Services</a>
                                 <ul class="mega-dropdown-menu dropdown-menu">
                                     {% for field in service_fields %}
@@ -114,7 +115,8 @@
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                <a class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false"
                                    role="button">Products</a>
                                 <ul class="dropdown-menu" style="min-width: 250px;">
                                     {% for category in product_categories %}
@@ -126,7 +128,8 @@
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                <a class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false"
                                    role="button">Research areas</a>
                                 <ul class="dropdown-menu" style="min-width: 250px;">
                                     {% for research in research_areas %}
@@ -137,7 +140,8 @@
                                 </ul>
                             </li>
                             <li class="nav-item submenu dropdown">
-                                <a href="#" class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                <a class="nav-link nav-padding dropdown-toggle" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false"
                                    role="button">Tutorials</a>
                                 <ul class="dropdown-menu tutorial" style="min-width: 250px;">
                                     {% for tutorial in tutorials %}

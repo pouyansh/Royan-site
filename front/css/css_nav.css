@@ -26,6 +26,7 @@
     background: none;
     color: pink;
     outline = none;
+    max-width: 100%;
 
 }
 
@@ -33,6 +34,7 @@
 .header_area .navbar .nav .nav-item .nav-padding{
     padding: 0px 15px;
     line-height: 50px;
+    max-width: 100%;
 }
 
 .header_area.navbar_fixed .main_menu .navbar .nav .nav-item .login-btn,
@@ -226,6 +228,7 @@
     background: none;
     color: pink;
     outline = none;
+    max-width: 100%;
 }
 
 .header_area.navbar_fixed .main_menu, .home_banner_area {
