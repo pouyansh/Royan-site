@@ -389,11 +389,17 @@
     .mega-dropdown-menu.show {
         display:table!important;
     }
+    .open>.dropdown-menu {
+        display: none;
+    }
 }
 
 @media (min-width: 768px) {
     .navbar-nav{
         flex-direction: row;
+    }
+    .mega-dropdown{
+        max-width: 150px;
     }
 }
 
