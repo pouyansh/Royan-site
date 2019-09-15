@@ -406,9 +406,9 @@
     }
     .mega-dropdown-menu.show{
         position: absolute;
-        background-image: -moz-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
-        background-image: -webkit-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
-        background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+        background-image: -moz-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%)!important;
+        background-image: -webkit-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%)!important;
+        background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%)!important;
     }
     .mega-dropdown-menu .dropdown-header {
         padding: 5px;
