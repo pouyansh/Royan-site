@@ -397,12 +397,21 @@
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width:991px){
     .navbar-nav{
         flex-direction: row;
     }
     .mega-dropdown{
         max-width: 150px;
+    }
+    .mega-dropdown-menu.show{
+        position: absolute;
+        background-image: -moz-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+        background-image: -webkit-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+        background-image: -ms-linear-gradient(0deg, #777 0%, rgb(9, 56, 121) 100%);
+    }
+    .mega-dropdown-menu .dropdown-header {
+        padding: 5px;
     }
 }
 
