@@ -63,8 +63,6 @@
     width: 100%;
     box-shadow: none;
     -webkit-box-shadow: none;
-}
-.mega-dropdown-menu.show {
     display:table!important;
 }
 
@@ -354,6 +352,9 @@
         margin-left: 0px;
         margin-right: 0px;
         margin-top: 20px;
+    }
+    .mega-dropdown-menu {
+        display:none!important;
     }
     .mega-dropdown-menu.show {
         display:block!important;
