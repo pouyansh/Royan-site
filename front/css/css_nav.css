@@ -374,7 +374,6 @@
         color: #eeeeee;
     }
     .header_area .navbar .nav .nav-item.submenu ul {
-        padding: 0 0 0 40px;
         background: none;
     }
     .header_area .navbar .nav .nav-item.submenu ul .nav-item.submenu .my_dropdown_menu .nav-item .nav-link {
@@ -391,6 +390,10 @@
     }
     .open>.dropdown-menu {
         display: none;
+    }
+    .mega-dropdown-menu .dropdown-header {
+        background: rgb(10, 110, 185);
+        color: #eeeeee;
     }
 }
 
@@ -413,8 +416,7 @@
     .mega-dropdown-col {
         display : list-item;
     }
-    .mega-dropdown-menu .dropdown-header {
-        background: rgb(10, 110, 185);
-        color: #eeeeee;
+    .header_area .navbar .nav .nav-item.submenu ul {
+        padding: 0 0 0 40px;
     }
 }
