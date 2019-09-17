@@ -182,7 +182,7 @@ class BlockUser(FormView):
 
 class UnblockUser(FormView):
     template_name = "royan_admin/unblock_user.html"
-    success_url = reverse_lazy("royan_admin:blocked")
+    success_url = reverse_lazy("royan_admin:unblocked")
     form_class = BlockForm
 
     def get_context_data(self, **kwargs):
