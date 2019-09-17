@@ -174,8 +174,10 @@ class BlockUser(FormView):
 
     def form_valid(self, form):
         user = User.objects.get(id=self.kwargs['pk'])
-        print(user.is_active)
-        user.is_active = False
+        if user.is_active:
+            user.is_active = False
+        else:
+            user.is_active = True
         user.save()
         return super(BlockUser, self).form_valid(form)
 
@@ -200,7 +202,6 @@ class UnblockUser(FormView):
 
     def form_valid(self, form):
         user = User.objects.get(id=self.kwargs['pk'])
-        print(user.is_active)
         user.is_active = True
         user.save()
         return super(UnblockUser, self).form_valid(form)
@@ -219,7 +220,7 @@ class BlockSuccessful(TemplateView):
         context['tutorials'] = Tutorial.objects.all().order_by('id')
         context['fields2'] = Field2.objects.all().order_by('id')
         context[
-            'text'] = "کاربر مورد نظر بلاک شد"
+            'text'] = "وضعیت کاربر موردنظر با موفقیت تغییر یافت"
         return context
 
 
