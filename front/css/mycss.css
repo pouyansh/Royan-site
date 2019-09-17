@@ -359,6 +359,11 @@ a.details-link:hover {
      border-left: 1px solid #aaaaaa;
 }
 
+.interior_area {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
 @media (max-width:991px){
     .interior_text {
         margin-left: 0;
