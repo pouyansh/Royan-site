@@ -1,0 +1,26 @@
+{% load static staticfiles %}
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Royan TuCAGene</title>
+    <!-- Bootstrap CSS -->
+    {% include 'temporary/cssfiles.html' %}
+</head>
+<body>
+<div class="login_body"></div>
+<div class="bg-text" style="width: 60%;">
+    <h2 dir="rtl">آیا کاربر با نام کاربری {{user.username}} آنبلاک شود؟</h2>
+    <a class="btn circle btn-dark" href="{% url 'index:index' %}"
+            style="font-family: FarsiFont; font-size: 18px; min-width: 80px; margin: 10px;">خیر</a>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn circle btn-danger"
+            style="font-family: FarsiFont; font-size: 18px; min-width: 80px; margin: 10px;">بله</button>
+    </form>
+
+</div>
+</body>
+</html>
