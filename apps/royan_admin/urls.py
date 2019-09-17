@@ -11,7 +11,5 @@ urlpatterns = [
     url('update_info/(?P<pk>[0-9]+)/', staff_member_required((ChangeSystemInformation.as_view())),
         name='update_info'),
     url('change_state_user/(?P<pk>[0-9]+)/', staff_member_required(BlockUser.as_view()), name='block'),
-    url('unblock_user/(?P<pk>[0-9]+)/', staff_member_required(UnblockUser.as_view()), name='unblock'),
     path('state_changed/', staff_member_required(BlockSuccessful.as_view()), name='blocked'),
-    path('unblocked/', staff_member_required(UnblockSuccessful.as_view()), name='unblocked'),
 ]

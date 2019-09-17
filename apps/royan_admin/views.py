@@ -182,31 +182,6 @@ class BlockUser(FormView):
         return super(BlockUser, self).form_valid(form)
 
 
-class UnblockUser(FormView):
-    template_name = "royan_admin/unblock_user.html"
-    success_url = reverse_lazy("royan_admin:unblocked")
-    form_class = BlockForm
-
-    def get_context_data(self, **kwargs):
-        context = super(UnblockUser, self).get_context_data(**kwargs)
-        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
-        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
-        context['admin'] = self.request.user
-        context['services'] = Service.objects.all().order_by('id')
-        context['service_fields'] = Field.objects.all().order_by('id')
-        context['research_areas'] = ResearchArea.objects.all().order_by('id')
-        context['tutorials'] = Tutorial.objects.all().order_by('id')
-        context['user'] = User.objects.get(id=self.kwargs['pk'])
-        context['fields2'] = Field2.objects.all().order_by('id')
-        return context
-
-    def form_valid(self, form):
-        user = User.objects.get(id=self.kwargs['pk'])
-        user.is_active = True
-        user.save()
-        return super(UnblockUser, self).form_valid(form)
-
-
 class BlockSuccessful(TemplateView):
     template_name = 'temporary/show_text.html'
 
@@ -221,21 +196,4 @@ class BlockSuccessful(TemplateView):
         context['fields2'] = Field2.objects.all().order_by('id')
         context[
             'text'] = "وضعیت کاربر موردنظر با موفقیت تغییر یافت"
-        return context
-
-
-class UnblockSuccessful(TemplateView):
-    template_name = 'temporary/show_text.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['RoyanTucagene'] = RoyanTucagene.objects.all()[0]
-        context['product_categories'] = Category.objects.filter(is_active=True).order_by('id')
-        context['services'] = Service.objects.all().order_by('id')
-        context['service_fields'] = Field.objects.all().order_by('id')
-        context['research_areas'] = ResearchArea.objects.all().order_by('id')
-        context['tutorials'] = Tutorial.objects.all().order_by('id')
-        context['fields2'] = Field2.objects.all().order_by('id')
-        context[
-            'text'] = "کاربر مورد نظر آنبلاک شد"
         return context
