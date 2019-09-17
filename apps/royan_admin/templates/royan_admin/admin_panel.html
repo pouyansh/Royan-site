@@ -362,7 +362,7 @@
                                 {% if customer.is_active %}
                                 <td><a class="text-danger" href="{% url 'royan_admin:block' customer.id %}">بلاک</a> </td>
                                 {% else %}
-                                <td><a class="text-danger" href="{% url 'royan_admin:unblock' customer.id %}">بلاک</a> </td>
+                                <td><a class="text-success" href="{% url 'royan_admin:unblock' customer.id %}">آنبلاک</a> </td>
                                 {% endif %}
                                 <td><a href="{% url 'royan_admin:customer_profile' customer.id %}" class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>
