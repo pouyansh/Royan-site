@@ -166,12 +166,14 @@ STATICFILES_DIRS = [
 ]
 LOGIN_REDIRECT_URL = '/login_success/'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-#
-# EMAIL_HOST_USER = 'tucagenesite'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'info@royantucagene.com'
+EMAIL_HOST_PASSWORD = 'P@ssw0rdinfo'
+
 LOGIN_URL = '/login/'
 
 if DEBUG:

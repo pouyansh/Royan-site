@@ -55,16 +55,15 @@ class RegisterPerson(CreateView):
 
     def form_valid(self, form):
         person = form.save(commit=False)
-        person.is_active = False
         person.is_person = True
         person.save()
         email = form.cleaned_data['email']
         username = form.cleaned_data['username']
-        hashed_data = '127.0.0.1:8000/verify_email/' + Hash.code(username + '#' + email)
+        hashed_data = 'http://www.royantucagene.com/verify_email/' + Hash.code(username + '#' + email)
         send_mail('تایید ایمیل',
                   'بسیار سپاس‌گزاریم که در سایت شرکت رویان توکاژن ثبت نام کردید. ' +
                   'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
-                  hashed_data + '/', 'tucagenesite@gmail.com', [email])
+                  hashed_data + '/', 'info@royantucagene.com', [email])
         return super(RegisterPerson, self).form_valid(form)
 
 
@@ -90,15 +89,14 @@ class RegisterOrganization(CreateView):
         organization = form.save(commit=False)
         organization.first_name = organization.post
         organization.last_name = organization.organization_name
-        organization.is_active = False
         organization.save()
         email = form.cleaned_data['email']
         username = form.cleaned_data['username']
-        hashed_data = '127.0.0.1:8000/verify_email/' + Hash.code(username + '#' + email)
+        hashed_data = 'http://www.royantucagene.com/verify_email/' + Hash.code(username + '#' + email)
         send_mail('تایید ایمیل',
                   'بسیار سپاس‌گزاریم که در سایت شرکت رویان توکاژن ثبت نام کردید. ' +
                   'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
-                  hashed_data + '/', 'tucagenesite@gmail.com', [email])
+                  hashed_data + '/', 'info@royantucagene.com', [email])
         return super(RegisterOrganization, self).form_valid(form)
 
 
@@ -142,7 +140,7 @@ class VerifyEmail(FormView):
         decoded = Hash.decode(hashed)
         if decoded == username + "#" + email:
             customer = Customer.objects.get(username=username)
-            customer.is_active = True
+            customer.email_verified = True
             customer.save()
         else:
             self.success_url = reverse_lazy('registration:not_verified')
@@ -249,7 +247,7 @@ class ForgetPassword(FormView):
                   'کاربر گرامی، رمز عبور جدیدی برای حساب کاربری شما ساخته شد که در ادامه مشاهده می‌فرمایید. ' +
                   'خواهشمند است به منظور حفظ مسائل امنیتی، رمز عبور حساب کاربری خود را تغییر دهید.\n' +
                   'username: ' + customer.username + '\n new password: ' + newpass + '\n www.royantucagene.com/login/',
-                  'tucagenesite@gmail.com', [customer.email])
+                  'info@royantucagene.com', [customer.email])
         return super(ForgetPassword, self).form_valid(form)
 
 
