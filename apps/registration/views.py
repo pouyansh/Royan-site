@@ -55,6 +55,7 @@ class RegisterPerson(CreateView):
 
     def form_valid(self, form):
         person = form.save(commit=False)
+        person.is_active = False
         person.is_person = True
         person.save()
         email = form.cleaned_data['email']
@@ -89,6 +90,7 @@ class RegisterOrganization(CreateView):
         organization = form.save(commit=False)
         organization.first_name = organization.post
         organization.last_name = organization.organization_name
+        organization.is_active = False
         organization.save()
         email = form.cleaned_data['email']
         username = form.cleaned_data['username']
@@ -141,6 +143,8 @@ class VerifyEmail(FormView):
         if decoded == username + "#" + email:
             customer = Customer.objects.get(username=username)
             customer.email_verified = True
+            if not customer.is_blocked:
+                customer.is_active = True
             customer.save()
         else:
             self.success_url = reverse_lazy('registration:not_verified')

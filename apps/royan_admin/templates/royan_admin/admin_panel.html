@@ -350,19 +350,19 @@
                                 <td>{{customer.username}}</td>
                                 <td>{{customer.email}}</td>
                                 {% if customer.is_active %}
-                                    {% if customer.email_verified %}
-                                    <td class="text-success">ایمیل: تایید شده</td>
+                                    <td class="text-success">فعال</td>
+                                {% else %}
+                                    {% if customer.is_blocked %}
+                                    <td class="text-danger">بلاک شده</td>
                                     {% else %}
                                     <td class="text-danger">ایمیل: تایید نشده</td>
                                     {% endif %}
-                                {% else %}
-                                    <td class="text-danger">بلاک شده</td>
                                 {% endif %}
                                 <td><a class="text-dark" href="{% url 'message:admin_create_message' customer.username %}">ارسال</a> </td>
-                                {% if customer.is_active %}
-                                <td><a class="text-danger" href="{% url 'royan_admin:block' customer.id %}">بلاک</a> </td>
-                                {% else %}
+                                {% if customer.is_blocked %}
                                 <td><a class="text-success" href="{% url 'royan_admin:block' customer.id %}">آنبلاک</a> </td>
+                                {% else %}
+                                <td><a class="text-danger" href="{% url 'royan_admin:block' customer.id %}">بلاک</a> </td>
                                 {% endif %}
                                 <td><a href="{% url 'royan_admin:customer_profile' customer.id %}" class="details-link">
                                     <i class='fa fa-angle-left'></i></a></td>

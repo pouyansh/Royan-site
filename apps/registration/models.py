@@ -8,6 +8,7 @@ class Customer(User):
     address = models.CharField(max_length=1500, verbose_name='آدرس')
     email_verified = models.BooleanField(default=False, verbose_name="ایمیل تایید شده است")
     is_person = models.BooleanField(default=False)
+    is_blocked = models.BooleanField(default=False)
 
     def get_full_name(self):
         return self.first_name + " " + self.last_name

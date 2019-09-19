@@ -168,16 +168,23 @@ class BlockUser(FormView):
         context['service_fields'] = Field.objects.all().order_by('id')
         context['research_areas'] = ResearchArea.objects.all().order_by('id')
         context['tutorials'] = Tutorial.objects.all().order_by('id')
-        context['user'] = User.objects.get(id=self.kwargs['pk'])
+        user = User.objects.get(id=self.kwargs['pk'])
+        context['customer'] = Customer.objects.get(username=user.username)
         context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
     def form_valid(self, form):
         user = User.objects.get(id=self.kwargs['pk'])
-        if user.is_active:
-            user.is_active = False
+        customer = Customer.objects.get(username=user.username)
+        if customer.is_blocked:
+            customer.is_blocked = False
+            customer.save()
+            if customer.email_verified:
+                user.is_active = True
         else:
-            user.is_active = True
+            customer.is_blocked = True
+            customer.save()
+            user.is_active = False
         user.save()
         return super(BlockUser, self).form_valid(form)
 
