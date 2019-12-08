@@ -4,5 +4,5 @@ from django.contrib.admin.views.decorators import staff_member_required
 from apps.order_product.views import *
 
 urlpatterns = [
-    url(r'order/product/start/(?P<pk>\.+)/', StartOrderProduct.as_view(), name='start_order'),
+    url(r'order/product/start/(?P<pk>.+)/', StartOrderProduct.as_view(), name='start_order'),
 ]
