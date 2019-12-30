@@ -46,14 +46,14 @@ class OrderServiceFrom(forms.Form):
 
     def clean_type(self):
         if not self.cleaned_data['type'] and str(self.cleaned_data['final']) != "-1":
-            raise forms.ValidationError("باید حداقل یکی از این دو مورد را انتخاب کنید")
+            raise forms.ValidationError("باید حداقل یکی از این موارد را انتخاب کنید")
         return self.cleaned_data['type']
 
     def clean(self):
         return super(OrderServiceFrom, self).clean()
 
 
-class CheckDataFrom(forms.Form):
+class CheckDataForm(forms.Form):
     confirm = forms.BooleanField(required=True)
     name = forms.CharField(max_length=40)
 

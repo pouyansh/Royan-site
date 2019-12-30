@@ -33,3 +33,4 @@ class Service(models.Model):
     fields = models.FileField(verbose_name="فیلدهای فرم ثبت نام", blank=True, null=True)
     image = models.ImageField(verbose_name="عکس", default=None, null=True, blank=True)
     logo = models.ImageField(verbose_name="لوگو", default=None, null=True, blank=True)
+    field_names = models.CharField(verbose_name="نام فیلدها", default=None, null=True, blank=True, max_length=300)

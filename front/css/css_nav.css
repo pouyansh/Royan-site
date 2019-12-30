@@ -335,7 +335,7 @@
 
 @media (max-width:991px){
     .nav>li>a {
-        padding: 10px 10px;
+        padding: 10px 5px;
     }
     .margin-nav{
         margin: 0 auto;

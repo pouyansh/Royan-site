@@ -1,6 +1,7 @@
 import csv
 import os
 
+import xlrd
 from django.core.files.base import ContentFile
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -408,6 +409,17 @@ class CreateFormForService(FormView):
         service = Service.objects.get(id=self.kwargs['pk'])
         if form.cleaned_data['file']:
             service.file = form.cleaned_data['file']
+            content = form.cleaned_data['file'].read()
+            book = xlrd.open_workbook(file_contents=content)
+            sheet = book.sheet_by_index(0)
+            field_names = ""
+            index = 1
+            while True:
+                if not sheet.cell_value(2, index):
+                    break
+                field_names += sheet.cell_value(2, index) + ';'
+                index += 1
+            service.field_names = field_names
             service.save()
         if str(form.cleaned_data['final']) == "1":
             service.has_form = True

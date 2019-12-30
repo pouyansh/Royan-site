@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'order/service/set_invoice/(?P<pk>.+)/', staff_member_required(SetInvoice.as_view()), name='set_invoice'),
     url(r'order/service/set_receiving_date/(?P<pk>.+)/', staff_member_required(SetReceivingDate.as_view()),
         name='set_receiving_date'),
-    url(r'order/service/invoice/(?P<pk>.+)/', staff_member_required(CheckInvoice.as_view()), name='order_invoice')
+    url(r'order/service/invoice/(?P<pk>.+)/', staff_member_required(CheckInvoice.as_view()), name='order_invoice'),
+    url(r'order/service/error/', FileError.as_view(), name='file_error')
 ]

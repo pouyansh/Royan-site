@@ -93,12 +93,25 @@
             <div class="row">
                 <div class="col-lg-11 col-md-8" style="margin: auto">
                     <h4>ثبت سفارش برای سرویس {{service.name}}</h4>
-                    <h5>
-                        برای پر کردن اطلاعات، شما باید ابتدا یکی از دو روش زیر را انتخاب کنید.
+                    <h5>                        در این روش، شما باید ابتدا فایل اکسل
+                                داده شده را دانلود کرده و
+                                سپس تکمیل شده‌ی آن را آپلود کنید.
                     </h5>
-                    ‌
                     <form method="post" enctype="multipart/form-data">
-                        <div class="submit_service_register_parts" style="padding-bottom: 60px;">
+                        ‌<div id="div_type_1"
+                             style="margin: auto; display: flex; height: 100%; transition: 1s;">
+                            <a id="div_type_1_btn_1"
+                               href="{{ service.file.url }}" download class="submit_service_excel">دانلود فایل
+                                نمونه</a>
+                            <div class="submit_service_excel" style="padding: 0;" id="div_type_1_btn_2">
+                                <input class="input-file" name="file" id="id_file" type="file">
+                                <label tabindex="0" for="id_file" id="input-file-trigger"
+                                       style="font-weight: unset; width: 100%; height: 100%;
+                                   padding-top: 10px; cursor: pointer;">درگاه آپلود فایل</label>
+                            </div>
+                        </div>
+
+                        <!--<div class="submit_service_register_parts" style="padding-bottom: 60px;">
                             <input type="checkbox" name="type" id="id_type_1" style="display: inline-block;" value="1">
                             {% for error in form.type.errors %}
                             <p class="text-danger">
@@ -106,22 +119,9 @@
                             </p>
                             {% endfor %}
                             <h5 style="display: inline-block">روش اول:</h5>
-                            <div style="font-size: 20px; display: inline-block">در این روش، شما باید ابتدا فایل اکسل
-                                داده شده را دانلود کرده و
-                                سپس تکمیل شده‌ی آن را آپلود کنید.
+                            <div style="font-size: 20px; display: inline-block">
                             </div>
-                            <div id="div_type_1"
-                                 style="margin: auto; display: flex; height: 100%; transition: 1s;">
-                                <a id="div_type_1_btn_1"
-                                   href="{{ service.file.url }}" download class="submit_service_excel">دانلود فایل
-                                    نمونه</a>
-                                <div class="submit_service_excel" style="padding: 0;" id="div_type_1_btn_2">
-                                    <input class="input-file" name="file" id="id_file" type="file">
-                                    <label tabindex="0" for="id_file" id="input-file-trigger"
-                                           style="font-weight: unset; width: 100%; height: 100%;
-                                       padding-top: 10px; cursor: pointer;">درگاه آپلود فایل</label>
-                                </div>
-                            </div>
+
                             <p class="file-return" style="float: left;"></p>
                         </div>
 
@@ -220,7 +220,7 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                         <div class="pager">
                             <button type="submit" class="genric-btn purplebtn circle" onclick="makeRequired()"
                                     style="float: left; margin: 10px; display: inline-block">ثبت
@@ -228,7 +228,6 @@
 
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

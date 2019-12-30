@@ -123,6 +123,11 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         service = Service.objects.get(id=self.kwargs['pk'])
         customer = Customer.objects.get(username=self.request.user.username)
         orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
+
+        number_constraints = ["Sample Concentration (ng/ul)", "product size (bp)", "Primer Concentration (pmol/ul)"]
+        oligo_constraints = ["Primer Sequence (5 to 3)"]
+        oligo_letters = "ACGTNRYSWKMBDHV"
+
         if orders:
             order = orders[0]
             content = csv.reader(open(order.file.path, 'r'))
@@ -156,27 +161,57 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                 content = form.cleaned_data['file'].read()
                 book = xlrd.open_workbook(file_contents=content)
                 sheet = book.sheet_by_index(0)
-                fields = []
-                index = 0
+                field_names = ""
+                index = 1
                 while True:
-                    check = 0
-                    for j in range(sheet.ncols):
-                        if sheet.cell_value(index, j):
-                            check += 1
-                    if check >= 2:
+                    if not sheet.cell_value(2, index):
                         break
+                    field_names += sheet.cell_value(2, index) + ";"
                     index += 1
-                for j in range(1, sheet.ncols):
-                    if sheet.cell_value(index, j):
-                        fields.append(sheet.cell_value(index, j))
-                index += 1
-                for i in range(index, sheet.nrows):
+                if field_names != service.field_names:
+                    return reverse_lazy(
+                        'order_service:file_error'
+                        , kwargs={
+                            'text':
+                                "ستون های این فایل تغییر کرده اند و امکان آپلود این فایل وجود ندارد."})
+                field_names = field_names.split(';')
+                row_index = 3
+                while True:
                     row = []
+                    check = False
                     for j in range(1, sheet.ncols):
-                        if sheet.cell_value(i, j):
-                            row.append(sheet.cell_value(i, j))
-                    if len(row) == len(fields):
-                        data.append(row)
+                        if sheet.cell_value(row_index, j):
+                            if field_names[j - 1] in number_constraints:
+                                try:
+                                    float(sheet.cell_value(row_index, j))
+                                except ValueError or TypeError:
+                                    return reverse_lazy(
+                                        'order_service:file_error'
+                                        , kwargs={
+                                            'text':
+                                                "در ستون " + field_names[j - 1] + " تنها مقادیر عددی مجاز است."})
+                            if field_names[j - 1] in oligo_constraints:
+                                for c in sheet.cell_value(row_index, j):
+                                    if c not in oligo_letters:
+                                        return reverse_lazy(
+                                            'order_service:file_error'
+                                            , kwargs={
+                                                'text':
+                                                    "در ستون " + field_names[j - 1] + " تنها حروف" + oligo_letters +
+                                                    " مجاز است."})
+                            row.append(sheet.cell_value(row_index, j))
+                            check = True
+                    if not check:
+                        break
+                    if len(row) != len(field_names):
+                        return reverse_lazy(
+                            'order_service:file_error'
+                            , kwargs={
+                                'text':
+                                    "فایل شامل سطر هایی ناقص است." +
+                                    " لطفا در تمام سطرهایی که اطلاعات پر می کنید، تمامی بخش ها را پر کنید."})
+                    row_index += 1
+                    data.append(row)
                 with open(order.file.path, 'w') as f:
                     writer = csv.writer(f)
                     for row in data:
@@ -210,8 +245,20 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         return super(SubmitOrderService, self).form_valid(form)
 
 
+class FileError(TemplateView):
+    template_name = "temporary/show_text.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['text'] = self.kwargs['text']
+        return context
+
+
 class CheckData(LoginRequiredMixin, FormView):
-    form_class = CheckDataFrom
+    form_class = CheckDataForm
     template_name = "order_service/check_data.html"
     success_url = reverse_lazy("index:index")
 
@@ -419,7 +466,7 @@ class CheckReceived(LoginRequiredMixin, TemplateView):
             mail_text += self.request.user.customer.name + " " + self.request.user.customer.last_name
         else:
             mail_text += self.request.user.customer.last_name
-        mail_text += "و نام کاربری " + self.request.user.username + "سفارش با شناسه " + order.code +\
+        mail_text += "و نام کاربری " + self.request.user.username + "سفارش با شناسه " + order.code + \
                      "را در وضعیت تحویل گرفته شده قرار داد. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
         mail_text += "\nhttp://www.royantucagene.com/admin_panel"
