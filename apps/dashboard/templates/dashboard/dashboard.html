@@ -134,7 +134,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>کد رهگیری سفارش</th>
-                                <th>تاریخ</th>
+                                <th> تاریخ تحویل</th>
                                 <th>وضعیت سفارش</th>
                                 <th>مبلغ کل</th>
                                 <th>وضعیت تحویل سفارش</th>
@@ -146,7 +146,7 @@
                             <tr>
                                 <td>{{forloop.counter}}</td>
                                 <td>{{order.code}}</td>
-                                <td>{{order.date}}</td>
+                                <td>{{order.receiving_date}}</td>
                                 {% if order.is_finished %}
                                     {% if order.invoice %}
                                         <td class="text-success">تایید شده</td>

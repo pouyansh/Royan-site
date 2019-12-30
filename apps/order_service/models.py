@@ -21,3 +21,4 @@ class OrderService(models.Model):
     received = models.BooleanField(default=False, verbose_name="وضعیت تحویل")
     payed = models.BooleanField(default=False, verbose_name="وضعیت پرداخت")
     payment = models.IntegerField(default=0, verbose_name="مبلغ")
+    receiving_date = models.CharField(max_length=30, default="", blank=True, null=True, verbose_name="تاریخ تحویل")
