@@ -491,3 +491,36 @@ class CheckInvoice(TemplateView):
         context[
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تایید شده قرار داده شد."
         return context
+
+
+class SetReceivingDate(FormView):
+    form_class = SetReceivingDateForm
+    template_name = "order_service/set_receiving_date.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        try:
+            int(self.kwargs['pk'])
+        except:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if len(OrderService.objects.all()) < int(self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        if not order.is_finished:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر به مرحله پرداخت نرسیده است."})
+        order.invoice = True
+        order.save()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        context['order'] = order
+        return context
+
+    def form_valid(self, form):
+        receiving_date = form.cleaned_data['receiving_date']
+        order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
+        order.receiving_date = receiving_date
+        order.save()
+        self.success_url = reverse_lazy("order_service:order_invoice", kwargs={'pk': self.kwargs['pk']})
+        return super(SetReceivingDate, self).form_valid(form)

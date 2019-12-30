@@ -71,3 +71,7 @@ class SetInvoiceForm(forms.Form):
         if payment < 0:
             raise ValueError("هزینه نمی‌تواند منفی باشد.")
         return payment
+
+
+class SetReceivingDateForm(forms.Form):
+    receiving_date = forms.CharField(max_length=30)
