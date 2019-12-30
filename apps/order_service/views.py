@@ -416,9 +416,9 @@ class CheckReceived(LoginRequiredMixin, TemplateView):
         context['fields2'] = Field2.objects.all().order_by('id')
         mail_text = 'با سلام،\nکاربر با نام'
         if self.request.user.customer.is_person:
-            mail_text += self.request.user.name + " " + self.request.user.last_name
+            mail_text += self.request.user.customer.name + " " + self.request.user.customer.last_name
         else:
-            mail_text += self.request.user.organization_name
+            mail_text += self.request.user.customer.last_name
         mail_text += "و نام کاربری " + self.request.user.username + "سفارش با شناسه " + order.code +\
                      "را در وضعیت تحویل گرفته شده قرار داد. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
