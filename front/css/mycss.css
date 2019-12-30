@@ -40,7 +40,7 @@ h1, h2, h3, h4, h5, p, a {
     left: 10px;
     width: 50px;
     height: 50px;
-    background: #B37DC0;
+    background: rgb(9, 56, 121);
     padding: 10px;
     font-weight: bold;
     border-radius: 5px;
@@ -329,9 +329,9 @@ a.details-link:hover {
 }
 
 .purplebtn {
-    background-color: rgb(188,91,254);
+    background-color: rgb(9, 56, 121) !important;
     color: #eeeeee;
-    border: 1px solid rgb(188,91,254);
+    border: 1px solid rgb(9, 56, 121) !important;
     min-width: 100px;
     font-size: 16px;
     display: block;
@@ -339,7 +339,7 @@ a.details-link:hover {
 }
 
 .purplebtn:hover {
-    color: rgb(188,91,254);
+    color: rgb(9, 56, 121) !important;
     background-color: #eeeeee;
 }
 
