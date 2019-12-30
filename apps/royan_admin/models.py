@@ -18,3 +18,4 @@ class RoyanTucagene(models.Model):
     instagram = models.URLField(verbose_name="اینستاگرام", default="", null=True, blank=True)
     telegram = models.URLField(verbose_name="تلگرام", default="", null=True, blank=True)
     twitter = models.URLField(verbose_name="توییتر", default="", null=True, blank=True)
+    linkedin = models.URLField(verbose_name="لینکداین", default="", null=True, blank=True)
