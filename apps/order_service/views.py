@@ -279,7 +279,7 @@ class CheckData(LoginRequiredMixin, FormView):
         if customer.is_person:
             mail_text += customer.name + " " + customer.last_name
         else:
-            mail_text += customer.organization_name
+            mail_text += customer.last_name
         mail_text += "و نام کاربری " + customer.username + "سفارش با شناسه " + order.code + "ثبت کرد. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
         mail_text += "\nhttp://www.royantucagene.com/admin_panel"
