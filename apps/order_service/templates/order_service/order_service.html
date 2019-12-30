@@ -141,83 +141,84 @@
                                 {% csrf_token %}
                                 <input type="text" name="order_id" id="id_order_id" style="display: none;" value="-1">
                                 <input type="text" name="final" id="id_final" style="display: none;" value="-1">
-                                <table dir="ltr" id="table" lang="en">
-                                    <thead>
-                                    <tr style="font-size: 12px;">
-                                        <th>#</th>
-                                        {% for field in form %}
-                                        {% if field.name != "order_id" and field.name != "type" %}
-                                        {% if field.name != "final" and field.name != "file" %}
-                                        <th>{{ field.label }}</th>
-                                        {% endif %}
-                                        {% endif %}
-                                        {% endfor %}
-                                        <th>change</th>
-                                    </tr>
-                                    </thead>
-                                    <tr style="font-size: 12px;">
-                                        <td></td>
-                                        {% for field in form %}
-                                        {% if field.name != "order_id" and field.name != "type" %}
-                                        {% if field.name != "final" and field.name != "file" %}
-                                        <td class="text-danger" style="list-style=none;">{{ field.errors }}</td>
-                                        {% endif %}
-                                        {% endif %}
-                                        {% endfor %}
-                                        <td></td>
-                                    </tr>
-                                    {% for row in data %}
-                                    <tr style="font-size: 12px;">
-                                        <td>{{forloop.counter}}</td>
-                                        {% for field in row %}
-                                        <td style="padding: 0 5px; font-size: 15px;">{{field}}</td>
-                                        {% endfor %}
-                                        <td>
-                                            {% with y=forloop.counter|stringformat:"s" %}
-                                            <div onclick="myFunction({{forloop.counter}})"
-                                                 class="popup btn text-danger circle"
-                                                 style="font-size: 15px; min-width: 80px; display: block;
-                                                 ">
-                                                {% with id="id"|add:y %}
-                                                <div id="{{id}}">delete</div>
-                                                {% endwith %}
-                                                {% with mypopup="myPopup"|add:y %}
-                                                <div class="popuptext" id="{{mypopup}}">
+                                <div class="table-responsive">
+                                    <table dir="ltr" id="table" lang="en" class="table" style="text-align: center;">
+                                        <thead>
+                                        <tr style="font-size: 12px;">
+                                            <th>#</th>
+                                            {% for field in form %}
+                                            {% if field.name != "order_id" and field.name != "type" %}
+                                            {% if field.name != "final" and field.name != "file" %}
+                                            <th>{{ field.label }}</th>
+                                            {% endif %}
+                                            {% endif %}
+                                            {% endfor %}
+                                            <th>change</th>
+                                        </tr>
+                                        </thead>
+                                        <tr style="font-size: 12px;">
+                                            <td></td>
+                                            {% for field in form %}
+                                            {% if field.name != "order_id" and field.name != "type" %}
+                                            {% if field.name != "final" and field.name != "file" %}
+                                            <td class="text-danger" style="list-style=none;">{{ field.errors }}</td>
+                                            {% endif %}
+                                            {% endif %}
+                                            {% endfor %}
+                                            <td></td>
+                                        </tr>
+                                        {% for row in data %}
+                                        <tr style="font-size: 12px;">
+                                            <td>{{forloop.counter}}</td>
+                                            {% for field in row %}
+                                            <td style="padding: 0 5px; font-size: 15px;">{{field}}</td>
+                                            {% endfor %}
+                                            <td>
+                                                {% with y=forloop.counter|stringformat:"s" %}
+                                                <div onclick="myFunction({{forloop.counter}})"
+                                                     class="popup btn text-danger circle"
+                                                     style="font-size: 15px; min-width: 80px; display: block;
+                                                     ">
+                                                    {% with id="id"|add:y %}
+                                                    <div id="{{id}}">delete</div>
                                                     {% endwith %}
-                                                    <div onclick="myFunction({{forloop.counter}})"
-                                                         class="popup btn text-danger circle"
-                                                         style="font-size: 15px; min-width: 80px; display: block;"
-                                                    >Are you sure?
-                                                        <button type="submit" onclick="myDelete({{ y }})"
-                                                                class="popup btn text-danger circle"
-                                                                style="font-size: 15px; background: none;">yes
-                                                        </button>
+                                                    {% with mypopup="myPopup"|add:y %}
+                                                    <div class="popuptext" id="{{mypopup}}">
+                                                        {% endwith %}
+                                                        <div onclick="myFunction({{forloop.counter}})"
+                                                             class="popup btn text-danger circle"
+                                                             style="font-size: 15px; min-width: 80px; display: block;"
+                                                        >Are you sure?
+                                                            <button type="submit" onclick="myDelete({{ y }})"
+                                                                    class="popup btn text-danger circle"
+                                                                    style="font-size: 15px; background: none;">yes
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            {% endwith %}
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
-                                    <tr style="font-size: 12px;" id="1">
-                                        <td></td>
-                                        {% for field in form %}
-                                        {% if field.name != "order_id" and field.name != "type" %}
-                                        {% if field.name != "final" and field.name != "file" %}
-                                        <td style="padding: 0 5px;">{{field}}</td>
-                                        {% endif %}
-                                        {% endif %}
+                                                {% endwith %}
+                                            </td>
+                                        </tr>
                                         {% endfor %}
-                                        <td style="text-align: center;">
-                                            <button type="submit" class="btn generic-btn text-success"
-                                                    style="font-size: 15px; width: 100%; display: block;
-                                                    background: none;
-                                                 " id="button_add">add
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </table>
-
+                                        <tr style="font-size: 12px;" id="1">
+                                            <td></td>
+                                            {% for field in form %}
+                                            {% if field.name != "order_id" and field.name != "type" %}
+                                            {% if field.name != "final" and field.name != "file" %}
+                                            <td style="padding: 0 5px;">{{field}}</td>
+                                            {% endif %}
+                                            {% endif %}
+                                            {% endfor %}
+                                            <td style="text-align: center;">
+                                                <button type="submit" class="btn generic-btn text-success"
+                                                        style="font-size: 15px; width: 100%; display: block;
+                                                        background: none;
+                                                     " id="button_add">add
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         <div class="pager">

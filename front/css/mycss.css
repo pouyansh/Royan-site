@@ -410,4 +410,7 @@ a.details-link:hover {
     .my_chat {
         display: none;
     }
+    .submit_service_register_parts {
+        margin: 30px 0;
+    }
 }
