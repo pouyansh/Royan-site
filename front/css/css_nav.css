@@ -275,6 +275,11 @@
     color: #eeeeee;
 }
 
+.footer-link {
+    color: #aaaaaa;
+    display: block;
+}
+
 .footer-link:hover {
     color: rgb(25, 150, 231);
 }
