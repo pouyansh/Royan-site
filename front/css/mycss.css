@@ -304,16 +304,16 @@ a.details-link:hover {
 }
 
 .greenbtn {
-    background-color: rgb(50,205,50);
+    background-color: rgb(56,208,30);
     color: #eeeeee;
-    border: 1px solid rgb(50,205,50);
+    border: 1px solid rgb(56,208,30);
     min-width: 100px;
     font-size: 16px;
     display: block;
     margin: 20px auto;
 }
 .greenbtn:hover {
-    color: rgb(50,205,50);
+    color: rgb(56,208,30);
     background-color: #eeeeee;
 }
 
@@ -340,7 +340,7 @@ a.details-link:hover {
 
 .purplebtn:hover {
     color: rgb(9, 56, 121) !important;
-    background-color: #eeeeee;
+    background-color: #eeeeee !important;
 }
 
 .parent_msg {
