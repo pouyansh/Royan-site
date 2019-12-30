@@ -238,15 +238,6 @@ a.details-link:hover {
     color: rgb(143,109,252);
 }
 
-.footer-link {
-    color: #aaaaaa;
-    display: block;
-}
-
-.footer-link:hover {
-    color: rgb(143,109,252);
-}
-
 .login_body {
     background-image: url('../img/DNA3.png');
     width: 100vw;
