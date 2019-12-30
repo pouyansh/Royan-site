@@ -275,12 +275,12 @@ class CheckData(LoginRequiredMixin, FormView):
         order.code = code
         order.date = jdatetime.datetime.now()
         order.save()
-        mail_text = 'با سلام،\nکاربر با نام'
+        mail_text = "با سلام،\nکاربر با نام "
         if customer.is_person:
             mail_text += customer.name + " " + customer.last_name
         else:
             mail_text += customer.last_name
-        mail_text += "و نام کاربری " + customer.username + "سفارش با شناسه " + order.code + "ثبت کرد. "
+        mail_text += " و نام کاربری " + customer.username + " سفارش با شناسه " + order.code + "ثبت کرد. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
         mail_text += "\nhttp://www.royantucagene.com/admin_panel"
         send_mail('ثبت سفارش', mail_text, 'info@royantucagene.com', [RoyanTucagene.objects.all()[0].email])
@@ -415,7 +415,7 @@ class CheckReceived(LoginRequiredMixin, TemplateView):
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تحویل گرفته شده قرار داده شد."
         context['fields2'] = Field2.objects.all().order_by('id')
         mail_text = 'با سلام،\nکاربر با نام'
-        if self.request.user.is_person:
+        if self.request.user.customer.is_person:
             mail_text += self.request.user.name + " " + self.request.user.last_name
         else:
             mail_text += self.request.user.organization_name
