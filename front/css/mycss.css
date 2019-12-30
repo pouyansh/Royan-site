@@ -14,7 +14,7 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 2px;
 }
 
 /* Track */
@@ -135,7 +135,6 @@ a:hover .footer_helpnote {
     margin: 20px auto;
     margin-left: 10%;
     width: 30%;
-    height: 50px;
     display: inline-block;
     float: left;
     border-radius: 5px;
@@ -143,7 +142,7 @@ a:hover .footer_helpnote {
     background: rgb(9, 56, 121);
     text-align: center;
     color: #eeeeee;
-    font-size: 20px;
+    font-size: 17px;
     transition: 1s;
     font-weight: unset;
 }
@@ -403,5 +402,12 @@ a.details-link:hover {
     }
     .bg-text {
         width: 80%
+    }
+    .multi-step {
+        width: 100%;
+        padding: 0;
+    }
+    .my_chat {
+        display: none;
     }
 }
