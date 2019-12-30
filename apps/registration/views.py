@@ -98,7 +98,7 @@ class RegisterOrganization(CreateView):
         send_mail('تایید ایمیل',
                   'بسیار سپاس‌گزاریم که در سایت شرکت رویان توکاژن ثبت نام کردید. ' +
                   'لطفا برای تایید ایمیل خود، بر روی لینک زیر کلیک نمایید.\n' +
-                  hashed_data + '/', 'info@royantucagene.com', [email])
+                  hashed_data + '/', 'Royan TuCAGene', [email])
         return super(RegisterOrganization, self).form_valid(form)
 
 

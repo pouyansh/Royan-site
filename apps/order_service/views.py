@@ -283,7 +283,7 @@ class CheckData(LoginRequiredMixin, FormView):
         mail_text += " و نام کاربری " + customer.username + " سفارش با شناسه " + order.code + "ثبت کرد. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
         mail_text += "\nhttp://www.royantucagene.com/admin_panel"
-        send_mail('ثبت سفارش', mail_text, 'info@royantucagene.com', [RoyanTucagene.objects.all()[0].email])
+        send_mail('ثبت سفارش', mail_text, 'Royan TuCAGene', [RoyanTucagene.objects.all()[0].email])
         self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': index})
         return super(CheckData, self).form_valid(form)
 
@@ -423,7 +423,7 @@ class CheckReceived(LoginRequiredMixin, TemplateView):
                      "را در وضعیت تحویل گرفته شده قرار داد. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
         mail_text += "\nhttp://www.royantucagene.com/admin_panel"
-        send_mail('تغییر وضعیت سفارش', mail_text, 'info@royantucagene.com', [RoyanTucagene.objects.all()[0].email])
+        send_mail('تغییر وضعیت سفارش', mail_text, 'Royan TuCAGene', [RoyanTucagene.objects.all()[0].email])
         return context
 
 
@@ -455,7 +455,7 @@ class CheckPayed(TemplateView):
                      "در وضعیت پرداخت شده قرار گرفت. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
         mail_text += "\nhttp://www.royantucagene.com/dashboard"
-        send_mail('تغییر وضعیت سفارش', mail_text, 'info@royantucagene.com', [order.customer.email])
+        send_mail('تغییر وضعیت سفارش', mail_text, 'Royan TuCAGene', [order.customer.email])
         return context
 
 

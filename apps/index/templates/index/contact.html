@@ -14,11 +14,11 @@
                 <p style="font-family: FarsiFont; font-size: 20px;">آدرس: {{RoyanTucagene.address}}</p>
             </div>
             <div dir="rtl" class="col-lg-6 col-md-12" style="text-align: right;">
-                <p style="font-family: FarsiFont; font-size: 20px;">تلفن: {{RoyanTucagene.phone_number}}</p>
+                <p style="font-family: FarsiFont; font-size: 20px;">تلفن: <div style="font-family:EnglishFont">+98{{RoyanTucagene.phone_number}}</div></p>
                 {% if RoyanTucagene.fax %}
                 <p style="font-family: FarsiFont; font-size: 20px;">فکس: {{RoyanTucagene.fax}}</p>
                 {% endif %}
-                <p style="font-family: FarsiFont; font-size: 20px;">ایمیل: {{RoyanTucagene.email}}</p>
+                <p style="font-family: FarsiFont; font-size: 20px;">ایمیل: <a href="mailto:{{RoyanTucagene.email}}">{{RoyanTucagene.email}}</a></p>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
@@ -38,6 +39,8 @@ class CustomerCreateMessage(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.customer = Customer.objects.get(username=self.request.user.username)
         form.instance.is_sender = True
+        mail_text = "username: " + self.request.user.username + "\ntext:\n" + form.instance.text
+        send_mail('پیام جدید', mail_text, 'Royan TuCAGene', [RoyanTucagene.objects.all()[0].email])
         return super(CustomerCreateMessage, self).form_valid(form)
 
 
