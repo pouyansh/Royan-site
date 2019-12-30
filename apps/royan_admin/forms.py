@@ -4,10 +4,10 @@ from apps.royan_admin.models import RoyanTucagene
 
 
 class ChangeSystemInfoForm(forms.ModelForm):
-
     class Meta:
         model = RoyanTucagene
-        fields = ['summary', 'logo', 'logo2', 'about', 'phone_number', 'address', 'fax', 'email', 'instagram', 'telegram', 'twitter']
+        fields = ['summary', 'logo', 'logo2', 'about', 'phone_number', 'address', 'fax', 'email', 'instagram',
+                  'telegram', 'twitter', 'linkedin']
 
 
 class BlockForm(forms.Form):
