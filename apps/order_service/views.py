@@ -5,6 +5,7 @@ import jdatetime
 import xlrd
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.files.base import ContentFile
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
@@ -274,6 +275,15 @@ class CheckData(LoginRequiredMixin, FormView):
         order.code = code
         order.date = jdatetime.datetime.now()
         order.save()
+        mail_text = 'با سلام،\nکاربر با نام'
+        if customer.is_person:
+            mail_text += customer.name + " " + customer.last_name
+        else:
+            mail_text += customer.organization_name
+        mail_text += "و نام کاربری " + customer.username + "سفارش با شناسه " + order.code + "ثبت کرد. "
+        mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
+        mail_text += "\nhttp://www.royantucagene.com/admin_panel"
+        send_mail('ثبت سفارش', mail_text, 'info@royantucagene.com', [RoyanTucagene.objects.all()[0].email])
         self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': index})
         return super(CheckData, self).form_valid(form)
 
@@ -288,8 +298,6 @@ class GetCode(LoginRequiredMixin, TemplateView):
             int(self.kwargs['pk'])
         except:
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
-        print(int(self.kwargs['pk']))
-        print(OrderService.objects.filter(customer__username=self.request.user.username))
         if len(OrderService.objects.filter(customer__username=self.request.user.username)) < int(self.kwargs['pk']):
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
         return super().dispatch(request, *args, **kwargs)
@@ -406,6 +414,16 @@ class CheckReceived(LoginRequiredMixin, TemplateView):
         context[
             'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تحویل گرفته شده قرار داده شد."
         context['fields2'] = Field2.objects.all().order_by('id')
+        mail_text = 'با سلام،\nکاربر با نام'
+        if self.request.user.is_person:
+            mail_text += self.request.user.name + " " + self.request.user.last_name
+        else:
+            mail_text += self.request.user.organization_name
+        mail_text += "و نام کاربری " + self.request.user.username + "سفارش با شناسه " + order.code +\
+                     "را در وضعیت تحویل گرفته شده قرار داد. "
+        mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
+        mail_text += "\nhttp://www.royantucagene.com/admin_panel"
+        send_mail('تغییر وضعیت سفارش', mail_text, 'info@royantucagene.com', [RoyanTucagene.objects.all()[0].email])
         return context
 
 
@@ -430,8 +448,14 @@ class CheckPayed(TemplateView):
         context = super().get_context_data(**kwargs)
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
         context[
-            'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت پرداخت شده قرار داده شد."
+            'text'] = "سفارش مد نظر شما به کد " + order.code + " در وضعیت پرداخت شده قرار داده شد."
         context['fields2'] = Field2.objects.all().order_by('id')
+        mail_text = 'کاربر گرامی،\n با سلام،\n'
+        mail_text += "سفارش با شناسه " + order.code + \
+                     "در وضعیت پرداخت شده قرار گرفت. "
+        mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
+        mail_text += "\nhttp://www.royantucagene.com/dashboard"
+        send_mail('تغییر وضعیت سفارش', mail_text, 'info@royantucagene.com', [order.customer.email])
         return context
 
 
@@ -489,7 +513,7 @@ class CheckInvoice(TemplateView):
         context = super().get_context_data(**kwargs)
         order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
         context[
-            'text'] = "کاربر گرامی، سفارش مد نظر شما به کد " + order.code + " در وضعیت تایید شده قرار داده شد."
+            'text'] = "تغییرات مورد نظر بر روی سفارش به کد " + order.code + " با موفقیت ثبت شد."
         return context
 
 
