@@ -89,7 +89,12 @@
                     <div class="mt-10" style="display: flex; margin: 30px 0;">
                         <label style="float: right; display: inline-block; width: 150px; font-family: FarsiFont">
                             تاریخ تحویل سفارش:</label>
-                        <h4>{{order.receiving_date}}</h4>
+                        <h4>{{order.receiving_date}}
+                            {% if request.user.is_superuser %}
+                                <a href="{% url 'order_service:set_receiving_date' order_id %}"
+                                    style="margin-right: 10px;" class="text-primary">(مشخص کردن)</a>
+                            {% endif %}
+                        </h4>
                     </div>
                     <table dir="ltr" id="table2"
                            style="width: 100%; padding: 20px; text-align: center; margin: 20px 0;">

@@ -12,5 +12,7 @@ urlpatterns = [
     url(r'order/service/received/(?P<pk>.+)/', CheckReceived.as_view(), name='order_received'),
     url(r'order/service/payed/(?P<pk>.+)/', staff_member_required(CheckPayed.as_view()), name='order_payed'),
     url(r'order/service/set_invoice/(?P<pk>.+)/', staff_member_required(SetInvoice.as_view()), name='set_invoice'),
+    url(r'order/service/set_receiving_date/(?P<pk>.+)/', staff_member_required(SetReceivingDate.as_view()),
+        name='set_receiving_date'),
     url(r'order/service/invoice/(?P<pk>.+)/', staff_member_required(CheckInvoice.as_view()), name='order_invoice')
 ]
