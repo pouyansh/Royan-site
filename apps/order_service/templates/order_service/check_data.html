@@ -41,27 +41,27 @@
         <div class="section-top-border">
             <div class="row">
                 <div class="col-lg-8 col-md-8" style="margin: auto">
-
-                    <table dir="ltr" id="table2"
-                           style="width: 100%; padding: 20px; text-align: center; margin: 20px 0;">
-                        <thead>
-                        <tr style="font-size: 12px;">
-                            <th>#</th>
-                            {% for field in fields %}
-                            <th>{{field}}</th>
+                    <div class="table-responsive">
+                        <table dir="ltr" id="table2"  class="table" style="text-align: center;">
+                            <thead>
+                            <tr style="font-size: 12px;">
+                                <th>#</th>
+                                {% for field in fields %}
+                                <th>{{field}}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            {% for row in data %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                {% for cell in row %}
+                                <td>{{cell}}</td>
+                                {% endfor %}
+                            </tr>
                             {% endfor %}
-                        </tr>
-                        </thead>
-                        {% for row in data %}
-                        <tr>
-                            <td>{{forloop.counter}}</td>
-                            {% for cell in row %}
-                            <td>{{cell}}</td>
-                            {% endfor %}
-                        </tr>
-                        {% endfor %}
 
-                    </table>
+                        </table>
+                    </div>
                     <form method="post">
                         {% csrf_token %}
                         <div class="mt-10" style="display: flex; margin: 30px 0;">
