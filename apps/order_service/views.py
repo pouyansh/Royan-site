@@ -111,10 +111,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             field_names += sheet.cell_value(2, index) + ";"
             index += 1
         if field_names != service.field_names:
-            self.success_url = reverse_lazy(
-                'order_service:file_error', kwargs={
-                    'text':
-                        "ستون های این فایل تغییر کرده اند و امکان آپلود این فایل وجود ندارد."})
+            self.success_url = reverse_lazy('order_service:file_error_columns')
             return super(SubmitOrderService, self).form_valid(form)
         field_names = field_names.split(';')
         row_index = 3
@@ -127,30 +124,19 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                         try:
                             float(sheet.cell_value(row_index, j))
                         except ValueError or TypeError:
-                            self.success_url = reverse_lazy(
-                                'order_service:file_error', kwargs={
-                                    'text':
-                                        "در ستون " + field_names[j - 1] + " تنها مقادیر عددی مجاز است."})
+                            self.success_url = reverse_lazy('order_service:file_error_number')
                             return super(SubmitOrderService, self).form_valid(form)
                     if field_names[j - 1] in oligo_constraints:
                         for c in sheet.cell_value(row_index, j):
                             if c not in oligo_letters:
-                                self.success_url = reverse_lazy(
-                                    'order_service:file_error', kwargs={
-                                        'text':
-                                            "در ستون " + field_names[j - 1] + " تنها حروف" + oligo_letters +
-                                            " مجاز است."})
+                                self.success_url = reverse_lazy('order_service:file_error_oligo')
                                 return super(SubmitOrderService, self).form_valid(form)
                     row.append(sheet.cell_value(row_index, j))
                     check = True
             if not check:
                 break
             if len(row) != len(field_names):
-                self.success_url = reverse_lazy(
-                    'order_service:file_error', kwargs={
-                        'text':
-                            "فایل شامل سطر هایی ناقص است." +
-                            " لطفا در تمام سطرهایی که اطلاعات پر می کنید، تمامی بخش ها را پر کنید."})
+                self.success_url = reverse_lazy('order_service:file_error_incomplete')
                 return super(SubmitOrderService, self).form_valid(form)
             row_index += 1
             data.append(row)
@@ -175,7 +161,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         return super(SubmitOrderService, self).form_valid(form)
 
 
-class FileError(TemplateView):
+class FileErrorColumns(TemplateView):
     template_name = "temporary/show_text.html"
 
     def dispatch(self, request, *args, **kwargs):
@@ -183,7 +169,48 @@ class FileError(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['text'] = self.kwargs['text']
+        context['text'] = "ستون های این فایل تغییر کرده اند و امکان آپلود این فایل وجود ندارد."
+        return context
+
+
+class FileErrorNumber(TemplateView):
+    template_name = "temporary/show_text.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['text'] = "در ستون های " + \
+                          "Sample Concentration (ng/ul), product size (bp), Primer Concentration (pmol/ul)" + \
+                          " تنها مقادیر عددی مجاز است."
+        return context
+
+
+class FileErrorOligo(TemplateView):
+    template_name = "temporary/show_text.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['text'] = "در ستون " + \
+                          "Primer Sequence (5 to 3)" + \
+                          " تنها مقادیر" + "ACGTNRYSWKMBDHV" + " مجاز است."
+        return context
+
+
+class FileErrorIncomplete(TemplateView):
+    template_name = "temporary/show_text.html"
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['text'] = "فایل شامل سطر هایی ناقص است." + \
+                          " لطفا در تمام سطرهایی که اطلاعات پر می کنید، تمامی بخش ها را پر کنید."
         return context
 
 
