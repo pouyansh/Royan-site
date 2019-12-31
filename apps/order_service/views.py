@@ -111,10 +111,11 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             field_names += sheet.cell_value(2, index) + ";"
             index += 1
         if field_names != service.field_names:
-            return reverse_lazy(
+            self.success_url = reverse_lazy(
                 'order_service:file_error', kwargs={
                     'text':
                         "ستون های این فایل تغییر کرده اند و امکان آپلود این فایل وجود ندارد."})
+            return super(SubmitOrderService, self).form_valid(form)
         field_names = field_names.split(';')
         row_index = 3
         while True:
@@ -126,28 +127,31 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                         try:
                             float(sheet.cell_value(row_index, j))
                         except ValueError or TypeError:
-                            return reverse_lazy(
+                            self.success_url = reverse_lazy(
                                 'order_service:file_error', kwargs={
                                     'text':
                                         "در ستون " + field_names[j - 1] + " تنها مقادیر عددی مجاز است."})
+                            return super(SubmitOrderService, self).form_valid(form)
                     if field_names[j - 1] in oligo_constraints:
                         for c in sheet.cell_value(row_index, j):
                             if c not in oligo_letters:
-                                return reverse_lazy(
+                                self.success_url = reverse_lazy(
                                     'order_service:file_error', kwargs={
                                         'text':
                                             "در ستون " + field_names[j - 1] + " تنها حروف" + oligo_letters +
                                             " مجاز است."})
+                                return super(SubmitOrderService, self).form_valid(form)
                     row.append(sheet.cell_value(row_index, j))
                     check = True
             if not check:
                 break
             if len(row) != len(field_names):
-                return reverse_lazy(
+                self.success_url = reverse_lazy(
                     'order_service:file_error', kwargs={
                         'text':
                             "فایل شامل سطر هایی ناقص است." +
                             " لطفا در تمام سطرهایی که اطلاعات پر می کنید، تمامی بخش ها را پر کنید."})
+                return super(SubmitOrderService, self).form_valid(form)
             row_index += 1
             data.append(row)
         order = OrderService(customer=customer, service=service)
