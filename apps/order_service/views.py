@@ -156,7 +156,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         f.close()
         order.file.save(
             "media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
-                order.id) + ".csv", ContentFile(''), save=True)
+                order.id) + ".csv", ContentFile(data), save=True)
         order.save()
         self.success_url = reverse_lazy('order_service:check_data', kwargs={'pk': order.id})
         return super(SubmitOrderService, self).form_valid(form)
