@@ -140,6 +140,9 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                 return super(SubmitOrderService, self).form_valid(form)
             row_index += 1
             data.append(row)
+        if row_index < sheet.nrows:
+            self.success_url = reverse_lazy('order_service:file_error_incomplete')
+            return super(SubmitOrderService, self).form_valid(form)
         order = OrderService(customer=customer, service=service)
         order.save()
         if not os.path.exists("media/orders/"):
@@ -156,7 +159,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         f.close()
         order.file.save(
             "media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
-                order.id) + ".csv", ContentFile(data), save=True)
+                order.id) + ".csv", ContentFile(content), save=True)
         order.save()
         self.success_url = reverse_lazy('order_service:check_data', kwargs={'pk': order.id})
         return super(SubmitOrderService, self).form_valid(form)
