@@ -86,78 +86,18 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
         service = Service.objects.get(id=self.kwargs['pk'])
         context['service'] = service
-        customer = Customer.objects.get(username=self.request.user.username)
-        orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
-        if orders:
-            order = orders[0]
-            content = csv.reader(open(order.file.path, 'r'))
-            order.file.close()
-        else:
-            content = []
-        context['data'] = content
         context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        service = Service.objects.get(id=self.kwargs['pk'])
-        content = csv.reader(open(service.fields.path, 'r'))
-        data = []
-        for row in content:
-            temp = [row[0], row[1], row[2]]
-            if row[1] in ["text", "oligo"]:
-                temp.append(row[3])
-            if row[1] == "choice":
-                tempchoices = []
-                for i in range(3, len(row)):
-                    if row[i]:
-                        tempchoices.append((row[i], row[i]))
-                temp.append(tempchoices)
-            data.append(temp)
-        kwargs['columns'] = data
-        return kwargs
-
     def form_valid(self, form):
-        final = form.cleaned_data['final']
-        order_id = form.cleaned_data['order_id']
         service = Service.objects.get(id=self.kwargs['pk'])
         customer = Customer.objects.get(username=self.request.user.username)
-        orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
 
         number_constraints = ["Sample Concentration (ng/ul)", "product size (bp)", "Primer Concentration (pmol/ul)"]
         oligo_constraints = ["Primer Sequence (5 to 3)"]
         oligo_letters = "ACGTNRYSWKMBDHV"
 
-        if orders:
-            order = orders[0]
-            content = csv.reader(open(order.file.path, 'r'))
-            order.file.close()
-            content_data = []
-            for row in content:
-                content_data.append(row)
-        else:
-            order = OrderService(customer=customer, service=service)
-            order.save()
-            if not os.path.exists("media/orders/"):
-                os.mkdir("media/orders/")
-            if not os.path.exists("media/orders/user_" + str(customer.username)):
-                os.mkdir("media/orders/user_" + str(customer.username))
-            if not os.path.exists("media/orders/user_" + str(customer.username) + "/service_" + str(service.id)):
-                os.mkdir("media/orders/user_" + str(customer.username) + "/service_" + str(service.id))
-            f = open("media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
-                order.id) + ".csv", "x")
-            f.close()
-            order.file.save(
-                "media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
-                    order.id) + ".csv", ContentFile(''), save=True)
-            content_data = []
-        # if str(from.cleaned_data['final']) == '1'
-        order_type = form.cleaned_data['type']
         data = []
-        # if '2' in order_type:
-        #     for row in content_data:
-        #         data.append(row)
-        # if '1' in order_type:
         content = form.cleaned_data['file'].read()
         book = xlrd.open_workbook(file_contents=content)
         sheet = book.sheet_by_index(0)
@@ -170,8 +110,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             index += 1
         if field_names != service.field_names:
             return reverse_lazy(
-                'order_service:file_error'
-                , kwargs={
+                'order_service:file_error', kwargs={
                     'text':
                         "ستون های این فایل تغییر کرده اند و امکان آپلود این فایل وجود ندارد."})
         field_names = field_names.split(';')
@@ -186,16 +125,14 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                             float(sheet.cell_value(row_index, j))
                         except ValueError or TypeError:
                             return reverse_lazy(
-                                'order_service:file_error'
-                                , kwargs={
+                                'order_service:file_error', kwargs={
                                     'text':
                                         "در ستون " + field_names[j - 1] + " تنها مقادیر عددی مجاز است."})
                     if field_names[j - 1] in oligo_constraints:
                         for c in sheet.cell_value(row_index, j):
                             if c not in oligo_letters:
                                 return reverse_lazy(
-                                    'order_service:file_error'
-                                    , kwargs={
+                                    'order_service:file_error', kwargs={
                                         'text':
                                             "در ستون " + field_names[j - 1] + " تنها حروف" + oligo_letters +
                                             " مجاز است."})
@@ -205,43 +142,30 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                 break
             if len(row) != len(field_names):
                 return reverse_lazy(
-                    'order_service:file_error'
-                    , kwargs={
+                    'order_service:file_error', kwargs={
                         'text':
                             "فایل شامل سطر هایی ناقص است." +
                             " لطفا در تمام سطرهایی که اطلاعات پر می کنید، تمامی بخش ها را پر کنید."})
             row_index += 1
             data.append(row)
-        with open(order.file.path, 'w') as f:
-            writer = csv.writer(f)
-            for row in data:
-                writer.writerow(row)
-        self.success_url = reverse_lazy('order_service:check_data', kwargs={'pk': self.kwargs['pk']})
-        # else:
-        #     try:
-        #         if order_id != -1:
-        #             with open(order.file.path, 'w+') as f:
-        #                 f.truncate()
-        #                 writer = csv.writer(f)
-        #                 for i in range(len(content_data)):
-        #                     if i != order_id - 1:
-        #                         writer.writerow(content_data[i])
-        #         else:
-        #             fields = csv.reader(open(service.fields.path, 'r'))
-        #             data = []
-        #             for row in fields:
-        #                 data.append(form.cleaned_data[row[0]])
-        #             content_data.append(data)
-        #
-        #             with open(order.file.path, 'a') as f:
-        #                 writer = csv.writer(f)
-        #                 writer.writerow(data)
-        #     except:
-        #         with open(order.file.path, 'w') as f:
-        #             writer = csv.writer(f)
-        #             for row in content_data:
-        #                 writer.writerow(row)
-        #     self.success_url = reverse_lazy('order_service:order_service', kwargs={'pk': self.kwargs['pk']})
+        order = OrderService(customer=customer, service=service)
+        if not os.path.exists("media/orders/"):
+            os.mkdir("media/orders/")
+        if not os.path.exists("media/orders/user_" + str(customer.username)):
+            os.mkdir("media/orders/user_" + str(customer.username))
+        if not os.path.exists("media/orders/user_" + str(customer.username) + "/service_" + str(service.id)):
+            os.mkdir("media/orders/user_" + str(customer.username) + "/service_" + str(service.id))
+        f = open("media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
+            order.id) + ".csv", "x")
+        writer = csv.writer(f)
+        for row in data:
+            writer.writerow(row)
+        f.close()
+        order.file.save(
+            "media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
+                order.id) + ".csv", ContentFile(''), save=True)
+        order.save()
+        self.success_url = reverse_lazy('order_service:check_data', kwargs={'pk': order.id})
         return super(SubmitOrderService, self).form_valid(form)
 
 
@@ -266,16 +190,16 @@ class CheckData(LoginRequiredMixin, FormView):
         try:
             int(self.kwargs['pk'])
         except:
-            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
-        if not Service.objects.filter(id=self.kwargs['pk']):
-            return render(request, "temporary/show_text.html", {'text': "سرویس مورد نظر یافت نشد"})
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if not OrderService.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        order = OrderService.objects.get(id=self.kwargs['pk'])
         if self.request.user.is_superuser:
             return render(request, "temporary/show_text.html", {'text': "ثبت سفارش مخصوص مشتریان است"})
-        service = Service.objects.get(id=self.kwargs['pk'])
-        customer = Customer.objects.get(username=self.request.user.username)
-        if not OrderService.objects.filter(customer=customer, service=service, is_finished=False):
-            return render(request, "temporary/show_text.html",
-                          {'text': "شما سفارش تکمیل نشده‌ای برای این سرویس ندارید"})
+        if order.customer.username != self.request.user.username:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if order.is_finished:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر با موفقیت ثبت شده است"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -292,15 +216,11 @@ class CheckData(LoginRequiredMixin, FormView):
             context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
         else:
             context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        service = Service.objects.get(id=self.kwargs['pk'])
+        order = OrderService.objects.get(id=self.kwargs['pk'])
+        service = order.service
         context['service'] = service
-        fields_file = csv.reader(open(service.fields.path, 'r'))
-        fields = []
-        for row in fields_file:
-            fields.append(row[2])
+        fields = service.field_names
         context['fields'] = fields
-        orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
-        order = orders[0]
         content = csv.reader(open(order.file.path, 'r'))
         order.file.close()
         context['data'] = content
@@ -308,10 +228,9 @@ class CheckData(LoginRequiredMixin, FormView):
         return context
 
     def form_valid(self, form):
-        service = Service.objects.get(id=self.kwargs['pk'])
+        order = OrderService.objects.get(id=self.kwargs['pk'])
+        service = order.service
         customer = Customer.objects.get(username=self.request.user.username)
-        orders = OrderService.objects.filter(customer=customer, service=service, is_finished=False)
-        order = orders[0]
         index = 0
         all_orders = OrderService.objects.filter(customer=customer).order_by('id')
         while all_orders[index] != order:
