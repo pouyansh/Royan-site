@@ -113,7 +113,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         if field_names != service.field_names:
             self.success_url = reverse_lazy('order_service:file_error_columns')
             return super(SubmitOrderService, self).form_valid(form)
-        field_names = field_names.split(';')
+        field_names = field_names.split(';')[:-1]
         row_index = 3
         while True:
             row = []
