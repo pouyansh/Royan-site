@@ -141,6 +141,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             row_index += 1
             data.append(row)
         order = OrderService(customer=customer, service=service)
+        order.save()
         if not os.path.exists("media/orders/"):
             os.mkdir("media/orders/")
         if not os.path.exists("media/orders/user_" + str(customer.username)):
