@@ -333,12 +333,8 @@ class OrderDetails(LoginRequiredMixin, TemplateView):
         if not OrderService.objects.filter(id=self.kwargs['pk']):
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
         order = OrderService.objects.get(id=self.kwargs['pk'])
-        if self.request.user.is_superuser:
-            return render(request, "temporary/show_text.html", {'text': "ثبت سفارش مخصوص مشتریان است"})
-        if order.customer.username != self.request.user.username:
+        if order.customer.username != self.request.user.username and not self.request.user.is_superuser:
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
-        if order.is_finished:
-            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر با موفقیت ثبت شده است"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):

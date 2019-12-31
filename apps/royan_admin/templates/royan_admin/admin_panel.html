@@ -129,7 +129,7 @@
                                 <td>{{order.0.receiving_date}}</td>
                                 <td class="text-danger">کامل نشده</td>
                                 <td><a class="details-link"
-                                       href="{% url 'order_service:order_details' order.1 %}">
+                                       href="{% url 'order_service:order_details' order.0.id %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -158,7 +158,7 @@
                                 <td>{{order.0.receiving_date}}</td>
                                 <td class="text-warning">در انتظار پیش فاکتور</td>
                                 <td><a class="details-link"
-                                       href="{% url 'order_service:order_details' order.1 %}">
+                                       href="{% url 'order_service:order_details' order.0.id %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -197,7 +197,7 @@
                                 {% endif %}
                                 <td class="text-danger">تایید نشده</td>
                                 <td><a class="details-link"
-                                       href="{% url 'order_service:order_details' order.1 %}">
+                                       href="{% url 'order_service:order_details' order.0.id %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -236,7 +236,7 @@
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
                                 <td><a class="details-link"
-                                       href="{% url 'order_service:order_details' order.1 %}">
+                                       href="{% url 'order_service:order_details' order.0.id %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
@@ -270,7 +270,7 @@
                                 <td class="text-success">تایید شده</td>
                                 <td class="text-success">تایید شده</td>
                                 <td><a class="details-link"
-                                       href="{% url 'order_service:order_details' order.1 %}">
+                                       href="{% url 'order_service:order_details' order.0.id %}">
                                     <i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}

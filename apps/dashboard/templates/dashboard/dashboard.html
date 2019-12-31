@@ -173,7 +173,7 @@
                                 {% else %}
                                 <td class="text-danger">تایید نشده</td>
                                 {% endif %}
-                                <td><a href="{% url 'order_service:order_details' forloop.counter %}"
+                                <td><a href="{% url 'order_service:order_details' order.id %}"
                                        class="details-link"><i class='fa fa-angle-left'></i></a></td>
                             </tr>
                             {% endfor %}
