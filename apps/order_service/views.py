@@ -104,6 +104,8 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
         field_names = ""
         index = 1
         while True:
+            if index >= sheet.ncols:
+                break
             if not sheet.cell_value(2, index):
                 break
             field_names += sheet.cell_value(2, index) + ";"
