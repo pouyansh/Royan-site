@@ -330,12 +330,15 @@ class OrderDetails(LoginRequiredMixin, TemplateView):
             int(self.kwargs['pk'])
         except:
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if not OrderService.objects.filter(id=self.kwargs['pk']):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        order = OrderService.objects.get(id=self.kwargs['pk'])
         if self.request.user.is_superuser:
-            if len(OrderService.objects.all()) < int(self.kwargs['pk']):
-                return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
-        else:
-            if len(OrderService.objects.filter(customer__username=self.request.user.username)) < int(self.kwargs['pk']):
-                return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+            return render(request, "temporary/show_text.html", {'text': "ثبت سفارش مخصوص مشتریان است"})
+        if order.customer.username != self.request.user.username:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if order.is_finished:
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر با موفقیت ثبت شده است"})
         return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -353,26 +356,28 @@ class OrderDetails(LoginRequiredMixin, TemplateView):
                 context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
             else:
                 context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        if self.request.user.is_superuser:
-            order = OrderService.objects.all().order_by('id')[int(self.kwargs['pk']) - 1]
-        else:
-            order = OrderService.objects.filter(customer__username=self.request.user.username).order_by('id')[
-                int(self.kwargs['pk']) - 1]
+        order = OrderService.objects.get(id=self.kwargs['pk'])
         context['order'] = order
         service = order.service
         context['service'] = service
-        with open(service.fields.path, 'r') as f:
-            fields_file = csv.reader(f)
-            fields = []
-            for row in fields_file:
-                fields.append(row[2])
-            context['fields'] = fields
-        with open(order.file.path, 'r') as f:
-            content = csv.reader(f)
-            data = []
-            for row in content:
+        fields = service.field_names.split(';')[:-1]
+        context['fields'] = fields
+        data = []
+        row_index = 3
+        content = order.file.read()
+        book = xlrd.open_workbook(file_contents=content)
+        sheet = book.sheet_by_index(0)
+        while row_index < sheet.nrows:
+            row = []
+            check = False
+            for j in range(1, sheet.ncols):
+                if sheet.cell_value(row_index, j):
+                    row.append(sheet.cell_value(row_index, j))
+                    check = True
+            row_index += 1
+            if check:
                 data.append(row)
-            context['data'] = data
+        context['data'] = data
         context['order_id'] = self.kwargs['pk']
         context['fields2'] = Field2.objects.all().order_by('id')
         return context
