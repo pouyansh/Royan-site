@@ -115,7 +115,7 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
             return super(SubmitOrderService, self).form_valid(form)
         field_names = field_names.split(';')[:-1]
         row_index = 3
-        while True:
+        while row_index < sheet.nrows:
             row = []
             check = False
             for j in range(1, sheet.ncols):
@@ -133,33 +133,17 @@ class SubmitOrderService(LoginRequiredMixin, FormView):
                                 return super(SubmitOrderService, self).form_valid(form)
                     row.append(sheet.cell_value(row_index, j))
                     check = True
-            if not check:
-                break
-            if len(row) != len(field_names):
+            if check and len(row) != len(field_names):
                 self.success_url = reverse_lazy('order_service:file_error_incomplete')
                 return super(SubmitOrderService, self).form_valid(form)
             row_index += 1
-            data.append(row)
+            if check:
+                data.append(row)
         if row_index < sheet.nrows:
             self.success_url = reverse_lazy('order_service:file_error_incomplete')
             return super(SubmitOrderService, self).form_valid(form)
         order = OrderService(customer=customer, service=service)
-        order.save()
-        if not os.path.exists("media/orders/"):
-            os.mkdir("media/orders/")
-        if not os.path.exists("media/orders/user_" + str(customer.username)):
-            os.mkdir("media/orders/user_" + str(customer.username))
-        if not os.path.exists("media/orders/user_" + str(customer.username) + "/service_" + str(service.id)):
-            os.mkdir("media/orders/user_" + str(customer.username) + "/service_" + str(service.id))
-        f = open("media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
-            order.id) + ".csv", "x")
-        writer = csv.writer(f)
-        for row in data:
-            writer.writerow(row)
-        f.close()
-        order.file.save(
-            "media/orders/user_" + str(customer.username) + "/service_" + str(service.id) + "/order_" + str(
-                order.id) + ".csv", ContentFile(content), save=True)
+        order.file = form.cleaned_data['file']
         order.save()
         self.success_url = reverse_lazy('order_service:check_data', kwargs={'pk': order.id})
         return super(SubmitOrderService, self).form_valid(form)
@@ -256,11 +240,24 @@ class CheckData(LoginRequiredMixin, FormView):
         order = OrderService.objects.get(id=self.kwargs['pk'])
         service = order.service
         context['service'] = service
-        fields = service.field_names
+        fields = service.field_names.split(';')[:-1]
         context['fields'] = fields
-        content = csv.reader(open(order.file.path, 'r'))
-        order.file.close()
-        context['data'] = content
+        content = order.file.read()
+        book = xlrd.open_workbook(file_contents=content)
+        sheet = book.sheet_by_index(0)
+        row_index = 3
+        data = []
+        while row_index < sheet.nrows:
+            row = []
+            check = False
+            for j in range(1, sheet.ncols):
+                if sheet.cell_value(row_index, j):
+                    row.append(sheet.cell_value(row_index, j))
+                    check = True
+            row_index += 1
+            if check:
+                data.append(row)
+        context['data'] = data
         context['fields2'] = Field2.objects.all().order_by('id')
         return context
 
@@ -268,10 +265,8 @@ class CheckData(LoginRequiredMixin, FormView):
         order = OrderService.objects.get(id=self.kwargs['pk'])
         service = order.service
         customer = Customer.objects.get(username=self.request.user.username)
-        index = 0
-        all_orders = OrderService.objects.filter(customer=customer).order_by('id')
-        while all_orders[index] != order:
-            index += 1
+        all_orders = OrderService.objects.filter(date=jdatetime.datetime.now().date(), is_finished=True).order_by('id')
+        index = len(all_orders)
         order.is_finished = True
         order.name = form.cleaned_data['name']
         code = service.name + "-" + str(jdatetime.datetime.now().date()) + "-" + str(index)
@@ -280,14 +275,14 @@ class CheckData(LoginRequiredMixin, FormView):
         order.save()
         mail_text = "با سلام،\nکاربر با نام "
         if customer.is_person:
-            mail_text += customer.name + " " + customer.last_name
+            mail_text += customer.first_name + " " + customer.last_name
         else:
             mail_text += customer.last_name
         mail_text += " و نام کاربری " + customer.username + " سفارش با شناسه " + order.code + "ثبت کرد. "
         mail_text += "برای مشاهده جزئیات، برروی لینک زیر کلیک کنید."
         mail_text += "\nhttp://www.royantucagene.com/admin_panel"
         send_mail('ثبت سفارش', mail_text, 'Royan TuCAGene', [RoyanTucagene.objects.all()[0].email])
-        self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': index})
+        self.success_url = reverse_lazy('order_service:get_code', kwargs={'pk': order.id})
         return super(CheckData, self).form_valid(form)
 
 
@@ -301,7 +296,9 @@ class GetCode(LoginRequiredMixin, TemplateView):
             int(self.kwargs['pk'])
         except:
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
-        if len(OrderService.objects.filter(customer__username=self.request.user.username)) < int(self.kwargs['pk']):
+        if not OrderService.objects.filter(id=int(self.kwargs['pk'])):
+            return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
+        if OrderService.objects.filter(id=int(self.kwargs['pk'])).customer.username != request.user.username:
             return render(request, "temporary/show_text.html", {'text': "سفارش مورد نظر یافت نشد"})
         return super().dispatch(request, *args, **kwargs)
 
@@ -319,8 +316,7 @@ class GetCode(LoginRequiredMixin, TemplateView):
             context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
         else:
             context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        order = OrderService.objects.filter(customer__username=self.request.user.username).order_by('id')[
-            int(self.kwargs['pk'])]
+        order = OrderService.objects.filter(id=int(self.kwargs['pk']))
         context['code'] = order.code
         context['fields2'] = Field2.objects.all().order_by('id')
         return context

@@ -34,7 +34,7 @@ class CustomerDashboard(LoginRequiredMixin, TemplateView):
             context['logged_in_user'] = Person.objects.get(username=self.request.user.username)
         else:
             context['logged_in_user'] = Organization.objects.get(username=self.request.user.username)
-        context['orders'] = OrderService.objects.filter(customer=customer).order_by('id')
+        context['orders'] = OrderService.objects.filter(customer=customer).order_by('-id')
         context['messages'] = Message.objects.filter(customer=customer).order_by('-id')
         context['fields2'] = Field2.objects.all().order_by('id')
         return context

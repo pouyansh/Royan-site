@@ -14,7 +14,7 @@ class OligoSequenceField(forms.CharField):
 
 
 class OrderServiceFrom(forms.Form):
-    file = forms.FileField(required=False)
+    file = forms.FileField(required=True)
 
 
 class CheckDataForm(forms.Form):
