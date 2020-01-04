@@ -157,6 +157,11 @@
     margin: 0;
 }
 
+.navbar-header {
+    line-height: 100%;
+    width: 70%;
+}
+
 .nav-side {
     height: 100%;
     float: right;
@@ -382,9 +387,9 @@
     .header_area .main_menu .navbar .container-fluid .navbar-header .navbar-brand-inverse{
         margin-top: 0px;
     }
-    #space{
+    #space1, #space2{
         display: inline-block;
-        width: 120px;
+        width: 100%;
     }
     .container-fluid>.navbar-collapse {
         margin-left: 0px;

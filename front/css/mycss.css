@@ -215,11 +215,11 @@ a:hover .footer_helpnote {
     .banner_index {
         background: url('../img/banner2.jpg');
         width: auto;
-        height: 100vh;
+        min-height: 100vh;
         background-repeat: no-repeat;
         background-size:cover;
         background-position:center;
-        -webkit-background-size:contain;
+        -webkit-background-size:cover;
         -moz-background-size:cover;
         -o-background-size:cover;
     }
