@@ -410,6 +410,9 @@
         background: rgb(10, 110, 185);
         color: #eeeeee;
     }
+    .navbar-moto {
+        display: none !important;
+    }
 }
 
 @media (min-width: 768px) and (max-width:991px){
