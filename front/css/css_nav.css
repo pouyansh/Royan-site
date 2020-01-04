@@ -1,3 +1,7 @@
+.main_menu {
+    margin: -1px;
+}
+
 .header_area.navbar_fixed .main_menu .navbar .nav .nav-item,
 .header_area .navbar .nav .nav-item {
 
@@ -159,7 +163,6 @@
 
 .navbar-header {
     line-height: 100%;
-    width: 70%;
 }
 
 .nav-side {
@@ -348,6 +351,10 @@
     transform: scale(2);
 }
 
+#space1, #space2{
+    display: none;
+}
+
 @media (max-width:1350px){
     .navbar-moto {
         margin-left: 200px;
@@ -437,6 +444,9 @@
     }
     .navbar-moto {
         display: none !important;
+    }
+    .navbar-header {
+        width: 70%;
     }
 }
 
