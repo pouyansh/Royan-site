@@ -19,3 +19,4 @@ class RoyanTucagene(models.Model):
     telegram = models.URLField(verbose_name="تلگرام", default="", null=True, blank=True)
     twitter = models.URLField(verbose_name="توییتر", default="", null=True, blank=True)
     linkedin = models.URLField(verbose_name="لینکداین", default="", null=True, blank=True)
+    moto = models.ImageField(verbose_name="شعار", blank=True, default=None, null=True)
