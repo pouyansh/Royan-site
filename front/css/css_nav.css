@@ -333,6 +333,16 @@
     margin-left: -60px;
 }
 
+.navbar-brand>img {
+    display: inline-block;
+}
+
+.navbar-moto {
+    height: 100%;
+    margin-left: 300px;
+    transform: scale(2);
+}
+
 @media (max-width:991px){
     .nav>li>a {
         padding: 10px 5px;
