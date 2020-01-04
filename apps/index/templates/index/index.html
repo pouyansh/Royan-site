@@ -4,14 +4,15 @@
 {% block internal_css %}
 <style>
     .details-link {
-        height: 100px;
-        background: rgba(10,10,10,0.8);
-        width: 50px;
+        height: 50px;
+        background: none;
+        width: 30px;
+        border: none;
     }
 
     .arrow {
         color: rgb(25, 150, 231);
-        font-size: 50px;
+        font-size: 30px;
     }
 </style>
 {% endblock internal_css %}
@@ -42,23 +43,24 @@
                style="font-family: FarsiFont; font-size: 30px;">اخبار</a>
             {% endif %}
         </div>
-        <div class="feature_inner row" id="all_news" dir="rtl" style="height: 550px; text-align: right; font-family: FarsiFont;">
+        <div class="feature_inner row news-wrapper" id="all_news" dir="rtl">
             {% for new in news %}
             <div class="col-lg-12" id="news{{forloop.counter}}" style="height: 100%; display: none;">
                 <div class="feature_item" style="height: 100%;">
-                    <div style="width: 100%; height: 90%; margin-bottom: 20px; text-align: center;">
-                        <img class="img-news" src="{{ new.image.url }}" alt=""
-                             style="width: auto; max-height: 100%; max-width: 100%;">
+                    <div class="image-wrapper">
+                        <img class="img-news" src="{{ new.image.url }}" alt="">
                     </div>
-                    <a href="{% url 'news:show_news' forloop.counter %}" class="text-info"
-                       style="font-size: 20px; font-family: FarsiFont;">{{ new.title }}</a>
-                    <div style="position: absolute; top: 200px;">
-                        <button class="details-link" onclick="change({{forloop.counter}}, 1)">
-                            <i class='fa fa-angle-right arrow'></i></button>
-                    </div>
-                    <div style="position: absolute; top: 200px; left: 45px;">
-                        <button class="details-link" onclick="change({{forloop.counter}}, -1)">
-                            <i class='fa fa-angle-left arrow'></i></button>
+                    <div style="height: 10%; text-align: center;">
+                        <a href="{% url 'news:show_news' forloop.counter %}" class="text-info"
+                           style="font-size: 20px; font-family: FarsiFont;">{{ new.title }}</a>
+                        <div style="position: absolute; bottom: 5%;">
+                            <button class="details-link" onclick="change({{forloop.counter}}, 1)">
+                                <i class='fa fa-angle-right arrow'></i></button>
+                        </div>
+                        <div style="position: absolute; bottom: 5%; left: 45px;">
+                            <button class="details-link" onclick="change({{forloop.counter}}, -1)">
+                                <i class='fa fa-angle-left arrow'></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
