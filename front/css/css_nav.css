@@ -469,6 +469,18 @@
     .navbar-moto {
         display: none !important;
     }
+    .navbar-collapse.collapse {
+        display: none !important;
+    }
+    .collapse.show {
+        display: block !important;
+    }
+    .nav-link.nav-padding.dropdown-toggle {
+
+    }
+    .nav-item{
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -487,20 +499,4 @@
     .navbar-moto {
         display: none !important;
     }
-}
-
-@media (min-width: 768px) {
-    .navbar-collapse.collapse {
-        display: none !important;
-    }
-    .collapse.show {
-        display: block !important;
-    }
-    .nav-link.nav-padding.dropdown-toggle {
-
-    }
-    .nav-item{
-        font-size: 14px;
-    }
-
 }
